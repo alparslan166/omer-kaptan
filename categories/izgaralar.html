@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner">
+        <img src="../assets/capasimgesi.png" alt="Yükleniyor" />
+      </div>
+      <p class="loading-text">Yükleniyor...</p>
+    </div>
     <header class="site-header">
       <div class="container header-inner">
         <div class="brand">
@@ -561,7 +567,15 @@
       </svg>
     </button>
     <script>
+      // Loading Overlay
       window.addEventListener("load", function () {
+        window.scrollTo(0, 0);
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        if (loadingOverlay) {
+          setTimeout(function () {
+            loadingOverlay.classList.add("hide");
+          }, 500);
+        }
         // Sadece ilk yüklemede scroll yap, geri/ileri navigasyonunda scroll pozisyonunu koru
         const navType = performance.getEntriesByType("navigation")[0]?.type;
         if (navType === "navigate") {
