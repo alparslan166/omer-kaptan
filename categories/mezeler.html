@@ -26,7 +26,10 @@
             <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
           </div>
           <div class="titles">
-            <a href="../index.html" style="text-decoration: none; color: inherit;">
+            <a
+              href="../index.html"
+              style="text-decoration: none; color: inherit"
+            >
               <h1 class="site-title">Ömer Kaptan</h1>
             </a>
             <p class="site-subtitle">Mezeler</p>
@@ -477,12 +480,12 @@
             <img src="../assets/mezeler/atom.jpg" alt="Atom" />
           </div>
           <div class="product-body">
-            <h4 class="product-title">Atom (Yoğurt + Acı Biber)</h4>
+            <h4 class="product-title">Atom</h4>
             <p class="product-price">₺340</p>
             <p class="product-desc">Taze, lezzetli, günlük.</p>
             <a
               class="link"
-              href="../product.html?name=Atom%20%28Yo%C4%9Furt%20%2B%20Ac%C4%B1%20Biber%29&category=Mezeler&desc=Atom%20meze%2C%20yoğurt%20ve%20acı%20biber%20ile%20hazırlanmış.&companions=Sos%2C%20Turşu%2C%20Pide%2C%20Roka%2C%20Beyaz%20Peynir"
+              href="../product.html?name=Atom&category=Mezeler&desc=Atom%20meze%2C%20yoğurt%20ve%20acı%20biber%20ile%20hazırlanmış.&companions=Sos%2C%20Turşu%2C%20Pide%2C%20Roka%2C%20Beyaz%20Peynir"
               ><span class="icon"
                 ><img src="../assets/baliksimgesi.png" alt=""
               /></span>
@@ -1107,10 +1110,18 @@
           </p>
         </div>
         <div class="footer-social">
-          <a href="https://www.instagram.com/balikciomerkaptan" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.instagram.com/balikciomerkaptan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../assets/instagram-logo.png" alt="Instagram" />
           </a>
-          <a href="https://wa.me/905458372324" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://wa.me/905458372324"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../assets/whatsapp-logo.png" alt="WhatsApp" />
           </a>
         </div>
@@ -1145,7 +1156,10 @@
       const scrollToTopBtn = document.querySelector(".scroll-to-top");
 
       function toggleScrollButton() {
-        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const scrollY =
+          window.scrollY ||
+          window.pageYOffset ||
+          document.documentElement.scrollTop;
         if (scrollY > 300) {
           scrollToTopBtn.classList.add("show");
         } else {
@@ -1157,14 +1171,14 @@
       function checkScrollLoop() {
         // Her frame'de scroll pozisyonunu kontrol et ve butonu güncelle
         toggleScrollButton();
-        
+
         // Bir sonraki frame'de tekrar kontrol et
         requestAnimationFrame(checkScrollLoop);
       }
 
       // Scroll event listener'ı da ekle (hızlı güncelleme için)
       window.addEventListener("scroll", toggleScrollButton, { passive: true });
-      
+
       // İlk kontrol
       toggleScrollButton();
       // Sürekli kontrol döngüsünü başlat

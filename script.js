@@ -25,7 +25,15 @@
   // Ürün resmini yükle
   if (productImageEl && category && name) {
     const categorySlug = normalizeForFile(category);
-    const productSlug = normalizeForFile(name);
+    let productSlug = normalizeForFile(name);
+    
+    // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
+    if (category === 'Mezeler') {
+      // Parantez öncesi kısmı al (örn: "Atom" -> "Atom")
+      const nameWithoutParentheses = name.split('(')[0].trim();
+      productSlug = normalizeForFile(nameWithoutParentheses);
+    }
+    
     productImageEl.src = `assets/${categorySlug}/${productSlug}.jpg`;
     productImageEl.alt = name;
   }
@@ -127,7 +135,7 @@
         { name: 'Zeytin Ezmesi', image: 'mezeler/zeytin-ezmesi.jpg', desc: 'Zeytin ezmesi, şefin özel tarifi.' },
         { name: 'Börülce Salatası', image: 'mezeler/borulce-salatasi.jpg', desc: 'Börülce salatası, özenle hazırlanmış.' },
         { name: 'Zeytinyağlı Bakla', image: 'mezeler/zeytinyagli-bakla.jpg', desc: 'Zeytinyağlı bakla, geleneksel lezzet.' },
-        { name: 'Atom (Yoğurt + Acı Biber)', image: 'mezeler/atom.jpg', desc: 'Atom meze, yoğurt ve acı biber ile hazırlanmış.' },
+        { name: 'Atom', image: 'mezeler/atom.jpg', desc: 'Atom meze, yoğurt ve acı biber ile hazırlanmış.' },
         { name: 'Babagannuş', image: 'mezeler/babagannus.jpg', desc: 'Babagannuş, özenle hazırlanmış.' },
         { name: 'Girit Ezmesi', image: 'mezeler/girit-ezmesi.jpg', desc: 'Girit ezmesi, geleneksel lezzet.' },
         { name: 'Deniz Börülcesi', image: 'mezeler/deniz-borulcesi.jpg', desc: 'Deniz börülcesi, özenle hazırlanmış.' },
@@ -198,7 +206,7 @@
 
 function companionImagePath(name){
   const slug = normalizeForFile(name);
-  return `assets/companions/${slug}.jpg`; //! RESİMLERRRR
+  return `assets/companions/${slug}.jpg`; 
 }
 
 function getMezeIngredients(mezeName) {
@@ -223,7 +231,7 @@ function getMezeIngredients(mezeName) {
     'Zeytin Ezmesi': ['Siyah Zeytin', 'Sarımsak', 'Zeytinyağı', 'Limon', 'Kekik', 'Tuz'],
     'Börülce Salatası': ['Börülce', 'Soğan', 'Zeytinyağı', 'Limon', 'Maydanoz', 'Tuz'],
     'Zeytinyağlı Bakla': ['Bakla', 'Soğan', 'Dereotu', 'Zeytinyağı', 'Limon', 'Tuz'],
-    'Atom (Yoğurt + Acı Biber)': ['Yoğurt', 'Acı Biber', 'Sarımsak', 'Zeytinyağı', 'Tuz'],
+    'Atom': ['Yoğurt', 'Acı Biber', 'Sarımsak', 'Zeytinyağı', 'Tuz'],
     'Babagannuş': ['Patlıcan', 'Tahin', 'Sarımsak', 'Limon', 'Zeytinyağı', 'Tuz'],
     'Girit Ezmesi': ['Patlıcan', 'Biber', 'Domates', 'Sarımsak', 'Zeytinyağı', 'Kekik'],
     'Deniz Börülcesi': ['Deniz Börülcesi', 'Sarımsak', 'Zeytinyağı', 'Limon', 'Tuz'],
