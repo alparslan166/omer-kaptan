@@ -87,6 +87,7 @@ main {
 /* Hero */
 .hero {
   padding: 16px 0;
+  text-align: center;
 }
 .hero h2 {
   margin: 0 0 4px 0;
@@ -410,13 +411,13 @@ main {
   justify-content: center;
   align-items: center;
   margin: 0 auto 24px;
-  max-width: 400px;
   width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
 }
 .product-detail-image {
   width: 100%;
-  max-width: 400px;
-  height: auto;
+  height: 100%;
   border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 8px 24px rgba(10, 42, 87, 0.15);
@@ -586,6 +587,60 @@ main {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #e1edff;
+}
+.footer-social {
+  text-align: center;
+  margin-top: 2px;
+  padding-top: 2px;
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+.footer-social a {
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.footer-social a:first-child {
+  order: 1;
+}
+.footer-social a:last-child {
+  order: 2;
+}
+.footer-social a:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+.footer-social img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.footer-social a:last-child img {
+  width: 36px;
+  height: 36px;
+}
+.footer-designer {
+  text-align: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e1edff;
+}
+.footer-designer a {
+  color: var(--blue-700);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.footer-designer a:hover {
+  color: var(--blue-900);
+  text-decoration: underline;
 }
 
 /* Scroll to Top Button */
