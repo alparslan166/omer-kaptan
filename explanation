@@ -1,0 +1,41 @@
+--AÇIKLAMA--
+
+ANA SAYFA:
+- Ana sayfada tüm kategoriler sergilenir (Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Salatalar, Pideler, Tatlılar, Mezeler, İçecekler, Alkollü İçecekler)
+- Her kategori kartında kategori resmi ve "Ürünleri Gör" butonu bulunur
+- Sayfa yüklendiğinde otomatik olarak en üste scroll yapılır
+
+KATEGORİ SAYFALARI:
+- Her kategori sayfasında o kategoriye ait tüm ürünler listelenir
+- Her ürün kartında: ürün resmi, ürün adı, fiyat (₺340), kısa açıklama ve "Detay" butonu bulunur
+- Kullanıcı "Detay" butonuna tıklayarak ürün detay sayfasına gidebilir
+
+ÜRÜN DETAY SAYFASI:
+- Ürün detay sayfasında ürüne ait resim, başlık, açıklama ve ücretsiz eşlikçiler gösterilir
+- Ücretsiz eşlikçiler görsel kartlar halinde gösterilir (her satırda 3 adet, tüm cihazlarda optimize edilmiş)
+- Ücretsiz eşlikçiler bölümü bazı kategorilerde gösterilmez: Tatlılar, Mezeler, İçecekler, Alkollü İçecekler
+- Eğer ürün için eşlikçi tanımlanmamışsa, "Ücretsiz Eşlikçiler" başlığı ve bölümü gizlenir
+
+ŞEFİN ÖNERDİĞİ MEZELER:
+- Ürün detay sayfasında alt kısımda "Şefin Önerdiği Mezeler" bölümü gösterilir
+- Bu bölüm sadece şu kategorilerde gösterilir: Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Pideler
+- Mezeler listesinden rastgele 6 meze seçilip gösterilir
+- Her meze kartında meze resmi, adı, fiyat ve "Detay" butonu bulunur
+- Sayfanın sonunda "Tüm Mezeler" butonu ile mezeler kategorisine ulaşılabilir
+
+MEZE DETAY SAYFASI:
+- Meze detay sayfasında mezenin resim, açıklama ve içindekiler listesi gösterilir
+- İçindekiler listesi sadece Mezeler kategorisi için gösterilir
+- Meze detay sayfasında "Ücretsiz Eşlikçiler" bölümü gösterilmez (Mezeler kategorisi olduğu için)
+- "Şefin Önerdiği Mezeler" bölümü gösterilmez (Mezeler kategorisi olduğu için)
+
+KULLANICI DENEYİMİ:
+- Sağ üst kısımda "Geri" butonu bulunur (tarayıcı geçmişine dönüş)
+- Sayfada aşağı inildiğinde (300px'den fazla) sağ alt kısımda "Yukarı Çık" butonu gözükür
+- Sayfa yüklendiğinde otomatik olarak en üste scroll yapılır
+
+TASARIM:
+- Sayfanın üst kısmında "Ömer Kaptan" logosu ve "Mavi-Beyaz QR Menü" alt metni bulunur
+- Sayfanın alt kısmında (footer) "Ömer Kaptan Balık Restaurant" logosu, "Hakkımızda" metni, "Ödeme Yöntemleri" görseli, "Adres" bilgisi ve "Copyright" metni bulunur
+- Tüm sayfalar responsive tasarıma sahiptir (mobil, tablet, masaüstü uyumlu)
+
