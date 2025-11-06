@@ -60,7 +60,7 @@
   }
 
   // Eşlikçi gösterilmeyecek kategoriler
-  const noCompanionCategories = ['Tatlılar', 'Mezeler', 'İçecekler', 'Alkollü İçecekler'];
+  const noCompanionCategories = ['Tatlılar', 'Mezeler', 'Alkolsüz İçecekler', 'Alkollü İçecekler'];
   
   if (chipsEl) {
     // "Ücretsiz Eşlikçiler" başlığını bul

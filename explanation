@@ -1,7 +1,7 @@
 --AÇIKLAMA--
 
 ANA SAYFA:
-- Ana sayfada tüm kategoriler sergilenir (Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Salatalar, Pideler, Tatlılar, Mezeler, İçecekler, Alkollü İçecekler)
+- Ana sayfada tüm kategoriler sergilenir (Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Salatalar, Pideler, Tatlılar, Mezeler, Alkolsüz İçecekler, Alkollü Alkolsüz İçecekler)
 - Her kategori kartında kategori resmi ve "Ürünleri Gör" butonu bulunur
 - Sayfa yüklendiğinde otomatik olarak en üste scroll yapılır
 
@@ -13,7 +13,7 @@ KATEGORİ SAYFALARI:
 ÜRÜN DETAY SAYFASI:
 - Ürün detay sayfasında ürüne ait resim, başlık, açıklama ve ücretsiz eşlikçiler gösterilir
 - Ücretsiz eşlikçiler görsel kartlar halinde gösterilir (her satırda 3 adet, tüm cihazlarda optimize edilmiş)
-- Ücretsiz eşlikçiler bölümü bazı kategorilerde gösterilmez: Tatlılar, Mezeler, İçecekler, Alkollü İçecekler
+- Ücretsiz eşlikçiler bölümü bazı kategorilerde gösterilmez: Tatlılar, Mezeler, Alkolsüz İçecekler, Alkollü Alkolsüz İçecekler
 - Eğer ürün için eşlikçi tanımlanmamışsa, "Ücretsiz Eşlikçiler" başlığı ve bölümü gizlenir
 
 ŞEFİN ÖNERDİĞİ MEZELER:
