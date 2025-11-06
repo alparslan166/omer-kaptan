@@ -34,6 +34,12 @@
       productSlug = normalizeForFile(nameWithoutParentheses);
     }
     
+    // "D." ile başlayan ürünler için özel işlem: "D." -> "deniz"
+    if (name.startsWith('D. ')) {
+      const nameWithoutD = name.replace(/^D\.\s*/, '');
+      productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
+    }
+    
     productImageEl.src = `assets/${categorySlug}/${productSlug}.jpg`;
     productImageEl.alt = name;
   }
