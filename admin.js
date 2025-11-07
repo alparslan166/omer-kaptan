@@ -319,6 +319,10 @@ function toggleProductVisibility(id) {
   // Listeleri yenile
   displayProducts();
   displayHiddenProducts();
+  
+  // Kullanıcıya bilgi ver
+  const status = product.hidden ? 'gizlendi' : 'gösterildi';
+  alert(`"${product.name}" ürünü ${status}. Değişiklikleri görmek için kategori sayfalarını yenileyin.`);
 }
 
 // Form setup
