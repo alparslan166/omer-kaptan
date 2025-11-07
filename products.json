@@ -2495,12 +2495,12 @@
     },
     {
       "id": 156,
-      "name": "test1",
+      "name": "anya",
       "category": "Tavalar",
       "price": "31",
       "shortDesc": "dfghj",
       "description": "ksgdfhjklşilkjhtfdsvz",
-      "image": "tavalar/test1.jpg",
+      "image": "tavalar/anya.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık"
