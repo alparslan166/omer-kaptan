@@ -526,6 +526,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Mevcut eşlikçilerin resim yollarını assets/companions/ formatına çevir
     if (productsData && productsData.companions && Array.isArray(productsData.companions)) {
       let updated = false;
+      // normalizeForFileGlobal fonksiyonunu burada tanımla (henüz tanımlanmamış olabilir)
+      const normalizeForMigration = (text) => {
+        return text
+          .toLowerCase()
+          .replace(/ğ/g, 'g')
+          .replace(/ü/g, 'u')
+          .replace(/ş/g, 's')
+          .replace(/ı/g, 'i')
+          .replace(/ö/g, 'o')
+          .replace(/ç/g, 'c')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      };
+      
       productsData.companions.forEach(companion => {
         if (companion.image) {
           // Eğer assets/companions/ ile başlamıyorsa güncelle
@@ -539,7 +553,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
         } else {
           // Resim yolu yoksa oluştur
-          companion.image = `assets/companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+          companion.image = `assets/companions/${normalizeForMigration(companion.name)}.jpg`;
           updated = true;
         }
       });
@@ -569,13 +583,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       console.warn('Products data is invalid, using empty data', productsData);
       debugText.textContent = 'Veri yüklenemedi! products.json dosyasını kontrol edin veya localStorage\'ı temizleyin.';
-      productsData = { categories: [], products: [] };
+      productsData = { categories: [], products: [], companions: [] };
       initializeAdmin();
     }
   } catch (error) {
     console.error('Error initializing admin:', error);
     debugText.textContent = `Hata: ${error.message}`;
-    productsData = { categories: [], products: [] };
+    productsData = { categories: [], products: [], companions: [] };
     initializeAdmin();
   }
 });
@@ -589,6 +603,9 @@ function initializeAdmin() {
   
   // Form event listener'ları
   setupForms();
+  
+  // Eşlikçi form event listener'ları
+  setupCompanionForms();
   
   // URL'den product id kontrolü
   const urlParams = new URLSearchParams(window.location.search);
@@ -645,6 +662,10 @@ function setupTabs() {
       } else if (targetTab === 'categories') {
         if (productsData && productsData.categories && Array.isArray(productsData.categories)) {
           displayCategories();
+        }
+      } else if (targetTab === 'companions') {
+        if (productsData) {
+          displayCompanions();
         }
       }
     });
