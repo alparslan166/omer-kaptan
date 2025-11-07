@@ -1020,19 +1020,26 @@ function setupForms() {
       
       // GitHub API kontrolü - önce config'i yükle
       let githubConfigReady = false;
+      let config = null;
       if (window.GitHubConfig) {
-        const config = window.GitHubConfig.loadGitHubConfig();
+        config = window.GitHubConfig.loadGitHubConfig();
         githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
         console.log('🔧 GitHub Config durumu:', {
           hasConfig: !!window.GitHubConfig,
           configReady: githubConfigReady,
-          repository: config.repository,
+          repository: config.repository || '(boş)',
           hasToken: !!config.token,
+          tokenLength: config.token ? config.token.length : 0,
           hasAPI: !!window.GitHubAPI,
           hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
         });
+        
+        if (!githubConfigReady) {
+          console.warn('⚠️ GitHub API yapılandırılmamış! Repository veya Token eksik.');
+          console.warn('💡 Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.');
+        }
       } else {
-        console.warn('⚠️ GitHubConfig bulunamadı!');
+        console.error('❌ GitHubConfig bulunamadı! Script dosyaları yüklenmemiş olabilir.');
       }
       
       try {
@@ -1058,12 +1065,33 @@ function setupForms() {
             console.log('🌐 Resim URL:', uploadResult.url);
           }
         } else {
+          const reason = !githubConfigReady 
+            ? (config && !config.repository ? 'Repository eksik' : config && !config.token ? 'Token eksik' : 'Config eksik')
+            : !window.GitHubAPI ? 'GitHubAPI yüklenmemiş' 
+            : !window.GitHubAPI.uploadImage ? 'uploadImage fonksiyonu bulunamadı'
+            : 'Bilinmeyen neden';
+          
           console.warn('⚠️ GitHub API yapılandırılmamış veya eksik!', {
+            reason: reason,
             configReady: githubConfigReady,
             hasAPI: !!window.GitHubAPI,
-            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage),
+            config: config ? {
+              hasRepository: !!config.repository,
+              hasToken: !!config.token
+            } : 'config null'
           });
-          alert('⚠️ GitHub API yapılandırılmamış!\n\nResim yolu oluşturuldu: ' + imagePath + '\n\nLütfen resmi manuel olarak assets klasörüne yükleyin veya GitHub API ayarlarını yapılandırın.');
+          
+          const message = `⚠️ GitHub API yapılandırılmamış!\n\n` +
+            `Sebep: ${reason}\n\n` +
+            `Resim yolu oluşturuldu: ${imagePath}\n\n` +
+            `Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak:\n` +
+            `- Repository: alparslan166/omer-kaptan\n` +
+            `- Token: GitHub Personal Access Token\n` +
+            `ayarlarını yapılandırın.\n\n` +
+            `Veya resmi manuel olarak assets klasörüne yükleyin.`;
+          
+          alert(message);
         }
       } catch (error) {
         console.error('❌ Resim yükleme hatası:', error);
@@ -1208,8 +1236,25 @@ function setupForms() {
               console.log('🌐 Resim URL:', uploadResult.url);
             }
           } else {
-            console.warn('⚠️ GitHub API yapılandırılmamış veya eksik!');
-            alert('⚠️ GitHub API yapılandırılmamış!\n\nResim yolu oluşturuldu: ' + imagePath + '\n\nLütfen resmi manuel olarak assets klasörüne yükleyin veya GitHub API ayarlarını yapılandırın.');
+            const reason = !githubConfigReady 
+              ? (config && !config.repository ? 'Repository eksik' : config && !config.token ? 'Token eksik' : 'Config eksik')
+              : !window.GitHubAPI ? 'GitHubAPI yüklenmemiş' 
+              : !window.GitHubAPI.uploadImage ? 'uploadImage fonksiyonu bulunamadı'
+              : 'Bilinmeyen neden';
+            
+            console.warn('⚠️ GitHub API yapılandırılmamış veya eksik!', {
+              reason: reason,
+              configReady: githubConfigReady,
+              hasAPI: !!window.GitHubAPI,
+              hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+            });
+            
+            const message = `⚠️ GitHub API yapılandırılmamış!\n\n` +
+              `Sebep: ${reason}\n\n` +
+              `Resim yolu oluşturuldu: ${imagePath}\n\n` +
+              `Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.`;
+            
+            alert(message);
           }
         } catch (error) {
           console.error('❌ Resim yükleme hatası:', error);
