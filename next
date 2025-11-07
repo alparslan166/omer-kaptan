@@ -1,3 +1,7 @@
+--------------------------------
+
+
+
 admin paneli tasarlanıcak, bu paneli sadece bir kişi kullanıcak, o yüzden herhangi bir güvenlik önlemleri alınmayacak.
 
 Kullanılacak Teknolojiler:
@@ -77,3 +81,13 @@ alkollü içeceklere ve mezelere ürün eklerken kategori seçildikten sonra; al
 Aynı gizle gibi bir buton daha olucak “stokta yok” isimli buton, bu seçenek seçildiği zaman;
  ürün kategoriler kısmında gözükücek fakat, ürün detay sayfasına gidildiği zaman;
   “Maalsef,,, tükendi” tarzı tutarlı bir yazı yazsın
+
+
+
+githubda güncellemeleri yapınca otomatik olarak site güncellenecek,
+githubda güncellemeleri yapınca otomatik olarak admin paneli güncellenecek,
+githubda güncellemeleri yapınca otomatik olarak kategori sayfaları güncellenecek,
+githubda güncellemeleri yapınca otomatik olarak product.html sayfası güncellenecek,
+githubda güncellemeleri yapınca otomatik olarak product-detail.html sayfası güncellenecek,
+githubda güncellemeleri yapınca otomatik olarak product-detail.html sayfası güncellenecek,
+
