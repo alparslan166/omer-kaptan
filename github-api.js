@@ -38,74 +38,102 @@ async function updateFileViaGitHubAPI(content) {
     throw new Error('Repository formatı hatalı! Format: owner/repo');
   }
   
-  try {
-    // 1. Mevcut dosyayı al (SHA için)
-    const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}`;
-    const getFileResponse = await fetch(getFileUrl, {
-      headers: {
-        'Authorization': `token ${config.token}`,
-        'Accept': 'application/vnd.github.v3+json'
+  // SHA uyuşmazlığı durumunda retry mekanizması
+  const maxRetries = 3;
+  let retryCount = 0;
+  
+  while (retryCount < maxRetries) {
+    try {
+      // 1. Mevcut dosyayı al (SHA için) - Her retry'da güncel SHA'yı al
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}`;
+      const getFileResponse = await fetch(getFileUrl, {
+        headers: {
+          'Authorization': `token ${config.token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      
+      let sha = null;
+      if (getFileResponse.ok) {
+        const fileData = await getFileResponse.json();
+        sha = fileData.sha;
+        console.log(`📋 Mevcut dosya SHA'sı alındı: ${sha.substring(0, 8)}... (Retry: ${retryCount + 1}/${maxRetries})`);
+      } else if (getFileResponse.status === 404) {
+        console.log('📋 Dosya bulunamadı, yeni dosya oluşturulacak');
+      } else {
+        // 404 dışında bir hata varsa fırlat
+        const error = await getFileResponse.json().catch(() => ({}));
+        throw new Error(`Dosya bilgisi alınamadı: ${error.message || getFileResponse.statusText}`);
       }
-    });
-    
-    let sha = null;
-    if (getFileResponse.ok) {
-      const fileData = await getFileResponse.json();
-      sha = fileData.sha;
-    } else if (getFileResponse.status !== 404) {
-      // 404 dışında bir hata varsa fırlat
-      const error = await getFileResponse.json();
-      throw new Error(`Dosya bilgisi alınamadı: ${error.message || getFileResponse.statusText}`);
+      
+      // 2. Dosyayı güncelle veya oluştur
+      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}`;
+      
+      // Base64 encode (Türkçe karakter desteği ile)
+      const utf8Content = unescape(encodeURIComponent(content));
+      const base64Content = btoa(utf8Content);
+      
+      const updatePayload = {
+        message: config.commitMessage,
+        content: base64Content,
+        branch: config.branch
+      };
+      
+      // Eğer dosya varsa SHA ekle (güncelleme için)
+      if (sha) {
+        updatePayload.sha = sha;
+      }
+      
+      const updateResponse = await fetch(updateUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${config.token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatePayload)
+      });
+      
+      if (updateResponse.ok) {
+        // Başarılı!
+        const result = await updateResponse.json();
+        console.log('✅ GitHub API başarılı yanıt (Retry başarılı):', result);
+        return {
+          success: true,
+          commit: result.commit,
+          content: result.content
+        };
+      } else {
+        const errorData = await updateResponse.json().catch(() => ({}));
+        const errorMessage = errorData.message || updateResponse.statusText || 'Bilinmeyen hata';
+        
+        // SHA uyuşmazlığı hatası (409 Conflict) - Retry yap
+        if (updateResponse.status === 409 && errorMessage.includes('does not match') && retryCount < maxRetries - 1) {
+          retryCount++;
+          console.warn(`⚠️ SHA uyuşmazlığı tespit edildi (${retryCount}/${maxRetries}), tekrar deneniyor...`);
+          // Kısa bir bekleme sonrası tekrar dene
+          await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+          continue; // Döngünün başına dön
+        } else {
+          // Diğer hatalar veya max retry'a ulaşıldı
+          console.error('GitHub API error response:', errorData);
+          throw new Error(`GitHub API hatası: ${errorMessage}`);
+        }
+      }
+    } catch (error) {
+      // Retry sayısına ulaşılmadıysa ve SHA uyuşmazlığı değilse retry yap
+      if (retryCount < maxRetries - 1 && error.message && error.message.includes('does not match')) {
+        retryCount++;
+        console.warn(`⚠️ Hata tespit edildi (${retryCount}/${maxRetries}), tekrar deneniyor...`);
+        await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+        continue;
+      }
+      throw error;
     }
-    
-    // 2. Dosyayı güncelle veya oluştur
-    const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}`;
-    
-    // Base64 encode (Türkçe karakter desteği ile)
-    const utf8Content = unescape(encodeURIComponent(content));
-    const base64Content = btoa(utf8Content);
-    
-    const updatePayload = {
-      message: config.commitMessage,
-      content: base64Content,
-      branch: config.branch
-    };
-    
-    // Eğer dosya varsa SHA ekle (güncelleme için)
-    if (sha) {
-      updatePayload.sha = sha;
-    }
-    
-    const updateResponse = await fetch(updateUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${config.token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatePayload)
-    });
-    
-    if (!updateResponse.ok) {
-      const errorData = await updateResponse.json().catch(() => ({}));
-      const errorMessage = errorData.message || updateResponse.statusText || 'Bilinmeyen hata';
-      console.error('GitHub API error response:', errorData);
-      throw new Error(`GitHub API hatası: ${errorMessage}`);
-    }
-    
-    const result = await updateResponse.json();
-    console.log('GitHub API başarılı yanıt:', result);
-    return {
-      success: true,
-      commit: result.commit,
-      content: result.content,
-      message: result.commit?.message || 'Dosya güncellendi'
-    };
-    
-  } catch (error) {
-    console.error('GitHub API error:', error);
-    throw error;
   }
+  
+  // Max retry'a ulaşıldıysa hata fırlat
+  throw new Error('Dosya güncelleme başarısız: SHA uyuşmazlığı nedeniyle maksimum deneme sayısına ulaşıldı. Lütfen sayfayı yenileyip tekrar deneyin.');
 }
 
 /**
