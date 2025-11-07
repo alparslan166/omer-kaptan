@@ -278,12 +278,29 @@ function updateDownloadButton(data) {
 
 // GitHub ayarları modal'ını göster
 function showGitHubSettingsModal() {
-  const config = window.GitHubConfig ? window.GitHubConfig.getConfig() : {
+  let config = {
     repository: '',
     token: '',
     branch: 'main',
     filePath: 'products.json'
   };
+  
+  if (window.GitHubConfig) {
+    try {
+      config = window.GitHubConfig.loadGitHubConfig();
+    } catch (e) {
+      console.error('Error loading GitHub config in modal:', e);
+      // Fallback: localStorage'dan direkt yükle
+      try {
+        const stored = localStorage.getItem('github_api_config');
+        if (stored) {
+          config = JSON.parse(stored);
+        }
+      } catch (e2) {
+        console.error('Error loading from localStorage:', e2);
+      }
+    }
+  }
   
   const modal = document.createElement('div');
   modal.id = 'github-settings-modal';
@@ -1290,17 +1307,26 @@ function setupForms() {
       const name = document.getElementById('edit-name').value;
       const imageFile = document.getElementById('edit-image-file').files[0];
       
-      // Resim yolu belirleme
-      let imagePath = document.getElementById('edit-image').value;
+      // Resim yolu belirleme - HER ZAMAN otomatik oluştur (kategori ve ürün adına göre)
+      let imagePath = generateImagePath(category, name);
       
-      // Eğer yeni dosya seçilmişse veya kategori/ürün adı değişmişse, yeni yol oluştur
+      // Eğer yeni dosya seçilmişse, yeni dosya uzantısını kullan
       if (imageFile) {
-        // Yeni dosya seçilmişse, yeni dosya uzantısını kullan
         const fileExt = imageFile.name.split('.').pop().toLowerCase();
-        imagePath = generateImagePath(category, name);
         imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
-        
-        // Yeni resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
+      } else {
+        // Dosya seçilmemişse, mevcut resmin uzantısını koru (eğer varsa)
+        if (product.image) {
+          const currentExt = product.image.split('.').pop();
+          imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${currentExt}`);
+        }
+      }
+      
+      // Hidden input'u güncelle
+      document.getElementById('edit-image').value = imagePath;
+      
+      // Eğer yeni resim dosyası seçilmişse GitHub'a yükle
+      if (imageFile) {
         const updateButton = editForm.querySelector('button[type="submit"]');
         const originalButtonText = updateButton ? updateButton.textContent : 'Güncelle';
         
@@ -1309,19 +1335,20 @@ function setupForms() {
           category: category,
           productName: name,
           generatedPath: imagePath,
-          fileExtension: fileExt
+          fileExtension: imageFile.name.split('.').pop().toLowerCase()
         });
         
         // GitHub API kontrolü - önce config'i yükle
         let githubConfigReady = false;
+        let config = null;
         if (window.GitHubConfig) {
-          const config = window.GitHubConfig.loadGitHubConfig();
+          config = window.GitHubConfig.loadGitHubConfig();
           githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
           console.log('🔧 GitHub Config durumu:', {
             hasConfig: !!window.GitHubConfig,
             configReady: githubConfigReady,
-            repository: config.repository,
-            hasToken: !!config.token,
+            repository: config ? config.repository : '(yok)',
+            hasToken: !!(config && config.token),
             hasAPI: !!window.GitHubAPI,
             hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
           });
@@ -1339,7 +1366,8 @@ function setupForms() {
             console.log('📤 Yeni resim GitHub\'a yükleniyor:', {
               fullPath: fullImagePath,
               fileSize: `${(imageFile.size / 1024).toFixed(2)} KB`,
-              fileType: imageFile.type
+              fileType: imageFile.type,
+              oldPath: product.image
             });
             
             const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
@@ -1389,13 +1417,7 @@ function setupForms() {
             updateButton.textContent = originalButtonText;
           }
         }
-      } else if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
-        // Dosya seçilmemiş ama kategori/ürün adı değişmişse, yeni yol oluştur (mevcut uzantıyı koru)
-        const currentExt = product.image ? product.image.split('.').pop() : 'jpg';
-        imagePath = generateImagePath(category, name);
-        imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${currentExt}`);
       }
-      // Aksi halde mevcut resim yolunu koru
       
       product.name = name;
       product.category = category;

@@ -147,22 +147,31 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
       reader.readAsDataURL(file);
     });
     
-    // 1. Mevcut dosyayı kontrol et (SHA için)
-    const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}`;
-    const getFileResponse = await fetch(getFileUrl, {
-      headers: {
-        'Authorization': `token ${config.token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-    
+    // 1. Mevcut dosyayı kontrol et (SHA için) - sadece dosya varsa SHA al
     let sha = null;
-    if (getFileResponse.ok) {
-      const fileData = await getFileResponse.json();
-      sha = fileData.sha;
-    } else if (getFileResponse.status !== 404) {
-      const error = await getFileResponse.json().catch(() => ({}));
-      throw new Error(`Dosya bilgisi alınamadı: ${error.message || getFileResponse.statusText}`);
+    try {
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}`;
+      const getFileResponse = await fetch(getFileUrl, {
+        headers: {
+          'Authorization': `token ${config.token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      
+      if (getFileResponse.ok) {
+        const fileData = await getFileResponse.json();
+        sha = fileData.sha;
+        console.log(`📋 Mevcut dosya bulundu, SHA: ${sha.substring(0, 8)}...`);
+      } else if (getFileResponse.status === 404) {
+        console.log(`📋 Yeni dosya oluşturulacak: ${filePath}`);
+      } else {
+        // 404 dışında bir hata varsa logla ama devam et (yeni dosya oluşturulabilir)
+        const error = await getFileResponse.json().catch(() => ({}));
+        console.warn(`⚠️ Dosya bilgisi alınamadı (404 değil), yeni dosya olarak oluşturulacak:`, error.message || getFileResponse.statusText);
+      }
+    } catch (error) {
+      // SHA kontrolü hatası kritik değil, yeni dosya olarak oluşturulabilir
+      console.warn(`⚠️ SHA kontrolü başarısız, yeni dosya olarak oluşturulacak:`, error.message);
     }
     
     // 2. Dosyayı yükle veya güncelle
