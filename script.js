@@ -10,46 +10,9 @@
   
   // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
   let productImagePath = null; // products.json'dan gelen resim yolu
-  (async function() {
-    try {
-      console.log('products.json yükleniyor (product detail)...');
-      const response = await fetch('products.json');
-      if (response.ok) {
-        const productsData = await response.json();
-        if (productsData && productsData.products && Array.isArray(productsData.products)) {
-          // URL'den gelen name ve category ile ürünü bul
-          const product = productsData.products.find(p => 
-            p.name === name && p.category === category
-          );
-          
-          if (product) {
-            // products.json'dan gelen veriyi kullan (daha güncel)
-            console.log('Ürün products.json\'dan bulundu:', product.name);
-            name = product.name;
-            category = product.category;
-            desc = product.description || product.shortDesc || desc;
-            companions = product.companions || companions;
-            
-            // products.json'dan gelen resim yolunu kullan
-            if (product.image) {
-              productImagePath = product.image;
-              console.log('Resim yolu products.json\'dan alındı:', productImagePath);
-            }
-            
-            // Sayfayı güncelle
-            updateProductPage();
-          } else {
-            console.log('Ürün products.json\'da bulunamadı, URL parametreleri kullanılıyor');
-          }
-        }
-      }
-    } catch (e) {
-      console.error('Error loading products.json:', e);
-      // Hata durumunda URL parametreleri kullanılacak
-    }
-  })();
   
-  function updateProductPage() {
+  // updateProductPage fonksiyonu - resim yolunu parametre olarak alabilir
+  function updateProductPage(imagePathFromJson = null) {
     const titleEl = document.querySelector('[data-product-name]');
     const catEl = document.querySelector('[data-product-category]');
     const descEl = document.querySelector('[data-product-desc]');
