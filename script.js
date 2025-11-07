@@ -1,21 +1,56 @@
 (function(){
   const params = new URLSearchParams(window.location.search);
-  const name = params.get('name') || 'Ürün adı';
-  const category = params.get('category') || '';
-  const desc = params.get('desc') || 'Lezzetli bir deniz ürünü.';
-  const companions = (params.get('companions') || '')
+  let name = params.get('name') || 'Ürün adı';
+  let category = params.get('category') || '';
+  let desc = params.get('desc') || 'Lezzetli bir deniz ürünü.';
+  let companions = (params.get('companions') || '')
     .split(',')
     .map(s => s.trim())
     .filter(Boolean);
-
-  const titleEl = document.querySelector('[data-product-name]');
-  const catEl = document.querySelector('[data-product-category]');
-  const descEl = document.querySelector('[data-product-desc]');
-  const chipsEl = document.querySelector('[data-companions]');
-  const productNameTitleEl = document.querySelector('[data-product-name-title]');
-  const productImageEl = document.querySelector('[data-product-image]');
-  const ingredientsTitleEl = document.querySelector('[data-ingredients-title]');
-  const ingredientsListEl = document.querySelector('[data-ingredients-list]');
+  
+  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
+  (async function() {
+    try {
+      console.log('products.json yükleniyor (product detail)...');
+      const response = await fetch('products.json');
+      if (response.ok) {
+        const productsData = await response.json();
+        if (productsData && productsData.products && Array.isArray(productsData.products)) {
+          // URL'den gelen name ve category ile ürünü bul
+          const product = productsData.products.find(p => 
+            p.name === name && p.category === category
+          );
+          
+          if (product) {
+            // products.json'dan gelen veriyi kullan (daha güncel)
+            console.log('Ürün products.json\'dan bulundu:', product.name);
+            name = product.name;
+            category = product.category;
+            desc = product.description || product.shortDesc || desc;
+            companions = product.companions || companions;
+            
+            // Sayfayı güncelle
+            updateProductPage();
+          } else {
+            console.log('Ürün products.json\'da bulunamadı, URL parametreleri kullanılıyor');
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error loading products.json:', e);
+      // Hata durumunda URL parametreleri kullanılacak
+    }
+  })();
+  
+  function updateProductPage() {
+    const titleEl = document.querySelector('[data-product-name]');
+    const catEl = document.querySelector('[data-product-category]');
+    const descEl = document.querySelector('[data-product-desc]');
+    const chipsEl = document.querySelector('[data-companions]');
+    const productNameTitleEl = document.querySelector('[data-product-name-title]');
+    const productImageEl = document.querySelector('[data-product-image]');
+    const ingredientsTitleEl = document.querySelector('[data-ingredients-title]');
+    const ingredientsListEl = document.querySelector('[data-ingredients-list]');
 
   if (titleEl) titleEl.textContent = category ? `${category} / ${name}` : name;
   if (catEl) catEl.textContent = category;
@@ -208,6 +243,9 @@
       });
     }
   }
+  
+  // İlk yüklemede sayfayı güncelle (URL parametreleri ile)
+  updateProductPage();
 })();
 
 function companionImagePath(name){

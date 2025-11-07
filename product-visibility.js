@@ -4,17 +4,52 @@
 (function() {
   const STORAGE_KEY = 'omer_kaptan_products';
   
-  function initProductVisibility() {
-    // LocalStorage'dan veriyi yükle
+  async function initProductVisibility() {
+    // Önce products.json'dan yükle (kalıcı kaynak)
     let productsData = null;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        productsData = JSON.parse(stored);
+      console.log('products.json yükleniyor (product-visibility)...');
+      // Sayfa konumuna göre products.json yolunu belirle
+      let jsonPath = 'products.json';
+      if (window.location.pathname.includes('/categories/')) {
+        jsonPath = '../products.json';
+      }
+      
+      const response = await fetch(jsonPath);
+      if (response.ok) {
+        const jsonData = await response.json();
+        console.log('products.json yüklendi (product-visibility):', jsonData.products?.length, 'ürün');
+        productsData = jsonData;
+        
+        // LocalStorage'a cache olarak kaydet
+        if (productsData && productsData.products) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
+        }
+      } else {
+        console.log('products.json yüklenemedi, localStorage kullanılıyor');
+        // products.json yüklenemezse localStorage'dan yükle
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            productsData = JSON.parse(stored);
+            console.log('LocalStorage\'dan veri yüklendi:', productsData.products?.length, 'ürün');
+          }
+        } catch (e) {
+          console.error('Error loading products data from localStorage:', e);
+        }
       }
     } catch (e) {
-      console.error('Error loading products data:', e);
-      return;
+      console.error('Error loading products.json:', e);
+      // products.json yüklenemezse localStorage'dan yükle
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          productsData = JSON.parse(stored);
+          console.log('LocalStorage\'dan veri yüklendi (fallback):', productsData.products?.length, 'ürün');
+        }
+      } catch (e2) {
+        console.error('Error loading products data from localStorage:', e2);
+      }
     }
     
     if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
@@ -148,15 +183,19 @@
   
   // Sayfa yüklendiğinde çalıştır
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProductVisibility);
+    document.addEventListener('DOMContentLoaded', () => {
+      initProductVisibility().catch(e => console.error('Error in initProductVisibility:', e));
+    });
   } else {
     // DOM zaten yüklenmişse direkt çalıştır
-    initProductVisibility();
+    initProductVisibility().catch(e => console.error('Error in initProductVisibility:', e));
   }
   
   // Sayfa yüklendikten sonra da bir kez daha kontrol et (gecikmeli yüklenen içerik için)
   window.addEventListener('load', function() {
-    setTimeout(initProductVisibility, 100);
+    setTimeout(() => {
+      initProductVisibility().catch(e => console.error('Error in initProductVisibility (load):', e));
+    }, 100);
   });
 })();
 

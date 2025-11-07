@@ -19,20 +19,49 @@
       return;
     }
     
-    // Diğer kategoriler için localStorage'dan veri yükle
+    // Önce products.json'dan yükle (kalıcı kaynak)
     let productsData = null;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        productsData = JSON.parse(stored);
+      console.log('products.json yükleniyor...');
+      const response = await fetch('../products.json');
+      if (response.ok) {
+        const jsonData = await response.json();
+        console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');
+        productsData = jsonData;
+        
+        // LocalStorage'a cache olarak kaydet
+        if (productsData && productsData.products) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
+        }
+      } else {
+        console.log('products.json yüklenemedi, localStorage kullanılıyor');
+        // products.json yüklenemezse localStorage'dan yükle
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) {
+            productsData = JSON.parse(stored);
+            console.log('LocalStorage\'dan veri yüklendi:', productsData.products?.length, 'ürün');
+          }
+        } catch (e) {
+          console.error('Error loading products data from localStorage:', e);
+        }
       }
     } catch (e) {
-      console.error('Error loading products data:', e);
-      return;
+      console.error('Error loading products.json:', e);
+      // products.json yüklenemezse localStorage'dan yükle
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          productsData = JSON.parse(stored);
+          console.log('LocalStorage\'dan veri yüklendi (fallback):', productsData.products?.length, 'ürün');
+        }
+      } catch (e2) {
+        console.error('Error loading products data from localStorage:', e2);
+      }
     }
     
     if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
-      console.log('LocalStorage\'da veri yok, statik içerik gösteriliyor');
+      console.log('Veri yüklenemedi, statik içerik gösteriliyor');
       return; // Veri yoksa statik HTML'i göster
     }
     

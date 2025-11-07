@@ -3,11 +3,68 @@
 // LocalStorage'dan veri yükleme ve kaydetme
 const STORAGE_KEY = 'omer_kaptan_products';
 
-async function loadProducts() {
-  // Önce localStorage'ı kontrol et
+async function loadProducts(forceRefresh = false) {
+  // Eğer forceRefresh true ise, önce products.json'dan yükle (GitHub güncellemesi sonrası)
+  if (forceRefresh) {
+    console.log('Force refresh: Loading from products.json (GitHub güncellemesi sonrası)');
+    try {
+      const response = await fetch('products.json?' + Date.now()); // Cache bypass
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('Fetched data from products.json (force refresh):', data);
+      
+      // Veri yapısını kontrol et
+      if (data && typeof data === 'object' && Array.isArray(data.products) && Array.isArray(data.categories)) {
+        // Eşlikçiler array'i yoksa oluştur
+        if (!data.companions || !Array.isArray(data.companions)) {
+          data.companions = [];
+        }
+        console.log('products.json data is valid (force refresh):', data.products.length, 'products', data.companions.length, 'companions');
+        
+        // LocalStorage'ı temizle ve yeni veriyi kaydet
+        localStorage.removeItem(STORAGE_KEY);
+        saveProducts(data);
+        return data;
+      } else {
+        throw new Error('Invalid data structure in products.json');
+      }
+    } catch (error) {
+      console.error('Error loading products (force refresh):', error);
+      // Hata durumunda localStorage'dan yüklemeyi dene
+    }
+  }
+  
+  // Önce products.json'dan yükle (kalıcı kaynak)
+  console.log('Loading from products.json');
+  try {
+    const response = await fetch('products.json?' + Date.now()); // Cache bypass
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Fetched data from products.json:', data);
+      
+      // Veri yapısını kontrol et
+      if (data && typeof data === 'object' && Array.isArray(data.products) && Array.isArray(data.categories)) {
+        // Eşlikçiler array'i yoksa oluştur
+        if (!data.companions || !Array.isArray(data.companions)) {
+          data.companions = [];
+        }
+        console.log('products.json data is valid:', data.products.length, 'products', data.companions.length, 'companions');
+        
+        // LocalStorage'a cache olarak kaydet
+        saveProducts(data);
+        return data;
+      }
+    }
+  } catch (error) {
+    console.error('Error loading products.json:', error);
+  }
+  
+  // products.json yüklenemezse localStorage'dan yükle (fallback)
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
-    console.log('Loading from localStorage');
+    console.log('Loading from localStorage (fallback)');
     try {
       const parsed = JSON.parse(stored);
       // Veri yapısını kontrol et
@@ -16,7 +73,7 @@ async function loadProducts() {
         if (!parsed.companions || !Array.isArray(parsed.companions)) {
           parsed.companions = [];
         }
-        console.log('LocalStorage data is valid:', parsed.products.length, 'products', parsed.companions.length, 'companions');
+        console.log('LocalStorage data is valid (fallback):', parsed.products.length, 'products', parsed.companions.length, 'companions');
         return parsed;
       } else {
         console.warn('LocalStorage data structure is invalid, clearing...');
@@ -28,33 +85,9 @@ async function loadProducts() {
     }
   }
   
-  // İlk yüklemede veya localStorage boşsa products.json'dan yükle
-  console.log('Loading from products.json');
-  try {
-    const response = await fetch('products.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log('Fetched data from products.json:', data);
-    
-    // Veri yapısını kontrol et
-    if (data && typeof data === 'object' && Array.isArray(data.products) && Array.isArray(data.categories)) {
-      // Eşlikçiler array'i yoksa oluştur
-      if (!data.companions || !Array.isArray(data.companions)) {
-        data.companions = [];
-      }
-      console.log('products.json data is valid:', data.products.length, 'products', data.companions.length, 'companions');
-      saveProducts(data);
-      return data;
-    } else {
-      throw new Error('Invalid data structure in products.json');
-    }
-  } catch (error) {
-    console.error('Error loading products:', error);
-    // Hata durumunda boş veri döndür
-    return { categories: [], products: [], companions: [] };
-  }
+  // Hiçbir kaynak yüklenemezse boş veri döndür
+  console.warn('No data source available, returning empty data');
+  return { categories: [], products: [], companions: [] };
 }
 
 function saveProducts(data) {
@@ -237,7 +270,28 @@ function updateDownloadButton(data) {
           console.log('✅ GitHub API güncelleme sonucu:', result);
           
           if (result && result.success) {
-            showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
+            // GitHub güncellemesi başarılı, LocalStorage'ı temizle ve products.json'dan yeniden yükle
+            console.log('🔄 GitHub güncellemesi başarılı, cache temizleniyor ve veri yeniden yükleniyor...');
+            localStorage.removeItem(STORAGE_KEY);
+            
+            // Birkaç saniye bekle (GitHub Pages'in güncellemesi için)
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // products.json'dan yeniden yükle (force refresh)
+            try {
+              productsData = await loadProducts(true);
+              console.log('✅ Veri yeniden yüklendi:', productsData.products?.length, 'ürün');
+              
+              // Admin panelini yeniden başlat
+              initializeAdmin();
+              displayProductsIfReady();
+              displayCompanions();
+              
+              showNotification('✅ Başarıyla güncellendi! Tüm cihazlarda görünecek. (Sayfa yenilendi)', 'success');
+            } catch (error) {
+              console.error('Error reloading data:', error);
+              showNotification('✅ GitHub\'a güncellendi, ancak veri yeniden yüklenirken hata oluştu. Sayfayı yenileyin.', 'error');
+            }
           } else if (result) {
             console.warn('GitHub API yanıtı:', result);
             showNotification('✅ Güncelleme tamamlandı! (Yanıt bekleniyor...)', 'success');
