@@ -59,12 +59,15 @@
   
   // Mezeler ve Alkollü İçecekler için kategori organizasyonu
   async function organizeCategoryProducts(category) {
+    console.log(`organizeCategoryProducts çağrıldı: ${category}`);
+    
     // Önce localStorage'dan dene
     let productsData = null;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         productsData = JSON.parse(stored);
+        console.log('LocalStorage\'dan veri yüklendi:', productsData.products?.length, 'ürün');
       }
     } catch (e) {
       console.error('Error loading products data from localStorage:', e);
@@ -73,29 +76,39 @@
     // Eğer localStorage'da yoksa, products.json'dan yükle
     if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
       try {
+        console.log('products.json yükleniyor...');
         const response = await fetch('../products.json');
         if (response.ok) {
           productsData = await response.json();
+          console.log('products.json yüklendi:', productsData.products?.length, 'ürün');
           // LocalStorage'a kaydet
           if (productsData && productsData.products) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
           }
+        } else {
+          console.log('products.json yüklenemedi, statik HTML\'den parse edilecek');
         }
       } catch (e) {
         console.error('Error loading products.json:', e);
         // products.json yüklenemezse, statik HTML'den ürünleri topla
+        console.log('products.json hatası, statik HTML\'den parse ediliyor...');
         organizeStaticProducts(category);
         return;
       }
     }
     
     // Bu kategoriye ait gizlenmemiş ürünleri bul
-    const categoryProducts = productsData.products.filter(p => 
-      p.category === category && !p.hidden
-    );
+    let categoryProducts = [];
+    if (productsData && productsData.products && Array.isArray(productsData.products)) {
+      categoryProducts = productsData.products.filter(p => 
+        p.category === category && !p.hidden
+      );
+      console.log(`${category} kategorisinde ${categoryProducts.length} ürün bulundu`);
+    }
     
     if (categoryProducts.length === 0) {
       // LocalStorage ve products.json'da yoksa, statik HTML'den topla
+      console.log('Veri bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
       return;
     }
@@ -103,7 +116,7 @@
     // Mevcut içeriği bul (section-head'den sonraki tüm içeriği temizle)
     const main = document.querySelector('main .container');
     if (!main) {
-      console.log('main container bulunamadı');
+      console.log('main container bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
       return;
     }
@@ -126,12 +139,21 @@
     const newContainer = document.createElement('div');
     main.appendChild(newContainer);
     
-    // Ürünleri render et
-    renderProducts(categoryProducts, newContainer, category);
+    // Ürünleri render et (Mezeler için özel render)
+    console.log('Ürünler render ediliyor...');
+    if (category === 'Mezeler') {
+      renderMezeler(categoryProducts, newContainer);
+    } else if (category === 'Alkollü İçecekler') {
+      renderAlkolluIcecekler(categoryProducts, newContainer);
+    } else {
+      renderProducts(categoryProducts, newContainer, category);
+    }
   }
   
   // Statik HTML'den ürünleri topla ve kategorize et (fallback)
   function organizeStaticProducts(category) {
+    console.log(`organizeStaticProducts çağrıldı: ${category}`);
+    
     const productGrid = document.querySelector('.product-grid');
     if (!productGrid) {
       console.log('product-grid bulunamadı');
@@ -143,6 +165,8 @@
       console.log('Ürün kartı bulunamadı');
       return;
     }
+    
+    console.log(`${productCards.length} ürün kartı bulundu`);
     
     // Ürün kartlarını parse et
     const products = productCards.map(card => {
@@ -158,14 +182,33 @@
       // Link'ten URL parametrelerini parse et
       if (linkEl && linkEl.href) {
         try {
-          const url = new URL(linkEl.href, window.location.origin);
+          // Relative URL'leri handle et
+          let urlString = linkEl.href;
+          if (!urlString.startsWith('http') && !urlString.startsWith('//')) {
+            // Relative URL ise, absolute URL'e çevir
+            const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+            urlString = new URL(urlString, baseUrl + '/').href;
+          }
+          const url = new URL(urlString);
           description = url.searchParams.get('desc') || '';
           const companionsStr = url.searchParams.get('companions');
           if (companionsStr) {
             companions = decodeURIComponent(companionsStr).split(',').map(s => s.trim()).filter(Boolean);
           }
         } catch (e) {
-          console.error('Error parsing URL:', e);
+          // URL parse edilemezse, href'ten direkt regex ile çıkar
+          try {
+            const match = linkEl.href.match(/desc=([^&]*)/);
+            if (match) {
+              description = decodeURIComponent(match[1]);
+            }
+            const companionsMatch = linkEl.href.match(/companions=([^&]*)/);
+            if (companionsMatch) {
+              companions = decodeURIComponent(companionsMatch[1]).split(',').map(s => s.trim()).filter(Boolean);
+            }
+          } catch (e2) {
+            console.error('Error parsing URL with regex:', e2);
+          }
         }
       }
       
@@ -211,8 +254,16 @@
     const newContainer = document.createElement('div');
     main.appendChild(newContainer);
     
-    // Ürünleri render et
-    renderProducts(products, newContainer, category);
+    // Ürünleri render et (Mezeler için özel render)
+    if (category === 'Mezeler') {
+      renderMezeler(products, newContainer);
+    } else if (category === 'Alkollü İçecekler') {
+      renderAlkolluIcecekler(products, newContainer);
+    } else {
+      renderProducts(products, newContainer, category);
+    }
+    
+    console.log(`Statik HTML'den ${products.length} ürün parse edildi ve render edildi`);
   }
   
   function getCurrentCategory() {
@@ -260,6 +311,8 @@
   }
   
   function renderMezeler(products, container) {
+    console.log(`renderMezeler çağrıldı: ${products.length} ürün ile`);
+    
     // Mezeleri kategorilere ayır (öncelik sırasına göre)
     
     // 1. Deniz Mahsullü Mezeler (en özel kategori)
@@ -337,8 +390,11 @@
     // Mevcut içeriği temizle
     container.innerHTML = '';
     
+    console.log(`Kategoriler: Zeytinyağlı: ${zeytinyagli.length}, Yoğurtlu: ${yogurtlu.length}, Ezme: ${ezmeler.length}, Salata: ${salatalar.length}, Deniz: ${denizMahsulleri.length}, Diğer: ${digerMezeler.length}`);
+    
     // Zeytinyağlı Mezeler
     if (zeytinyagli.length > 0) {
+      console.log('Zeytinyağlı Mezeler render ediliyor...');
       const section = document.createElement('div');
       section.innerHTML = `<h4 class="category-title">Zeytinyağlı Mezeler</h4>`;
       container.appendChild(section);
