@@ -12,7 +12,11 @@ async function loadProducts() {
       const parsed = JSON.parse(stored);
       // Veri yapısını kontrol et
       if (parsed && typeof parsed === 'object' && Array.isArray(parsed.products) && Array.isArray(parsed.categories)) {
-        console.log('LocalStorage data is valid:', parsed.products.length, 'products');
+        // Eşlikçiler array'i yoksa oluştur
+        if (!parsed.companions || !Array.isArray(parsed.companions)) {
+          parsed.companions = [];
+        }
+        console.log('LocalStorage data is valid:', parsed.products.length, 'products', parsed.companions.length, 'companions');
         return parsed;
       } else {
         console.warn('LocalStorage data structure is invalid, clearing...');
@@ -36,7 +40,11 @@ async function loadProducts() {
     
     // Veri yapısını kontrol et
     if (data && typeof data === 'object' && Array.isArray(data.products) && Array.isArray(data.categories)) {
-      console.log('products.json data is valid:', data.products.length, 'products');
+      // Eşlikçiler array'i yoksa oluştur
+      if (!data.companions || !Array.isArray(data.companions)) {
+        data.companions = [];
+      }
+      console.log('products.json data is valid:', data.products.length, 'products', data.companions.length, 'companions');
       saveProducts(data);
       return data;
     } else {
@@ -45,7 +53,7 @@ async function loadProducts() {
   } catch (error) {
     console.error('Error loading products:', error);
     // Hata durumunda boş veri döndür
-    return { categories: [], products: [] };
+    return { categories: [], products: [], companions: [] };
   }
 }
 
@@ -824,7 +832,19 @@ function editProduct(id) {
   document.getElementById('edit-short-desc').value = product.shortDesc || '';
   document.getElementById('edit-description').value = product.description;
   document.getElementById('edit-image').value = product.image;
-  document.getElementById('edit-companions').value = product.companions ? product.companions.join(', ') : '';
+  // Eşlikçi dropdown'unu doldur ve seçili olanları işaretle
+  const editCompanionsSelect = document.getElementById('edit-companions');
+  if (editCompanionsSelect) {
+    populateCompanionSelect(editCompanionsSelect);
+    if (product.companions && Array.isArray(product.companions)) {
+      product.companions.forEach(companionName => {
+        const option = Array.from(editCompanionsSelect.options).find(opt => opt.value === companionName);
+        if (option) {
+          option.selected = true;
+        }
+      });
+    }
+  }
   document.getElementById('edit-hidden').checked = product.hidden || false;
   
   const editOutOfStock = document.getElementById('edit-out-of-stock');
@@ -1122,9 +1142,8 @@ function setupForms() {
         shortDesc: document.getElementById('add-short-desc').value,
         description: document.getElementById('add-description').value,
         image: imagePath,
-        companions: document.getElementById('add-companions').value
-          .split(',')
-          .map(s => s.trim())
+        companions: Array.from(document.getElementById('add-companions').selectedOptions)
+          .map(option => option.value)
           .filter(Boolean),
         hidden: false,
         outOfStock: false,
@@ -1290,9 +1309,8 @@ function setupForms() {
       product.shortDesc = document.getElementById('edit-short-desc').value;
       product.description = document.getElementById('edit-description').value;
       product.image = imagePath;
-      product.companions = document.getElementById('edit-companions').value
-        .split(',')
-        .map(s => s.trim())
+      product.companions = Array.from(document.getElementById('edit-companions').selectedOptions)
+        .map(option => option.value)
         .filter(Boolean);
       product.hidden = document.getElementById('edit-hidden').checked;
       product.outOfStock = document.getElementById('edit-out-of-stock') ? document.getElementById('edit-out-of-stock').checked : false;
@@ -1385,6 +1403,48 @@ function setupForms() {
       filterProducts();
     });
   }
+  
+  // Eşlikçi dropdown'larını doldur
+  const addCompanionsSelect = document.getElementById('add-companions');
+  if (addCompanionsSelect) {
+    populateCompanionSelect(addCompanionsSelect);
+  }
+  
+  const editCompanionsSelect = document.getElementById('edit-companions');
+  if (editCompanionsSelect) {
+    populateCompanionSelect(editCompanionsSelect);
+  }
+}
+
+// Eşlikçi dropdown'unu doldur
+function populateCompanionSelect(selectElement) {
+  if (!selectElement || !productsData || !productsData.companions) return;
+  
+  // Mevcut seçili değerleri sakla
+  const selectedValues = Array.from(selectElement.selectedOptions).map(opt => opt.value);
+  
+  // Tüm seçenekleri temizle (ilk boş seçenek hariç)
+  const firstOption = selectElement.querySelector('option[value=""]');
+  selectElement.innerHTML = '';
+  if (firstOption) {
+    selectElement.appendChild(firstOption);
+  } else {
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Eşlikçi seçin...';
+    selectElement.appendChild(defaultOption);
+  }
+  
+  // Eşlikçileri ekle
+  productsData.companions.forEach(companion => {
+    const option = document.createElement('option');
+    option.value = companion.name;
+    option.textContent = companion.name;
+    if (selectedValues.includes(companion.name)) {
+      option.selected = true;
+    }
+    selectElement.appendChild(option);
+  });
 }
 
 // Ürünleri filtrele
@@ -1463,8 +1523,290 @@ function deleteCategory(categoryName) {
   }
 }
 
+// Eşlikçileri listele
+function displayCompanions() {
+  const companionsList = document.getElementById('companions-list');
+  if (!companionsList) return;
+  
+  if (!productsData.companions || productsData.companions.length === 0) {
+    companionsList.innerHTML = '<p>Henüz eşlikçi eklenmemiş.</p>';
+    return;
+  }
+  
+  companionsList.innerHTML = '';
+  
+  productsData.companions.forEach(companion => {
+    const card = document.createElement('div');
+    card.className = 'product-card-admin';
+    const imagePath = companion.image || `companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+    card.innerHTML = `
+      <div class="product-card-image">
+        <img src="assets/${imagePath}" alt="${companion.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
+      </div>
+      <div class="product-card-info">
+        <h4>${companion.name}</h4>
+        <div class="product-actions">
+          <button class="btn-edit" onclick="editCompanion(${companion.id})">Düzenle</button>
+          <button class="btn-danger" onclick="deleteCompanion(${companion.id})" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Sil</button>
+        </div>
+      </div>
+    `;
+    companionsList.appendChild(card);
+  });
+}
+
+// Eşlikçi düzenle
+function editCompanion(id) {
+  const companion = productsData.companions.find(c => c.id === id);
+  if (!companion) return;
+  
+  document.getElementById('edit-companion-id').value = companion.id;
+  document.getElementById('edit-companion-name').value = companion.name;
+  document.getElementById('edit-companion-image').value = companion.image || '';
+  
+  // Düzenleme formunu göster
+  document.getElementById('edit-companion-section').style.display = 'block';
+  document.querySelector('.add-companion-form').style.display = 'none';
+  
+  // Companions tabını göster
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+  
+  document.querySelector('[data-tab="companions"]').classList.add('active');
+  document.getElementById('companions-tab').classList.add('active');
+  
+  window.scrollTo(0, 0);
+}
+
+// Eşlikçi sil
+function deleteCompanion(id) {
+  const companion = productsData.companions.find(c => c.id === id);
+  if (!companion) return;
+  
+  const confirmMessage = `"${companion.name}" eşlikçisini silmek istediğinize emin misiniz?\n\nBu işlem geri alınamaz ve bu eşlikçiyi kullanan tüm ürünlerden de kaldırılacaktır.`;
+  if (!confirm(confirmMessage)) return;
+  
+  // Ürünlerden de kaldır
+  productsData.products.forEach(product => {
+    if (product.companions && Array.isArray(product.companions)) {
+      product.companions = product.companions.filter(c => c !== companion.name);
+    }
+  });
+  
+  // Eşlikçiyi sil
+  productsData.companions = productsData.companions.filter(c => c.id !== id);
+  saveProducts(productsData);
+  
+  displayCompanions();
+  // Eşlikçi dropdown'larını güncelle
+  populateCompanionSelect(document.getElementById('add-companions'));
+  populateCompanionSelect(document.getElementById('edit-companions'));
+  alert(`"${companion.name}" eşlikçisi başarıyla silindi.`);
+}
+
+// normalizeForFile global fonksiyonu
+function normalizeForFileGlobal(text) {
+  return text
+    .toLowerCase()
+    .replace(/ğ/g, 'g')
+    .replace(/ü/g, 'u')
+    .replace(/ş/g, 's')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ç/g, 'c')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// Eşlikçi formlarını ayarla
+function setupCompanionForms() {
+  // Eşlikçi ekleme formu
+  const addCompanionForm = document.getElementById('add-companion-form');
+  if (addCompanionForm) {
+    addCompanionForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('add-companion-name').value.trim();
+      const imageFile = document.getElementById('add-companion-image-file').files[0];
+      
+      if (!name || !imageFile) {
+        alert('Lütfen eşlikçi adı ve resim dosyası seçin!');
+        return;
+      }
+      
+      // Resim yolu oluştur
+      const fileExt = imageFile.name.split('.').pop().toLowerCase();
+      const imagePath = `companions/${normalizeForFileGlobal(name)}.${fileExt}`;
+      
+      // Resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
+      const uploadButton = addCompanionForm.querySelector('button[type="submit"]');
+      const originalButtonText = uploadButton ? uploadButton.textContent : 'Eşlikçi Ekle';
+      
+      try {
+        if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+          if (uploadButton) {
+            uploadButton.disabled = true;
+            uploadButton.textContent = '⏳ Resim yükleniyor...';
+          }
+          
+          const fullImagePath = `assets/${imagePath}`;
+          console.log('Eşlikçi resmi GitHub\'a yükleniyor:', fullImagePath);
+          await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+          console.log('✅ Eşlikçi resmi başarıyla yüklendi:', fullImagePath);
+        } else {
+          console.warn('⚠️ GitHub API yapılandırılmamış, resim yüklenmedi.');
+        }
+      } catch (error) {
+        console.error('❌ Eşlikçi resmi yükleme hatası:', error);
+        const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de eşlikçiyi eklemek istiyor musunuz?`);
+        if (!continueAnyway) {
+          if (uploadButton) {
+            uploadButton.disabled = false;
+            uploadButton.textContent = originalButtonText;
+          }
+          return;
+        }
+      } finally {
+        if (uploadButton) {
+          uploadButton.disabled = false;
+          uploadButton.textContent = originalButtonText;
+        }
+      }
+      
+      const newCompanion = {
+        id: Math.max(...(productsData.companions || []).map(c => c.id || 0), 0) + 1,
+        name: name,
+        image: imagePath
+      };
+      
+      if (!productsData.companions) {
+        productsData.companions = [];
+      }
+      productsData.companions.push(newCompanion);
+      saveProducts(productsData);
+      
+      addCompanionForm.reset();
+      displayCompanions();
+      // Eşlikçi dropdown'larını güncelle
+      populateCompanionSelect(document.getElementById('add-companions'));
+      populateCompanionSelect(document.getElementById('edit-companions'));
+      alert('Eşlikçi başarıyla eklendi!');
+    });
+  }
+  
+  // Eşlikçi düzenleme formu
+  const editCompanionForm = document.getElementById('edit-companion-form');
+  if (editCompanionForm) {
+    editCompanionForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const id = parseInt(document.getElementById('edit-companion-id').value);
+      const companion = productsData.companions.find(c => c.id === id);
+      if (!companion) return;
+      
+      const name = document.getElementById('edit-companion-name').value.trim();
+      const imageFile = document.getElementById('edit-companion-image-file').files[0];
+      
+      let imagePath = companion.image;
+      
+      // Yeni resim seçilmişse
+      if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop().toLowerCase();
+        imagePath = `companions/${normalizeForFileGlobal(name)}.${fileExt}`;
+        
+        // Resmi GitHub'a yükle
+        const updateButton = editCompanionForm.querySelector('button[type="submit"]');
+        const originalButtonText = updateButton ? updateButton.textContent : 'Güncelle';
+        
+        try {
+          if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+            if (updateButton) {
+              updateButton.disabled = true;
+              updateButton.textContent = '⏳ Resim yükleniyor...';
+            }
+            
+            const fullImagePath = `assets/${imagePath}`;
+            console.log('Yeni eşlikçi resmi GitHub\'a yükleniyor:', fullImagePath);
+            await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+            console.log('✅ Eşlikçi resmi başarıyla yüklendi:', fullImagePath);
+          }
+        } catch (error) {
+          console.error('❌ Eşlikçi resmi yükleme hatası:', error);
+          const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de eşlikçiyi güncellemek istiyor musunuz?`);
+          if (!continueAnyway) {
+            if (updateButton) {
+              updateButton.disabled = false;
+              updateButton.textContent = originalButtonText;
+            }
+            return;
+          }
+        } finally {
+          if (updateButton) {
+            updateButton.disabled = false;
+            updateButton.textContent = originalButtonText;
+          }
+        }
+      } else if (name !== companion.name) {
+        // İsim değişmişse resim yolunu güncelle
+        const currentExt = companion.image ? companion.image.split('.').pop() : 'jpg';
+        imagePath = `companions/${normalizeForFileGlobal(name)}.${currentExt}`;
+      }
+      
+      const oldName = companion.name;
+      companion.name = name;
+      companion.image = imagePath;
+      
+      // Ürünlerdeki eşlikçi adını güncelle
+      productsData.products.forEach(product => {
+        if (product.companions && Array.isArray(product.companions)) {
+          const index = product.companions.indexOf(oldName);
+          if (index !== -1) {
+            product.companions[index] = name;
+          }
+        }
+      });
+      
+      saveProducts(productsData);
+      
+      document.getElementById('edit-companion-section').style.display = 'none';
+      document.querySelector('.add-companion-form').style.display = 'block';
+      editCompanionForm.reset();
+      displayCompanions();
+      // Eşlikçi dropdown'larını güncelle
+      populateCompanionSelect(document.getElementById('add-companions'));
+      populateCompanionSelect(document.getElementById('edit-companions'));
+      alert('Eşlikçi başarıyla güncellendi!');
+    });
+  }
+  
+  // Eşlikçi silme butonu
+  const deleteCompanionBtn = document.getElementById('delete-companion-btn');
+  if (deleteCompanionBtn) {
+    deleteCompanionBtn.addEventListener('click', () => {
+      const id = parseInt(document.getElementById('edit-companion-id').value);
+      if (id) {
+        deleteCompanion(id);
+        document.getElementById('edit-companion-section').style.display = 'none';
+        document.querySelector('.add-companion-form').style.display = 'block';
+      }
+    });
+  }
+  
+  // Eşlikçi düzenleme iptal butonu
+  const cancelEditCompanionBtn = document.getElementById('cancel-edit-companion-btn');
+  if (cancelEditCompanionBtn) {
+    cancelEditCompanionBtn.addEventListener('click', () => {
+      document.getElementById('edit-companion-section').style.display = 'none';
+      document.querySelector('.add-companion-form').style.display = 'block';
+      document.getElementById('edit-companion-form').reset();
+    });
+  }
+}
+
 // Global fonksiyonlar (inline onclick için)
 window.editProduct = editProduct;
 window.toggleProductVisibility = toggleProductVisibility;
 window.deleteCategory = deleteCategory;
+window.editCompanion = editCompanion;
+window.deleteCompanion = deleteCompanion;
 

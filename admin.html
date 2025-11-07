@@ -58,6 +58,7 @@
         <button class="admin-tab active" data-tab="products">Ürünler</button>
         <button class="admin-tab" data-tab="add-product">Yeni Ürün Ekle</button>
         <button class="admin-tab" data-tab="categories">Kategoriler</button>
+        <button class="admin-tab" data-tab="companions">Eşlikçiler</button>
         <button class="admin-tab" data-tab="hidden">Gizlenen Ürünler</button>
       </div>
 
@@ -125,12 +126,31 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="add-companions">Eşlikçiler (virgülle ayırın)</label>
-            <input
-              type="text"
+            <label for="add-companions">Eşlikçiler (Çoklu seçim)</label>
+            <select
               id="add-companions"
-              placeholder="Beyaz Peynir, Sos, Fıstık"
-            />
+              multiple
+              style="
+                min-height: 100px;
+                width: 100%;
+                padding: 8px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+              "
+            >
+              <option value="">Eşlikçi seçin...</option>
+            </select>
+            <small
+              style="
+                color: #666;
+                font-size: 12px;
+                display: block;
+                margin-top: 4px;
+              "
+            >
+              Birden fazla eşlikçi seçmek için Ctrl (Windows) veya Cmd (Mac)
+              tuşuna basılı tutun.
+            </small>
           </div>
           <button type="submit" class="btn-primary">Ürün Ekle</button>
         </form>
@@ -164,12 +184,31 @@
             <textarea id="edit-description" rows="4" required></textarea>
           </div>
           <div class="form-group">
-            <label for="edit-companions">Eşlikçiler (virgülle ayırın)</label>
-            <input
-              type="text"
+            <label for="edit-companions">Eşlikçiler (Çoklu seçim)</label>
+            <select
               id="edit-companions"
-              placeholder="Beyaz Peynir, Sos, Fıstık"
-            />
+              multiple
+              style="
+                min-height: 100px;
+                width: 100%;
+                padding: 8px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+              "
+            >
+              <option value="">Eşlikçi seçin...</option>
+            </select>
+            <small
+              style="
+                color: #666;
+                font-size: 12px;
+                display: block;
+                margin-top: 4px;
+              "
+            >
+              Birden fazla eşlikçi seçmek için Ctrl (Windows) veya Cmd (Mac)
+              tuşuna basılı tutun.
+            </small>
           </div>
           <div class="form-group">
             <label for="edit-image-file">Resim Dosyası</label>
@@ -247,6 +286,99 @@
                 required
               />
               <button type="submit" class="btn-primary">Ekle</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Companions Tab -->
+      <div class="admin-tab-content" id="companions-tab">
+        <h2>Eşlikçiler</h2>
+        <div class="companions-section">
+          <div class="companions-list">
+            <h3>Mevcut Eşlikçiler</h3>
+            <div id="companions-list" class="products-grid-admin"></div>
+          </div>
+          <div class="add-companion-form">
+            <h3>Yeni Eşlikçi Ekle</h3>
+            <form id="add-companion-form" class="admin-form">
+              <div class="form-group">
+                <label for="add-companion-name">Eşlikçi Adı *</label>
+                <input type="text" id="add-companion-name" required />
+              </div>
+              <div class="form-group">
+                <label for="add-companion-image-file">Eşlikçi Resmi *</label>
+                <input
+                  type="file"
+                  id="add-companion-image-file"
+                  accept="image/*"
+                  required
+                />
+                <small
+                  style="
+                    color: #666;
+                    font-size: 12px;
+                    display: block;
+                    margin-top: 4px;
+                  "
+                >
+                  Resim dosyası seçin. Resim yolu otomatik olarak
+                  oluşturulacaktır.
+                </small>
+                <input type="hidden" id="add-companion-image" />
+              </div>
+              <button type="submit" class="btn-primary">Eşlikçi Ekle</button>
+            </form>
+          </div>
+          <div
+            class="edit-companion-form"
+            id="edit-companion-section"
+            style="display: none"
+          >
+            <h3>Eşlikçi Düzenle</h3>
+            <form id="edit-companion-form" class="admin-form">
+              <input type="hidden" id="edit-companion-id" />
+              <div class="form-group">
+                <label for="edit-companion-name">Eşlikçi Adı *</label>
+                <input type="text" id="edit-companion-name" required />
+              </div>
+              <div class="form-group">
+                <label for="edit-companion-image-file">Eşlikçi Resmi</label>
+                <input
+                  type="file"
+                  id="edit-companion-image-file"
+                  accept="image/*"
+                />
+                <small
+                  style="
+                    color: #666;
+                    font-size: 12px;
+                    display: block;
+                    margin-top: 4px;
+                  "
+                >
+                  Yeni resim dosyası seçin (isteğe bağlı). Resim yolu otomatik
+                  olarak oluşturulacaktır.
+                </small>
+                <input type="hidden" id="edit-companion-image" />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Güncelle</button>
+                <button
+                  type="button"
+                  id="delete-companion-btn"
+                  class="btn-danger"
+                >
+                  Sil
+                </button>
+                <button
+                  type="button"
+                  id="cancel-edit-companion-btn"
+                  class="btn-secondary"
+                >
+                  İptal
+                </button>
+              </div>
             </form>
           </div>
         </div>
