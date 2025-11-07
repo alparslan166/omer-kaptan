@@ -51,6 +51,54 @@ async function loadProducts() {
 
 function saveProducts(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  // Güncellenmiş products.json'u indirme butonunu güncelle
+  updateDownloadButton(data);
+}
+
+// Güncellenmiş products.json'u indirme butonunu güncelle
+function updateDownloadButton(data) {
+  let downloadBtn = document.getElementById('download-products-json');
+  
+  if (!downloadBtn) {
+    // Buton yoksa oluştur
+    const adminMain = document.querySelector('.admin-main');
+    if (adminMain) {
+      const btnContainer = document.createElement('div');
+      btnContainer.style.cssText = 'margin: 20px 0; padding: 15px; background: #f0f8ff; border: 2px solid #4da6ff; border-radius: 8px; text-align: center;';
+      btnContainer.innerHTML = `
+        <p style="margin: 0 0 10px 0; color: #333; font-weight: 600;">
+          📥 Değişiklikleri Telefonda Görmek İçin:
+        </p>
+        <button id="download-products-json" class="btn-primary" style="font-size: 16px; padding: 10px 20px;">
+          Güncellenmiş products.json'u İndir
+        </button>
+        <p style="margin: 10px 0 0 0; color: #666; font-size: 14px;">
+          İndirdiğiniz dosyayı sunucuya yükleyin (GitHub Pages, FTP, vs.)
+        </p>
+      `;
+      adminMain.insertBefore(btnContainer, adminMain.firstChild);
+      downloadBtn = document.getElementById('download-products-json');
+    }
+  }
+  
+  if (downloadBtn) {
+    downloadBtn.onclick = () => {
+      // JSON dosyasını indir
+      const jsonStr = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'products.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // Başarı mesajı
+      alert('✅ products.json dosyası indirildi!\n\nBu dosyayı sunucunuza yükleyin (GitHub Pages, FTP, vs.)\n\nDosya yüklendikten sonra tüm cihazlarda değişiklikler görünecektir.');
+    };
+  }
 }
 
 // Sayfa yüklendiğinde
@@ -72,6 +120,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (productsData && typeof productsData === 'object' && productsData.products && Array.isArray(productsData.products)) {
       console.log('Products loaded:', productsData.products.length);
       debugText.textContent = `${productsData.products.length} ürün yüklendi.`;
+      
+      // İndirme butonunu göster
+      updateDownloadButton(productsData);
       
       initializeAdmin();
       

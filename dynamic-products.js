@@ -73,25 +73,43 @@
       console.error('Error loading products data from localStorage:', e);
     }
     
-    // Eğer localStorage'da yoksa, products.json'dan yükle
-    if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
-      try {
-        console.log('products.json yükleniyor...');
-        const response = await fetch('../products.json');
-        if (response.ok) {
-          productsData = await response.json();
-          console.log('products.json yüklendi:', productsData.products?.length, 'ürün');
-          // LocalStorage'a kaydet
-          if (productsData && productsData.products) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
-          }
+    // Her zaman önce products.json'dan yükle (telefon/web uyumluluğu için)
+    // LocalStorage sadece cache olarak kullanılır
+    try {
+      console.log('products.json yükleniyor...');
+      const response = await fetch('../products.json');
+      if (response.ok) {
+        const jsonData = await response.json();
+        console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');
+        
+        // LocalStorage'daki veri ile karşılaştır, eğer products.json daha yeniyse onu kullan
+        if (productsData && productsData.products && Array.isArray(productsData.products)) {
+          // Her iki kaynakta da veri var, products.json'u öncelik ver
+          console.log('products.json öncelikli olarak kullanılıyor');
+          productsData = jsonData;
         } else {
-          console.log('products.json yüklenemedi, statik HTML\'den parse edilecek');
+          // LocalStorage'da veri yok, products.json'u kullan
+          productsData = jsonData;
         }
-      } catch (e) {
-        console.error('Error loading products.json:', e);
-        // products.json yüklenemezse, statik HTML'den ürünleri topla
-        console.log('products.json hatası, statik HTML\'den parse ediliyor...');
+        
+        // LocalStorage'a cache olarak kaydet
+        if (productsData && productsData.products) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
+        }
+      } else {
+        console.log('products.json yüklenemedi, localStorage kullanılıyor');
+        // products.json yüklenemezse localStorage'daki veriyi kullan
+        if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
+          console.log('LocalStorage\'da da veri yok, statik HTML\'den parse edilecek');
+          organizeStaticProducts(category);
+          return;
+        }
+      }
+    } catch (e) {
+      console.error('Error loading products.json:', e);
+      // products.json yüklenemezse localStorage'daki veriyi kullan
+      if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
+        console.log('products.json hatası, localStorage\'da veri yok, statik HTML\'den parse ediliyor...');
         organizeStaticProducts(category);
         return;
       }
