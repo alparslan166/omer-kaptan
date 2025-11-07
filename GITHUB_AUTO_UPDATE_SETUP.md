@@ -3,6 +3,7 @@
 ## Adımlar:
 
 1. **GitHub Personal Access Token Oluştur:**
+
    - GitHub.com → Settings → Developer settings → Personal access tokens → Tokens (classic)
    - "Generate new token" → "Generate new token (classic)"
    - İsim: "Ömer Kaptan Admin Panel"
@@ -12,6 +13,7 @@
    - **ÖNEMLİ:** Token'ı kopyala ve güvenli bir yere kaydet (bir daha göremezsiniz!)
 
 2. **Admin Panelinde Token'ı Ayarla:**
+
    - Admin panelinde "GitHub Ayarları" bölümüne git
    - Token'ı yapıştır
    - Repository bilgilerini gir (örn: alparslan166/omer-kaptan)
@@ -31,4 +33,3 @@
 ## Alternatif: GitHub Actions Kullanımı
 
 Eğer token kullanmak istemiyorsanız, GitHub Actions ile de yapılabilir ama bu daha karmaşıktır.
-
