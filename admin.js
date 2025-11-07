@@ -837,15 +837,19 @@ function displayProducts(filteredProducts = null) {
     let imagePath = 'omerkaptanlogo.png'; // Varsayılan resim
     if (product.image && product.image.trim() !== '') {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa, kaldır
-      const cleanImage = product.image.replace(/^assets\//, '');
+      let cleanImage = product.image.replace(/^assets\//, '');
       // Eğer resim yolu boş değilse, geçerli bir dosya adı gibi görünüyorsa ve kategori ile eşleşiyorsa kullan
       if (cleanImage && cleanImage !== product.category && !cleanImage.includes(' ')) {
-        // Resim yolunun kategori klasörünü içerdiğini kontrol et
+        // Resim yolunun zaten kategori klasörünü içerip içermediğini kontrol et
+        // Önce normalize edilmiş kategori slug'ını al
         const categorySlug = normalizeForFileGlobal(product.category);
-        if (cleanImage.includes(categorySlug) || cleanImage.startsWith(categorySlug + '/')) {
+        
+        // Eğer resim yolu zaten "/" içeriyorsa (yani kategori klasörü + dosya adı formatında)
+        if (cleanImage.includes('/')) {
+          // Resim yolu zaten tam formatta, direkt kullan
           imagePath = cleanImage;
         } else {
-          // Kategori klasörü yoksa, kategori klasörünü ekle
+          // Sadece dosya adı var, kategori klasörünü ekle
           imagePath = `${categorySlug}/${cleanImage}`;
         }
       }
@@ -928,10 +932,18 @@ function displayHiddenProducts() {
     let imagePath = 'omerkaptanlogo.png'; // Varsayılan resim
     if (product.image && product.image.trim() !== '') {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa, kaldır
-      const cleanImage = product.image.replace(/^assets\//, '');
-      // Eğer resim yolu boş değilse ve geçerli bir dosya adı gibi görünüyorsa kullan
+      let cleanImage = product.image.replace(/^assets\//, '');
+      // Eğer resim yolu boş değilse, geçerli bir dosya adı gibi görünüyorsa ve kategori ile eşleşiyorsa kullan
       if (cleanImage && cleanImage !== product.category && !cleanImage.includes(' ')) {
-        imagePath = cleanImage;
+        // Eğer resim yolu zaten "/" içeriyorsa (yani kategori klasörü + dosya adı formatında)
+        if (cleanImage.includes('/')) {
+          // Resim yolu zaten tam formatta, direkt kullan
+          imagePath = cleanImage;
+        } else {
+          // Sadece dosya adı var, kategori klasörünü ekle
+          const categorySlug = normalizeForFileGlobal(product.category);
+          imagePath = `${categorySlug}/${cleanImage}`;
+        }
       }
     }
     

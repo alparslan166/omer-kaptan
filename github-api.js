@@ -51,9 +51,7 @@ async function updateFileViaGitHubAPI(content) {
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
           'Authorization': `token ${config.token}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
+          'Accept': 'application/vnd.github.v3+json'
         },
         cache: 'no-store'
       });
@@ -102,8 +100,7 @@ async function updateFileViaGitHubAPI(content) {
         headers: {
           'Authorization': `token ${config.token}`,
           'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(updatePayload),
         cache: 'no-store'
