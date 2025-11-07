@@ -838,9 +838,16 @@ function displayProducts(filteredProducts = null) {
     if (product.image && product.image.trim() !== '') {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa, kaldır
       const cleanImage = product.image.replace(/^assets\//, '');
-      // Eğer resim yolu boş değilse ve geçerli bir dosya adı gibi görünüyorsa kullan
+      // Eğer resim yolu boş değilse, geçerli bir dosya adı gibi görünüyorsa ve kategori ile eşleşiyorsa kullan
       if (cleanImage && cleanImage !== product.category && !cleanImage.includes(' ')) {
-        imagePath = cleanImage;
+        // Resim yolunun kategori klasörünü içerdiğini kontrol et
+        const categorySlug = normalizeForFileGlobal(product.category);
+        if (cleanImage.includes(categorySlug) || cleanImage.startsWith(categorySlug + '/')) {
+          imagePath = cleanImage;
+        } else {
+          // Kategori klasörü yoksa, kategori klasörünü ekle
+          imagePath = `${categorySlug}/${cleanImage}`;
+        }
       }
     }
     
@@ -851,15 +858,30 @@ function displayProducts(filteredProducts = null) {
     const imageDiv = document.createElement('div');
     imageDiv.className = 'product-card-image';
     const img = document.createElement('img');
-    img.src = `assets/${imagePath}`;
     img.alt = product.name;
-    // Resim yükleme hatası için fallback
-    img.onerror = function() {
-      if (this.src && !this.src.includes('omerkaptanlogo.png')) {
-        this.src = 'assets/omerkaptanlogo.png';
-        this.onerror = null; // Sonsuz döngüyü önle
-      }
+    
+    // Resim yükleme stratejisi: Önce gerçek resmi yükle, yüklenemezse varsayılan resmi kullan
+    // Bu sayede 404 hataları konsola yazılmaz
+    const testImg = new Image();
+    testImg.onload = function() {
+      // Resim başarıyla yüklendi
+      img.src = `assets/${imagePath}`;
     };
+    testImg.onerror = function() {
+      // Resim yüklenemedi, varsayılan resmi kullan (sessizce)
+      img.src = 'assets/omerkaptanlogo.png';
+    };
+    
+    // Önce varsayılan resmi göster, sonra gerçek resmi yükle
+    img.src = 'assets/omerkaptanlogo.png';
+    img.onerror = function() {
+      // Varsayılan resim de yüklenemezse, hiçbir şey yapma (sonsuz döngüyü önle)
+      this.onerror = null;
+    };
+    
+    // Gerçek resmi yüklemeyi dene (sessizce)
+    testImg.src = `assets/${imagePath}`;
+    
     imageDiv.appendChild(img);
     
     // İçerik HTML'i
@@ -915,24 +937,56 @@ function displayHiddenProducts() {
     
     const card = document.createElement('div');
     card.className = 'product-card-admin';
-    card.innerHTML = `
-      <div class="product-card-image">
-        <img src="assets/${imagePath}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
-      </div>
-      <div class="product-card-info">
-        <h4>${product.name}</h4>
-        <p class="product-category">${product.category}</p>
-        <p class="product-price">₺${product.price}</p>
-        <p class="product-desc">${product.shortDesc || product.description}</p>
-        <div class="product-actions">
-          <button class="btn-edit" onclick="editProduct(${product.id})">Düzenle</button>
-          <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">Göster</button>
-          <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
-            ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
-          </button>
-        </div>
+    
+    // Resim div'i oluştur
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'product-card-image';
+    const img = document.createElement('img');
+    img.alt = product.name;
+    
+    // Resim yükleme stratejisi: Önce gerçek resmi yükle, yüklenemezse varsayılan resmi kullan
+    // Bu sayede 404 hataları konsola yazılmaz
+    const testImg = new Image();
+    testImg.onload = function() {
+      // Resim başarıyla yüklendi
+      img.src = `assets/${imagePath}`;
+    };
+    testImg.onerror = function() {
+      // Resim yüklenemedi, varsayılan resmi kullan (sessizce)
+      img.src = 'assets/omerkaptanlogo.png';
+    };
+    
+    // Önce varsayılan resmi göster, sonra gerçek resmi yükle
+    img.src = 'assets/omerkaptanlogo.png';
+    img.onerror = function() {
+      // Varsayılan resim de yüklenemezse, hiçbir şey yapma (sonsuz döngüyü önle)
+      this.onerror = null;
+    };
+    
+    // Gerçek resmi yüklemeyi dene (sessizce)
+    testImg.src = `assets/${imagePath}`;
+    
+    imageDiv.appendChild(img);
+    
+    // İçerik HTML'i
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'product-card-info';
+    infoDiv.innerHTML = `
+      <h4>${escapeHtml(product.name)}</h4>
+      <p class="product-category">${escapeHtml(product.category)}</p>
+      <p class="product-price">₺${product.price}</p>
+      <p class="product-desc">${escapeHtml(product.shortDesc || product.description || '')}</p>
+      <div class="product-actions">
+        <button class="btn-edit" onclick="editProduct(${product.id})">Düzenle</button>
+        <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">Göster</button>
+        <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+          ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
+        </button>
       </div>
     `;
+    
+    card.appendChild(imageDiv);
+    card.appendChild(infoDiv);
     hiddenList.appendChild(card);
   });
 }
