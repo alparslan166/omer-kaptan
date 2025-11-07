@@ -47,6 +47,12 @@ güncelle butonuna tıklanırsa ürün güncellenecek,
 sitenin bir bölümünde gizlenen ürünler listelenecek, bu liste mevcut koddaki formatta olucak.
 
 
+----------------------------------
+
+eşliçiler seçileceği zaman aynı kategori seçer gibi bir liste üzerinden seçilsin,
+yeni eşlikçi ekleme kısmı da olucak, bu kısımda yeni eşlikçi eklemek için gerekli olan eşlikçi adı ve fotoğrafını gireceğiz,
+ekle butonuna tıklanırsa yeni eşlikçi oluşturulacak,
+oluşturulan eşlikçi mevcut koddaki formatta olucak.
 
 
 resim ekleme kısmı da olucak, kullanıcı yeni ürün oluştururrken istediği resmi koyabilecek, mevcut bir ürünün resmini de değiştirebilecek, bu kısımda resim eklemek için gerekli olan resim yolunu otomatik ayarlanıcak,
@@ -68,4 +74,6 @@ değişiklikleri yapınca otomatik olarak product-detail.html sayfası güncelle
 alkollü içeceklere ve mezelere ürün eklerken kategori seçildikten sonra; alt başlıklar arasında da seçim yapılacak,
 ürünün sayfadaki yeri ona göre belirlenecek.
 
-ynı gizle gibi bir buton daha olucak “stokta yok” isimli buton, bu seçenek seçildiği zaman ürün kategoriler kısmında gözükücek fakat, ürün detay sayfasına gidildiği zaman “Maaleef,,, tükendi” tarzı tutarlı bir yazı yazsın
+Aynı gizle gibi bir buton daha olucak “stokta yok” isimli buton, bu seçenek seçildiği zaman;
+ ürün kategoriler kısmında gözükücek fakat, ürün detay sayfasına gidildiği zaman;
+  “Maalsef,,, tükendi” tarzı tutarlı bir yazı yazsın

@@ -655,11 +655,22 @@ function displayProducts(filteredProducts = null) {
   productsList.innerHTML = '';
   
   productsToShow.forEach(product => {
+    // Resim yolunu güvenli hale getir
+    let imagePath = 'omerkaptanlogo.png'; // Varsayılan resim
+    if (product.image && product.image.trim() !== '') {
+      // Eğer resim yolu zaten "assets/" ile başlıyorsa, kaldır
+      const cleanImage = product.image.replace(/^assets\//, '');
+      // Eğer resim yolu boş değilse ve geçerli bir dosya adı gibi görünüyorsa kullan
+      if (cleanImage && cleanImage !== product.category && !cleanImage.includes(' ')) {
+        imagePath = cleanImage;
+      }
+    }
+    
     const card = document.createElement('div');
     card.className = 'product-card-admin';
     card.innerHTML = `
       <div class="product-card-image">
-        <img src="assets/${product.image}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'" />
+        <img src="assets/${imagePath}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
       </div>
       <div class="product-card-info">
         <h4>${product.name}</h4>
@@ -693,11 +704,22 @@ function displayHiddenProducts() {
   hiddenList.innerHTML = '';
   
   hiddenProducts.forEach(product => {
+    // Resim yolunu güvenli hale getir
+    let imagePath = 'omerkaptanlogo.png'; // Varsayılan resim
+    if (product.image && product.image.trim() !== '') {
+      // Eğer resim yolu zaten "assets/" ile başlıyorsa, kaldır
+      const cleanImage = product.image.replace(/^assets\//, '');
+      // Eğer resim yolu boş değilse ve geçerli bir dosya adı gibi görünüyorsa kullan
+      if (cleanImage && cleanImage !== product.category && !cleanImage.includes(' ')) {
+        imagePath = cleanImage;
+      }
+    }
+    
     const card = document.createElement('div');
     card.className = 'product-card-admin';
     card.innerHTML = `
       <div class="product-card-image">
-        <img src="assets/${product.image}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'" />
+        <img src="assets/${imagePath}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
       </div>
       <div class="product-card-info">
         <h4>${product.name}</h4>
