@@ -30,7 +30,7 @@
         "Fıstık",
         "Peynir"
       ],
-      "hidden": true
+      "hidden": false
     },
     {
       "id": 2,
@@ -2505,7 +2505,7 @@
         "Beyaz Peynir",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "outOfStock": false,
       "subcategory": ""
     }
