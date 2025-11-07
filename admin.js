@@ -1628,10 +1628,17 @@ function setupForms() {
       console.log('💾 Veri kaydedildi. productsData.products içinde güncellenmiş ürün:', 
         productsData.products.find(p => p.id === id));
       
-      alert(`Ürün başarıyla güncellendi!\n\nEski ad: ${oldName}\nYeni ad: ${product.name}`);
+      // Ürünler listesini yenile (sayfa yenilemeden)
+      displayProducts();
+      displayHiddenProducts();
       
-      // Ürünler listesine dön
-      window.location.href = 'admin.html';
+      // Ürünler tab'ına geç
+      document.querySelector('[data-tab="products"]').click();
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+      
+      alert(`Ürün başarıyla güncellendi!\n\nEski ad: ${oldName}\nYeni ad: ${product.name}\n\nNot: Değişikliklerin GitHub'a gönderilmesi için "GitHub'da Güncelle" butonuna basın.`);
     });
   }
   
@@ -1660,8 +1667,14 @@ function setupForms() {
       productsData.products = productsData.products.filter(p => p.id !== id);
       saveProducts(productsData);
       
-      alert(`"${product.name}" ürünü başarıyla silindi!`);
-      window.location.href = 'admin.html';
+      // Ürünler listesini yenile (sayfa yenilemeden)
+      displayProducts();
+      displayHiddenProducts();
+      
+      // Ürünler tab'ına geç
+      document.querySelector('[data-tab="products"]').click();
+      
+      alert(`"${product.name}" ürünü başarıyla silindi!\n\nNot: Değişikliklerin GitHub'a gönderilmesi için "GitHub'da Güncelle" butonuna basın.`);
     });
   }
   
