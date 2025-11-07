@@ -200,7 +200,47 @@
     </main>
 
     <script src="github-api-config.js"></script>
+    <script>
+      // GitHubConfig yüklendiğini kontrol et
+      console.log(
+        "github-api-config.js yüklendi, GitHubConfig:",
+        typeof window.GitHubConfig !== "undefined" ? "Mevcut" : "Yok"
+      );
+    </script>
     <script src="github-api.js"></script>
+    <script>
+      // GitHubAPI yüklendiğini kontrol et
+      console.log(
+        "github-api.js yüklendi, GitHubAPI:",
+        typeof window.GitHubAPI !== "undefined" ? "Mevcut" : "Yok"
+      );
+
+      // Eğer yüklenmemişse, tekrar dene
+      if (typeof window.GitHubAPI === "undefined") {
+        console.warn("GitHubAPI yüklenmemiş, tekrar deneniyor...");
+        setTimeout(() => {
+          if (typeof window.GitHubAPI !== "undefined") {
+            console.log("✅ GitHubAPI sonradan yüklendi");
+          } else {
+            console.error("❌ GitHubAPI hala yüklenmedi!");
+          }
+        }, 500);
+      }
+    </script>
     <script src="admin.js"></script>
+    <script>
+      // Admin.js yüklendikten sonra kontrol et
+      console.log("admin.js yüklendi");
+      setTimeout(() => {
+        console.log(
+          "Final kontrol - GitHubConfig:",
+          typeof window.GitHubConfig !== "undefined" ? "✅" : "❌"
+        );
+        console.log(
+          "Final kontrol - GitHubAPI:",
+          typeof window.GitHubAPI !== "undefined" ? "✅" : "❌"
+        );
+      }, 1000);
+    </script>
   </body>
 </html>

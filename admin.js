@@ -157,29 +157,58 @@ function updateDownloadButton(data) {
     
     // GitHub otomatik güncelleme butonu
     const autoUpdateBtn = document.getElementById('auto-update-github');
-    if (autoUpdateBtn && window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete()) {
-      autoUpdateBtn.style.display = 'inline-block';
-      autoUpdateBtn.onclick = async () => {
-        autoUpdateBtn.disabled = true;
-        autoUpdateBtn.textContent = '⏳ Güncelleniyor...';
-        
-        try {
-          const jsonStr = JSON.stringify(data, null, 2);
-          
-          if (window.GitHubAPI && window.GitHubAPI.updateFile) {
-            const result = await window.GitHubAPI.updateFile(jsonStr);
-            showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
-          } else {
-            throw new Error('GitHub API modülü yüklenmedi!');
-          }
-        } catch (error) {
-          console.error('GitHub API error:', error);
-          showNotification(`❌ Hata: ${error.message}`, 'error');
-        } finally {
-          autoUpdateBtn.disabled = false;
-          autoUpdateBtn.textContent = '🚀 Otomatik Güncelle (GitHub)';
+    if (autoUpdateBtn) {
+      // GitHubConfig kontrolü
+      const checkGitHubConfig = () => {
+        if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete()) {
+          autoUpdateBtn.style.display = 'inline-block';
+          return true;
         }
+        return false;
       };
+      
+      // İlk kontrol
+      if (checkGitHubConfig()) {
+        autoUpdateBtn.onclick = async () => {
+          autoUpdateBtn.disabled = true;
+          autoUpdateBtn.textContent = '⏳ Güncelleniyor...';
+          
+          try {
+            const jsonStr = JSON.stringify(data, null, 2);
+            
+            // GitHubAPI'nin yüklendiğinden emin ol
+            if (!window.GitHubAPI) {
+              // Biraz bekle ve tekrar dene
+              await new Promise(resolve => setTimeout(resolve, 500));
+              
+              if (!window.GitHubAPI) {
+                throw new Error('GitHub API modülü yüklenmedi! Sayfayı yenileyin.');
+              }
+            }
+            
+            if (window.GitHubAPI.updateFile) {
+              const result = await window.GitHubAPI.updateFile(jsonStr);
+              showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
+            } else {
+              throw new Error('GitHub API updateFile fonksiyonu bulunamadı!');
+            }
+          } catch (error) {
+            console.error('GitHub API error:', error);
+            showNotification(`❌ Hata: ${error.message}`, 'error');
+          } finally {
+            autoUpdateBtn.disabled = false;
+            autoUpdateBtn.textContent = '🚀 Otomatik Güncelle (GitHub)';
+          }
+        };
+      } else {
+        // GitHubConfig henüz yüklenmemiş, biraz sonra tekrar dene
+        setTimeout(() => {
+          if (checkGitHubConfig()) {
+            // Buton event listener'ı yukarıdaki kod bloğunda zaten ayarlanmış
+            // Sadece görünürlüğü kontrol et
+          }
+        }, 500);
+      }
     }
     
     // GitHub ayarları butonu
@@ -317,7 +346,8 @@ function showGitHubSettingsModal() {
       const tempConfig = {
         repository: document.getElementById('github-repo').value.trim(),
         token: document.getElementById('github-token').value.trim(),
-        branch: document.getElementById('github-branch').value.trim() || 'main'
+        branch: document.getElementById('github-branch').value.trim() || 'main',
+        filePath: document.getElementById('github-filepath').value.trim() || 'products.json'
       };
       
       if (!tempConfig.repository || !tempConfig.token) {
@@ -326,19 +356,33 @@ function showGitHubSettingsModal() {
       
       if (window.GitHubConfig) {
         window.GitHubConfig.saveGitHubConfig(tempConfig);
+      } else {
+        throw new Error('GitHub Config modülü yüklenmedi! Sayfayı yenileyin.');
       }
       
-      if (window.GitHubAPI && window.GitHubAPI.testConnection) {
-        const isConnected = await window.GitHubAPI.testConnection();
-        if (isConnected) {
-          resultDiv.innerHTML = '<p style="margin: 0; color: #28a745; font-weight: 600;">✅ Bağlantı başarılı!</p>';
-        } else {
-          throw new Error('Bağlantı başarısız. Token ve repository bilgilerini kontrol edin.');
-        }
+      // GitHubAPI'nin yüklendiğinden emin ol
+      let retries = 0;
+      while (!window.GitHubAPI && retries < 10) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        retries++;
+      }
+      
+      if (!window.GitHubAPI) {
+        throw new Error('GitHub API modülü yüklenmedi! Lütfen sayfayı yenileyin ve script dosyalarının doğru yüklendiğinden emin olun.');
+      }
+      
+      if (!window.GitHubAPI.testConnection) {
+        throw new Error('GitHub API testConnection fonksiyonu bulunamadı!');
+      }
+      
+      const isConnected = await window.GitHubAPI.testConnection();
+      if (isConnected) {
+        resultDiv.innerHTML = '<p style="margin: 0; color: #28a745; font-weight: 600;">✅ Bağlantı başarılı!</p>';
       } else {
-        throw new Error('GitHub API modülü yüklenmedi!');
+        throw new Error('Bağlantı başarısız. Token ve repository bilgilerini kontrol edin.');
       }
     } catch (error) {
+      console.error('GitHub connection test error:', error);
       resultDiv.innerHTML = `<p style="margin: 0; color: #dc3545; font-weight: 600;">❌ ${error.message}</p>`;
     } finally {
       testBtn.disabled = false;

@@ -1,18 +1,16 @@
 // GitHub API ile products.json'u otomatik güncelleme
 // Bu modül GitHub API kullanarak products.json dosyasını otomatik olarak günceller
 
-// Global erişim için fonksiyonlar
-let loadGitHubConfig, isGitHubConfigComplete;
-
-// github-api-config.js yüklendikten sonra çalışacak
-if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    // Config fonksiyonlarını al
-    if (typeof window.GitHubConfig !== 'undefined') {
-      loadGitHubConfig = window.GitHubConfig.loadGitHubConfig;
-      isGitHubConfigComplete = window.GitHubConfig.isGitHubConfigComplete;
-    }
-  });
+// Config fonksiyonlarını almak için yardımcı fonksiyon
+function getConfigFunctions() {
+  if (typeof window !== 'undefined' && window.GitHubConfig) {
+    return {
+      loadGitHubConfig: window.GitHubConfig.loadGitHubConfig,
+      isGitHubConfigComplete: window.GitHubConfig.isGitHubConfigComplete
+    };
+  }
+  // Fallback: Eğer henüz yüklenmemişse, kısa bir süre bekle
+  return null;
 }
 
 /**
@@ -21,13 +19,13 @@ if (typeof window !== 'undefined') {
  * @returns {Promise<Object>} - API yanıtı
  */
 async function updateFileViaGitHubAPI(content) {
-  if (!loadGitHubConfig) {
-    loadGitHubConfig = window.GitHubConfig?.loadGitHubConfig || (() => ({}));
-  }
-  if (!isGitHubConfigComplete) {
-    isGitHubConfigComplete = window.GitHubConfig?.isGitHubConfigComplete || (() => false);
+  // Config fonksiyonlarını al
+  const configFuncs = getConfigFunctions();
+  if (!configFuncs) {
+    throw new Error('GitHub Config modülü yüklenmedi! Sayfayı yenileyin.');
   }
   
+  const { loadGitHubConfig, isGitHubConfigComplete } = configFuncs;
   const config = loadGitHubConfig();
   
   if (!isGitHubConfigComplete()) {
@@ -111,13 +109,13 @@ async function updateFileViaGitHubAPI(content) {
  * @returns {Promise<boolean>} - Bağlantı başarılı mı?
  */
 async function testGitHubConnection() {
-  if (!loadGitHubConfig) {
-    loadGitHubConfig = window.GitHubConfig?.loadGitHubConfig || (() => ({}));
-  }
-  if (!isGitHubConfigComplete) {
-    isGitHubConfigComplete = window.GitHubConfig?.isGitHubConfigComplete || (() => false);
+  // Config fonksiyonlarını al
+  const configFuncs = getConfigFunctions();
+  if (!configFuncs) {
+    return false;
   }
   
+  const { loadGitHubConfig, isGitHubConfigComplete } = configFuncs;
   const config = loadGitHubConfig();
   
   if (!isGitHubConfigComplete()) {
@@ -145,16 +143,18 @@ async function testGitHubConnection() {
   }
 }
 
-// Export functions (ES6 modules için)
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { updateFileViaGitHubAPI, testGitHubConnection };
-}
-
 // Global erişim için (script tag ile yüklenirse)
+// Hemen window.GitHubAPI'yi oluştur (script yüklendiğinde)
 if (typeof window !== 'undefined') {
   window.GitHubAPI = {
     updateFile: updateFileViaGitHubAPI,
     testConnection: testGitHubConnection
   };
+  console.log('✅ GitHub API modülü yüklendi');
+}
+
+// Export functions (ES6 modules için)
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { updateFileViaGitHubAPI, testGitHubConnection };
 }
 
