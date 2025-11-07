@@ -68,14 +68,15 @@
   if (productImageEl && category && name) {
     let imageSrc = null;
     
-    // Önce products.json'dan gelen resim yolunu kullan
-    if (productImagePath) {
+    // Önce products.json'dan gelen resim yolunu kullan (parametre veya global değişken)
+    const imagePath = imagePathFromJson || productImagePath;
+    if (imagePath) {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
-      if (productImagePath.startsWith('assets/')) {
-        imageSrc = productImagePath;
+      if (imagePath.startsWith('assets/')) {
+        imageSrc = imagePath;
       } else {
         // Değilse "assets/" ekle
-        imageSrc = `assets/${productImagePath}`;
+        imageSrc = `assets/${imagePath}`;
       }
       console.log('Resim yolu products.json\'dan kullanılıyor:', imageSrc);
     } else {
@@ -281,6 +282,47 @@
   
   // İlk yüklemede sayfayı güncelle (URL parametreleri ile)
   updateProductPage();
+  
+  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
+  (async function() {
+    try {
+      console.log('products.json yükleniyor (product detail)...');
+      const response = await fetch('products.json');
+      if (response.ok) {
+        const productsData = await response.json();
+        if (productsData && productsData.products && Array.isArray(productsData.products)) {
+          // URL'den gelen name ve category ile ürünü bul
+          const product = productsData.products.find(p => 
+            p.name === name && p.category === category
+          );
+          
+          if (product) {
+            // products.json'dan gelen veriyi kullan (daha güncel)
+            console.log('Ürün products.json\'dan bulundu:', product.name);
+            name = product.name;
+            category = product.category;
+            desc = product.description || product.shortDesc || desc;
+            companions = product.companions || companions;
+            
+            // products.json'dan gelen resim yolunu kullan
+            const imagePath = product.image || null;
+            if (imagePath) {
+              productImagePath = imagePath;
+              console.log('Resim yolu products.json\'dan alındı:', productImagePath);
+            }
+            
+            // Sayfayı güncelle (resim yolu ile)
+            updateProductPage(imagePath);
+          } else {
+            console.log('Ürün products.json\'da bulunamadı, URL parametreleri kullanılıyor');
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error loading products.json:', e);
+      // Hata durumunda URL parametreleri kullanılacak
+    }
+  })();
 })();
 
 function companionImagePath(name){
