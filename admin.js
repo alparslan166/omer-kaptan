@@ -398,12 +398,24 @@ function setupForms() {
   if (deleteBtn) {
     deleteBtn.addEventListener('click', () => {
       const id = parseInt(document.getElementById('edit-id').value);
-      if (!confirm('Bu ürünü silmek istediğinizden emin misiniz?')) return;
+      const product = productsData.products.find(p => p.id === id);
       
+      if (!product) {
+        alert('Ürün bulunamadı!');
+        return;
+      }
+      
+      // Onay mesajı
+      const confirmMessage = `⚠️ DİKKAT!\n\n"${product.name}" adlı ürünü silmek istediğinizden emin misiniz?\n\nKategori: ${product.category}\nFiyat: ₺${product.price}\n\nBu işlem geri alınamaz!\n\nSil?`;
+      if (!confirm(confirmMessage)) {
+        return; // Kullanıcı iptal etti
+      }
+      
+      // Onay verildi, sil
       productsData.products = productsData.products.filter(p => p.id !== id);
       saveProducts(productsData);
       
-      alert('Ürün başarıyla silindi!');
+      alert(`"${product.name}" ürünü başarıyla silindi!`);
       window.location.href = 'admin.html';
     });
   }
@@ -499,16 +511,27 @@ function displayCategories() {
 
 // Kategori sil
 function deleteCategory(categoryName) {
-  if (!confirm(`"${categoryName}" kategorisini silmek istediğinizden emin misiniz?`)) return;
-  
   // Kategorideki ürünleri kontrol et
   const categoryProducts = productsData.products.filter(p => p.category === categoryName);
+  
+  // Onay mesajı oluştur
+  let confirmMessage = `⚠️ DİKKAT!\n\n"${categoryName}" kategorisini silmek istediğinizden emin misiniz?\n\n`;
+  
   if (categoryProducts.length > 0) {
-    if (!confirm(`Bu kategoride ${categoryProducts.length} ürün var. Kategori silinecek ve ürünler kategorisiz kalacak. Devam etmek istiyor musunuz?`)) {
-      return;
-    }
+    confirmMessage += `⚠️ UYARI: Bu kategoride ${categoryProducts.length} ürün bulunuyor!\n\n`;
+    confirmMessage += `Kategori silindiğinde bu ${categoryProducts.length} ürünün kategorisi kaldırılacak ve ürünler kategorisiz kalacak.\n\n`;
+  } else {
+    confirmMessage += `Bu kategoride ürün bulunmuyor.\n\n`;
   }
   
+  confirmMessage += `Bu işlem geri alınamaz!\n\nSil?`;
+  
+  // Onay iste
+  if (!confirm(confirmMessage)) {
+    return; // Kullanıcı iptal etti
+  }
+  
+  // Onay verildi, sil
   productsData.categories = productsData.categories.filter(c => c !== categoryName);
   saveProducts(productsData);
   
@@ -516,7 +539,11 @@ function deleteCategory(categoryName) {
   displayCategories();
   displayProducts();
   
-  alert('Kategori başarıyla silindi!');
+  if (categoryProducts.length > 0) {
+    alert(`"${categoryName}" kategorisi başarıyla silindi!\n\n${categoryProducts.length} ürünün kategorisi kaldırıldı.`);
+  } else {
+    alert(`"${categoryName}" kategorisi başarıyla silindi!`);
+  }
 }
 
 // Global fonksiyonlar (inline onclick için)
