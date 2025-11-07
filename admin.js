@@ -762,6 +762,14 @@ function populateCategories() {
 }
 
 // Resim yolu otomatik oluşturma fonksiyonu
+// HTML escape fonksiyonu
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function generateImagePath(category, productName) {
   // normalizeForFile fonksiyonunu admin.js'de de kullanabilmek için
   function normalizeForFile(text) {
@@ -838,26 +846,43 @@ function displayProducts(filteredProducts = null) {
     
     const card = document.createElement('div');
     card.className = 'product-card-admin';
-    card.innerHTML = `
-      <div class="product-card-image">
-        <img src="assets/${imagePath}" alt="${product.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
-      </div>
-      <div class="product-card-info">
-        <h4>${product.name}</h4>
-        <p class="product-category">${product.category}</p>
-        <p class="product-price">₺${product.price}</p>
-        <p class="product-desc">${product.shortDesc || product.description}</p>
-        <div class="product-actions">
-          <button class="btn-edit" onclick="editProduct(${product.id})">Düzenle</button>
-          <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">
-            ${product.hidden ? 'Göster' : 'Gizle'}
-          </button>
-          <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
-            ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
-          </button>
-        </div>
+    
+    // Resim div'i oluştur
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'product-card-image';
+    const img = document.createElement('img');
+    img.src = `assets/${imagePath}`;
+    img.alt = product.name;
+    // Resim yükleme hatası için fallback
+    img.onerror = function() {
+      if (this.src && !this.src.includes('omerkaptanlogo.png')) {
+        this.src = 'assets/omerkaptanlogo.png';
+        this.onerror = null; // Sonsuz döngüyü önle
+      }
+    };
+    imageDiv.appendChild(img);
+    
+    // İçerik HTML'i
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'product-card-info';
+    infoDiv.innerHTML = `
+      <h4>${escapeHtml(product.name)}</h4>
+      <p class="product-category">${escapeHtml(product.category)}</p>
+      <p class="product-price">₺${product.price}</p>
+      <p class="product-desc">${escapeHtml(product.shortDesc || product.description || '')}</p>
+      <div class="product-actions">
+        <button class="btn-edit" onclick="editProduct(${product.id})">Düzenle</button>
+        <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">
+          ${product.hidden ? 'Göster' : 'Gizle'}
+        </button>
+        <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+          ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
+        </button>
       </div>
     `;
+    
+    card.appendChild(imageDiv);
+    card.appendChild(infoDiv);
     productsList.appendChild(card);
   });
 }

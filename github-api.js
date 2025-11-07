@@ -39,24 +39,37 @@ async function updateFileViaGitHubAPI(content) {
   }
   
   // SHA uyuşmazlığı durumunda retry mekanizması
-  const maxRetries = 3;
+  const maxRetries = 5;
   let retryCount = 0;
+  let lastSha = null;
   
   while (retryCount < maxRetries) {
     try {
-      // 1. Mevcut dosyayı al (SHA için) - Her retry'da güncel SHA'yı al
-      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}`;
+      // 1. Mevcut dosyayı al (SHA için) - Her retry'da güncel SHA'yı al (cache bypass için timestamp ekle)
+      const cacheBuster = Date.now();
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}&t=${cacheBuster}`;
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
           'Authorization': `token ${config.token}`,
-          'Accept': 'application/vnd.github.v3+json'
-        }
+          'Accept': 'application/vnd.github.v3+json',
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
+        cache: 'no-store'
       });
       
       let sha = null;
       if (getFileResponse.ok) {
         const fileData = await getFileResponse.json();
         sha = fileData.sha;
+        
+        // Eğer SHA değişmediyse, biraz daha uzun bekle (başka bir işlem devam ediyor olabilir)
+        if (lastSha === sha && retryCount > 0) {
+          console.warn(`⚠️ SHA değişmedi (${sha.substring(0, 8)}...), başka bir güncelleme devam ediyor olabilir. Daha uzun bekleniyor...`);
+          await new Promise(resolve => setTimeout(resolve, 3000 * (retryCount + 1)));
+        }
+        
+        lastSha = sha;
         console.log(`📋 Mevcut dosya SHA'sı alındı: ${sha.substring(0, 8)}... (Retry: ${retryCount + 1}/${maxRetries})`);
       } else if (getFileResponse.status === 404) {
         console.log('📋 Dosya bulunamadı, yeni dosya oluşturulacak');
@@ -74,7 +87,7 @@ async function updateFileViaGitHubAPI(content) {
       const base64Content = btoa(utf8Content);
       
       const updatePayload = {
-        message: config.commitMessage,
+        message: `${config.commitMessage} (${new Date().toISOString()})`,
         content: base64Content,
         branch: config.branch
       };
@@ -89,15 +102,17 @@ async function updateFileViaGitHubAPI(content) {
         headers: {
           'Authorization': `token ${config.token}`,
           'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
         },
-        body: JSON.stringify(updatePayload)
+        body: JSON.stringify(updatePayload),
+        cache: 'no-store'
       });
       
       if (updateResponse.ok) {
         // Başarılı!
         const result = await updateResponse.json();
-        console.log('✅ GitHub API başarılı yanıt (Retry başarılı):', result);
+        console.log(`✅ GitHub API başarılı yanıt (Retry ${retryCount + 1} başarılı):`, result);
         return {
           success: true,
           commit: result.commit,
@@ -110,22 +125,27 @@ async function updateFileViaGitHubAPI(content) {
         // SHA uyuşmazlığı hatası (409 Conflict) - Retry yap
         if (updateResponse.status === 409 && errorMessage.includes('does not match') && retryCount < maxRetries - 1) {
           retryCount++;
-          console.warn(`⚠️ SHA uyuşmazlığı tespit edildi (${retryCount}/${maxRetries}), tekrar deneniyor...`);
-          // Kısa bir bekleme sonrası tekrar dene
-          await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+          const waitTime = Math.min(2000 * retryCount, 10000); // Max 10 saniye bekle
+          console.warn(`⚠️ SHA uyuşmazlığı tespit edildi (${retryCount}/${maxRetries}), ${waitTime/1000} saniye bekleniyor...`);
+          console.warn(`   Beklenen SHA: ${errorMessage.match(/does not match ([a-f0-9]+)/)?.[1]?.substring(0, 8) || 'bilinmiyor'}...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
           continue; // Döngünün başına dön
         } else {
           // Diğer hatalar veya max retry'a ulaşıldı
           console.error('GitHub API error response:', errorData);
+          if (retryCount >= maxRetries - 1) {
+            throw new Error(`GitHub API hatası: SHA uyuşmazlığı nedeniyle ${maxRetries} deneme başarısız oldu. Lütfen sayfayı yenileyip birkaç saniye bekledikten sonra tekrar deneyin.`);
+          }
           throw new Error(`GitHub API hatası: ${errorMessage}`);
         }
       }
     } catch (error) {
-      // Retry sayısına ulaşılmadıysa ve SHA uyuşmazlığı değilse retry yap
+      // Retry sayısına ulaşılmadıysa ve SHA uyuşmazlığı varsa retry yap
       if (retryCount < maxRetries - 1 && error.message && error.message.includes('does not match')) {
         retryCount++;
-        console.warn(`⚠️ Hata tespit edildi (${retryCount}/${maxRetries}), tekrar deneniyor...`);
-        await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+        const waitTime = Math.min(2000 * retryCount, 10000);
+        console.warn(`⚠️ Hata tespit edildi (${retryCount}/${maxRetries}), ${waitTime/1000} saniye bekleniyor...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
         continue;
       }
       throw error;
@@ -133,7 +153,7 @@ async function updateFileViaGitHubAPI(content) {
   }
   
   // Max retry'a ulaşıldıysa hata fırlat
-  throw new Error('Dosya güncelleme başarısız: SHA uyuşmazlığı nedeniyle maksimum deneme sayısına ulaşıldı. Lütfen sayfayı yenileyip tekrar deneyin.');
+  throw new Error('Dosya güncelleme başarısız: SHA uyuşmazlığı nedeniyle maksimum deneme sayısına ulaşıldı. Lütfen sayfayı yenileyip birkaç saniye bekledikten sonra tekrar deneyin.');
 }
 
 /**
