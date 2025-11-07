@@ -1267,6 +1267,8 @@ function setupForms() {
       // Formu temizle
       addForm.reset();
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
+      const addImage = document.getElementById('add-image');
+      const addImageFile = document.getElementById('add-image-file');
       if (addImage) addImage.value = '';
       if (addImageFile) addImageFile.value = '';
       if (uploadButton) {
