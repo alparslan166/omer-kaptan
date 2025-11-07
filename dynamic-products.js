@@ -5,8 +5,21 @@
   const STORAGE_KEY = 'omer_kaptan_products';
   
   // Sayfa yüklendiğinde çalıştır
-  function initDynamicProducts() {
-    // LocalStorage'dan veriyi yükle
+  async function initDynamicProducts() {
+    // Mevcut sayfanın kategorisini bul
+    const currentCategory = getCurrentCategory();
+    if (!currentCategory) {
+      console.log('Kategori bulunamadı');
+      return;
+    }
+    
+    // Mezeler ve Alkollü İçecekler için özel işlem (her durumda kategori başlıkları göster)
+    if (currentCategory === 'Mezeler' || currentCategory === 'Alkollü İçecekler') {
+      await organizeCategoryProducts(currentCategory);
+      return;
+    }
+    
+    // Diğer kategoriler için localStorage'dan veri yükle
     let productsData = null;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -23,13 +36,6 @@
       return; // Veri yoksa statik HTML'i göster
     }
     
-    // Mevcut sayfanın kategorisini bul
-    const currentCategory = getCurrentCategory();
-    if (!currentCategory) {
-      console.log('Kategori bulunamadı');
-      return;
-    }
-    
     // Bu kategoriye ait gizlenmemiş ürünleri bul
     const categoryProducts = productsData.products.filter(p => 
       p.category === currentCategory && !p.hidden
@@ -40,46 +46,173 @@
       return;
     }
     
-    // Alkollü İçecekler ve Mezeler için özel işlem (kategori başlıkları ile)
-    if (currentCategory === 'Alkollü İçecekler' || currentCategory === 'Mezeler') {
-      // Mevcut içeriği bul (section-head'den sonraki tüm içeriği temizle)
-      const main = document.querySelector('main .container');
-      if (!main) {
-        console.log('main container bulunamadı');
-        return;
-      }
-      
-      const sectionHead = main.querySelector('.section-head');
-      if (!sectionHead) {
-        console.log('section-head bulunamadı');
-        return;
-      }
-      
-      // section-head'den sonraki tüm içeriği temizle
-      let nextSibling = sectionHead.nextElementSibling;
-      while (nextSibling) {
-        const toRemove = nextSibling;
-        nextSibling = nextSibling.nextElementSibling;
-        toRemove.remove();
-      }
-      
-      // Yeni container oluştur
-      const newContainer = document.createElement('div');
-      main.appendChild(newContainer);
-      
-      // Ürünleri render et
-      renderProducts(categoryProducts, newContainer, currentCategory);
-    } else {
-      // Diğer kategoriler için normal işlem
-      const productGrid = document.querySelector('.product-grid');
-      if (!productGrid) {
-        console.log('product-grid bulunamadı');
-        return;
-      }
-      
-      // Ürünleri render et
-      renderProducts(categoryProducts, productGrid, currentCategory);
+    // Diğer kategoriler için normal işlem
+    const productGrid = document.querySelector('.product-grid');
+    if (!productGrid) {
+      console.log('product-grid bulunamadı');
+      return;
     }
+    
+    // Ürünleri render et
+    renderProducts(categoryProducts, productGrid, currentCategory);
+  }
+  
+  // Mezeler ve Alkollü İçecekler için kategori organizasyonu
+  async function organizeCategoryProducts(category) {
+    // Önce localStorage'dan dene
+    let productsData = null;
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        productsData = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.error('Error loading products data from localStorage:', e);
+    }
+    
+    // Eğer localStorage'da yoksa, products.json'dan yükle
+    if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
+      try {
+        const response = await fetch('../products.json');
+        if (response.ok) {
+          productsData = await response.json();
+          // LocalStorage'a kaydet
+          if (productsData && productsData.products) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(productsData));
+          }
+        }
+      } catch (e) {
+        console.error('Error loading products.json:', e);
+        // products.json yüklenemezse, statik HTML'den ürünleri topla
+        organizeStaticProducts(category);
+        return;
+      }
+    }
+    
+    // Bu kategoriye ait gizlenmemiş ürünleri bul
+    const categoryProducts = productsData.products.filter(p => 
+      p.category === category && !p.hidden
+    );
+    
+    if (categoryProducts.length === 0) {
+      // LocalStorage ve products.json'da yoksa, statik HTML'den topla
+      organizeStaticProducts(category);
+      return;
+    }
+    
+    // Mevcut içeriği bul (section-head'den sonraki tüm içeriği temizle)
+    const main = document.querySelector('main .container');
+    if (!main) {
+      console.log('main container bulunamadı');
+      organizeStaticProducts(category);
+      return;
+    }
+    
+    const sectionHead = main.querySelector('.section-head');
+    if (!sectionHead) {
+      console.log('section-head bulunamadı');
+      return;
+    }
+    
+    // section-head'den sonraki tüm içeriği temizle
+    let nextSibling = sectionHead.nextElementSibling;
+    while (nextSibling) {
+      const toRemove = nextSibling;
+      nextSibling = nextSibling.nextElementSibling;
+      toRemove.remove();
+    }
+    
+    // Yeni container oluştur
+    const newContainer = document.createElement('div');
+    main.appendChild(newContainer);
+    
+    // Ürünleri render et
+    renderProducts(categoryProducts, newContainer, category);
+  }
+  
+  // Statik HTML'den ürünleri topla ve kategorize et (fallback)
+  function organizeStaticProducts(category) {
+    const productGrid = document.querySelector('.product-grid');
+    if (!productGrid) {
+      console.log('product-grid bulunamadı');
+      return;
+    }
+    
+    const productCards = Array.from(productGrid.querySelectorAll('.product-card'));
+    if (productCards.length === 0) {
+      console.log('Ürün kartı bulunamadı');
+      return;
+    }
+    
+    // Ürün kartlarını parse et
+    const products = productCards.map(card => {
+      const titleEl = card.querySelector('.product-title');
+      const priceEl = card.querySelector('.product-price');
+      const descEl = card.querySelector('.product-desc');
+      const linkEl = card.querySelector('.link');
+      const imgEl = card.querySelector('img');
+      
+      let description = '';
+      let companions = [];
+      
+      // Link'ten URL parametrelerini parse et
+      if (linkEl && linkEl.href) {
+        try {
+          const url = new URL(linkEl.href, window.location.origin);
+          description = url.searchParams.get('desc') || '';
+          const companionsStr = url.searchParams.get('companions');
+          if (companionsStr) {
+            companions = decodeURIComponent(companionsStr).split(',').map(s => s.trim()).filter(Boolean);
+          }
+        } catch (e) {
+          console.error('Error parsing URL:', e);
+        }
+      }
+      
+      // Image path'i düzelt (absolute URL'den relative path'e)
+      let imagePath = '';
+      if (imgEl && imgEl.src) {
+        const match = imgEl.src.match(/assets\/(.+)$/);
+        if (match) {
+          imagePath = match[1];
+        } else {
+          // Relative path zaten varsa
+          imagePath = imgEl.src.replace(/^.*\/assets\//, '').replace(/^assets\//, '');
+        }
+      }
+      
+      return {
+        name: titleEl ? titleEl.textContent.trim() : '',
+        price: priceEl ? priceEl.textContent.trim().replace('₺', '') : '',
+        shortDesc: descEl ? descEl.textContent.trim() : '',
+        description: description,
+        image: imagePath,
+        companions: companions,
+        hidden: false
+      };
+    });
+    
+    // Mevcut product-grid'i temizle
+    const main = document.querySelector('main .container');
+    if (!main) return;
+    
+    const sectionHead = main.querySelector('.section-head');
+    if (!sectionHead) return;
+    
+    // section-head'den sonraki tüm içeriği temizle
+    let nextSibling = sectionHead.nextElementSibling;
+    while (nextSibling) {
+      const toRemove = nextSibling;
+      nextSibling = nextSibling.nextElementSibling;
+      toRemove.remove();
+    }
+    
+    // Yeni container oluştur
+    const newContainer = document.createElement('div');
+    main.appendChild(newContainer);
+    
+    // Ürünleri render et
+    renderProducts(products, newContainer, category);
   }
   
   function getCurrentCategory() {
@@ -405,14 +538,18 @@
   
   // Sayfa yüklendiğinde çalıştır
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDynamicProducts);
+    document.addEventListener('DOMContentLoaded', () => {
+      initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
+    });
   } else {
-    initDynamicProducts();
+    initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
   }
   
   // Sayfa yüklendikten sonra da bir kez daha kontrol et
   window.addEventListener('load', function() {
-    setTimeout(initDynamicProducts, 100);
+    setTimeout(() => {
+      initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
+    }, 100);
   });
 })();
 
