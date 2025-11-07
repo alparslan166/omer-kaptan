@@ -18,166 +18,166 @@
     
     // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
     let productImagePath = null; // products.json'dan gelen resim yolu
-  
-  // updateProductPage fonksiyonu - resim yolunu parametre olarak alabilir
-  function updateProductPage(imagePathFromJson = null) {
-    const titleEl = document.querySelector('[data-product-name]');
-    const catEl = document.querySelector('[data-product-category]');
-    const descEl = document.querySelector('[data-product-desc]');
-    const chipsEl = document.querySelector('[data-companions]');
-    const productNameTitleEl = document.querySelector('[data-product-name-title]');
-    const productImageEl = document.querySelector('[data-product-image]');
-    const ingredientsTitleEl = document.querySelector('[data-ingredients-title]');
-    const ingredientsListEl = document.querySelector('[data-ingredients-list]');
+    
+    // updateProductPage fonksiyonu - resim yolunu parametre olarak alabilir
+    function updateProductPage(imagePathFromJson = null) {
+      const titleEl = document.querySelector('[data-product-name]');
+      const catEl = document.querySelector('[data-product-category]');
+      const descEl = document.querySelector('[data-product-desc]');
+      const chipsEl = document.querySelector('[data-companions]');
+      const productNameTitleEl = document.querySelector('[data-product-name-title]');
+      const productImageEl = document.querySelector('[data-product-image]');
+      const ingredientsTitleEl = document.querySelector('[data-ingredients-title]');
+      const ingredientsListEl = document.querySelector('[data-ingredients-list]');
 
-  if (titleEl) titleEl.textContent = category ? `${category} / ${name}` : name;
-  if (catEl) catEl.textContent = category;
-  if (descEl) descEl.textContent = desc;
-  if (productNameTitleEl) productNameTitleEl.textContent = name;
-  
-  // Ürün resmini yükle
-  if (productImageEl && category && name) {
-    let imageSrc = null;
+      if (titleEl) titleEl.textContent = category ? `${category} / ${name}` : name;
+      if (catEl) catEl.textContent = category;
+      if (descEl) descEl.textContent = desc;
+      if (productNameTitleEl) productNameTitleEl.textContent = name;
+      
+      // Ürün resmini yükle
+      if (productImageEl && category && name) {
+      let imageSrc = null;
     
-    // Önce products.json'dan gelen resim yolunu kullan (parametre veya global değişken)
-    const imagePath = imagePathFromJson || productImagePath;
-    console.log('🖼️ Resim yolu kontrolü:', { imagePathFromJson, productImagePath, imagePath, category, name });
+      // Önce products.json'dan gelen resim yolunu kullan (parametre veya global değişken)
+      const imagePath = imagePathFromJson || productImagePath;
+      console.log('🖼️ Resim yolu kontrolü:', { imagePathFromJson, productImagePath, imagePath, category, name });
     
-    if (imagePath) {
+      if (imagePath) {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
       if (imagePath.startsWith('assets/')) {
         imageSrc = imagePath;
       } else {
         // Değilse "assets/" ekle
         imageSrc = `assets/${imagePath}`;
-      }
+    }
       console.log('✅ Resim yolu products.json\'dan kullanılıyor:', imageSrc);
     } else {
-      // products.json'da resim yolu yoksa, otomatik oluştur
-      console.log('⚠️ products.json\'da resim yolu yok, otomatik oluşturuluyor...');
-      const categorySlug = normalizeForFile(category);
-      let productSlug = normalizeForFile(name);
-      
-      // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
-      if (category === 'Mezeler') {
-        // Parantez öncesi kısmı al (örn: "Atom" -> "Atom")
-        const nameWithoutParentheses = name.split('(')[0].trim();
-        productSlug = normalizeForFile(nameWithoutParentheses);
-      }
-      
-      // "D." ile başlayan ürünler için özel işlem: "D." -> "deniz"
-      if (name.startsWith('D. ')) {
-        const nameWithoutD = name.replace(/^D\.\s*/, '');
-        productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
-      }
-      
-      imageSrc = `assets/${categorySlug}/${productSlug}.jpg`;
-      console.log('🔄 Resim yolu otomatik oluşturuldu:', imageSrc);
-    }
-    
-    if (imageSrc) {
-      console.log('📸 Resim yükleniyor:', imageSrc);
-      productImageEl.src = imageSrc;
-      productImageEl.alt = name;
-      
-      // Resim yükleme başarılı
-      productImageEl.onload = function() {
-        console.log('✅ Resim başarıyla yüklendi:', imageSrc);
-      };
-      
-      // Resim yükleme hatası için fallback
-      productImageEl.onerror = function() {
-        console.error('❌ Resim yüklenemedi:', imageSrc);
-        // Varsayılan resme geç
-        this.src = 'assets/omerkaptanlogo.png';
-        this.onerror = null; // Sonsuz döngüyü önle
-        console.log('🔄 Varsayılan resim kullanılıyor');
-      };
-    } else {
-      console.error('❌ Resim yolu oluşturulamadı!');
-    }
-  } else {
-    console.error('❌ Resim elementi veya kategori/ürün adı bulunamadı:', {
-      productImageEl: !!productImageEl,
-      category,
-      name
-    });
-  }
-
-  // İçindekiler listesini göster (sadece Mezeler kategorisi için)
-  if (category === 'Mezeler' && ingredientsTitleEl && ingredientsListEl) {
-    const ingredients = getMezeIngredients(name);
-    if (ingredients && ingredients.length > 0) {
-      ingredientsTitleEl.style.display = 'block';
-      ingredientsListEl.style.display = 'block';
-      ingredientsListEl.innerHTML = '';
-      ingredients.forEach(ingredient => {
-        const li = document.createElement('li');
-        li.textContent = ingredient;
-        ingredientsListEl.appendChild(li);
-      });
-    } else {
-      ingredientsTitleEl.style.display = 'none';
-      ingredientsListEl.style.display = 'none';
-    }
-  } else if (ingredientsTitleEl && ingredientsListEl) {
-    ingredientsTitleEl.style.display = 'none';
-    ingredientsListEl.style.display = 'none';
-  }
-
-  // Eşlikçi gösterilmeyecek kategoriler
-  const noCompanionCategories = ['Tatlılar', 'Mezeler', 'Alkolsüz İçecekler', 'Alkollü İçecekler'];
-  
-  if (chipsEl) {
-    // "Ücretsiz Eşlikçiler" başlığını bul
-    const companionsSection = chipsEl.closest('.detail');
-    const companionsTitle = companionsSection ? Array.from(companionsSection.querySelectorAll('h3')).find(h3 => h3.textContent === 'Ücretsiz Eşlikçiler') : null;
-    
-    // Belirtilen kategorilerde eşlikçi gösterilmez
-    if (noCompanionCategories.includes(category)) {
-      if (companionsTitle) {
-        companionsTitle.style.display = 'none';
-      }
-      chipsEl.style.display = 'none';
-    } else {
-    chipsEl.innerHTML = '';
-      // Eşlikçi varsa göster
-      if (companions.length > 0) {
-        companions.forEach(c => {
-          const card = document.createElement('div');
-          card.className = 'companion-card';
-          const imgWrap = document.createElement('div');
-          imgWrap.className = 'image';
-          const img = document.createElement('img');
-          img.src = companionImagePath(c);
-          img.alt = c;
-          imgWrap.appendChild(img);
-          const label = document.createElement('div');
-          label.className = 'label';
-          label.textContent = c;
-          card.appendChild(imgWrap);
-          card.appendChild(label);
-          chipsEl.appendChild(card);
-        });
-      } else {
-        // Eşlikçi yoksa hiçbir şey gösterilmez
-        if (companionsTitle) {
-          companionsTitle.style.display = 'none';
+          // products.json'da resim yolu yoksa, otomatik oluştur
+          console.log('⚠️ products.json\'da resim yolu yok, otomatik oluşturuluyor...');
+          const categorySlug = normalizeForFile(category);
+          let productSlug = normalizeForFile(name);
+          
+          // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
+          if (category === 'Mezeler') {
+            // Parantez öncesi kısmı al (örn: "Atom" -> "Atom")
+            const nameWithoutParentheses = name.split('(')[0].trim();
+            productSlug = normalizeForFile(nameWithoutParentheses);
+          }
+          
+          // "D." ile başlayan ürünler için özel işlem: "D." -> "deniz"
+          if (name.startsWith('D. ')) {
+            const nameWithoutD = name.replace(/^D\.\s*/, '');
+            productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
+          }
+          
+          imageSrc = `assets/${categorySlug}/${productSlug}.jpg`;
+          console.log('🔄 Resim yolu otomatik oluşturuldu:', imageSrc);
         }
-        chipsEl.style.display = 'none';
+        
+        if (imageSrc) {
+          console.log('📸 Resim yükleniyor:', imageSrc);
+          productImageEl.src = imageSrc;
+          productImageEl.alt = name;
+          
+          // Resim yükleme başarılı
+          productImageEl.onload = function() {
+            console.log('✅ Resim başarıyla yüklendi:', imageSrc);
+          };
+          
+          // Resim yükleme hatası için fallback
+          productImageEl.onerror = function() {
+            console.error('❌ Resim yüklenemedi:', imageSrc);
+            // Varsayılan resme geç
+            this.src = 'assets/omerkaptanlogo.png';
+            this.onerror = null; // Sonsuz döngüyü önle
+            console.log('🔄 Varsayılan resim kullanılıyor');
+          };
+        } else {
+          console.error('❌ Resim yolu oluşturulamadı!');
+        }
+      } else {
+        console.error('❌ Resim elementi veya kategori/ürün adı bulunamadı:', {
+          productImageEl: !!productImageEl,
+          category,
+          name
+        });
       }
-    }
-  }
 
-  // Şefin Önerdiği Mezeler
-  const chefRecommendationsEl = document.getElementById('chef-recommendations');
-  const recommendedMezelerEl = document.getElementById('recommended-mezeler');
-  
-  if (chefRecommendationsEl && recommendedMezelerEl) {
-    const allowedCategories = ['Tavalar', 'Izgaralar', 'Buğulamalar', 'Kavurmalar', 'Ara Sıcaklar', 'Şişler', 'Balık Ekmekler', 'Çorbalar', 'Pideler'];
-    
-    if (allowedCategories.includes(category)) {
-      chefRecommendationsEl.style.display = 'block';
+      // İçindekiler listesini göster (sadece Mezeler kategorisi için)
+      if (category === 'Mezeler' && ingredientsTitleEl && ingredientsListEl) {
+        const ingredients = getMezeIngredients(name);
+        if (ingredients && ingredients.length > 0) {
+          ingredientsTitleEl.style.display = 'block';
+          ingredientsListEl.style.display = 'block';
+          ingredientsListEl.innerHTML = '';
+          ingredients.forEach(ingredient => {
+            const li = document.createElement('li');
+            li.textContent = ingredient;
+            ingredientsListEl.appendChild(li);
+          });
+        } else {
+          ingredientsTitleEl.style.display = 'none';
+          ingredientsListEl.style.display = 'none';
+        }
+      } else if (ingredientsTitleEl && ingredientsListEl) {
+        ingredientsTitleEl.style.display = 'none';
+        ingredientsListEl.style.display = 'none';
+      }
+
+      // Eşlikçi gösterilmeyecek kategoriler
+      const noCompanionCategories = ['Tatlılar', 'Mezeler', 'Alkolsüz İçecekler', 'Alkollü İçecekler'];
+      
+      if (chipsEl) {
+        // "Ücretsiz Eşlikçiler" başlığını bul
+        const companionsSection = chipsEl.closest('.detail');
+        const companionsTitle = companionsSection ? Array.from(companionsSection.querySelectorAll('h3')).find(h3 => h3.textContent === 'Ücretsiz Eşlikçiler') : null;
+        
+        // Belirtilen kategorilerde eşlikçi gösterilmez
+        if (noCompanionCategories.includes(category)) {
+          if (companionsTitle) {
+            companionsTitle.style.display = 'none';
+          }
+          chipsEl.style.display = 'none';
+        } else {
+          chipsEl.innerHTML = '';
+          // Eşlikçi varsa göster
+          if (companions.length > 0) {
+            companions.forEach(c => {
+              const card = document.createElement('div');
+              card.className = 'companion-card';
+              const imgWrap = document.createElement('div');
+              imgWrap.className = 'image';
+              const img = document.createElement('img');
+              img.src = companionImagePath(c);
+              img.alt = c;
+              imgWrap.appendChild(img);
+              const label = document.createElement('div');
+              label.className = 'label';
+              label.textContent = c;
+              card.appendChild(imgWrap);
+              card.appendChild(label);
+              chipsEl.appendChild(card);
+            });
+          } else {
+            // Eşlikçi yoksa hiçbir şey gösterilmez
+            if (companionsTitle) {
+              companionsTitle.style.display = 'none';
+            }
+            chipsEl.style.display = 'none';
+          }
+        }
+      }
+
+      // Şefin Önerdiği Mezeler
+      const chefRecommendationsEl = document.getElementById('chef-recommendations');
+      const recommendedMezelerEl = document.getElementById('recommended-mezeler');
+      
+      if (chefRecommendationsEl && recommendedMezelerEl) {
+        const allowedCategories = ['Tavalar', 'Izgaralar', 'Buğulamalar', 'Kavurmalar', 'Ara Sıcaklar', 'Şişler', 'Balık Ekmekler', 'Çorbalar', 'Pideler'];
+        
+        if (allowedCategories.includes(category)) {
+          chefRecommendationsEl.style.display = 'block';
       
       // Mezeler listesi
       const mezeler = [
@@ -264,13 +264,14 @@
           </div>
         `;
         
-        recommendedMezelerEl.appendChild(card);
-      });
+          recommendedMezelerEl.appendChild(card);
+          });
+        }
+      }
     }
-  }
   
-  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak) - ÖNCELİKLE
-  (async function() {
+    // products.json'dan ürün bilgilerini yükle (kalıcı kaynak) - ÖNCELİKLE
+    (async function() {
     try {
       console.log('products.json yükleniyor (product detail)...');
       const response = await fetch('products.json?' + Date.now()); // Cache-busting
