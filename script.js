@@ -43,16 +43,16 @@
       const imagePath = imagePathFromJson || productImagePath;
       console.log('🖼️ Resim yolu kontrolü:', { imagePathFromJson, productImagePath, imagePath, category, name });
     
-      if (imagePath) {
-      // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
-      if (imagePath.startsWith('assets/')) {
-        imageSrc = imagePath;
-      } else {
-        // Değilse "assets/" ekle
-        imageSrc = `assets/${imagePath}`;
-    }
-      console.log('✅ Resim yolu products.json\'dan kullanılıyor:', imageSrc);
-    } else {
+        if (imagePath) {
+          // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
+          if (imagePath.startsWith('assets/')) {
+            imageSrc = imagePath;
+          } else {
+            // Değilse "assets/" ekle
+            imageSrc = `assets/${imagePath}`;
+          }
+          console.log('✅ Resim yolu products.json\'dan kullanılıyor:', imageSrc);
+        } else {
           // products.json'da resim yolu yoksa, otomatik oluştur
           console.log('⚠️ products.json\'da resim yolu yok, otomatik oluşturuluyor...');
           const categorySlug = normalizeForFile(category);
@@ -230,22 +230,22 @@
         { name: 'Levrek Marin', image: 'mezeler/levrek-marin.jpg', desc: 'Levrek marin, özenle hazırlanmış.' },
         { name: 'Tarama (Balık Yumurtası Ezmesi)', image: 'mezeler/tarama.jpg', desc: 'Tarama, balık yumurtası ezmesi, geleneksel lezzet.' },
         { name: 'Balık Köftesi', image: 'mezeler/balik-koftesi.jpg', desc: 'Balık köftesi, özenle hazırlanmış.' },
-        { name: 'Deniz Mahsullü', image: 'mezeler/deniz-mahsullu.jpg', desc: 'Deniz mahsullü meze, şefin özel tarifi.' }
-      ];
+            { name: 'Deniz Mahsullü', image: 'mezeler/deniz-mahsullu.jpg', desc: 'Deniz mahsullü meze, şefin özel tarifi.' }
+          ];
 
-      // Rastgele 6 meze seç
-      const shuffled = mezeler.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 6);
+          // Rastgele 6 meze seç
+          const shuffled = mezeler.sort(() => 0.5 - Math.random());
+          const selected = shuffled.slice(0, 6);
 
-      // Mezeleri göster
-      selected.forEach(meze => {
-        const card = document.createElement('article');
-        card.className = 'product-card';
-        
-        const encodedName = encodeURIComponent(meze.name);
-        const encodedDesc = encodeURIComponent(meze.desc);
-        
-        card.innerHTML = `
+          // Mezeleri göster
+          selected.forEach(meze => {
+            const card = document.createElement('article');
+            card.className = 'product-card';
+            
+            const encodedName = encodeURIComponent(meze.name);
+            const encodedDesc = encodeURIComponent(meze.desc);
+            
+            card.innerHTML = `
           <div class="media-figure">
             <img src="assets/${meze.image}" alt="${meze.name}" />
           </div>
@@ -261,18 +261,18 @@
               /></span>
               Detay</a
             >
-          </div>
-        `;
-        
-          recommendedMezelerEl.appendChild(card);
+            </div>
+          `;
+          
+            recommendedMezelerEl.appendChild(card);
           });
         }
       }
     }
-  
+    
     // products.json'dan ürün bilgilerini yükle (kalıcı kaynak) - ÖNCELİKLE
     (async function() {
-    try {
+      try {
       console.log('products.json yükleniyor (product detail)...');
       const response = await fetch('products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
