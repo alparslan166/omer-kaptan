@@ -41,13 +41,13 @@
       const productCategory = urlParams.get('category');
       
       if (productName && productCategory) {
-        // Bu ürün gizlenmiş mi kontrol et
-        const isHidden = hiddenProducts.some(p => 
+        // Bu ürünü bul
+        const product = productsData.products.find(p => 
           p.name === productName.trim() && p.category === productCategory.trim()
         );
         
-        if (isHidden) {
-          // Ürün gizlenmişse, sayfayı ana sayfaya yönlendir veya mesaj göster
+        if (!product) {
+          // Ürün bulunamadı
           const main = document.querySelector('main');
           if (main) {
             main.innerHTML = `
@@ -57,6 +57,24 @@
                 <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #4da6ff; color: white; text-decoration: none; border-radius: 8px;">Ana Sayfaya Dön</a>
               </div>
             `;
+          }
+        } else if (product.hidden) {
+          // Ürün gizlenmişse
+          const main = document.querySelector('main');
+          if (main) {
+            main.innerHTML = `
+              <div style="text-align: center; padding: 40px;">
+                <h2>Ürün Bulunamadı</h2>
+                <p>Bu ürün şu anda görüntülenemiyor.</p>
+                <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #4da6ff; color: white; text-decoration: none; border-radius: 8px;">Ana Sayfaya Dön</a>
+              </div>
+            `;
+          }
+        } else if (product.outOfStock) {
+          // Ürün stokta yok - mesajı göster
+          const outOfStockMessage = document.getElementById('out-of-stock-message');
+          if (outOfStockMessage) {
+            outOfStockMessage.style.display = 'block';
           }
         }
       }

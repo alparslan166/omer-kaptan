@@ -625,6 +625,40 @@ function populateCategories() {
   });
 }
 
+// Resim yolu otomatik oluşturma fonksiyonu
+function generateImagePath(category, productName) {
+  // normalizeForFile fonksiyonunu admin.js'de de kullanabilmek için
+  function normalizeForFile(text) {
+    return text
+      .toLowerCase()
+      .replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u')
+      .replace(/ş/g, 's')
+      .replace(/ı/g, 'i')
+      .replace(/ö/g, 'o')
+      .replace(/ç/g, 'c')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+  
+  const categorySlug = normalizeForFile(category);
+  let productSlug = normalizeForFile(productName);
+  
+  // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
+  if (category === 'Mezeler') {
+    const nameWithoutParentheses = productName.split('(')[0].trim();
+    productSlug = normalizeForFile(nameWithoutParentheses);
+  }
+  
+  // "D." ile başlayan ürünler için özel işlem
+  if (productName.startsWith('D. ')) {
+    const nameWithoutD = productName.replace(/^D\.\s*/, '');
+    productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
+  }
+  
+  return `${categorySlug}/${productSlug}.jpg`;
+}
+
 // Ürünleri listele
 function displayProducts(filteredProducts = null) {
   const productsList = document.getElementById('products-list');
@@ -682,6 +716,9 @@ function displayProducts(filteredProducts = null) {
           <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">
             ${product.hidden ? 'Göster' : 'Gizle'}
           </button>
+          <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+            ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
+          </button>
         </div>
       </div>
     `;
@@ -729,6 +766,9 @@ function displayHiddenProducts() {
         <div class="product-actions">
           <button class="btn-edit" onclick="editProduct(${product.id})">Düzenle</button>
           <button class="btn-toggle-hidden" onclick="toggleProductVisibility(${product.id})">Göster</button>
+          <button class="btn-toggle-stock" onclick="toggleProductStock(${product.id})" style="background: ${product.outOfStock ? '#ff9800' : '#28a745'}; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+            ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}
+          </button>
         </div>
       </div>
     `;
@@ -743,7 +783,25 @@ function editProduct(id) {
   
   // Edit formunu doldur
   document.getElementById('edit-id').value = product.id;
-  document.getElementById('edit-category').value = product.category;
+  
+  const editCategory = document.getElementById('edit-category');
+  const editSubcategory = document.getElementById('edit-subcategory');
+  const editSubcategoryGroup = document.getElementById('edit-subcategory-group');
+  
+  editCategory.value = product.category;
+  
+  // Alt kategori varsa göster
+  if (editSubcategory && editSubcategoryGroup) {
+    if (product.category === 'Alkollü İçecekler' || product.category === 'Mezeler') {
+      updateSubcategoryOptions(editCategory, editSubcategory, editSubcategoryGroup);
+      if (product.subcategory) {
+        editSubcategory.value = product.subcategory;
+      }
+    } else {
+      editSubcategoryGroup.style.display = 'none';
+    }
+  }
+  
   document.getElementById('edit-name').value = product.name;
   document.getElementById('edit-price').value = product.price;
   document.getElementById('edit-short-desc').value = product.shortDesc || '';
@@ -751,6 +809,11 @@ function editProduct(id) {
   document.getElementById('edit-image').value = product.image;
   document.getElementById('edit-companions').value = product.companions ? product.companions.join(', ') : '';
   document.getElementById('edit-hidden').checked = product.hidden || false;
+  
+  const editOutOfStock = document.getElementById('edit-out-of-stock');
+  if (editOutOfStock) {
+    editOutOfStock.checked = product.outOfStock || false;
+  }
   
   // Edit tabını göster
   document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -779,27 +842,193 @@ function toggleProductVisibility(id) {
   alert(`"${product.name}" ürünü ${status}. Değişiklikleri görmek için kategori sayfalarını yenileyin.`);
 }
 
+// Ürün stok durumunu değiştir
+function toggleProductStock(id) {
+  const product = productsData.products.find(p => p.id === id);
+  if (!product) return;
+  
+  product.outOfStock = !product.outOfStock;
+  saveProducts(productsData);
+  displayProducts();
+  displayHiddenProducts();
+  
+  const status = product.outOfStock ? 'stokta yok olarak işaretlendi' : 'stokta var olarak işaretlendi';
+  alert(`"${product.name}" ürünü ${status}.`);
+}
+
+// Alt kategori seçeneklerini yönet
+function updateSubcategoryOptions(categorySelect, subcategorySelect, subcategoryGroup) {
+  const category = categorySelect.value;
+  subcategoryGroup.style.display = 'none';
+  subcategorySelect.innerHTML = '<option value="">Alt Kategori Seçin</option>';
+  subcategorySelect.required = false;
+  
+  if (category === 'Alkollü İçecekler') {
+    subcategoryGroup.style.display = 'block';
+    subcategorySelect.required = true;
+    subcategorySelect.innerHTML = `
+      <option value="">Alt Kategori Seçin</option>
+      <option value="Rakılar">Rakılar</option>
+      <option value="Diğer Alkoller">Diğer Alkoller</option>
+    `;
+  } else if (category === 'Mezeler') {
+    subcategoryGroup.style.display = 'block';
+    subcategorySelect.required = true;
+    subcategorySelect.innerHTML = `
+      <option value="">Alt Kategori Seçin</option>
+      <option value="Zeytinyağlı Mezeler">Zeytinyağlı Mezeler</option>
+      <option value="Yoğurtlu Mezeler">Yoğurtlu Mezeler</option>
+      <option value="Ezmeler">Ezmeler</option>
+      <option value="Salatalar">Salatalar</option>
+      <option value="Deniz Mahsullü Mezeler">Deniz Mahsullü Mezeler</option>
+      <option value="Diğer Mezeler">Diğer Mezeler</option>
+    `;
+  }
+}
+
+// Resim dosyası seçildiğinde otomatik yol oluştur
+function setupImageFileInputs() {
+  // Yeni ürün ekleme formu
+  const addImageFile = document.getElementById('add-image-file');
+  const addImage = document.getElementById('add-image');
+  const addCategory = document.getElementById('add-category');
+  const addName = document.getElementById('add-name');
+  
+  if (addImageFile && addImage) {
+    addImageFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        // Dosya adını kullanarak resim yolu oluştur
+        const category = addCategory.value;
+        const name = addName.value;
+        
+        if (category && name) {
+          // Dosya uzantısını al
+          const fileExt = file.name.split('.').pop().toLowerCase();
+          // Otomatik resim yolu oluştur
+          const autoPath = generateImagePath(category, name);
+          // Uzantıyı güncelle
+          const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+          addImage.value = finalPath;
+        } else {
+          // Sadece dosya adını kullan
+          addImage.value = file.name;
+        }
+      }
+    });
+  }
+  
+  // Kategori veya ürün adı değiştiğinde resim yolunu güncelle
+  if (addCategory && addName && addImage) {
+    const updateImagePath = () => {
+      const category = addCategory.value;
+      const name = addName.value;
+      if (category && name && (!addImageFile || addImageFile.files.length === 0)) {
+        // Dosya seçilmemişse, otomatik yol oluştur
+        addImage.value = generateImagePath(category, name);
+      } else if (category && name && addImageFile && addImageFile.files.length > 0) {
+        // Dosya seçilmişse, dosya uzantısını kullan
+        const file = addImageFile.files[0];
+        const fileExt = file.name.split('.').pop().toLowerCase();
+        const autoPath = generateImagePath(category, name);
+        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+        addImage.value = finalPath;
+      }
+    };
+    
+    addCategory.addEventListener('change', updateImagePath);
+    addName.addEventListener('input', updateImagePath);
+  }
+  
+  // Ürün düzenleme formu
+  const editImageFile = document.getElementById('edit-image-file');
+  const editImage = document.getElementById('edit-image');
+  const editCategory = document.getElementById('edit-category');
+  const editName = document.getElementById('edit-name');
+  
+  if (editImageFile && editImage) {
+    editImageFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const category = editCategory.value;
+        const name = editName.value;
+        
+        if (category && name) {
+          const fileExt = file.name.split('.').pop().toLowerCase();
+          const autoPath = generateImagePath(category, name);
+          const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+          editImage.value = finalPath;
+        } else {
+          editImage.value = file.name;
+        }
+      }
+    });
+  }
+  
+  if (editCategory && editName && editImage) {
+    const updateEditImagePath = () => {
+      const category = editCategory.value;
+      const name = editName.value;
+      if (category && name && (!editImageFile || editImageFile.files.length === 0)) {
+        // Dosya seçilmemişse, otomatik yol oluştur
+        editImage.value = generateImagePath(category, name);
+      } else if (category && name && editImageFile && editImageFile.files.length > 0) {
+        const file = editImageFile.files[0];
+        const fileExt = file.name.split('.').pop().toLowerCase();
+        const autoPath = generateImagePath(category, name);
+        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+        editImage.value = finalPath;
+      }
+    };
+    
+    editCategory.addEventListener('change', updateEditImagePath);
+    editName.addEventListener('input', updateEditImagePath);
+  }
+}
+
 // Form setup
 function setupForms() {
+  // Alt kategori yönetimi - Yeni ürün ekleme
+  const addCategory = document.getElementById('add-category');
+  const addSubcategory = document.getElementById('add-subcategory');
+  const addSubcategoryGroup = document.getElementById('add-subcategory-group');
+  
+  if (addCategory && addSubcategory && addSubcategoryGroup) {
+    addCategory.addEventListener('change', () => {
+      updateSubcategoryOptions(addCategory, addSubcategory, addSubcategoryGroup);
+    });
+  }
+  
   // Yeni ürün ekleme formu
   const addForm = document.getElementById('add-product-form');
   if (addForm) {
     addForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
+      const category = document.getElementById('add-category').value;
+      const name = document.getElementById('add-name').value;
+      
+      // Resim yolu otomatik oluştur (eğer boşsa)
+      let imagePath = document.getElementById('add-image').value;
+      if (!imagePath || imagePath.trim() === '') {
+        imagePath = generateImagePath(category, name);
+      }
+      
       const newProduct = {
         id: Math.max(...productsData.products.map(p => p.id), 0) + 1,
-        name: document.getElementById('add-name').value,
-        category: document.getElementById('add-category').value,
+        name: name,
+        category: category,
         price: document.getElementById('add-price').value,
         shortDesc: document.getElementById('add-short-desc').value,
         description: document.getElementById('add-description').value,
-        image: document.getElementById('add-image').value,
+        image: imagePath,
         companions: document.getElementById('add-companions').value
           .split(',')
           .map(s => s.trim())
           .filter(Boolean),
-        hidden: false
+        hidden: false,
+        outOfStock: false,
+        subcategory: addSubcategory ? addSubcategory.value : null
       };
       
       productsData.products.push(newProduct);
@@ -807,6 +1036,8 @@ function setupForms() {
       
       // Formu temizle
       addForm.reset();
+      if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
+      if (addImage) addImage.value = '';
       
       // Başarı mesajı
       alert('Ürün başarıyla eklendi!');
@@ -819,6 +1050,17 @@ function setupForms() {
   // Ürün güncelleme formu
   const editForm = document.getElementById('edit-product-form');
   if (editForm) {
+    // Alt kategori yönetimi
+    const editCategory = document.getElementById('edit-category');
+    const editSubcategory = document.getElementById('edit-subcategory');
+    const editSubcategoryGroup = document.getElementById('edit-subcategory-group');
+    
+    if (editCategory && editSubcategory && editSubcategoryGroup) {
+      editCategory.addEventListener('change', () => {
+        updateSubcategoryOptions(editCategory, editSubcategory, editSubcategoryGroup);
+      });
+    }
+    
     editForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
@@ -826,17 +1068,29 @@ function setupForms() {
       const product = productsData.products.find(p => p.id === id);
       if (!product) return;
       
-      product.name = document.getElementById('edit-name').value;
-      product.category = document.getElementById('edit-category').value;
+      const category = document.getElementById('edit-category').value;
+      const name = document.getElementById('edit-name').value;
+      
+      // Resim yolu otomatik oluştur (eğer boşsa veya değiştirilmişse)
+      let imagePath = document.getElementById('edit-image').value;
+      if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
+        imagePath = generateImagePath(category, name);
+        document.getElementById('edit-image').value = imagePath;
+      }
+      
+      product.name = name;
+      product.category = category;
       product.price = document.getElementById('edit-price').value;
       product.shortDesc = document.getElementById('edit-short-desc').value;
       product.description = document.getElementById('edit-description').value;
-      product.image = document.getElementById('edit-image').value;
+      product.image = imagePath;
       product.companions = document.getElementById('edit-companions').value
         .split(',')
         .map(s => s.trim())
         .filter(Boolean);
       product.hidden = document.getElementById('edit-hidden').checked;
+      product.outOfStock = document.getElementById('edit-out-of-stock') ? document.getElementById('edit-out-of-stock').checked : false;
+      product.subcategory = editSubcategory ? editSubcategory.value : null;
       
       saveProducts(productsData);
       
@@ -846,6 +1100,9 @@ function setupForms() {
       window.location.href = 'admin.html';
     });
   }
+  
+  // Resim dosyası input'larını ayarla
+  setupImageFileInputs();
   
   // Ürün silme
   const deleteBtn = document.getElementById('delete-product-btn');

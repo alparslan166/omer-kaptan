@@ -354,78 +354,53 @@
   function renderMezeler(products, container) {
     console.log(`renderMezeler çağrıldı: ${products.length} ürün ile`);
     
-    // Mezeleri kategorilere ayır (öncelik sırasına göre)
+    // Eğer ürünlerde subcategory field'ı varsa, onu kullan
+    // Yoksa otomatik kategoriye ayır
     
-    // 1. Deniz Mahsullü Mezeler (en özel kategori)
-    const denizMahsulleri = products.filter(p => 
-      p.name.includes('Karides') ||
-      p.name.includes('Ahtapot') ||
-      p.name.includes('Kalamar') ||
-      p.name.includes('Midye') ||
-      p.name.includes('Lakerda') ||
-      p.name.includes('Marine') ||
-      p.name.includes('Marin') ||
-      (p.name.includes('Tarama') && !p.name.includes('Ezme')) ||
-      p.name.includes('Balık Köftesi') ||
-      p.name.includes('Deniz Börülcesi') ||
-      p.name === 'Deniz Mahsullü'
-    );
-    
-    // 2. Zeytinyağlı Mezeler
+    // Alt kategoriye göre grupla
     const zeytinyagli = products.filter(p => 
-      (p.name.includes('Zeytinyağlı') || p.name.includes('zeytinyağlı')) &&
-      !denizMahsulleri.includes(p)
+      p.subcategory === 'Zeytinyağlı Mezeler' || 
+      ((p.name.includes('Zeytinyağlı') || p.name.includes('zeytinyağlı')) && !p.subcategory)
     );
     
-    // 3. Yoğurtlu Mezeler
     const yogurtlu = products.filter(p => 
-      (p.name.includes('Yoğurtlu') || p.name.includes('yoğurtlu') || p.name === 'Atom') &&
-      !p.name.includes('Zeytinyağlı') &&
-      !denizMahsulleri.includes(p) &&
-      !p.name.includes('Salata')
+      p.subcategory === 'Yoğurtlu Mezeler' ||
+      ((p.name.includes('Yoğurtlu') || p.name.includes('yoğurtlu') || p.name === 'Atom') && !p.subcategory && !p.name.includes('Zeytinyağlı') && !p.name.includes('Salata'))
     );
     
-    // 4. Ezmeler (deniz ürünü olmayan)
     const ezmeler = products.filter(p => 
-      (p.name.includes('Ezme') || p.name.includes('ezme')) &&
-      !denizMahsulleri.includes(p) &&
-      !zeytinyagli.includes(p) &&
-      !p.name.includes('Salata')
-    ).concat(
-      products.filter(p => 
-        (p.name === 'Muhammara' ||
-         p.name === 'Fava' ||
-         p.name === 'Babagannuş' ||
-         p.name === 'Girit Ezmesi' ||
-         p.name === 'Tahinli Patlıcan' ||
-         p.name === 'Zeytin Ezmesi') &&
-        !denizMahsulleri.includes(p)
-      )
+      p.subcategory === 'Ezmeler' ||
+      ((p.name.includes('Ezme') || p.name.includes('ezme') || 
+        p.name === 'Muhammara' || p.name === 'Fava' || p.name === 'Babagannuş' || 
+        p.name === 'Girit Ezmesi' || p.name === 'Tahinli Patlıcan' || p.name === 'Zeytin Ezmesi') && 
+       !p.subcategory && !p.name.includes('Salata'))
     );
     
-    // 5. Salatalar (diğer kategorilere dahil olmayan)
     const salatalar = products.filter(p => 
-      (p.name.includes('Salata') || 
-       p.name.includes('salata') ||
-       p.name.includes('Salatası') ||
-       p.name.includes('Piyazı') ||
-       p.name.includes('Kısır') ||
-       p.name.includes('Gavurdağı') ||
-       p.name.includes('Mercimek Köftesi') ||
-       p.name.includes('Havuç Tarator')) &&
-      !denizMahsulleri.includes(p) &&
-      !zeytinyagli.includes(p) &&
-      !yogurtlu.includes(p) &&
-      !ezmeler.includes(p)
+      p.subcategory === 'Salatalar' ||
+      ((p.name.includes('Salata') || p.name.includes('salata') || p.name.includes('Salatası') ||
+        p.name.includes('Piyazı') || p.name.includes('Kısır') || p.name.includes('Gavurdağı') ||
+        p.name.includes('Mercimek Köftesi') || p.name.includes('Havuç Tarator')) && !p.subcategory)
     );
     
-    // 6. Diğer Mezeler
+    const denizMahsulleri = products.filter(p => 
+      p.subcategory === 'Deniz Mahsullü Mezeler' ||
+      ((p.name.includes('Karides') || p.name.includes('Ahtapot') || p.name.includes('Kalamar') ||
+        p.name.includes('Midye') || p.name.includes('Lakerda') || p.name.includes('Marine') ||
+        p.name.includes('Marin') || (p.name.includes('Tarama') && !p.name.includes('Ezme')) ||
+        p.name.includes('Balık Köftesi') || p.name.includes('Deniz Börülcesi') ||
+        p.name === 'Deniz Mahsullü') && !p.subcategory)
+    );
+    
+    // Diğer Mezeler (subcategory belirtilmemiş ve diğer kategorilere dahil olmayan)
     const digerMezeler = products.filter(p => 
-      !zeytinyagli.includes(p) &&
-      !yogurtlu.includes(p) &&
-      !ezmeler.includes(p) &&
-      !denizMahsulleri.includes(p) &&
-      !salatalar.includes(p)
+      p.subcategory === 'Diğer Mezeler' ||
+      (!p.subcategory && 
+       !zeytinyagli.includes(p) &&
+       !yogurtlu.includes(p) &&
+       !ezmeler.includes(p) &&
+       !denizMahsulleri.includes(p) &&
+       !salatalar.includes(p))
     );
     
     // Mevcut içeriği temizle
@@ -546,12 +521,14 @@
   }
   
   function renderAlkolluIcecekler(products, container) {
-    // Rakılar ve Diğer Alkoller olarak ayır
+    // Alt kategoriye göre ayır (subcategory varsa onu kullan, yoksa otomatik)
     const rakiProducts = products.filter(p => 
-      p.name.includes('Rakı') || p.name.includes('Raki') || p.name.includes('rakı') || p.name.includes('raki')
+      p.subcategory === 'Rakılar' ||
+      (!p.subcategory && (p.name.includes('Rakı') || p.name.includes('Raki') || p.name.includes('rakı') || p.name.includes('raki')))
     );
     const digerAlkoller = products.filter(p => 
-      !p.name.includes('Rakı') && !p.name.includes('Raki') && !p.name.includes('rakı') && !p.name.includes('raki')
+      p.subcategory === 'Diğer Alkoller' ||
+      (!p.subcategory && !p.name.includes('Rakı') && !p.name.includes('Raki') && !p.name.includes('rakı') && !p.name.includes('raki'))
     );
     
     // Mevcut içeriği temizle
