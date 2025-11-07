@@ -894,50 +894,30 @@ function setupImageFileInputs() {
   const addCategory = document.getElementById('add-category');
   const addName = document.getElementById('add-name');
   
-  if (addImageFile && addImage) {
-    addImageFile.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        // Dosya adını kullanarak resim yolu oluştur
-        const category = addCategory.value;
-        const name = addName.value;
-        
-        if (category && name) {
-          // Dosya uzantısını al
-          const fileExt = file.name.split('.').pop().toLowerCase();
-          // Otomatik resim yolu oluştur
-          const autoPath = generateImagePath(category, name);
-          // Uzantıyı güncelle
-          const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
-          addImage.value = finalPath;
-        } else {
-          // Sadece dosya adını kullan
-          addImage.value = file.name;
-        }
-      }
-    });
-  }
-  
   // Kategori veya ürün adı değiştiğinde resim yolunu güncelle
-  if (addCategory && addName && addImage) {
-    const updateImagePath = () => {
-      const category = addCategory.value;
-      const name = addName.value;
-      if (category && name && (!addImageFile || addImageFile.files.length === 0)) {
-        // Dosya seçilmemişse, otomatik yol oluştur
-        addImage.value = generateImagePath(category, name);
-      } else if (category && name && addImageFile && addImageFile.files.length > 0) {
+  const updateAddImagePath = () => {
+    const category = addCategory.value;
+    const name = addName.value;
+    const file = addImageFile?.files[0];
+    
+    if (category && name) {
+      if (file) {
         // Dosya seçilmişse, dosya uzantısını kullan
-        const file = addImageFile.files[0];
         const fileExt = file.name.split('.').pop().toLowerCase();
         const autoPath = generateImagePath(category, name);
-        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
         addImage.value = finalPath;
+      } else {
+        // Dosya seçilmemişse, varsayılan olarak .jpg kullan
+        addImage.value = generateImagePath(category, name);
       }
-    };
-    
-    addCategory.addEventListener('change', updateImagePath);
-    addName.addEventListener('input', updateImagePath);
+    }
+  };
+  
+  if (addImageFile && addImage && addCategory && addName) {
+    addImageFile.addEventListener('change', updateAddImagePath);
+    addCategory.addEventListener('change', updateAddImagePath);
+    addName.addEventListener('input', updateAddImagePath);
   }
   
   // Ürün düzenleme formu
@@ -946,41 +926,30 @@ function setupImageFileInputs() {
   const editCategory = document.getElementById('edit-category');
   const editName = document.getElementById('edit-name');
   
-  if (editImageFile && editImage) {
-    editImageFile.addEventListener('change', (e) => {
-      const file = e.target.files[0];
+  const updateEditImagePath = () => {
+    const category = editCategory.value;
+    const name = editName.value;
+    const file = editImageFile?.files[0];
+    
+    if (category && name) {
       if (file) {
-        const category = editCategory.value;
-        const name = editName.value;
-        
-        if (category && name) {
-          const fileExt = file.name.split('.').pop().toLowerCase();
-          const autoPath = generateImagePath(category, name);
-          const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
-          editImage.value = finalPath;
-        } else {
-          editImage.value = file.name;
-        }
-      }
-    });
-  }
-  
-  if (editCategory && editName && editImage) {
-    const updateEditImagePath = () => {
-      const category = editCategory.value;
-      const name = editName.value;
-      if (category && name && (!editImageFile || editImageFile.files.length === 0)) {
-        // Dosya seçilmemişse, otomatik yol oluştur
-        editImage.value = generateImagePath(category, name);
-      } else if (category && name && editImageFile && editImageFile.files.length > 0) {
-        const file = editImageFile.files[0];
+        // Yeni dosya seçilmişse, yeni dosya uzantısını kullan
         const fileExt = file.name.split('.').pop().toLowerCase();
         const autoPath = generateImagePath(category, name);
-        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif)$/i, `.${fileExt}`);
+        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
         editImage.value = finalPath;
+      } else {
+        // Dosya değiştirilmemişse, mevcut resim yolunu koru veya otomatik oluştur
+        if (!editImage.value || editImage.value.trim() === '') {
+          editImage.value = generateImagePath(category, name);
+        }
+        // Mevcut değeri koru (değiştirme)
       }
-    };
-    
+    }
+  };
+  
+  if (editImageFile && editImage && editCategory && editName) {
+    editImageFile.addEventListener('change', updateEditImagePath);
     editCategory.addEventListener('change', updateEditImagePath);
     editName.addEventListener('input', updateEditImagePath);
   }
@@ -1007,12 +976,18 @@ function setupForms() {
       
       const category = document.getElementById('add-category').value;
       const name = document.getElementById('add-name').value;
+      const imageFile = document.getElementById('add-image-file').files[0];
       
-      // Resim yolu otomatik oluştur (eğer boşsa)
-      let imagePath = document.getElementById('add-image').value;
-      if (!imagePath || imagePath.trim() === '') {
-        imagePath = generateImagePath(category, name);
+      // Resim dosyası kontrolü
+      if (!imageFile) {
+        alert('Lütfen bir resim dosyası seçin!');
+        return;
       }
+      
+      // Resim yolu otomatik oluştur
+      const fileExt = imageFile.name.split('.').pop().toLowerCase();
+      let imagePath = generateImagePath(category, name);
+      imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
       
       const newProduct = {
         id: Math.max(...productsData.products.map(p => p.id), 0) + 1,
@@ -1038,6 +1013,7 @@ function setupForms() {
       addForm.reset();
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
       if (addImage) addImage.value = '';
+      if (addImageFile) addImageFile.value = '';
       
       // Başarı mesajı
       alert('Ürün başarıyla eklendi!');
@@ -1070,13 +1046,24 @@ function setupForms() {
       
       const category = document.getElementById('edit-category').value;
       const name = document.getElementById('edit-name').value;
+      const imageFile = document.getElementById('edit-image-file').files[0];
       
-      // Resim yolu otomatik oluştur (eğer boşsa veya değiştirilmişse)
+      // Resim yolu belirleme
       let imagePath = document.getElementById('edit-image').value;
-      if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
+      
+      // Eğer yeni dosya seçilmişse veya kategori/ürün adı değişmişse, yeni yol oluştur
+      if (imageFile) {
+        // Yeni dosya seçilmişse, yeni dosya uzantısını kullan
+        const fileExt = imageFile.name.split('.').pop().toLowerCase();
         imagePath = generateImagePath(category, name);
-        document.getElementById('edit-image').value = imagePath;
+        imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+      } else if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
+        // Dosya seçilmemiş ama kategori/ürün adı değişmişse, yeni yol oluştur (mevcut uzantıyı koru)
+        const currentExt = product.image ? product.image.split('.').pop() : 'jpg';
+        imagePath = generateImagePath(category, name);
+        imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${currentExt}`);
       }
+      // Aksi halde mevcut resim yolunu koru
       
       product.name = name;
       product.category = category;
