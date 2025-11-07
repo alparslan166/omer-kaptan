@@ -1,4 +1,28 @@
-admin paneli tasarlanıcak
+admin paneli tasarlanıcak, bu paneli sadece bir kişi kullanıcak, o yüzden herhangi bir güvenlik önlemleri alınmayacak.
+
+Kullanılacak Teknolojiler:
+HTML + CSS + JavaScript (Vanilla)
+LocalStorage veya JSON dosyası (veri kaynağı)
+Yapı:
+index.html: ürünleri gösterir.
+admin.html: ürün ekleme/silme/güncelleme arayüzü.
+products.json: ürün verilerinin tutulduğu dosya.
+Nasıl çalışır:
+index.html ürünleri products.json’dan çeker.
+Her ürün kartında “Düzenle” butonu olur.
+Butona tıklanınca admin.html?product=id şeklinde admin paneli açılır.
+Admin panelinde ürünün fotoğraf, isim, fiyat, açıklama vb. alanları güncellenir.
+LocalStorage veya JSON dosyası güncellenir.
+Avantaj:
+- Kolay entegrasyon
+- Hızlı güncellemeler
+- Kolay bakım
+- Hızlı erişim
+- Hızlı yanıt
+- Hızlı yükleme
+- Hızlı işleme
+- Hızlı yönetim
+
 
 ürün ekleme, silme, güncelleme, listeleme
 kategori ekleme, silme, güncelleme, listeleme
