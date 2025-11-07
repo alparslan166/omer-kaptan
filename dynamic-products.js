@@ -114,7 +114,15 @@
     }
     
     // Mevcut içeriği bul (section-head'den sonraki tüm içeriği temizle)
-    const main = document.querySelector('main .container');
+    // Önce main.container'ı dene, sonra main .container'ı, sonra sadece main'i
+    let main = document.querySelector('main.container');
+    if (!main) {
+      main = document.querySelector('main .container');
+    }
+    if (!main) {
+      main = document.querySelector('main');
+    }
+    
     if (!main) {
       console.log('main container bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
@@ -123,7 +131,8 @@
     
     const sectionHead = main.querySelector('.section-head');
     if (!sectionHead) {
-      console.log('section-head bulunamadı');
+      console.log('section-head bulunamadı, statik HTML\'den parse ediliyor...');
+      organizeStaticProducts(category);
       return;
     }
     
@@ -236,11 +245,25 @@
     });
     
     // Mevcut product-grid'i temizle
-    const main = document.querySelector('main .container');
-    if (!main) return;
+    // Önce main.container'ı dene, sonra main .container'ı, sonra sadece main'i
+    let main = document.querySelector('main.container');
+    if (!main) {
+      main = document.querySelector('main .container');
+    }
+    if (!main) {
+      main = document.querySelector('main');
+    }
+    
+    if (!main) {
+      console.log('main container bulunamadı (organizeStaticProducts)');
+      return;
+    }
     
     const sectionHead = main.querySelector('.section-head');
-    if (!sectionHead) return;
+    if (!sectionHead) {
+      console.log('section-head bulunamadı (organizeStaticProducts)');
+      return;
+    }
     
     // section-head'den sonraki tüm içeriği temizle
     let nextSibling = sectionHead.nextElementSibling;
@@ -593,18 +616,33 @@
   }
   
   // Sayfa yüklendiğinde çalıştır
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
+  function runInit() {
+    console.log('dynamic-products.js yüklendi, initDynamicProducts çağrılıyor...');
+    console.log('document.readyState:', document.readyState);
+    console.log('main element:', document.querySelector('main'));
+    
+    initDynamicProducts().catch(e => {
+      console.error('Error initializing dynamic products:', e);
+      // Hata durumunda tekrar dene
+      setTimeout(() => {
+        console.log('Hata sonrası tekrar deneniyor...');
+        initDynamicProducts().catch(e2 => console.error('Error retrying:', e2));
+      }, 500);
     });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInit);
   } else {
-    initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
+    // DOM zaten yüklenmiş, hemen çalıştır
+    runInit();
   }
   
   // Sayfa yüklendikten sonra da bir kez daha kontrol et
   window.addEventListener('load', function() {
     setTimeout(() => {
-      initDynamicProducts().catch(e => console.error('Error initializing dynamic products:', e));
+      console.log('window.load event - tekrar kontrol ediliyor...');
+      initDynamicProducts().catch(e => console.error('Error on load:', e));
     }, 100);
   });
 })();
