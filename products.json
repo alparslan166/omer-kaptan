@@ -2494,21 +2494,6 @@
       "hidden": false
     },
     {
-      "id": 155,
-      "name": "turuncu ezmesi",
-      "category": "Mezeler",
-      "price": "31",
-      "shortDesc": "ezme",
-      "description": "FGHJDSKFLASDŞ",
-      "image": "mezeler/turuncu-ezmesi.jpg",
-      "companions": [
-        "Fıstık"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": "Ezmeler"
-    },
-    {
       "id": 156,
       "name": "test1",
       "category": "Tavalar",
