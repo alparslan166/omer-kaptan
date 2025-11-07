@@ -2534,6 +2534,21 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": ""
+    },
+    {
+      "id": 157,
+      "name": "test12",
+      "category": "Tavalar",
+      "price": "21434",
+      "shortDesc": "ghjk",
+      "description": "fghjklş",
+      "image": "tavalar/test12.jpg",
+      "companions": [
+        "Sos"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
