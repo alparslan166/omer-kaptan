@@ -2508,6 +2508,22 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": ""
+    },
+    {
+      "id": 157,
+      "name": "nazoşş",
+      "category": "Tatlılar",
+      "price": "0",
+      "shortDesc": "azizin sapığı",
+      "description": "fhgjkl",
+      "image": "tatlilar/nazoss.png",
+      "companions": [
+        "Beyaz Peynir",
+        "Fıstık"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
