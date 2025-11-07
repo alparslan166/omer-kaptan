@@ -2518,22 +2518,6 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": "Ezmeler"
-    },
-    {
-      "id": 156,
-      "name": "tavatest",
-      "category": "Tavalar",
-      "price": "3131",
-      "shortDesc": "dsfghjklşi",
-      "description": "sdfghjklşi,şlks\nüğpserdtfyguhıjokplş",
-      "image": "tavalar/tavatest.jpg",
-      "companions": [
-        "Sos",
-        "Fıstık"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": ""
     }
   ],
   "companions": [
