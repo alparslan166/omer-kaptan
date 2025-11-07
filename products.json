@@ -2494,17 +2494,6 @@
       "hidden": false
     },
     {
-      "id": 154,
-      "name": "turuncu tava",
-      "category": "Tavalar",
-      "price": "200",
-      "shortDesc": "turuncu",
-      "description": "turuncu-turuncuturuncuturuncu",
-      "image": "Tavalar",
-      "companions": [],
-      "hidden": false
-    },
-    {
       "id": 155,
       "name": "turuncu ezmesi",
       "category": "Mezeler",
@@ -2518,6 +2507,22 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": "Ezmeler"
+    },
+    {
+      "id": 156,
+      "name": "test1",
+      "category": "Tavalar",
+      "price": "31",
+      "shortDesc": "dfghj",
+      "description": "ksgdfhjklşilkjhtfdsvz",
+      "image": "tavalar/test1.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Fıstık"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
