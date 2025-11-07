@@ -1006,31 +1006,83 @@ function setupForms() {
       let imagePath = generateImagePath(category, name);
       imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
       
+      console.log('📸 Resim bilgileri:', {
+        originalFileName: imageFile.name,
+        category: category,
+        productName: name,
+        generatedPath: imagePath,
+        fileExtension: fileExt
+      });
+      
       // Resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
       const uploadButton = addForm.querySelector('button[type="submit"]');
-      const originalButtonText = uploadButton.textContent;
+      const originalButtonText = uploadButton ? uploadButton.textContent : 'Ekle';
+      
+      // GitHub API kontrolü - önce config'i yükle
+      let githubConfigReady = false;
+      if (window.GitHubConfig) {
+        const config = window.GitHubConfig.loadGitHubConfig();
+        githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
+        console.log('🔧 GitHub Config durumu:', {
+          hasConfig: !!window.GitHubConfig,
+          configReady: githubConfigReady,
+          repository: config.repository,
+          hasToken: !!config.token,
+          hasAPI: !!window.GitHubAPI,
+          hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+        });
+      } else {
+        console.warn('⚠️ GitHubConfig bulunamadı!');
+      }
       
       try {
         // GitHub API yapılandırılmış mı kontrol et
-        if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
-          uploadButton.disabled = true;
-          uploadButton.textContent = '⏳ Resim yükleniyor...';
+        if (githubConfigReady && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+          if (uploadButton) {
+            uploadButton.disabled = true;
+            uploadButton.textContent = '⏳ Resim yükleniyor...';
+          }
           
           // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
           const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
-          console.log('Resim GitHub\'a yükleniyor:', fullImagePath);
-          await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
-          console.log('✅ Resim başarıyla yüklendi:', fullImagePath);
+          console.log('📤 Resim GitHub\'a yükleniyor:', {
+            fullPath: fullImagePath,
+            fileSize: `${(imageFile.size / 1024).toFixed(2)} KB`,
+            fileType: imageFile.type
+          });
+          
+          const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+          console.log('✅ Resim başarıyla yüklendi:', uploadResult);
+          
+          if (uploadResult && uploadResult.url) {
+            console.log('🌐 Resim URL:', uploadResult.url);
+          }
         } else {
-          console.log('GitHub API yapılandırılmamış, resim yüklenmedi. Lütfen resmi manuel olarak assets klasörüne yükleyin.');
+          console.warn('⚠️ GitHub API yapılandırılmamış veya eksik!', {
+            configReady: githubConfigReady,
+            hasAPI: !!window.GitHubAPI,
+            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+          });
+          alert('⚠️ GitHub API yapılandırılmamış!\n\nResim yolu oluşturuldu: ' + imagePath + '\n\nLütfen resmi manuel olarak assets klasörüne yükleyin veya GitHub API ayarlarını yapılandırın.');
         }
       } catch (error) {
-        console.error('Resim yükleme hatası:', error);
-        const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de ürünü eklemek istiyor musunuz? (Resmi daha sonra manuel olarak yükleyebilirsiniz)`);
+        console.error('❌ Resim yükleme hatası:', error);
+        console.error('Hata detayları:', {
+          message: error.message,
+          stack: error.stack
+        });
+        const continueAnyway = confirm(`❌ Resim yükleme hatası!\n\nHata: ${error.message}\n\nYine de ürünü eklemek istiyor musunuz?\n(Resmi daha sonra manuel olarak yükleyebilirsiniz)`);
         if (!continueAnyway) {
+          if (uploadButton) {
+            uploadButton.disabled = false;
+            uploadButton.textContent = originalButtonText;
+          }
+          return;
+        }
+      } finally {
+        if (uploadButton) {
           uploadButton.disabled = false;
           uploadButton.textContent = originalButtonText;
-          return;
         }
       }
       
@@ -1059,8 +1111,10 @@ function setupForms() {
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
       if (addImage) addImage.value = '';
       if (addImageFile) addImageFile.value = '';
-      uploadButton.disabled = false;
-      uploadButton.textContent = originalButtonText;
+      if (uploadButton) {
+        uploadButton.disabled = false;
+        uploadButton.textContent = originalButtonText;
+      }
       
       // Başarı mesajı
       alert('Ürün başarıyla eklendi!');
@@ -1107,32 +1161,75 @@ function setupForms() {
         
         // Yeni resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
         const updateButton = editForm.querySelector('button[type="submit"]');
-        const originalButtonText = updateButton.textContent;
+        const originalButtonText = updateButton ? updateButton.textContent : 'Güncelle';
+        
+        console.log('📸 Düzenleme - Resim bilgileri:', {
+          originalFileName: imageFile.name,
+          category: category,
+          productName: name,
+          generatedPath: imagePath,
+          fileExtension: fileExt
+        });
+        
+        // GitHub API kontrolü - önce config'i yükle
+        let githubConfigReady = false;
+        if (window.GitHubConfig) {
+          const config = window.GitHubConfig.loadGitHubConfig();
+          githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
+          console.log('🔧 GitHub Config durumu:', {
+            hasConfig: !!window.GitHubConfig,
+            configReady: githubConfigReady,
+            repository: config.repository,
+            hasToken: !!config.token,
+            hasAPI: !!window.GitHubAPI,
+            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+          });
+        }
         
         try {
-          if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
-            updateButton.disabled = true;
-            updateButton.textContent = '⏳ Resim yükleniyor...';
+          if (githubConfigReady && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+            if (updateButton) {
+              updateButton.disabled = true;
+              updateButton.textContent = '⏳ Resim yükleniyor...';
+            }
             
             // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
             const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
-            console.log('Yeni resim GitHub\'a yükleniyor:', fullImagePath);
-            await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
-            console.log('✅ Resim başarıyla yüklendi:', fullImagePath);
+            console.log('📤 Yeni resim GitHub\'a yükleniyor:', {
+              fullPath: fullImagePath,
+              fileSize: `${(imageFile.size / 1024).toFixed(2)} KB`,
+              fileType: imageFile.type
+            });
+            
+            const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+            console.log('✅ Resim başarıyla yüklendi:', uploadResult);
+            
+            if (uploadResult && uploadResult.url) {
+              console.log('🌐 Resim URL:', uploadResult.url);
+            }
+          } else {
+            console.warn('⚠️ GitHub API yapılandırılmamış veya eksik!');
+            alert('⚠️ GitHub API yapılandırılmamış!\n\nResim yolu oluşturuldu: ' + imagePath + '\n\nLütfen resmi manuel olarak assets klasörüne yükleyin veya GitHub API ayarlarını yapılandırın.');
           }
         } catch (error) {
-          console.error('Resim yükleme hatası:', error);
-          const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de ürünü güncellemek istiyor musunuz?`);
+          console.error('❌ Resim yükleme hatası:', error);
+          console.error('Hata detayları:', {
+            message: error.message,
+            stack: error.stack
+          });
+          const continueAnyway = confirm(`❌ Resim yükleme hatası!\n\nHata: ${error.message}\n\nYine de ürünü güncellemek istiyor musunuz?`);
           if (!continueAnyway) {
-            updateButton.disabled = false;
-            updateButton.textContent = originalButtonText;
+            if (updateButton) {
+              updateButton.disabled = false;
+              updateButton.textContent = originalButtonText;
+            }
             return;
           }
-        }
-        
-        if (updateButton) {
-          updateButton.disabled = false;
-          updateButton.textContent = originalButtonText;
+        } finally {
+          if (updateButton) {
+            updateButton.disabled = false;
+            updateButton.textContent = originalButtonText;
+          }
         }
       } else if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
         // Dosya seçilmemiş ama kategori/ürün adı değişmişse, yeni yol oluştur (mevcut uzantıyı koru)
