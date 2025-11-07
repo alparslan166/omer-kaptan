@@ -45,3 +45,27 @@ güncelle butonuna tıklanırsa ürün güncellenecek,
 
 ürünün üstünde gizle/göster butonu olacak, bu butona tıklanırsa ürün gizlenecek/gösterilecek,
 sitenin bir bölümünde gizlenen ürünler listelenecek, bu liste mevcut koddaki formatta olucak.
+
+
+
+
+resim ekleme kısmı da olucak, kullanıcı yeni ürün oluştururrken istediği resmi koyabilecek, mevcut bir ürünün resmini de değiştirebilecek, bu kısımda resim eklemek için gerekli olan resim yolunu otomatik ayarlanıcak,
+önceisnde yazılan standartlarına uygun olarak resim yolu otomatik olarak oluşturulacak,
+resim yolu oluşturulurken kategori adı ve ürün adı kullanılacak,
+admin resim yolu eklemeyecek, otomatik olarak oluşturulacak.
+
+değişiklikleri yapınca otomatik olarak products.json dosyası güncellenecek,
+değişiklikleri yapınca otomatik olarak localStorage güncellenecek,
+değişiklikleri yapınca otomatik olarak site güncellenecek,
+değişiklikleri yapınca otomatik olarak admin paneli güncellenecek,
+değişiklikleri yapınca otomatik olarak kategori sayfaları güncellenecek,
+değişiklikleri yapınca otomatik olarak product.html sayfası güncellenecek,
+değişiklikleri yapınca otomatik olarak product-detail.html sayfası güncellenecek,
+değişiklikleri yapınca otomatik olarak product-detail.html sayfası güncellenecek,
+
+
+
+alkollü içeceklere ve mezelere ürün eklerken kategori seçildikten sonra; alt başlıklar arasında da seçim yapılacak,
+ürünün sayfadaki yeri ona göre belirlenecek.
+
+ynı gizle gibi bir buton daha olucak “stokta yok” isimli buton, bu seçenek seçildiği zaman ürün kategoriler kısmında gözükücek fakat, ürün detay sayfasına gidildiği zaman “Maaleef,,, tükendi” tarzı tutarlı bir yazı yazsın

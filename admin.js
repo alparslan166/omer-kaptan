@@ -57,48 +57,355 @@ function saveProducts(data) {
 
 // Güncellenmiş products.json'u indirme butonunu güncelle
 function updateDownloadButton(data) {
-  let downloadBtn = document.getElementById('download-products-json');
+  let btnContainer = document.getElementById('products-json-actions');
   
-  if (!downloadBtn) {
-    // Buton yoksa oluştur
+  if (!btnContainer) {
+    // Container yoksa oluştur
     const adminMain = document.querySelector('.admin-main');
     if (adminMain) {
-      const btnContainer = document.createElement('div');
-      btnContainer.style.cssText = 'margin: 20px 0; padding: 15px; background: #f0f8ff; border: 2px solid #4da6ff; border-radius: 8px; text-align: center;';
-      btnContainer.innerHTML = `
-        <p style="margin: 0 0 10px 0; color: #333; font-weight: 600;">
-          📥 Değişiklikleri Telefonda Görmek İçin:
-        </p>
-        <button id="download-products-json" class="btn-primary" style="font-size: 16px; padding: 10px 20px;">
-          Güncellenmiş products.json'u İndir
-        </button>
-        <p style="margin: 10px 0 0 0; color: #666; font-size: 14px;">
-          İndirdiğiniz dosyayı sunucuya yükleyin (GitHub Pages, FTP, vs.)
-        </p>
-      `;
+      btnContainer = document.createElement('div');
+      btnContainer.id = 'products-json-actions';
+      btnContainer.style.cssText = 'margin: 20px 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);';
       adminMain.insertBefore(btnContainer, adminMain.firstChild);
-      downloadBtn = document.getElementById('download-products-json');
     }
   }
   
-  if (downloadBtn) {
-    downloadBtn.onclick = () => {
-      // JSON dosyasını indir
-      const jsonStr = JSON.stringify(data, null, 2);
-      const blob = new Blob([jsonStr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'products.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
-      // Başarı mesajı
-      alert('✅ products.json dosyası indirildi!\n\nBu dosyayı sunucunuza yükleyin (GitHub Pages, FTP, vs.)\n\nDosya yüklendikten sonra tüm cihazlarda değişiklikler görünecektir.');
-    };
+  if (btnContainer) {
+    btnContainer.innerHTML = `
+      <div style="text-align: center;">
+        <h3 style="margin: 0 0 15px 0; color: white; font-size: 18px;">
+          🔄 Tüm Cihazlarda Güncelleme
+        </h3>
+        <p style="margin: 0 0 15px 0; color: rgba(255,255,255,0.9); font-size: 14px; line-height: 1.6;">
+          Değişikliklerin tüm cihazlarda (telefon, tablet, bilgisayar) görünmesi için products.json dosyasını sunucuya yüklemeniz gerekiyor.
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <button id="auto-update-github" class="btn-primary" style="font-size: 15px; padding: 12px 24px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: none;">
+            🚀 Otomatik Güncelle (GitHub)
+          </button>
+          <button id="download-products-json" class="btn-primary" style="font-size: 15px; padding: 12px 24px; background: white; color: #667eea; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+            📥 Dosyayı İndir
+          </button>
+          <button id="copy-json-content" class="btn-secondary" style="font-size: 15px; padding: 12px 24px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            📋 JSON'u Kopyala
+          </button>
+          <button id="github-settings-btn" class="btn-secondary" style="font-size: 15px; padding: 12px 24px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            ⚙️ GitHub Ayarları
+          </button>
+        </div>
+        <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.15); border-radius: 8px; text-align: center;">
+          <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.9); font-size: 13px;">
+            💡 <strong>Otomatik Güncelleme:</strong> GitHub API ile otomatik güncelleme özelliğini aktifleştirmek için <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">GITHUB_AUTO_UPDATE_SETUP.md</code> dosyasına bakın.
+          </p>
+        </div>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: left;">
+          <p style="margin: 0 0 10px 0; font-weight: 600; color: white; font-size: 14px;">📌 Adımlar:</p>
+          <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.8;">
+            <li>"Dosyayı İndir" butonuna tıklayın</li>
+            <li>İndirilen <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">products.json</code> dosyasını sunucunuza yükleyin</li>
+            <li>GitHub Pages kullanıyorsanız: Dosyayı GitHub repository'nize commit edin</li>
+            <li>Diğer hosting servislerinde: FTP veya dosya yönetimi ile yükleyin</li>
+            <li>Birkaç dakika içinde tüm cihazlarda değişiklikler görünecektir</li>
+          </ol>
+        </div>
+        <div id="last-update-info" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); font-size: 12px;">
+          Son güncelleme: ${new Date().toLocaleString('tr-TR')}
+        </div>
+      </div>
+    `;
+    
+    // İndirme butonu
+    const downloadBtn = document.getElementById('download-products-json');
+    if (downloadBtn) {
+      downloadBtn.onclick = () => {
+        // JSON dosyasını indir
+        const jsonStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'products.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        // Başarı mesajı
+        showNotification('✅ products.json dosyası indirildi! Dosyayı sunucunuza yükleyin.', 'success');
+      };
+    }
+    
+    // Kopyalama butonu
+    const copyBtn = document.getElementById('copy-json-content');
+    if (copyBtn) {
+      copyBtn.onclick = () => {
+        const jsonStr = JSON.stringify(data, null, 2);
+        navigator.clipboard.writeText(jsonStr).then(() => {
+          showNotification('✅ JSON içeriği panoya kopyalandı!', 'success');
+        }).catch(err => {
+          // Fallback: textarea kullan
+          const textarea = document.createElement('textarea');
+          textarea.value = jsonStr;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showNotification('✅ JSON içeriği panoya kopyalandı!', 'success');
+        });
+      };
+    }
+    
+    // GitHub otomatik güncelleme butonu
+    const autoUpdateBtn = document.getElementById('auto-update-github');
+    if (autoUpdateBtn && window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete()) {
+      autoUpdateBtn.style.display = 'inline-block';
+      autoUpdateBtn.onclick = async () => {
+        autoUpdateBtn.disabled = true;
+        autoUpdateBtn.textContent = '⏳ Güncelleniyor...';
+        
+        try {
+          const jsonStr = JSON.stringify(data, null, 2);
+          
+          if (window.GitHubAPI && window.GitHubAPI.updateFile) {
+            const result = await window.GitHubAPI.updateFile(jsonStr);
+            showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
+          } else {
+            throw new Error('GitHub API modülü yüklenmedi!');
+          }
+        } catch (error) {
+          console.error('GitHub API error:', error);
+          showNotification(`❌ Hata: ${error.message}`, 'error');
+        } finally {
+          autoUpdateBtn.disabled = false;
+          autoUpdateBtn.textContent = '🚀 Otomatik Güncelle (GitHub)';
+        }
+      };
+    }
+    
+    // GitHub ayarları butonu
+    const settingsBtn = document.getElementById('github-settings-btn');
+    if (settingsBtn) {
+      settingsBtn.onclick = () => {
+        showGitHubSettingsModal();
+      };
+    }
   }
+}
+
+// GitHub ayarları modal'ını göster
+function showGitHubSettingsModal() {
+  const config = window.GitHubConfig ? window.GitHubConfig.getConfig() : {
+    repository: '',
+    token: '',
+    branch: 'main',
+    filePath: 'products.json'
+  };
+  
+  const modal = document.createElement('div');
+  modal.id = 'github-settings-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  `;
+  
+  modal.innerHTML = `
+    <div style="background: white; border-radius: 12px; padding: 30px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+      <h2 style="margin: 0 0 20px 0; color: #333;">⚙️ GitHub API Ayarları</h2>
+      
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Repository (owner/repo)</label>
+        <input type="text" id="github-repo" value="${config.repository}" placeholder="alparslan166/omer-kaptan" 
+          style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+        <small style="color: #666; font-size: 12px;">Örnek: alparslan166/omer-kaptan</small>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Personal Access Token</label>
+        <input type="password" id="github-token" value="${config.token}" placeholder="ghp_xxxxxxxxxxxx" 
+          style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+        <small style="color: #666; font-size: 12px;">
+          <a href="https://github.com/settings/tokens" target="_blank" style="color: #667eea;">Token oluştur</a> 
+          (repo izni gerekli)
+        </small>
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Branch</label>
+        <input type="text" id="github-branch" value="${config.branch}" placeholder="main" 
+          style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+      </div>
+      
+      <div style="margin-bottom: 25px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Dosya Yolu</label>
+        <input type="text" id="github-filepath" value="${config.filePath}" placeholder="products.json" 
+          style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+      </div>
+      
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button id="test-github-connection" class="btn-secondary" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+          🔍 Bağlantıyı Test Et
+        </button>
+        <button id="save-github-settings" class="btn-primary" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+          💾 Kaydet
+        </button>
+        <button id="close-github-settings" class="btn-secondary" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+          ✕ Kapat
+        </button>
+      </div>
+      
+      <div id="github-test-result" style="margin-top: 20px; padding: 10px; border-radius: 8px; display: none;"></div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Kapat butonu
+  document.getElementById('close-github-settings').onclick = () => {
+    modal.remove();
+  };
+  
+  // Modal dışına tıklayınca kapat
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.remove();
+    }
+  };
+  
+  // Kaydet butonu
+  document.getElementById('save-github-settings').onclick = () => {
+    const newConfig = {
+      repository: document.getElementById('github-repo').value.trim(),
+      token: document.getElementById('github-token').value.trim(),
+      branch: document.getElementById('github-branch').value.trim() || 'main',
+      filePath: document.getElementById('github-filepath').value.trim() || 'products.json',
+      commitMessage: 'Update products.json from admin panel'
+    };
+    
+    if (window.GitHubConfig && window.GitHubConfig.saveGitHubConfig) {
+      window.GitHubConfig.saveGitHubConfig(newConfig);
+      showNotification('✅ GitHub ayarları kaydedildi!', 'success');
+      modal.remove();
+      
+      // Butonları güncelle
+      if (productsData) {
+        updateDownloadButton(productsData);
+      }
+    }
+  };
+  
+  // Test butonu
+  document.getElementById('test-github-connection').onclick = async () => {
+    const testBtn = document.getElementById('test-github-connection');
+    const resultDiv = document.getElementById('github-test-result');
+    
+    testBtn.disabled = true;
+    testBtn.textContent = '⏳ Test ediliyor...';
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<p style="margin: 0; color: #17a2b8;">⏳ Bağlantı test ediliyor...</p>';
+    
+    try {
+      // Geçici config ile test et
+      const tempConfig = {
+        repository: document.getElementById('github-repo').value.trim(),
+        token: document.getElementById('github-token').value.trim(),
+        branch: document.getElementById('github-branch').value.trim() || 'main'
+      };
+      
+      if (!tempConfig.repository || !tempConfig.token) {
+        throw new Error('Repository ve Token alanları doldurulmalıdır!');
+      }
+      
+      if (window.GitHubConfig) {
+        window.GitHubConfig.saveGitHubConfig(tempConfig);
+      }
+      
+      if (window.GitHubAPI && window.GitHubAPI.testConnection) {
+        const isConnected = await window.GitHubAPI.testConnection();
+        if (isConnected) {
+          resultDiv.innerHTML = '<p style="margin: 0; color: #28a745; font-weight: 600;">✅ Bağlantı başarılı!</p>';
+        } else {
+          throw new Error('Bağlantı başarısız. Token ve repository bilgilerini kontrol edin.');
+        }
+      } else {
+        throw new Error('GitHub API modülü yüklenmedi!');
+      }
+    } catch (error) {
+      resultDiv.innerHTML = `<p style="margin: 0; color: #dc3545; font-weight: 600;">❌ ${error.message}</p>`;
+    } finally {
+      testBtn.disabled = false;
+      testBtn.textContent = '🔍 Bağlantıyı Test Et';
+    }
+  };
+}
+
+// Bildirim gösterme fonksiyonu
+function showNotification(message, type = 'info') {
+  // Mevcut bildirimi kaldır
+  const existing = document.querySelector('.admin-notification');
+  if (existing) existing.remove();
+  
+  const notification = document.createElement('div');
+  notification.className = 'admin-notification';
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-size: 14px;
+    max-width: 400px;
+    animation: slideIn 0.3s ease-out;
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  // 3 saniye sonra kaldır
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// CSS animasyonları ekle
+if (!document.getElementById('admin-notification-styles')) {
+  const style = document.createElement('style');
+  style.id = 'admin-notification-styles';
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
 }
 
 // Sayfa yüklendiğinde
