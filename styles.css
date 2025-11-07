@@ -311,6 +311,7 @@ main {
 }
 .product-body {
   padding: 12px;
+  position: relative;
 }
 .product-title {
   margin: 0 0 6px;
@@ -732,6 +733,45 @@ main {
     opacity: 0;
     visibility: hidden;
   }
+}
+
+/* Admin Edit Button */
+.admin-edit-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--blue-700);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(77, 166, 255, 0.3);
+}
+
+.admin-edit-btn:hover {
+  background: var(--blue-900);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(77, 166, 255, 0.4);
+}
+
+.admin-edit-btn .icon {
+  display: inline-flex;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+}
+
+.admin-edit-btn .icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
 }
 
 .loading-overlay {

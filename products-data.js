@@ -1,0 +1,2497 @@
+// Products data
+export const productsData = {
+  "categories": [
+    "Tavalar",
+    "Izgaralar",
+    "Buğulamalar",
+    "Kavurmalar",
+    "Ara Sıcaklar",
+    "Şişler",
+    "Balık Ekmekler",
+    "Çorbalar",
+    "Salatalar",
+    "Pideler",
+    "Tatlılar",
+    "Mezeler",
+    "Alkolsüz İçecekler",
+    "Alkollü İçecekler"
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Hamsi Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze hamsi balığı, özenle hazırlanmış tava lezzeti.",
+      "image": "tavalar/hamsi-tava.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Sos",
+        "Fıstık",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 2,
+      "name": "İstavrit Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "İstavrit balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/istavrit-tava.jpg",
+      "companions": [
+        "Kraker",
+        "Kavun",
+        "Sos",
+        "Roka",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 3,
+      "name": "Alabalık Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze alabalık balığı, özenle pişirilmiş tava lezzeti.",
+      "image": "tavalar/alabalik-tava.jpg",
+      "companions": [
+        "Turşu",
+        "Kraker",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 4,
+      "name": "Mezgit Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Mezgit balığının nefis tava lezzeti, şefin özel hazırlığı.",
+      "image": "tavalar/mezgit-tava.jpg",
+      "companions": [
+        "Turşu",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Limon",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 5,
+      "name": "Tekir Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
+      "image": "tavalar/tekir-tava.jpg",
+      "companions": [
+        "Sos",
+        "Soğan",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 6,
+      "name": "Barbun Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Barbun balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/barbun-tava.jpg",
+      "companions": [
+        "Roka",
+        "Fıstık",
+        "Kraker",
+        "Turşu",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 7,
+      "name": "Dil Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze dil balığı, özenle pişirilmiş tava lezzeti.",
+      "image": "tavalar/dil-tava.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Kraker",
+        "Soğan",
+        "Pide",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 8,
+      "name": "Zargana Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zargana balığının nefis tava lezzeti, şefin özel hazırlığı.",
+      "image": "tavalar/zargana-tava.jpg",
+      "companions": [
+        "Pide",
+        "Roka",
+        "Peynir",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 9,
+      "name": "Kalkan Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze kalkan balığı, özenle hazırlanmış tava lezzeti.",
+      "image": "tavalar/kalkan-tava.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Fıstık",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 10,
+      "name": "Palamut Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/palamut-tava.jpg",
+      "companions": [
+        "Peynir",
+        "Roka",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 11,
+      "name": "Bako Mezgit",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze bako mezgit, özenle pişirilmiş tava lezzeti.",
+      "image": "tavalar/bako-mezgit-tava.jpg",
+      "companions": [
+        "Soğan",
+        "Limon",
+        "Roka",
+        "Fıstık",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 12,
+      "name": "Iskorpit Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Iskorpit balığının nefis tava lezzeti, şefin özel hazırlığı.",
+      "image": "tavalar/iskorpit-tava.jpg",
+      "companions": [
+        "Peynir",
+        "Fıstık",
+        "Pide",
+        "Kraker",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 13,
+      "name": "Gümüş Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze gümüş balığı, özenle hazırlanmış tava lezzeti.",
+      "image": "tavalar/gumus-tava.jpg",
+      "companions": [
+        "Kraker",
+        "Kavun",
+        "Peynir",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 14,
+      "name": "Mercan Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Mercan balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/mercan-tava.jpg",
+      "companions": [
+        "Limon",
+        "Fıstık",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 15,
+      "name": "Çinekop Tava",
+      "category": "Tavalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze çinekop balığı, özenle pişirilmiş tava lezzeti.",
+      "image": "tavalar/cinekop-tava.jpg",
+      "companions": [
+        "Roka",
+        "Fıstık",
+        "Soğan",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 16,
+      "name": "Hamsi Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze hamsi balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/hamsi-izgara.jpg",
+      "companions": [
+        "Kraker",
+        "Fıstık",
+        "Pide",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 17,
+      "name": "İstavrit Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "İstavrit balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/istavrit-izgara.jpg",
+      "companions": [
+        "Kavun",
+        "Kraker",
+        "Roka",
+        "Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 18,
+      "name": "Alabalık Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze alabalık balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/alabalik-izgara.jpg",
+      "companions": [
+        "Roka",
+        "Pide",
+        "Turşu",
+        "Kraker",
+        "Beyaz Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 19,
+      "name": "Çupra Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Çupra balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/cupra-izgara.jpg",
+      "companions": [
+        "Kavun",
+        "Pide",
+        "Sos",
+        "Limon",
+        "Turşu",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 20,
+      "name": "Levrek Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze levrek balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/levrek-izgara.jpg",
+      "companions": [
+        "Pide",
+        "Beyaz Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 21,
+      "name": "Palamut Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Palamut balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/palamut-izgara.jpg",
+      "companions": [
+        "Kraker",
+        "Kavun",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 22,
+      "name": "Torik Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze torik balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/torik-izgara.jpg",
+      "companions": [
+        "Roka",
+        "Kavun",
+        "Beyaz Peynir",
+        "Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 23,
+      "name": "Çinekop Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Çinekop balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/cinekop-izgara.jpg",
+      "companions": [
+        "Roka",
+        "Fıstık",
+        "Peynir",
+        "Limon",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 24,
+      "name": "Sarıkanat Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze sarıkanat balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/sarikanat-izgara.jpg",
+      "companions": [
+        "Limon",
+        "Kavun",
+        "Kraker",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 25,
+      "name": "Lüfer Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Lüfer balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/lufer-izgara.jpg",
+      "companions": [
+        "Sos",
+        "Turşu",
+        "Limon",
+        "Peynir",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 26,
+      "name": "Sardalya Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze sardalya balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/sardalya-izgara.jpg",
+      "companions": [
+        "Soğan",
+        "Kraker",
+        "Turşu",
+        "Beyaz Peynir",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 27,
+      "name": "Karadeniz Somonu Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Karadeniz somonunun nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/karadeniz-somonu-izgara.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Sos",
+        "Turşu",
+        "Soğan",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 28,
+      "name": "Norveç Somonu Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Norveç somonunun taze ızgara lezzeti, özenle hazırlanmış.",
+      "image": "izgaralar/norvec-somonu-izgara.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Kavun",
+        "Turşu",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 29,
+      "name": "Deniz Çupra Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz çupra balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/deniz-cupra-izgara.jpg",
+      "companions": [
+        "Pide",
+        "Sos",
+        "Roka",
+        "Fıstık",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 30,
+      "name": "Deniz Levrek Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Deniz levrek balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/deniz-levrek-izgara.jpg",
+      "companions": [
+        "Pide",
+        "Soğan",
+        "Kavun",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 31,
+      "name": "Uskumru Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Uskumru balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/uskumru-izgara.jpg",
+      "companions": [
+        "Sos",
+        "Peynir",
+        "Limon",
+        "Fıstık",
+        "Soğan",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 32,
+      "name": "Akya Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze akya balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/akya-izgara.jpg",
+      "companions": [
+        "Limon",
+        "Fıstık",
+        "Roka",
+        "Kavun",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 33,
+      "name": "Lagos Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Lagos balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/lagos-izgara.jpg",
+      "companions": [
+        "Kavun",
+        "Beyaz Peynir",
+        "Roka",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 34,
+      "name": "Mavruşgil Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze mavruşgil balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/mavrusgil-izgara.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Pide",
+        "Turşu",
+        "Limon",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 35,
+      "name": "Kılıç Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Kılıç balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/kilic-izgara.jpg",
+      "companions": [
+        "Peynir",
+        "Limon",
+        "Fıstık",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 36,
+      "name": "Kaya Levrek Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kaya levrek balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/kaya-levrek-izgara.jpg",
+      "companions": [
+        "Pide",
+        "Kraker",
+        "Kavun",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 37,
+      "name": "Ceylan Izgara",
+      "category": "Izgaralar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Ceylan balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/ceylan-izgara.jpg",
+      "companions": [
+        "Limon",
+        "Kraker",
+        "Soğan",
+        "Fıstık",
+        "Pide",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 38,
+      "name": "D. Levrek Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Deniz levrek balığının nefis buğulama lezzeti, özenle hazırlanmış.",
+      "image": "bugulamalar/deniz-levrek-bugulama.jpg",
+      "companions": [
+        "Fıstık",
+        "Limon",
+        "Sos",
+        "Beyaz Peynir",
+        "Turşu",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 39,
+      "name": "D. Çupra Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz çupra balığının nefis buğulama lezzeti, şefin özel tarifi.",
+      "image": "bugulamalar/deniz-cupra-bugulama.jpg",
+      "companions": [
+        "Limon",
+        "Pide",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 40,
+      "name": "Kaya Levrek Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kaya levrek balığının nefis buğulama lezzeti, özenle pişirilmiş.",
+      "image": "bugulamalar/kaya-levrek-bugulama.jpg",
+      "companions": [
+        "Limon",
+        "Fıstık",
+        "Sos",
+        "Turşu",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 41,
+      "name": "Akya Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Akya balığının nefis buğulama lezzeti, şefin özel hazırlığı.",
+      "image": "bugulamalar/akya-bugulama.jpg",
+      "companions": [
+        "Peynir",
+        "Beyaz Peynir",
+        "Kraker",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 42,
+      "name": "Lagos Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Lagos balığının nefis buğulama lezzeti, özenle hazırlanmış.",
+      "image": "bugulamalar/lagos-bugulama.jpg",
+      "companions": [
+        "Soğan",
+        "Roka",
+        "Sos",
+        "Limon",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 43,
+      "name": "Hamsi Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Taze hamsi balığının nefis buğulama lezzeti, şefin özel tarifi.",
+      "image": "bugulamalar/hamsi-bugulama.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Beyaz Peynir",
+        "Roka",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 44,
+      "name": "Palamut Buğulama",
+      "category": "Buğulamalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Palamut balığının nefis buğulama lezzeti, özenle pişirilmiş.",
+      "image": "bugulamalar/palamut-bugulama.jpg",
+      "companions": [
+        "Turşu",
+        "Peynir",
+        "Limon",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 45,
+      "name": "D. Levrek Kavurma",
+      "category": "Kavurmalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Deniz levrek balığının nefis kavurma lezzeti, özenle hazırlanmış.",
+      "image": "kavurmalar/deniz-levrek-kavurma.jpg",
+      "companions": [
+        "Fıstık",
+        "Roka",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 46,
+      "name": "D. Çupra Kavurma",
+      "category": "Kavurmalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz çupra balığının nefis kavurma lezzeti, şefin özel tarifi.",
+      "image": "kavurmalar/deniz-cupra-kavurma.jpg",
+      "companions": [
+        "Peynir",
+        "Soğan",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 47,
+      "name": "Kaya Levrek Kavurma",
+      "category": "Kavurmalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kaya levrek balığının nefis kavurma lezzeti, özenle pişirilmiş.",
+      "image": "kavurmalar/kaya-levrek-kavurma.jpg",
+      "companions": [
+        "Roka",
+        "Kraker",
+        "Limon",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 48,
+      "name": "Akya Kavurma",
+      "category": "Kavurmalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Akya balığının nefis kavurma lezzeti, şefin özel hazırlığı.",
+      "image": "kavurmalar/akya-kavurma.jpg",
+      "companions": [
+        "Peynir",
+        "Turşu",
+        "Kraker",
+        "Pide",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 49,
+      "name": "Lagos Kavurma",
+      "category": "Kavurmalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Lagos balığının nefis kavurma lezzeti, özenle hazırlanmış.",
+      "image": "kavurmalar/lagos-kavurma.jpg",
+      "companions": [
+        "Kraker",
+        "Pide",
+        "Turşu",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 50,
+      "name": "Karides Tereyağında",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze karides tereyağında pişirilmiş, nefis bir lezzet.",
+      "image": "arasicaklar/karides-tereyaginda.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Kraker",
+        "Turşu",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 51,
+      "name": "Karides Güveç",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Karides güveçte özenle hazırlanmış, şefin özel tarifi.",
+      "image": "arasicaklar/karides-guvec.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Soğan",
+        "Kraker",
+        "Kavun",
+        "Roka",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 52,
+      "name": "Kalamar Tava",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze kalamar tavada pişirilmiş, nefis bir lezzet.",
+      "image": "arasicaklar/kalamar-tava.jpg",
+      "companions": [
+        "Turşu",
+        "Roka",
+        "Soğan",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 53,
+      "name": "Kalamar Izgara",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Kalamar ızgara özenle pişirilmiş, şefin özel tarifi.",
+      "image": "arasicaklar/kalamar-izgara.jpg",
+      "companions": [
+        "Peynir",
+        "Kavun",
+        "Sos",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 54,
+      "name": "Ahtapot Tereyağında",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze ahtapot tereyağında pişirilmiş, nefis bir lezzet.",
+      "image": "arasicaklar/ahtapot-tereyaginda.jpg",
+      "companions": [
+        "Sos",
+        "Kavun",
+        "Kraker",
+        "Soğan",
+        "Roka",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 55,
+      "name": "Ahtapot Izgara",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Ahtapot ızgara özenle pişirilmiş, şefin özel tarifi.",
+      "image": "arasicaklar/ahtapot-izgara.jpg",
+      "companions": [
+        "Soğan",
+        "Kavun",
+        "Sos",
+        "Turşu",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 56,
+      "name": "Hamsili Pilav",
+      "category": "Ara Sıcaklar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze hamsi ile hazırlanmış nefis pilav, özenle pişirilmiş.",
+      "image": "arasicaklar/hamsili-pilav.jpg",
+      "companions": [
+        "Limon",
+        "Peynir",
+        "Soğan",
+        "Kavun",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 57,
+      "name": "Kılıç Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kılıç balığının nefis şiş lezzeti, özenle hazırlanmış.",
+      "image": "sisler/kilic-sis.jpg",
+      "companions": [
+        "Turşu",
+        "Roka",
+        "Limon",
+        "Pide",
+        "Beyaz Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 58,
+      "name": "Akya Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Akya balığının nefis şiş lezzeti, şefin özel tarifi.",
+      "image": "sisler/akya-sis.jpg",
+      "companions": [
+        "Sos",
+        "Kraker",
+        "Fıstık",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 59,
+      "name": "Lagos Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Lagos balığının nefis şiş lezzeti, özenle pişirilmiş.",
+      "image": "sisler/lagos-sis.jpg",
+      "companions": [
+        "Turşu",
+        "Sos",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 60,
+      "name": "Mavruşgil Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Mavruşgil balığının nefis şiş lezzeti, şefin özel hazırlığı.",
+      "image": "sisler/mavrusgil-sis.jpg",
+      "companions": [
+        "Peynir",
+        "Limon",
+        "Turşu",
+        "Pide",
+        "Kavun",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 61,
+      "name": "Kaya Levrek Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kaya levrek balığının nefis şiş lezzeti, özenle hazırlanmış.",
+      "image": "sisler/kaya-levrek-sis.jpg",
+      "companions": [
+        "Roka",
+        "Peynir",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 62,
+      "name": "Deniz Levrek Şiş",
+      "category": "Şişler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz levrek balığının nefis şiş lezzeti, şefin özel tarifi.",
+      "image": "sisler/deniz-levrek-sis.jpg",
+      "companions": [
+        "Pide",
+        "Fıstık",
+        "Turşu",
+        "Beyaz Peynir",
+        "Roka",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 63,
+      "name": "Hamsi Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze hamsi ile hazırlanmış nefis balık ekmeği, özenle pişirilmiş.",
+      "image": "balik-ekmekler/hamsi-ekmek.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Kraker",
+        "Pide",
+        "Peynir",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 64,
+      "name": "Alabalık Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Alabalık ile hazırlanmış nefis balık ekmeği, şefin özel tarifi.",
+      "image": "balik-ekmekler/alabalik-ekmek.jpg",
+      "companions": [
+        "Pide",
+        "Kavun",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 65,
+      "name": "Çupra Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Çupra ile hazırlanmış nefis balık ekmeği, özenle hazırlanmış.",
+      "image": "balik-ekmekler/cupra-ekmek.jpg",
+      "companions": [
+        "Fıstık",
+        "Turşu",
+        "Beyaz Peynir",
+        "Limon",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 66,
+      "name": "Levrek Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Levrek ile hazırlanmış nefis balık ekmeği, şefin özel hazırlığı.",
+      "image": "balik-ekmekler/levrek-ekmek.jpg",
+      "companions": [
+        "Turşu",
+        "Peynir",
+        "Roka",
+        "Soğan",
+        "Kavun",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 67,
+      "name": "Palamut Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Palamut ile hazırlanmış nefis balık ekmeği, özenle pişirilmiş.",
+      "image": "balik-ekmekler/palamut-ekmek.jpg",
+      "companions": [
+        "Kraker",
+        "Sos",
+        "Kavun",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 68,
+      "name": "Uskumru Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Uskumru ile hazırlanmış nefis balık ekmeği, şefin özel tarifi.",
+      "image": "balik-ekmekler/uskumru-ekmek.jpg",
+      "companions": [
+        "Kavun",
+        "Peynir",
+        "Limon",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 69,
+      "name": "Bako Mezgit Ekmek",
+      "category": "Balık Ekmekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Bako mezgit ile hazırlanmış nefis balık ekmeği, özenle hazırlanmış.",
+      "image": "balik-ekmekler/bako-mezgit-ekmek.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Fıstık",
+        "Soğan",
+        "Sos",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 70,
+      "name": "Balık Çorbası",
+      "category": "Çorbalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze balık ile hazırlanmış nefis çorba, özenle pişirilmiş.",
+      "image": "corbalar/balik-corbasi.jpg",
+      "companions": [
+        "Kavun",
+        "Kraker",
+        "Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 71,
+      "name": "Mevsim Salatası",
+      "category": "Salatalar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Mevsim sebzelerinden hazırlanmış taze ve nefis salata, özenle hazırlanmış.",
+      "image": "salatalar/mevsim-salatasi.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Sos",
+        "Kavun",
+        "Soğan",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 72,
+      "name": "Roka Salatası",
+      "category": "Salatalar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Taze roka ile hazırlanmış nefis salata, şefin özel tarifi.",
+      "image": "salatalar/roka-salatasi.jpg",
+      "companions": [
+        "Pide",
+        "Sos",
+        "Kavun",
+        "Beyaz Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 73,
+      "name": "Levrekli Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Levrek ile hazırlanmış nefis pide, özenle pişirilmiş.",
+      "image": "pideler/levrekli-pide.jpg",
+      "companions": [
+        "Roka",
+        "Sos",
+        "Beyaz Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 74,
+      "name": "Karidesli Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Karides ile hazırlanmış nefis pide, şefin özel tarifi.",
+      "image": "pideler/karidesli-pide.jpg",
+      "companions": [
+        "Pide",
+        "Fıstık",
+        "Beyaz Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 75,
+      "name": "Hamsili Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze hamsi ile hazırlanmış nefis pide, özenle hazırlanmış.",
+      "image": "pideler/hamsili-pide.jpg",
+      "companions": [
+        "Sos",
+        "Pide",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 76,
+      "name": "Kıymalı Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Taze kıyma ile hazırlanmış nefis pide, şefin özel hazırlığı.",
+      "image": "pideler/kiymali-pide.jpg",
+      "companions": [
+        "Peynir",
+        "Turşu",
+        "Roka",
+        "Pide",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 77,
+      "name": "Kuşbaşılı Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kuşbaşı et ile hazırlanmış nefis pide, özenle pişirilmiş.",
+      "image": "pideler/kusbasili-pide.jpg",
+      "companions": [
+        "Kavun",
+        "Kraker",
+        "Sos",
+        "Soğan",
+        "Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 78,
+      "name": "Kaşarlı Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Kaşar peyniri ile hazırlanmış nefis pide, şefin özel tarifi.",
+      "image": "pideler/kasarli-pide.jpg",
+      "companions": [
+        "Roka",
+        "Soğan",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 79,
+      "name": "Kuşbaşılı Kaşarlı Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kuşbaşı et ve kaşar peyniri ile hazırlanmış nefis pide, özenle hazırlanmış.",
+      "image": "pideler/kusbasili-kasarli-pide.jpg",
+      "companions": [
+        "Kavun",
+        "Kraker",
+        "Sos",
+        "Roka",
+        "Peynir",
+        "Soğan"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 80,
+      "name": "Kıymalı Kaşarlı Pide",
+      "category": "Pideler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Kıyma ve kaşar peyniri ile hazırlanmış nefis pide, şefin özel tarifi.",
+      "image": "pideler/kiymali-kasarli-pide.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Roka",
+        "Soğan",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 81,
+      "name": "Kabak Tatlısı",
+      "category": "Tatlılar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze kabak ile hazırlanmış nefis tatlı, özenle pişirilmiş.",
+      "image": "tatlilar/kabak-tatlisi.jpg",
+      "companions": [
+        "Kraker",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Sos",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 82,
+      "name": "Laz Böreği",
+      "category": "Tatlılar",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Geleneksel Laz böreği, şefin özel tarifi ile hazırlanmış.",
+      "image": "tatlilar/laz-boregi.jpg",
+      "companions": [
+        "Turşu",
+        "Fıstık",
+        "Peynir",
+        "Kavun",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 83,
+      "name": "Sıcak Helva",
+      "category": "Tatlılar",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Sıcak helva, özenle hazırlanmış nefis tatlı.",
+      "image": "tatlilar/sicak-helva.jpg",
+      "companions": [
+        "Pide",
+        "Soğan",
+        "Roka",
+        "Peynir",
+        "Beyaz Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 84,
+      "name": "Haydari",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Geleneksel haydari meze, özenle hazırlanmış.",
+      "image": "mezeler/haydari.jpg",
+      "companions": [
+        "Kavun",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Pide",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 85,
+      "name": "Cacık",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Taze cacık, serinletici lezzet.",
+      "image": "mezeler/cacik.jpg",
+      "companions": [
+        "Roka",
+        "Kavun",
+        "Kraker",
+        "Pide",
+        "Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 86,
+      "name": "Şakşuka",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Geleneksel şakşuka, özenle hazırlanmış.",
+      "image": "mezeler/saksuka.jpg",
+      "companions": [
+        "Kavun",
+        "Turşu",
+        "Soğan",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 87,
+      "name": "Közlenmiş Patlıcan Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Közlenmiş patlıcan ile hazırlanmış nefis salata.",
+      "image": "mezeler/kozlenmis-patlican-salatasi.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Turşu",
+        "Sos",
+        "Peynir",
+        "Pide",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 88,
+      "name": "Muhammara",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Muhammara meze, özenle hazırlanmış.",
+      "image": "mezeler/muhammara.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 89,
+      "name": "Fava",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Bakla ezmesi, geleneksel lezzet.",
+      "image": "mezeler/fava.jpg",
+      "companions": [
+        "Limon",
+        "Roka",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 90,
+      "name": "Zeytinyağlı Yaprak Sarma",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Zeytinyağlı yaprak sarma, özenle hazırlanmış.",
+      "image": "mezeler/zeytinyagli-yaprak-sarma.jpg",
+      "companions": [
+        "Roka",
+        "Limon",
+        "Turşu",
+        "Beyaz Peynir",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 91,
+      "name": "Zeytinyağlı Barbunya",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytinyağlı barbunya, geleneksel lezzet.",
+      "image": "mezeler/zeytinyagli-barbunya.jpg",
+      "companions": [
+        "Pide",
+        "Roka",
+        "Peynir",
+        "Limon",
+        "Turşu",
+        "Soğan"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 92,
+      "name": "Patlıcan Ezme",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Patlıcan ezme, özenle hazırlanmış.",
+      "image": "mezeler/patlican-ezme.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 93,
+      "name": "Acılı Ezme",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Acılı ezme, şefin özel tarifi.",
+      "image": "mezeler/acili-ezme.jpg",
+      "companions": [
+        "Fıstık",
+        "Roka",
+        "Sos",
+        "Peynir",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 94,
+      "name": "Yoğurtlu Semizotu",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Yoğurtlu semizotu, özenle hazırlanmış.",
+      "image": "mezeler/yogurtlu-semizotu.jpg",
+      "companions": [
+        "Fıstık",
+        "Roka",
+        "Pide",
+        "Kraker",
+        "Sos",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 95,
+      "name": "Yoğurtlu Kabak",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Yoğurtlu kabak, geleneksel lezzet.",
+      "image": "mezeler/yogurtlu-kabak.jpg",
+      "companions": [
+        "Fıstık",
+        "Soğan",
+        "Beyaz Peynir",
+        "Roka",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 96,
+      "name": "Zeytinyağlı Enginar",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Zeytinyağlı enginar, özenle hazırlanmış.",
+      "image": "mezeler/zeytinyagli-enginar.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Roka",
+        "Fıstık",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 97,
+      "name": "Havuç Tarator",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Havuç tarator, şefin özel tarifi.",
+      "image": "mezeler/havuc-tarator.jpg",
+      "companions": [
+        "Kavun",
+        "Fıstık",
+        "Beyaz Peynir",
+        "Limon",
+        "Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 98,
+      "name": "Zeytinyağlı Taze Fasulye",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Zeytinyağlı taze fasulye, özenle hazırlanmış.",
+      "image": "mezeler/zeytinyagli-taze-fasulye.jpg",
+      "companions": [
+        "Roka",
+        "Sos",
+        "Peynir",
+        "Turşu",
+        "Kavun",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 99,
+      "name": "Zeytinyağlı Kereviz",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytinyağlı kereviz, geleneksel lezzet.",
+      "image": "mezeler/zeytinyagli-kereviz.jpg",
+      "companions": [
+        "Turşu",
+        "Limon",
+        "Beyaz Peynir",
+        "Soğan",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 100,
+      "name": "Közlenmiş Kırmızı Biber Dolması",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Közlenmiş kırmızı biber dolması, özenle hazırlanmış.",
+      "image": "mezeler/kozlenmis-kirmizi-biber-dolmasi.jpg",
+      "companions": [
+        "Kraker",
+        "Peynir",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 101,
+      "name": "Zeytin Ezmesi",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytin ezmesi, şefin özel tarifi.",
+      "image": "mezeler/zeytin-ezmesi.jpg",
+      "companions": [
+        "Fıstık",
+        "Soğan",
+        "Peynir",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 102,
+      "name": "Börülce Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Börülce salatası, özenle hazırlanmış.",
+      "image": "mezeler/borulce-salatasi.jpg",
+      "companions": [
+        "Soğan",
+        "Turşu",
+        "Sos",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 103,
+      "name": "Zeytinyağlı Bakla",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytinyağlı bakla, geleneksel lezzet.",
+      "image": "mezeler/zeytinyagli-bakla.jpg",
+      "companions": [
+        "Turşu",
+        "Sos",
+        "Fıstık",
+        "Peynir",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 104,
+      "name": "Atom",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Atom meze, yoğurt ve acı biber ile hazırlanmış.",
+      "image": "mezeler/atom.jpg",
+      "companions": [
+        "Sos",
+        "Turşu",
+        "Pide",
+        "Roka",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 105,
+      "name": "Babagannuş",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Babagannuş, özenle hazırlanmış.",
+      "image": "mezeler/babagannus.jpg",
+      "companions": [
+        "Limon",
+        "Kavun",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 106,
+      "name": "Girit Ezmesi",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Girit ezmesi, geleneksel lezzet.",
+      "image": "mezeler/girit-ezmesi.jpg",
+      "companions": [
+        "Soğan",
+        "Pide",
+        "Turşu",
+        "Fıstık",
+        "Peynir",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 107,
+      "name": "Deniz Börülcesi",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz börülcesi, özenle hazırlanmış.",
+      "image": "mezeler/deniz-borulcesi.jpg",
+      "companions": [
+        "Turşu",
+        "Fıstık",
+        "Kraker",
+        "Pide"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 108,
+      "name": "Yoğurtlu Pancar",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Yoğurtlu pancar, şefin özel tarifi.",
+      "image": "mezeler/yogurtlu-pancar.jpg",
+      "companions": [
+        "Limon",
+        "Soğan",
+        "Roka",
+        "Sos",
+        "Pide",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 109,
+      "name": "Yoğurtlu Patates Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Yoğurtlu patates salatası, özenle hazırlanmış.",
+      "image": "mezeler/yogurtlu-patates-salatasi.jpg",
+      "companions": [
+        "Pide",
+        "Sos",
+        "Kavun",
+        "Roka",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 110,
+      "name": "Kabak Borani",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kabak borani, geleneksel lezzet.",
+      "image": "mezeler/kabak-borani.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Turşu",
+        "Peynir",
+        "Kavun",
+        "Roka",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 111,
+      "name": "Yoğurtlu Havuç",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Yoğurtlu havuç, özenle hazırlanmış.",
+      "image": "mezeler/yogurtlu-havuc.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 112,
+      "name": "Tahinli Patlıcan",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Tahinli patlıcan, şefin özel tarifi.",
+      "image": "mezeler/tahinli-patlican.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Kavun",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 113,
+      "name": "Sarımsaklı Yoğurtlu Mantar",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Sarımsaklı yoğurtlu mantar, özenle hazırlanmış.",
+      "image": "mezeler/sarimsakli-yogurtlu-mantar.jpg",
+      "companions": [
+        "Peynir",
+        "Kavun",
+        "Limon",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 114,
+      "name": "Kısır",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kısır, geleneksel lezzet.",
+      "image": "mezeler/kisir.jpg",
+      "companions": [
+        "Soğan",
+        "Limon",
+        "Pide",
+        "Beyaz Peynir",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 115,
+      "name": "Patates Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Patates salatası, özenle hazırlanmış.",
+      "image": "mezeler/patates-salatasi.jpg",
+      "companions": [
+        "Roka",
+        "Fıstık",
+        "Pide",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 116,
+      "name": "Gavurdağı Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Gavurdağı salatası, şefin özel tarifi.",
+      "image": "mezeler/gavurdagi-salatasi.jpg",
+      "companions": [
+        "Turşu",
+        "Limon",
+        "Beyaz Peynir",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 117,
+      "name": "Arnavut Ciğeri",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Arnavut ciğeri, soğuk servis edilir.",
+      "image": "mezeler/arnavut-cigeri.jpg",
+      "companions": [
+        "Pide",
+        "Fıstık",
+        "Kavun",
+        "Soğan",
+        "Roka",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 118,
+      "name": "Mercimek Köftesi",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Mercimek köftesi, özenle hazırlanmış.",
+      "image": "mezeler/mercimek-koftesi.jpg",
+      "companions": [
+        "Kavun",
+        "Pide",
+        "Soğan",
+        "Beyaz Peynir",
+        "Sos",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 119,
+      "name": "Zeytinyağlı Pırasa",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytinyağlı pırasa, geleneksel lezzet.",
+      "image": "mezeler/zeytinyagli-pirasa.jpg",
+      "companions": [
+        "Sos",
+        "Peynir",
+        "Turşu",
+        "Kavun",
+        "Pide",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 120,
+      "name": "Zeytinyağlı Patlıcan",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Zeytinyağlı patlıcan, özenle hazırlanmış.",
+      "image": "mezeler/zeytinyagli-patlican.jpg",
+      "companions": [
+        "Kavun",
+        "Peynir",
+        "Beyaz Peynir",
+        "Sos",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 121,
+      "name": "Zeytinyağlı Kabak",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Zeytinyağlı kabak, şefin özel tarifi.",
+      "image": "mezeler/zeytinyagli-kabak.jpg",
+      "companions": [
+        "Fıstık",
+        "Sos",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 122,
+      "name": "Börülce Piyazı",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Börülce piyazı, özenle hazırlanmış.",
+      "image": "mezeler/borulce-piyazi.jpg",
+      "companions": [
+        "Kraker",
+        "Turşu",
+        "Soğan"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 123,
+      "name": "Yeşil Mercimek Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Yeşil mercimek salatası, geleneksel lezzet.",
+      "image": "mezeler/yesil-mercimek-salatasi.jpg",
+      "companions": [
+        "Peynir",
+        "Pide",
+        "Turşu",
+        "Beyaz Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 124,
+      "name": "Karides Güveç",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Karides güveç, özenle hazırlanmış.",
+      "image": "mezeler/karides-guvec.jpg",
+      "companions": [
+        "Soğan",
+        "Sos",
+        "Fıstık",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 125,
+      "name": "Ahtapot Salatası",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Ahtapot salatası, şefin özel tarifi.",
+      "image": "mezeler/ahtapot-salatasi.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Turşu",
+        "Peynir",
+        "Sos"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 126,
+      "name": "Kalamar Tava",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Kalamar tava, özenle pişirilmiş.",
+      "image": "mezeler/kalamar-tava.jpg",
+      "companions": [
+        "Turşu",
+        "Kraker",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 127,
+      "name": "Midye Dolma",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Midye dolma, geleneksel lezzet.",
+      "image": "mezeler/midye-dolma.jpg",
+      "companions": [
+        "Kraker",
+        "Sos",
+        "Fıstık",
+        "Soğan",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 128,
+      "name": "Lakerda",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Lakerda, özenle hazırlanmış.",
+      "image": "mezeler/lakerda.jpg",
+      "companions": [
+        "Limon",
+        "Sos",
+        "Pide",
+        "Beyaz Peynir"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 129,
+      "name": "Hamsi Marine",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Hamsi marine, şefin özel tarifi.",
+      "image": "mezeler/hamsi-marine.jpg",
+      "companions": [
+        "Turşu",
+        "Peynir",
+        "Soğan"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 130,
+      "name": "Levrek Marin",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Levrek marin, özenle hazırlanmış.",
+      "image": "mezeler/levrek-marin.jpg",
+      "companions": [
+        "Sos",
+        "Limon",
+        "Roka",
+        "Kavun",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 131,
+      "name": "Tarama (Balık Yumurtası Ezmesi)",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Tarama, balık yumurtası ezmesi, geleneksel lezzet.",
+      "image": "mezeler/tarama.jpg",
+      "companions": [
+        "Peynir",
+        "Kraker",
+        "Kavun",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 132,
+      "name": "Balık Köftesi",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Balık köftesi, özenle hazırlanmış.",
+      "image": "mezeler/balik-koftesi.jpg",
+      "companions": [
+        "Soğan",
+        "Roka",
+        "Pide",
+        "Fıstık"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 133,
+      "name": "Deniz Mahsullü",
+      "category": "Mezeler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Deniz mahsullü meze, şefin özel tarifi.",
+      "image": "mezeler/deniz-mahsullu.jpg",
+      "companions": [
+        "Sos",
+        "Pide",
+        "Fıstık",
+        "Soğan",
+        "Kraker",
+        "Limon"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 134,
+      "name": "Şalgam / Acılı-Acısız",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze şalgam suyu, acılı ve acısız seçeneklerle sunulur.",
+      "image": "alkolsuz-icecekler/salgam-acili-acisiz.jpg",
+      "companions": [
+        "Pide",
+        "Beyaz Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 135,
+      "name": "Su",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Doğal kaynak suyu, taze ve sağlıklı.",
+      "image": "alkolsuz-icecekler/su.jpg",
+      "companions": [
+        "Soğan",
+        "Kavun",
+        "Peynir",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 136,
+      "name": "Kola",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Klasik kola lezzeti, soğuk servis.",
+      "image": "alkolsuz-icecekler/kola.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Kavun",
+        "Beyaz Peynir",
+        "Limon",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 137,
+      "name": "Fanta",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Meyve aroması ile nefis Fanta, soğuk servis.",
+      "image": "alkolsuz-icecekler/fanta.jpg",
+      "companions": [
+        "Peynir",
+        "Limon",
+        "Kraker",
+        "Turşu"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 138,
+      "name": "Kola Zero",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Şekersiz kola lezzeti, soğuk servis.",
+      "image": "alkolsuz-icecekler/kola-zero.jpg",
+      "companions": [
+        "Fıstık",
+        "Peynir",
+        "Kavun",
+        "Beyaz Peynir",
+        "Soğan"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 139,
+      "name": "Sprite",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Serinletici Sprite, soğuk servis.",
+      "image": "alkolsuz-icecekler/sprite.jpg",
+      "companions": [
+        "Kraker",
+        "Peynir",
+        "Kavun"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 140,
+      "name": "Soda",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Doğal maden suyu, serinletici lezzet.",
+      "image": "alkolsuz-icecekler/soda.jpg",
+      "companions": [
+        "Pide",
+        "Soğan",
+        "Turşu",
+        "Limon",
+        "Sos",
+        "Kraker"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 141,
+      "name": "Cappy Meyve Suyu",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Taze meyve suyu çeşitleri, doğal lezzet.",
+      "image": "alkolsuz-icecekler/cappy-meyve-suyu.jpg",
+      "companions": [
+        "Sos",
+        "Pide",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 142,
+      "name": "Ice Tea Çeşitleri",
+      "category": "Alkolsüz İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Çeşitli ice tea lezzetleri, soğuk servis.",
+      "image": "alkolsuz-icecekler/ice-tea-cesitleri.jpg",
+      "companions": [
+        "Kavun",
+        "Peynir",
+        "Sos",
+        "Roka"
+      ],
+      "hidden": false
+    },
+    {
+      "id": 143,
+      "name": "Tek Rakı",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Mezeyle birlikte tavsiye edilir.",
+      "description": "Tek rakı, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/tek-raki.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 144,
+      "name": "Duble Rakı",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Mezeyle birlikte tavsiye edilir.",
+      "description": "Duble rakı, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/duble-raki.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 145,
+      "name": "Yeni Rakı 20cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Yeni Rakı, 20cl şişe.",
+      "description": "Yeni Rakı, 20cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/yeni-raki-20cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 146,
+      "name": "Yeni Rakı 35cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Yeni Rakı, 35cl şişe.",
+      "description": "Yeni Rakı, 35cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/yeni-raki-35cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 147,
+      "name": "Yeni Rakı 50cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Yeni Rakı, 50cl şişe.",
+      "description": "Yeni Rakı, 50cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/yeni-raki-50cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 148,
+      "name": "Tekirdağ Rakı 20cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Tekirdağ Rakı, 20cl şişe.",
+      "description": "Tekirdağ Rakı, 20cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/tekirdag-raki-20cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 149,
+      "name": "Tekirdağ Rakı 35cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Tekirdağ Rakı, 35cl şişe.",
+      "description": "Tekirdağ Rakı, 35cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/tekirdag-raki-35cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 150,
+      "name": "Tekirdağ Rakı 50cl",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Tekirdağ Rakı, 50cl şişe.",
+      "description": "Tekirdağ Rakı, 50cl şişe, meze ile birlikte tavsiye edilir.",
+      "image": "alkollu-icecekler/tekirdag-raki-50cl.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 151,
+      "name": "Bira",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze bira, soğuk servis.",
+      "image": "alkollu-icecekler/bira.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 152,
+      "name": "Şarap",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Kaliteli şarap, şefin önerisi.",
+      "image": "alkollu-icecekler/sarap.jpg",
+      "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 153,
+      "name": "Viski",
+      "category": "Alkollü İçecekler",
+      "price": "340",
+      "shortDesc": "Kaliteli viski seçenekleri.",
+      "description": "Kaliteli viski seçenekleri, şefin önerisi.",
+      "image": "alkollu-icecekler/viski.jpg",
+      "companions": [],
+      "hidden": false
+    }
+  ]
+};

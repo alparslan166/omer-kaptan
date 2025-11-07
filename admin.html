@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - Ömer Kaptan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
+          </div>
+          <div class="titles">
+            <a href="index.html" style="text-decoration: none; color: inherit">
+              <h1 class="site-title">Admin Panel</h1>
+            </a>
+            <p class="site-subtitle">Ürün Yönetimi</p>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <a class="nav-link" href="index.html">
+            <span class="icon">
+              <img
+                src="assets/capasimgesi.png"
+                alt=""
+                style="width: 35px; height: 35px; object-fit: contain"
+              />
+            </span>
+            <span>Ana Sayfa</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container admin-main">
+      <!-- Debug Info (temporary) -->
+      <div
+        id="debug-info"
+        style="
+          padding: 10px;
+          background: #f0f0f0;
+          margin-bottom: 20px;
+          display: none;
+        "
+      >
+        <p><strong>Debug:</strong> <span id="debug-text"></span></p>
+        <button
+          onclick="localStorage.clear(); location.reload();"
+          style="
+            padding: 5px 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+          "
+        >
+          LocalStorage'ı Temizle ve Yenile
+        </button>
+      </div>
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="products">Ürünler</button>
+        <button class="admin-tab" data-tab="add-product">Yeni Ürün Ekle</button>
+        <button class="admin-tab" data-tab="categories">Kategoriler</button>
+        <button class="admin-tab" data-tab="hidden">Gizlenen Ürünler</button>
+      </div>
+
+      <!-- Products List Tab -->
+      <div class="admin-tab-content active" id="products-tab">
+        <h2>Ürünler</h2>
+        <div class="admin-filter">
+          <select id="category-filter">
+            <option value="">Tüm Kategoriler</option>
+          </select>
+          <input type="text" id="search-products" placeholder="Ürün ara..." />
+        </div>
+        <div id="products-list" class="products-grid-admin"></div>
+      </div>
+
+      <!-- Add Product Tab -->
+      <div class="admin-tab-content" id="add-product-tab">
+        <h2>Yeni Ürün Ekle</h2>
+        <form id="add-product-form" class="admin-form">
+          <div class="form-group">
+            <label for="add-category">Kategori *</label>
+            <select id="add-category" required>
+              <option value="">Kategori Seçin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="add-name">Ürün Adı *</label>
+            <input type="text" id="add-name" required />
+          </div>
+          <div class="form-group">
+            <label for="add-price">Fiyat (₺) *</label>
+            <input type="number" id="add-price" required />
+          </div>
+          <div class="form-group">
+            <label for="add-short-desc">Kısa Açıklama</label>
+            <input type="text" id="add-short-desc" />
+          </div>
+          <div class="form-group">
+            <label for="add-description">Açıklama *</label>
+            <textarea id="add-description" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="add-image">Resim Yolu (örn: tavalar/urun.jpg) *</label>
+            <input type="text" id="add-image" required />
+          </div>
+          <div class="form-group">
+            <label for="add-companions">Eşlikçiler (virgülle ayırın)</label>
+            <input
+              type="text"
+              id="add-companions"
+              placeholder="Beyaz Peynir, Sos, Fıstık"
+            />
+          </div>
+          <button type="submit" class="btn-primary">Ürün Ekle</button>
+        </form>
+      </div>
+
+      <!-- Edit Product Tab (shown when ?product=id) -->
+      <div class="admin-tab-content" id="edit-product-tab">
+        <h2>Ürün Düzenle</h2>
+        <form id="edit-product-form" class="admin-form">
+          <input type="hidden" id="edit-id" />
+          <div class="form-group">
+            <label for="edit-category">Kategori *</label>
+            <select id="edit-category" required>
+              <option value="">Kategori Seçin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit-name">Ürün Adı *</label>
+            <input type="text" id="edit-name" required />
+          </div>
+          <div class="form-group">
+            <label for="edit-price">Fiyat (₺) *</label>
+            <input type="number" id="edit-price" required />
+          </div>
+          <div class="form-group">
+            <label for="edit-short-desc">Kısa Açıklama</label>
+            <input type="text" id="edit-short-desc" />
+          </div>
+          <div class="form-group">
+            <label for="edit-description">Açıklama *</label>
+            <textarea id="edit-description" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="edit-image">Resim Yolu (örn: tavalar/urun.jpg) *</label>
+            <input type="text" id="edit-image" required />
+          </div>
+          <div class="form-group">
+            <label for="edit-companions">Eşlikçiler (virgülle ayırın)</label>
+            <input
+              type="text"
+              id="edit-companions"
+              placeholder="Beyaz Peynir, Sos, Fıstık"
+            />
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="edit-hidden" />
+              Gizli
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Güncelle</button>
+            <button type="button" id="delete-product-btn" class="btn-danger">
+              Sil
+            </button>
+            <button type="button" id="cancel-edit-btn" class="btn-secondary">
+              İptal
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Categories Tab -->
+      <div class="admin-tab-content" id="categories-tab">
+        <h2>Kategoriler</h2>
+        <div class="categories-section">
+          <div class="categories-list">
+            <h3>Mevcut Kategoriler</h3>
+            <ul id="categories-list"></ul>
+            <form id="add-category-form" class="inline-form">
+              <input
+                type="text"
+                id="new-category-name"
+                placeholder="Yeni kategori adı"
+                required
+              />
+              <button type="submit" class="btn-primary">Ekle</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden Products Tab -->
+      <div class="admin-tab-content" id="hidden-tab">
+        <h2>Gizlenen Ürünler</h2>
+        <div id="hidden-products-list" class="products-grid-admin"></div>
+      </div>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

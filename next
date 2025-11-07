@@ -1,0 +1,23 @@
+admin paneli tasarlanıcak
+
+ürün ekleme, silme, güncelleme, listeleme
+kategori ekleme, silme, güncelleme, listeleme
+her ürün kutucuğunun sağ alt köşesinde düzenle butonu olacak,
+bu butona tıklandığında admin paneli açılacak, 
+bu panelde fotoğraf değiştirme, isim değiştirme, fiyat değiştirme, açıklama değiştirme, eşlikçi değiştirme
+gibi işlemler yapılabilecek, bu değişiklikler mevcut koddaki formatta olucak.
+
+yeni ürün ekleme kısmı da olucak, bu kısımda yeni ürün eklemek için gerekli olan tüm bilgileri gireceğiz,
+kategori seçimi, isim, fiyat, açıklama, eşlikçi, resim seçimi gibi bilgileri gireceğiz,
+bu bilgileri girdikten sonra ekle butonuna tıklanırsa yeni ürün oluşturulacak,
+oluşturulan ürün mevcut koddaki formatta olucak.
+
+ürün silme kısmı da olucak, bu kısımda ürün silmek için gerekli olan ürün adını gireceğiz,
+sil butonuna tıklanırsa ürün silinecek,
+silinen ürün mevcut koddaki formatta olucak.
+
+ürün güncelleme kısmı da olucak, bu kısımda ürün güncellemek için gerekli olan ürün adını, kategori, isim, fiyat, açıklama, eşlikçi, resim gibi bilgileri gireceğiz,
+güncelle butonuna tıklanırsa ürün güncellenecek,
+
+ürünün üstünde gizle/göster butonu olacak, bu butona tıklanırsa ürün gizlenecek/gösterilecek,
+sitenin bir bölümünde gizlenen ürünler listelenecek, bu liste mevcut koddaki formatta olucak.
