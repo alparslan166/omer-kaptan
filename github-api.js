@@ -266,6 +266,97 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
 }
 
 /**
+ * GitHub API ile dosya silme
+ * @param {string} filePath - Silinecek dosya yolu (örn: assets/tavalar/eski-urun.jpg)
+ * @returns {Promise<Object>} - API yanıtı
+ */
+async function deleteFileViaGitHubAPI(filePath) {
+  // Config fonksiyonlarını al
+  const configFuncs = getConfigFunctions();
+  if (!configFuncs) {
+    throw new Error('GitHub Config modülü yüklenmedi! Sayfayı yenileyin.');
+  }
+  
+  const { loadGitHubConfig, isGitHubConfigComplete } = configFuncs;
+  const config = loadGitHubConfig();
+  
+  if (!isGitHubConfigComplete()) {
+    throw new Error('GitHub API ayarları eksik! Lütfen ayarları yapılandırın.');
+  }
+  
+  // Repository bilgilerini parse et
+  const [owner, repo] = config.repository.split('/');
+  if (!owner || !repo) {
+    throw new Error('Repository formatı hatalı! Format: owner/repo');
+  }
+  
+  try {
+    // 1. Mevcut dosyayı al (SHA için)
+    const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}`;
+    const getFileResponse = await fetch(getFileUrl, {
+      headers: {
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (!getFileResponse.ok) {
+      if (getFileResponse.status === 404) {
+        console.log(`📋 Dosya zaten mevcut değil: ${filePath}`);
+        return {
+          success: true,
+          message: 'Dosya zaten mevcut değil'
+        };
+      }
+      const error = await getFileResponse.json().catch(() => ({}));
+      throw new Error(`Dosya bilgisi alınamadı: ${error.message || getFileResponse.statusText}`);
+    }
+    
+    const fileData = await getFileResponse.json();
+    const sha = fileData.sha;
+    console.log(`📋 Dosya bulundu, SHA: ${sha.substring(0, 8)}...`);
+    
+    // 2. Dosyayı sil
+    const deleteUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    
+    const deletePayload = {
+      message: `Delete old image: ${filePath}`,
+      sha: sha,
+      branch: config.branch
+    };
+    
+    const deleteResponse = await fetch(deleteUrl, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(deletePayload)
+    });
+    
+    if (!deleteResponse.ok) {
+      const errorData = await deleteResponse.json().catch(() => ({}));
+      const errorMessage = errorData.message || deleteResponse.statusText || 'Bilinmeyen hata';
+      console.error('GitHub API delete error:', errorData);
+      throw new Error(`Dosya silme hatası: ${errorMessage}`);
+    }
+    
+    const result = await deleteResponse.json();
+    console.log('✅ Dosya başarıyla silindi:', filePath);
+    return {
+      success: true,
+      commit: result.commit,
+      message: 'Dosya başarıyla silindi'
+    };
+    
+  } catch (error) {
+    console.error('GitHub API delete error:', error);
+    throw error;
+  }
+}
+
+/**
  * GitHub API bağlantısını test et
  * @returns {Promise<boolean>} - Bağlantı başarılı mı?
  */
@@ -310,6 +401,7 @@ if (typeof window !== 'undefined') {
   window.GitHubAPI = {
     updateFile: updateFileViaGitHubAPI,
     uploadImage: uploadImageFileViaGitHubAPI,
+    deleteFile: deleteFileViaGitHubAPI,
     testConnection: testGitHubConnection
   };
   console.log('✅ GitHub API modülü yüklendi');
@@ -320,6 +412,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { 
     updateFileViaGitHubAPI, 
     uploadImageFileViaGitHubAPI,
+    deleteFileViaGitHubAPI,
     testGitHubConnection 
   };
 }

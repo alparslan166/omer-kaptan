@@ -1514,7 +1514,8 @@ function setupForms() {
           category: category,
           productName: name,
           generatedPath: imagePath,
-          fileExtension: imageFile.name.split('.').pop().toLowerCase()
+          fileExtension: imageFile.name.split('.').pop().toLowerCase(),
+          oldImagePath: product.image
         });
         
         // GitHub API kontrolü - önce config'i yükle
@@ -1529,7 +1530,8 @@ function setupForms() {
             repository: config ? config.repository : '(yok)',
             hasToken: !!(config && config.token),
             hasAPI: !!window.GitHubAPI,
-            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage),
+            hasDeleteFile: !!(window.GitHubAPI && window.GitHubAPI.deleteFile)
           });
         }
         
@@ -1542,12 +1544,39 @@ function setupForms() {
             
             // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
             const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
+            
+            // Eski resim yolu ile yeni resim yolu farklıysa, eski resmi sil
+            const oldFullImagePath = product.image && product.image.trim() !== '' 
+              ? (product.image.startsWith('assets/') ? product.image : `assets/${product.image}`)
+              : null;
+            
+            // Eski resmi sil (sadece yolu farklıysa ve eski resim varsa)
+            if (oldFullImagePath && oldFullImagePath !== fullImagePath && window.GitHubAPI.deleteFile) {
+              try {
+                console.log('🗑️ Eski resim siliniyor:', oldFullImagePath);
+                if (updateButton) {
+                  updateButton.textContent = '⏳ Eski resim siliniyor...';
+                }
+                await window.GitHubAPI.deleteFile(oldFullImagePath);
+                console.log('✅ Eski resim başarıyla silindi:', oldFullImagePath);
+              } catch (deleteError) {
+                // Eski resim silme hatası kritik değil, sadece logla
+                console.warn('⚠️ Eski resim silinemedi (devam ediliyor):', deleteError.message);
+              }
+            } else if (oldFullImagePath === fullImagePath) {
+              console.log('ℹ️ Resim yolu aynı, eski resmin üzerine yazılacak:', fullImagePath);
+            }
+            
             console.log('📤 Yeni resim GitHub\'a yükleniyor:', {
               fullPath: fullImagePath,
               fileSize: `${(imageFile.size / 1024).toFixed(2)} KB`,
               fileType: imageFile.type,
-              oldPath: product.image
+              oldPath: oldFullImagePath
             });
+            
+            if (updateButton) {
+              updateButton.textContent = '⏳ Yeni resim yükleniyor...';
+            }
             
             const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
             console.log('✅ Resim başarıyla yüklendi:', uploadResult);
