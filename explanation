@@ -39,3 +39,15 @@ TASARIM:
 - Sayfanın alt kısmında (footer) "Ömer Kaptan Balık Restaurant" logosu, "Hakkımızda" metni, "Ödeme Yöntemleri" görseli, "Adres" bilgisi ve "Copyright" metni bulunur
 - Tüm sayfalar responsive tasarıma sahiptir (mobil, tablet, masaüstü uyumlu)
 
+
+ADMİN PANELİ TASARIMI:
+- Admin panelinde tüm ürünler listelenir
+- Her ürün kartında ürün resmi, ürün adı, fiyat, kısa açıklama ve "Düzenle" butonu bulunur
+- "Düzenle" butonuna tıklanınca admin paneli açılır
+- Admin panelinde ürünün fotoğraf, isim, fiyat, açıklama vb. alanları güncellenir
+- Admin panelinde ürünün kategorisi, alt kategori, gizli mi, stokta mı vb. alanları güncellenir
+- Admin panelinde ürünün resmi güncellenir
+- Admin panelinde ürünün adı güncellenir
+- Admin panelinde ürünün fiyatı güncellenir
+- Admin panelinde ürünün kısa açıklamaı güncellenir
+- Admin panelinde ürünün açıklamaı güncellenir

@@ -216,9 +216,26 @@ function updateDownloadButton(data) {
           }
           
           console.log('🚀 GitHub API ile güncelleme başlatılıyor...');
+          const config = window.GitHubConfig.loadGitHubConfig();
+          console.log('GitHub Config:', {
+            repository: config.repository,
+            branch: config.branch,
+            filePath: config.filePath,
+            hasToken: !!config.token
+          });
+          console.log('Güncellenecek JSON içeriği (ilk 200 karakter):', jsonStr.substring(0, 200));
+          
           const result = await window.GitHubAPI.updateFile(jsonStr);
           console.log('✅ GitHub API güncelleme sonucu:', result);
-          showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
+          
+          if (result && result.success) {
+            showNotification('✅ Başarıyla güncellendi! Birkaç dakika içinde tüm cihazlarda görünecek.', 'success');
+          } else if (result) {
+            console.warn('GitHub API yanıtı:', result);
+            showNotification('✅ Güncelleme tamamlandı! (Yanıt bekleniyor...)', 'success');
+          } else {
+            showNotification('⚠️ Güncelleme tamamlandı ancak yanıt alınamadı. Lütfen GitHub repository\'nizi kontrol edin.', 'error');
+          }
         } catch (error) {
           console.error('GitHub API error:', error);
           showNotification(`❌ Hata: ${error.message}`, 'error');
@@ -971,7 +988,7 @@ function setupForms() {
   // Yeni ürün ekleme formu
   const addForm = document.getElementById('add-product-form');
   if (addForm) {
-    addForm.addEventListener('submit', (e) => {
+    addForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const category = document.getElementById('add-category').value;
@@ -988,6 +1005,34 @@ function setupForms() {
       const fileExt = imageFile.name.split('.').pop().toLowerCase();
       let imagePath = generateImagePath(category, name);
       imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+      
+      // Resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
+      const uploadButton = addForm.querySelector('button[type="submit"]');
+      const originalButtonText = uploadButton.textContent;
+      
+      try {
+        // GitHub API yapılandırılmış mı kontrol et
+        if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+          uploadButton.disabled = true;
+          uploadButton.textContent = '⏳ Resim yükleniyor...';
+          
+          // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
+          const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
+          console.log('Resim GitHub\'a yükleniyor:', fullImagePath);
+          await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+          console.log('✅ Resim başarıyla yüklendi:', fullImagePath);
+        } else {
+          console.log('GitHub API yapılandırılmamış, resim yüklenmedi. Lütfen resmi manuel olarak assets klasörüne yükleyin.');
+        }
+      } catch (error) {
+        console.error('Resim yükleme hatası:', error);
+        const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de ürünü eklemek istiyor musunuz? (Resmi daha sonra manuel olarak yükleyebilirsiniz)`);
+        if (!continueAnyway) {
+          uploadButton.disabled = false;
+          uploadButton.textContent = originalButtonText;
+          return;
+        }
+      }
       
       const newProduct = {
         id: Math.max(...productsData.products.map(p => p.id), 0) + 1,
@@ -1014,6 +1059,8 @@ function setupForms() {
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
       if (addImage) addImage.value = '';
       if (addImageFile) addImageFile.value = '';
+      uploadButton.disabled = false;
+      uploadButton.textContent = originalButtonText;
       
       // Başarı mesajı
       alert('Ürün başarıyla eklendi!');
@@ -1037,7 +1084,7 @@ function setupForms() {
       });
     }
     
-    editForm.addEventListener('submit', (e) => {
+    editForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const id = parseInt(document.getElementById('edit-id').value);
@@ -1057,6 +1104,36 @@ function setupForms() {
         const fileExt = imageFile.name.split('.').pop().toLowerCase();
         imagePath = generateImagePath(category, name);
         imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+        
+        // Yeni resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
+        const updateButton = editForm.querySelector('button[type="submit"]');
+        const originalButtonText = updateButton.textContent;
+        
+        try {
+          if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+            updateButton.disabled = true;
+            updateButton.textContent = '⏳ Resim yükleniyor...';
+            
+            // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
+            const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
+            console.log('Yeni resim GitHub\'a yükleniyor:', fullImagePath);
+            await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
+            console.log('✅ Resim başarıyla yüklendi:', fullImagePath);
+          }
+        } catch (error) {
+          console.error('Resim yükleme hatası:', error);
+          const continueAnyway = confirm(`Resim yükleme hatası: ${error.message}\n\nYine de ürünü güncellemek istiyor musunuz?`);
+          if (!continueAnyway) {
+            updateButton.disabled = false;
+            updateButton.textContent = originalButtonText;
+            return;
+          }
+        }
+        
+        if (updateButton) {
+          updateButton.disabled = false;
+          updateButton.textContent = originalButtonText;
+        }
       } else if (!imagePath || imagePath.trim() === '' || category !== product.category || name !== product.name) {
         // Dosya seçilmemiş ama kategori/ürün adı değişmişse, yeni yol oluştur (mevcut uzantıyı koru)
         const currentExt = product.image ? product.image.split('.').pop() : 'jpg';
