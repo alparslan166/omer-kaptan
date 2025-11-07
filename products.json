@@ -2518,6 +2518,79 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": "Ezmeler"
+    },
+    {
+      "id": 156,
+      "name": "tavatest",
+      "category": "Tavalar",
+      "price": "3131",
+      "shortDesc": "dsfghjklşi",
+      "description": "sdfghjklşi,şlks\nüğpserdtfyguhıjokplş",
+      "image": "tavalar/tavatest.jpg",
+      "companions": [
+        "Sos",
+        "Fıstık"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
+    }
+  ],
+  "companions": [
+    {
+      "id": 1,
+      "name": "Beyaz Peynir",
+      "image": "assets/companions/beyaz-peynir.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Sos",
+      "image": "assets/companions/sos.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Fıstık",
+      "image": "assets/companions/fistik.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Peynir",
+      "image": "assets/companions/peynir.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Kraker",
+      "image": "assets/companions/kraker.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Kavun",
+      "image": "assets/companions/kavun.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Roka",
+      "image": "assets/companions/roka.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Turşu",
+      "image": "assets/companions/tursu.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Limon",
+      "image": "assets/companions/limon.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Soğan",
+      "image": "assets/companions/sogan.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Pide",
+      "image": "assets/companions/pide.jpg"
     }
   ]
 }
