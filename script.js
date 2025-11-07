@@ -33,6 +33,8 @@
     
     // Önce products.json'dan gelen resim yolunu kullan (parametre veya global değişken)
     const imagePath = imagePathFromJson || productImagePath;
+    console.log('🖼️ Resim yolu kontrolü:', { imagePathFromJson, productImagePath, imagePath, category, name });
+    
     if (imagePath) {
       // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
       if (imagePath.startsWith('assets/')) {
@@ -41,9 +43,10 @@
         // Değilse "assets/" ekle
         imageSrc = `assets/${imagePath}`;
       }
-      console.log('Resim yolu products.json\'dan kullanılıyor:', imageSrc);
+      console.log('✅ Resim yolu products.json\'dan kullanılıyor:', imageSrc);
     } else {
       // products.json'da resim yolu yoksa, otomatik oluştur
+      console.log('⚠️ products.json\'da resim yolu yok, otomatik oluşturuluyor...');
       const categorySlug = normalizeForFile(category);
       let productSlug = normalizeForFile(name);
       
@@ -61,21 +64,36 @@
       }
       
       imageSrc = `assets/${categorySlug}/${productSlug}.jpg`;
-      console.log('Resim yolu otomatik oluşturuldu:', imageSrc);
+      console.log('🔄 Resim yolu otomatik oluşturuldu:', imageSrc);
     }
     
     if (imageSrc) {
+      console.log('📸 Resim yükleniyor:', imageSrc);
       productImageEl.src = imageSrc;
       productImageEl.alt = name;
       
+      // Resim yükleme başarılı
+      productImageEl.onload = function() {
+        console.log('✅ Resim başarıyla yüklendi:', imageSrc);
+      };
+      
       // Resim yükleme hatası için fallback
       productImageEl.onerror = function() {
-        console.warn('Resim yüklenemedi:', imageSrc);
+        console.error('❌ Resim yüklenemedi:', imageSrc);
         // Varsayılan resme geç
         this.src = 'assets/omerkaptanlogo.png';
         this.onerror = null; // Sonsuz döngüyü önle
+        console.log('🔄 Varsayılan resim kullanılıyor');
       };
+    } else {
+      console.error('❌ Resim yolu oluşturulamadı!');
     }
+  } else {
+    console.error('❌ Resim elementi veya kategori/ürün adı bulunamadı:', {
+      productImageEl: !!productImageEl,
+      category,
+      name
+    });
   }
 
   // İçindekiler listesini göster (sadece Mezeler kategorisi için)
@@ -243,25 +261,25 @@
     }
   }
   
-  // İlk yüklemede sayfayı güncelle (URL parametreleri ile)
-  updateProductPage();
-  
-  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
+  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak) - ÖNCELİKLE
   (async function() {
     try {
       console.log('products.json yükleniyor (product detail)...');
-      const response = await fetch('products.json');
+      const response = await fetch('products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
         const productsData = await response.json();
+        console.log('products.json yüklendi:', productsData);
         if (productsData && productsData.products && Array.isArray(productsData.products)) {
           // URL'den gelen name ve category ile ürünü bul
-          const product = productsData.products.find(p => 
-            p.name === name && p.category === category
-          );
+          const product = productsData.products.find(p => {
+            const nameMatch = p.name === name || p.name.toLowerCase() === name.toLowerCase();
+            const categoryMatch = p.category === category || p.category.toLowerCase() === category.toLowerCase();
+            return nameMatch && categoryMatch;
+          });
           
           if (product) {
             // products.json'dan gelen veriyi kullan (daha güncel)
-            console.log('Ürün products.json\'dan bulundu:', product.name);
+            console.log('✅ Ürün products.json\'dan bulundu:', product.name);
             name = product.name;
             category = product.category;
             desc = product.description || product.shortDesc || desc;
@@ -271,20 +289,29 @@
             const imagePath = product.image || null;
             if (imagePath) {
               productImagePath = imagePath;
-              console.log('Resim yolu products.json\'dan alındı:', productImagePath);
+              console.log('✅ Resim yolu products.json\'dan alındı:', productImagePath);
+            } else {
+              console.warn('⚠️ Ürün resim yolu bulunamadı:', product.name);
             }
             
             // Sayfayı güncelle (resim yolu ile)
             updateProductPage(imagePath);
+            return; // Başarılı yükleme, çık
           } else {
-            console.log('Ürün products.json\'da bulunamadı, URL parametreleri kullanılıyor');
+            console.warn('⚠️ Ürün products.json\'da bulunamadı:', { name, category });
+            console.log('Tüm ürünler:', productsData.products.map(p => ({ name: p.name, category: p.category })));
           }
         }
+      } else {
+        console.error('❌ products.json yüklenemedi, HTTP status:', response.status);
       }
     } catch (e) {
-      console.error('Error loading products.json:', e);
-      // Hata durumunda URL parametreleri kullanılacak
+      console.error('❌ Error loading products.json:', e);
     }
+    
+    // Hata durumunda veya ürün bulunamadığında URL parametreleri ile sayfayı güncelle
+    console.log('📋 URL parametreleri ile sayfa güncelleniyor...');
+    updateProductPage();
   })();
 })();
 
