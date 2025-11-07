@@ -523,42 +523,89 @@ document.addEventListener('DOMContentLoaded', async () => {
     productsData = await loadProducts();
     console.log('Loaded productsData:', productsData);
     
-    // Mevcut eşlikçilerin resim yollarını assets/companions/ formatına çevir
-    if (productsData && productsData.companions && Array.isArray(productsData.companions)) {
-      let updated = false;
-      // normalizeForFileGlobal fonksiyonunu burada tanımla (henüz tanımlanmamış olabilir)
-      const normalizeForMigration = (text) => {
-        return text
-          .toLowerCase()
-          .replace(/ğ/g, 'g')
-          .replace(/ü/g, 'u')
-          .replace(/ş/g, 's')
-          .replace(/ı/g, 'i')
-          .replace(/ö/g, 'o')
-          .replace(/ç/g, 'c')
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-+|-+$/g, '');
-      };
+    // normalizeForFileGlobal fonksiyonunu burada tanımla (henüz tanımlanmamış olabilir)
+    const normalizeForMigration = (text) => {
+      return text
+        .toLowerCase()
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    };
+    
+    // Mevcut eşlikçileri products.json'dan topla ve companions listesine ekle
+    if (productsData && productsData.products && Array.isArray(productsData.products)) {
+      const existingCompanionNames = new Set();
       
-      productsData.companions.forEach(companion => {
-        if (companion.image) {
-          // Eğer assets/companions/ ile başlamıyorsa güncelle
-          if (!companion.image.startsWith('assets/companions/')) {
-            if (companion.image.startsWith('companions/')) {
-              companion.image = `assets/${companion.image}`;
-            } else if (!companion.image.startsWith('assets/')) {
-              companion.image = `assets/companions/${companion.image}`;
+      // Mevcut companions array'inden isimleri topla
+      if (productsData.companions && Array.isArray(productsData.companions)) {
+        productsData.companions.forEach(c => {
+          if (c.name) existingCompanionNames.add(c.name);
+        });
+      }
+      
+      // Tüm ürünlerin companions array'lerinden unique eşlikçileri topla
+      const allCompanions = new Set();
+      productsData.products.forEach(product => {
+        if (product.companions && Array.isArray(product.companions)) {
+          product.companions.forEach(companionName => {
+            if (companionName && typeof companionName === 'string' && companionName.trim()) {
+              allCompanions.add(companionName.trim());
             }
-            updated = true;
-          }
-        } else {
-          // Resim yolu yoksa oluştur
-          companion.image = `assets/companions/${normalizeForMigration(companion.name)}.jpg`;
-          updated = true;
+          });
         }
       });
-      if (updated) {
-        console.log('Eşlikçi resim yolları güncellendi (assets/companions/ formatına çevrildi)');
+      
+      // Yeni eşlikçileri ekle
+      let companionsUpdated = false;
+      if (!productsData.companions) {
+        productsData.companions = [];
+      }
+      
+      // Mevcut max id'yi bul
+      let maxId = Math.max(...(productsData.companions.map(c => c.id || 0).concat([0])));
+      
+      allCompanions.forEach(companionName => {
+        // Eğer bu eşlikçi zaten companions listesinde yoksa ekle
+        if (!existingCompanionNames.has(companionName)) {
+          const imagePath = `assets/companions/${normalizeForMigration(companionName)}.jpg`;
+          productsData.companions.push({
+            id: ++maxId,
+            name: companionName,
+            image: imagePath
+          });
+          companionsUpdated = true;
+          console.log(`Yeni eşlikçi eklendi: ${companionName} (${imagePath})`);
+        }
+      });
+      
+      // Mevcut eşlikçilerin resim yollarını assets/companions/ formatına çevir
+      if (productsData.companions && Array.isArray(productsData.companions)) {
+        productsData.companions.forEach(companion => {
+          if (companion.image) {
+            // Eğer assets/companions/ ile başlamıyorsa güncelle
+            if (!companion.image.startsWith('assets/companions/')) {
+              if (companion.image.startsWith('companions/')) {
+                companion.image = `assets/${companion.image}`;
+              } else if (!companion.image.startsWith('assets/')) {
+                companion.image = `assets/companions/${companion.image}`;
+              }
+              companionsUpdated = true;
+            }
+          } else {
+            // Resim yolu yoksa oluştur
+            companion.image = `assets/companions/${normalizeForMigration(companion.name)}.jpg`;
+            companionsUpdated = true;
+          }
+        });
+      }
+      
+      if (companionsUpdated) {
+        console.log('Eşlikçiler güncellendi: Ürünlerden toplanan eşlikçiler companions listesine eklendi ve resim yolları düzeltildi');
         saveProducts(productsData);
       }
     }
