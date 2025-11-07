@@ -523,6 +523,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     productsData = await loadProducts();
     console.log('Loaded productsData:', productsData);
     
+    // Mevcut eşlikçilerin resim yollarını assets/companions/ formatına çevir
+    if (productsData && productsData.companions && Array.isArray(productsData.companions)) {
+      let updated = false;
+      productsData.companions.forEach(companion => {
+        if (companion.image) {
+          // Eğer assets/companions/ ile başlamıyorsa güncelle
+          if (!companion.image.startsWith('assets/companions/')) {
+            if (companion.image.startsWith('companions/')) {
+              companion.image = `assets/${companion.image}`;
+            } else if (!companion.image.startsWith('assets/')) {
+              companion.image = `assets/companions/${companion.image}`;
+            }
+            updated = true;
+          }
+        } else {
+          // Resim yolu yoksa oluştur
+          companion.image = `assets/companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+          updated = true;
+        }
+      });
+      if (updated) {
+        console.log('Eşlikçi resim yolları güncellendi (assets/companions/ formatına çevrildi)');
+        saveProducts(productsData);
+      }
+    }
+    
     if (productsData && typeof productsData === 'object' && productsData.products && Array.isArray(productsData.products)) {
       console.log('Products loaded:', productsData.products.length);
       debugText.textContent = `${productsData.products.length} ürün yüklendi.`;
@@ -1538,10 +1564,15 @@ function displayCompanions() {
   productsData.companions.forEach(companion => {
     const card = document.createElement('div');
     card.className = 'product-card-admin';
-    const imagePath = companion.image || `companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+    // Eşlikçi resim yolu: assets/companions/ veya mevcut yol
+    let imagePath = companion.image || `companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+    // Eğer assets/ ile başlamıyorsa ekle
+    if (!imagePath.startsWith('assets/')) {
+      imagePath = imagePath.startsWith('companions/') ? `assets/${imagePath}` : `assets/companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+    }
     card.innerHTML = `
       <div class="product-card-image">
-        <img src="assets/${imagePath}" alt="${companion.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
+        <img src="${imagePath}" alt="${companion.name}" onerror="this.src='assets/omerkaptanlogo.png'; this.onerror=null;" />
       </div>
       <div class="product-card-info">
         <h4>${companion.name}</h4>
@@ -1634,9 +1665,9 @@ function setupCompanionForms() {
         return;
       }
       
-      // Resim yolu oluştur
+      // Resim yolu oluştur (assets/companions/ klasörüne)
       const fileExt = imageFile.name.split('.').pop().toLowerCase();
-      const imagePath = `companions/${normalizeForFileGlobal(name)}.${fileExt}`;
+      const imagePath = `assets/companions/${normalizeForFileGlobal(name)}.${fileExt}`;
       
       // Resmi GitHub'a yükle (eğer GitHub API yapılandırılmışsa)
       const uploadButton = addCompanionForm.querySelector('button[type="submit"]');
@@ -1649,10 +1680,9 @@ function setupCompanionForms() {
             uploadButton.textContent = '⏳ Resim yükleniyor...';
           }
           
-          const fullImagePath = `assets/${imagePath}`;
-          console.log('Eşlikçi resmi GitHub\'a yükleniyor:', fullImagePath);
-          await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
-          console.log('✅ Eşlikçi resmi başarıyla yüklendi:', fullImagePath);
+          console.log('Eşlikçi resmi GitHub\'a yükleniyor:', imagePath);
+          await window.GitHubAPI.uploadImage(imageFile, imagePath);
+          console.log('✅ Eşlikçi resmi başarıyla yüklendi:', imagePath);
         } else {
           console.warn('⚠️ GitHub API yapılandırılmamış, resim yüklenmedi.');
         }
@@ -1712,7 +1742,7 @@ function setupCompanionForms() {
       // Yeni resim seçilmişse
       if (imageFile) {
         const fileExt = imageFile.name.split('.').pop().toLowerCase();
-        imagePath = `companions/${normalizeForFileGlobal(name)}.${fileExt}`;
+        imagePath = `assets/companions/${normalizeForFileGlobal(name)}.${fileExt}`;
         
         // Resmi GitHub'a yükle
         const updateButton = editCompanionForm.querySelector('button[type="submit"]');
@@ -1725,10 +1755,9 @@ function setupCompanionForms() {
               updateButton.textContent = '⏳ Resim yükleniyor...';
             }
             
-            const fullImagePath = `assets/${imagePath}`;
-            console.log('Yeni eşlikçi resmi GitHub\'a yükleniyor:', fullImagePath);
-            await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
-            console.log('✅ Eşlikçi resmi başarıyla yüklendi:', fullImagePath);
+            console.log('Yeni eşlikçi resmi GitHub\'a yükleniyor:', imagePath);
+            await window.GitHubAPI.uploadImage(imageFile, imagePath);
+            console.log('✅ Eşlikçi resmi başarıyla yüklendi:', imagePath);
           }
         } catch (error) {
           console.error('❌ Eşlikçi resmi yükleme hatası:', error);
@@ -1749,7 +1778,20 @@ function setupCompanionForms() {
       } else if (name !== companion.name) {
         // İsim değişmişse resim yolunu güncelle
         const currentExt = companion.image ? companion.image.split('.').pop() : 'jpg';
-        imagePath = `companions/${normalizeForFileGlobal(name)}.${currentExt}`;
+        imagePath = `assets/companions/${normalizeForFileGlobal(name)}.${currentExt}`;
+      } else {
+        // İsim ve resim değişmemişse, mevcut yolu kullan ama assets/companions/ formatına çevir
+        if (companion.image) {
+          if (companion.image.startsWith('assets/companions/')) {
+            imagePath = companion.image;
+          } else if (companion.image.startsWith('companions/')) {
+            imagePath = `assets/${companion.image}`;
+          } else {
+            imagePath = `assets/companions/${companion.image}`;
+          }
+        } else {
+          imagePath = `assets/companions/${normalizeForFileGlobal(name)}.jpg`;
+        }
       }
       
       const oldName = companion.name;

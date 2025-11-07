@@ -212,7 +212,7 @@
 
 function companionImagePath(name){
   const slug = normalizeForFile(name);
-  return `assets/companions/${slug}.jpg`; 
+  return `assets/companions/${slug}.jpg`;
 }
 
 function getMezeIngredients(mezeName) {
