@@ -1,15 +1,23 @@
 (function(){
-  const params = new URLSearchParams(window.location.search);
-  let name = params.get('name') || 'Ürün adı';
-  let category = params.get('category') || '';
-  let desc = params.get('desc') || 'Lezzetli bir deniz ürünü.';
-  let companions = (params.get('companions') || '')
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean);
+  // DOM yüklenene kadar bekle
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductPage);
+  } else {
+    initProductPage();
+  }
   
-  // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
-  let productImagePath = null; // products.json'dan gelen resim yolu
+  function initProductPage() {
+    const params = new URLSearchParams(window.location.search);
+    let name = params.get('name') || 'Ürün adı';
+    let category = params.get('category') || '';
+    let desc = params.get('desc') || 'Lezzetli bir deniz ürünü.';
+    let companions = (params.get('companions') || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+    
+    // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
+    let productImagePath = null; // products.json'dan gelen resim yolu
   
   // updateProductPage fonksiyonu - resim yolunu parametre olarak alabilir
   function updateProductPage(imagePathFromJson = null) {
@@ -313,6 +321,7 @@
     console.log('📋 URL parametreleri ile sayfa güncelleniyor...');
     updateProductPage();
   })();
+  }
 })();
 
 function companionImagePath(name){
