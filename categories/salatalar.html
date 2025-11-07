@@ -30,6 +30,7 @@
               <h1 class="site-title">Ömer Kaptan</h1>
             </a>
             <p class="site-subtitle">Salatalar</p>
+          </div>
         </div>
         <nav class="main-nav" aria-label="Geri">
           <a
@@ -56,39 +57,55 @@
             <span style="font-size: 14px">Geri</span>
           </a>
         </nav>
+      </div>
     </header>
     <main class="container">
       <div class="section-head"><h3>Salatalar</h3></div>
       <section class="product-grid" aria-label="Salatalar ürünleri">
+
         <article class="product-card">
           <div class="media-figure">
-            <img
-              src="../assets/salatalar/mevsim-salatasi.jpg"
-              alt="Mevsim Salatası"
-            />
+            <img src="../assets/salatalar/mevsim-salatasi.jpg" alt="Mevsim Salatası" />
+          </div>
           <div class="product-body">
             <h4 class="product-title">Mevsim Salatası</h4>
             <p class="product-price">₺340</p>
             <p class="product-desc">Taze, lezzetli, günlük.</p>
             <a
               class="link"
-              href="../product.html?name=Mevsim%20Salatas%C4%B1&category=Salatalar&desc=Mevsim%20sebzelerinden%20hazırlanmış%20taze%20ve%20nefis%20salata%2C%20özenle%20hazırlanmış.&companions=Beyaz%20Peynir%2C%20Sos%2C%20Kavun%2C%20Soğan%2C%20Peynir"
+              href="../product.html?name=Mevsim%20Salatas%C4%B1&category=Salatalar&desc=Mevsim%20sebzelerinden%20haz%C4%B1rlanm%C4%B1%C5%9F%20taze%20ve%20nefis%20salata%2C%20%C3%B6zenle%20haz%C4%B1rlanm%C4%B1%C5%9F.&companions=Beyaz%20Peynir%2C%20Sos%2C%20Kavun%2C%20So%C4%9Fan%2C%20Peynir"
               ><span class="icon"
                 ><img src="../assets/baliksimgesi.png" alt=""
               /></span>
               Detay</a
+            >
+          </div>
         </article>
-              src="../assets/salatalar/roka-salatasi.jpg"
-              alt="Roka Salatası"
+        <article class="product-card">
+          <div class="media-figure">
+            <img src="../assets/salatalar/roka-salatasi.jpg" alt="Roka Salatası" />
+          </div>
+          <div class="product-body">
             <h4 class="product-title">Roka Salatası</h4>
+            <p class="product-price">₺340</p>
             <p class="product-desc">Şefin önerisi.</p>
-              href="../product.html?name=Roka%20Salatas%C4%B1&category=Salatalar&desc=Taze%20roka%20ile%20hazırlanmış%20nefis%20salata%2C%20şefin%20özel%20tarifi.&companions=Pide%2C%20Sos%2C%20Kavun%2C%20Beyaz%20Peynir%2C%20Limon"
+            <a
+              class="link"
+              href="../product.html?name=Roka%20Salatas%C4%B1&category=Salatalar&desc=Taze%20roka%20ile%20haz%C4%B1rlanm%C4%B1%C5%9F%20nefis%20salata%2C%20%C5%9Fefin%20%C3%B6zel%20tarifi.&companions=Pide%2C%20Sos%2C%20Kavun%2C%20Beyaz%20Peynir%2C%20Limon"
+              ><span class="icon"
+                ><img src="../assets/baliksimgesi.png" alt=""
+              /></span>
+              Detay</a
+            >
+          </div>
+        </article>
       </section>
     </main>
     <footer class="site-footer">
       <div class="footer-content">
         <div class="footer-logo">
           <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
+        </div>
         <div class="footer-about">
           <h4>Hakkımızda</h4>
           <p>
@@ -96,20 +113,31 @@
             lezzetli şekilde sunmak için çalışıyoruz. Deniz mahsullerinin en
             taze halini müşterilerimize ulaştırmak bizim önceliğimizdir.
           </p>
+        </div>
         <div class="footer-payments">
           <img src="../assets/odemeler.png" alt="Ödeme Yöntemleri" />
+        </div>
         <div class="footer-address">
           <p>Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara</p>
+        </div>
         <div class="footer-copyright">
+          <p>
             © 2025 Ömer Kaptan Balık Restaurant - İskenderun Balıkçılık. Her
             Hakkı Saklıdır.
+          </p>
+        </div>
         <div class="footer-social">
           <a href="https://www.instagram.com/balikciomerkaptan" target="_blank" rel="noopener noreferrer">
             <img src="../assets/instagram-logo.png" alt="Instagram" />
+          </a>
           <a href="https://wa.me/905458372324" target="_blank" rel="noopener noreferrer">
             <img src="../assets/whatsapp-logo.png" alt="WhatsApp" />
+          </a>
+        </div>
         <div class="footer-designer">
           <a href="mailto:alp84202@gmail.com">Designed by Alparslan Turan➚</a>
+        </div>
+      </div>
     </footer>
     <button class="scroll-to-top" aria-label="Yukarı çık">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -130,17 +158,21 @@
         const navType = performance.getEntriesByType("navigation")[0]?.type;
         if (navType === "navigate") {
           window.scrollTo(0, 0);
+        }
       });
 
       // Scroll to Top Button
       const scrollToTopBtn = document.querySelector(".scroll-to-top");
+
       function toggleScrollButton() {
         const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
         if (scrollY > 300) {
           scrollToTopBtn.classList.add("show");
         } else {
           scrollToTopBtn.classList.remove("show");
+        }
       }
+
       // requestAnimationFrame ile sürekli kontrol (her frame'de mutlaka kontrol et)
       function checkScrollLoop() {
         // Her frame'de scroll pozisyonunu kontrol et ve butonu güncelle
@@ -148,6 +180,8 @@
         
         // Bir sonraki frame'de tekrar kontrol et
         requestAnimationFrame(checkScrollLoop);
+      }
+
       // Scroll event listener'ı da ekle (hızlı güncelleme için)
       window.addEventListener("scroll", toggleScrollButton, { passive: true });
       
@@ -155,11 +189,13 @@
       toggleScrollButton();
       // Sürekli kontrol döngüsünü başlat
       requestAnimationFrame(checkScrollLoop);
+
       scrollToTopBtn.addEventListener("click", function () {
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         });
+      });
     </script>
     <script src="../product-visibility.js"></script>
   </body>
