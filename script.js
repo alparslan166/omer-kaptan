@@ -9,6 +9,7 @@
     .filter(Boolean);
   
   // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
+  let productImagePath = null; // products.json'dan gelen resim yolu
   (async function() {
     try {
       console.log('products.json yükleniyor (product detail)...');
@@ -28,6 +29,12 @@
             category = product.category;
             desc = product.description || product.shortDesc || desc;
             companions = product.companions || companions;
+            
+            // products.json'dan gelen resim yolunu kullan
+            if (product.image) {
+              productImagePath = product.image;
+              console.log('Resim yolu products.json\'dan alındı:', productImagePath);
+            }
             
             // Sayfayı güncelle
             updateProductPage();
@@ -59,24 +66,52 @@
   
   // Ürün resmini yükle
   if (productImageEl && category && name) {
-    const categorySlug = normalizeForFile(category);
-    let productSlug = normalizeForFile(name);
+    let imageSrc = null;
     
-    // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
-    if (category === 'Mezeler') {
-      // Parantez öncesi kısmı al (örn: "Atom" -> "Atom")
-      const nameWithoutParentheses = name.split('(')[0].trim();
-      productSlug = normalizeForFile(nameWithoutParentheses);
+    // Önce products.json'dan gelen resim yolunu kullan
+    if (productImagePath) {
+      // Eğer resim yolu zaten "assets/" ile başlıyorsa direkt kullan
+      if (productImagePath.startsWith('assets/')) {
+        imageSrc = productImagePath;
+      } else {
+        // Değilse "assets/" ekle
+        imageSrc = `assets/${productImagePath}`;
+      }
+      console.log('Resim yolu products.json\'dan kullanılıyor:', imageSrc);
+    } else {
+      // products.json'da resim yolu yoksa, otomatik oluştur
+      const categorySlug = normalizeForFile(category);
+      let productSlug = normalizeForFile(name);
+      
+      // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
+      if (category === 'Mezeler') {
+        // Parantez öncesi kısmı al (örn: "Atom" -> "Atom")
+        const nameWithoutParentheses = name.split('(')[0].trim();
+        productSlug = normalizeForFile(nameWithoutParentheses);
+      }
+      
+      // "D." ile başlayan ürünler için özel işlem: "D." -> "deniz"
+      if (name.startsWith('D. ')) {
+        const nameWithoutD = name.replace(/^D\.\s*/, '');
+        productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
+      }
+      
+      imageSrc = `assets/${categorySlug}/${productSlug}.jpg`;
+      console.log('Resim yolu otomatik oluşturuldu:', imageSrc);
     }
     
-    // "D." ile başlayan ürünler için özel işlem: "D." -> "deniz"
-    if (name.startsWith('D. ')) {
-      const nameWithoutD = name.replace(/^D\.\s*/, '');
-      productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
+    if (imageSrc) {
+      productImageEl.src = imageSrc;
+      productImageEl.alt = name;
+      
+      // Resim yükleme hatası için fallback
+      productImageEl.onerror = function() {
+        console.warn('Resim yüklenemedi:', imageSrc);
+        // Varsayılan resme geç
+        this.src = 'assets/omerkaptanlogo.png';
+        this.onerror = null; // Sonsuz döngüyü önle
+      };
     }
-    
-    productImageEl.src = `assets/${categorySlug}/${productSlug}.jpg`;
-    productImageEl.alt = name;
   }
 
   // İçindekiler listesini göster (sadece Mezeler kategorisi için)
