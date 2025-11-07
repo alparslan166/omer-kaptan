@@ -159,8 +159,9 @@ function updateDownloadButton(data) {
     const downloadBtn = document.getElementById('download-products-json');
     if (downloadBtn) {
       downloadBtn.onclick = () => {
-        // JSON dosyasını indir
-        const jsonStr = JSON.stringify(data, null, 2);
+        // Güncel productsData'yı kullan (butona basıldığında)
+        const currentData = productsData || data;
+        const jsonStr = JSON.stringify(currentData, null, 2);
         const blob = new Blob([jsonStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -180,7 +181,9 @@ function updateDownloadButton(data) {
     const copyBtn = document.getElementById('copy-json-content');
     if (copyBtn) {
       copyBtn.onclick = () => {
-        const jsonStr = JSON.stringify(data, null, 2);
+        // Güncel productsData'yı kullan (butona basıldığında)
+        const currentData = productsData || data;
+        const jsonStr = JSON.stringify(currentData, null, 2);
         navigator.clipboard.writeText(jsonStr).then(() => {
           showNotification('✅ JSON içeriği panoya kopyalandı!', 'success');
         }).catch(err => {
@@ -219,7 +222,18 @@ function updateDownloadButton(data) {
             throw new Error('GitHub API ayarları eksik! Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.');
           }
           
-          const jsonStr = JSON.stringify(data, null, 2);
+          // Güncel productsData'yı kullan (butona basıldığında)
+          if (!productsData || !productsData.products) {
+            throw new Error('Ürün verisi bulunamadı! Lütfen sayfayı yenileyin.');
+          }
+          
+          const jsonStr = JSON.stringify(productsData, null, 2);
+          console.log('📤 GitHub\'a gönderilecek veri:', {
+            products: productsData.products.length,
+            categories: productsData.categories.length,
+            companions: productsData.companions ? productsData.companions.length : 0,
+            jsonSize: `${(jsonStr.length / 1024).toFixed(2)} KB`
+          });
           
           // GitHubAPI'nin yüklendiğinden emin ol (retry mekanizması ile)
           console.log('GitHubAPI kontrol ediliyor...', 'Mevcut:', typeof window.GitHubAPI !== 'undefined');
