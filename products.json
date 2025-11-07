@@ -2494,26 +2494,10 @@
       "hidden": false
     },
     {
-      "id": 156,
-      "name": "anya",
-      "category": "Tavalar",
-      "price": "31",
-      "shortDesc": "dfghj",
-      "description": "ksgdfhjklşilkjhtfdsvz",
-      "image": "tavalar/anya.jpg",
-      "companions": [
-        "Beyaz Peynir",
-        "Fıstık"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": ""
-    },
-    {
       "id": 157,
       "name": "nazoşş",
       "category": "Tatlılar",
-      "price": "33",
+      "price": "0",
       "shortDesc": "Mersin'in Tatlısı",
       "description": "fhgjkl",
       "image": "tatlilar/nazoss.jpg",
