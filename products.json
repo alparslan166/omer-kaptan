@@ -30,7 +30,7 @@
         "Fıstık",
         "Peynir"
       ],
-      "hidden": false
+      "hidden": true
     },
     {
       "id": 2,
@@ -2490,6 +2490,19 @@
       "description": "Kaliteli viski seçenekleri, şefin önerisi.",
       "image": "alkollu-icecekler/viski.jpg",
       "companions": [],
+      "hidden": false
+    },
+    {
+      "id": 154,
+      "name": "turuncu tava",
+      "category": "Tavalar",
+      "price": "200",
+      "shortDesc": "ertyuıopğ",
+      "description": "HDGSFHJGDSALFKGLSD",
+      "image": "Tavalar",
+      "companions": [
+        "Sos"
+      ],
       "hidden": false
     }
   ]
