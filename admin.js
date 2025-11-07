@@ -1462,10 +1462,28 @@ function setupForms() {
       
       const id = parseInt(document.getElementById('edit-id').value);
       const product = productsData.products.find(p => p.id === id);
-      if (!product) return;
+      if (!product) {
+        alert('Ürün bulunamadı!');
+        return;
+      }
       
-      const category = document.getElementById('edit-category').value;
-      const name = document.getElementById('edit-name').value;
+      const category = document.getElementById('edit-category').value.trim();
+      const name = document.getElementById('edit-name').value.trim();
+      
+      // Ürün adı boş olamaz
+      if (!name) {
+        alert('Ürün adı boş olamaz!');
+        return;
+      }
+      
+      console.log('🔄 Ürün güncelleniyor:', {
+        id: id,
+        eskiAd: product.name,
+        yeniAd: name,
+        eskiKategori: product.category,
+        yeniKategori: category
+      });
+      
       const imageFile = document.getElementById('edit-image-file').files[0];
       
       // Resim yolu belirleme - HER ZAMAN otomatik oluştur (kategori ve ürün adına göre)
@@ -1580,11 +1598,13 @@ function setupForms() {
         }
       }
       
+      // Ürün bilgilerini güncelle
+      const oldName = product.name;
       product.name = name;
       product.category = category;
-      product.price = document.getElementById('edit-price').value;
-      product.shortDesc = document.getElementById('edit-short-desc').value;
-      product.description = document.getElementById('edit-description').value;
+      product.price = document.getElementById('edit-price').value.trim();
+      product.shortDesc = document.getElementById('edit-short-desc').value.trim();
+      product.description = document.getElementById('edit-description').value.trim();
       product.image = imagePath;
       product.companions = Array.from(document.getElementById('edit-companions').selectedOptions)
         .map(option => option.value)
@@ -1593,9 +1613,22 @@ function setupForms() {
       product.outOfStock = document.getElementById('edit-out-of-stock') ? document.getElementById('edit-out-of-stock').checked : false;
       product.subcategory = editSubcategory ? editSubcategory.value : null;
       
+      console.log('✅ Ürün bilgileri güncellendi:', {
+        id: product.id,
+        eskiAd: oldName,
+        yeniAd: product.name,
+        kategori: product.category,
+        fiyat: product.price,
+        resim: product.image
+      });
+      
+      // Veriyi kaydet
       saveProducts(productsData);
       
-      alert('Ürün başarıyla güncellendi!');
+      console.log('💾 Veri kaydedildi. productsData.products içinde güncellenmiş ürün:', 
+        productsData.products.find(p => p.id === id));
+      
+      alert(`Ürün başarıyla güncellendi!\n\nEski ad: ${oldName}\nYeni ad: ${product.name}`);
       
       // Ürünler listesine dön
       window.location.href = 'admin.html';
