@@ -26,7 +26,10 @@
             <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
           </div>
           <div class="titles">
-            <a href="../index.html" style="text-decoration: none; color: inherit;">
+            <a
+              href="../index.html"
+              style="text-decoration: none; color: inherit"
+            >
               <h1 class="site-title">Ömer Kaptan</h1>
             </a>
             <p class="site-subtitle">Alkollü İçecekler</p>
@@ -66,7 +69,10 @@
       <section class="product-grid" aria-label="Rakılar">
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/tek-raki.jpg" alt="Tek Rakı" />
+            <img
+              src="../assets/alkollu-icecekler/tek-raki.jpg"
+              alt="Tek Rakı"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Tek Rakı</h4>
@@ -84,7 +90,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/duble-raki.jpg" alt="Duble Rakı" />
+            <img
+              src="../assets/alkollu-icecekler/duble-raki.jpg"
+              alt="Duble Rakı"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Duble Rakı</h4>
@@ -102,7 +111,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/yeni-raki-20cl.jpg" alt="Yeni Rakı 20cl" />
+            <img
+              src="../assets/alkollu-icecekler/yeni-raki-20cl.jpg"
+              alt="Yeni Rakı 20cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Yeni Rakı 20cl</h4>
@@ -120,7 +132,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/yeni-raki-35cl.jpg" alt="Yeni Rakı 35cl" />
+            <img
+              src="../assets/alkollu-icecekler/yeni-raki-35cl.jpg"
+              alt="Yeni Rakı 35cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Yeni Rakı 35cl</h4>
@@ -138,7 +153,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/yeni-raki-50cl.jpg" alt="Yeni Rakı 50cl" />
+            <img
+              src="../assets/alkollu-icecekler/yeni-raki-50cl.jpg"
+              alt="Yeni Rakı 50cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Yeni Rakı 50cl</h4>
@@ -156,7 +174,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/tekirdag-raki-20cl.jpg" alt="Tekirdağ Rakı 20cl" />
+            <img
+              src="../assets/alkollu-icecekler/tekirdag-raki-20cl.jpg"
+              alt="Tekirdağ Rakı 20cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Tekirdağ Rakı 20cl</h4>
@@ -174,7 +195,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/tekirdag-raki-35cl.jpg" alt="Tekirdağ Rakı 35cl" />
+            <img
+              src="../assets/alkollu-icecekler/tekirdag-raki-35cl.jpg"
+              alt="Tekirdağ Rakı 35cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Tekirdağ Rakı 35cl</h4>
@@ -192,7 +216,10 @@
         </article>
         <article class="product-card">
           <div class="media-figure">
-            <img src="../assets/alkollu-icecekler/tekirdag-raki-50cl.jpg" alt="Tekirdağ Rakı 50cl" />
+            <img
+              src="../assets/alkollu-icecekler/tekirdag-raki-50cl.jpg"
+              alt="Tekirdağ Rakı 50cl"
+            />
           </div>
           <div class="product-body">
             <h4 class="product-title">Tekirdağ Rakı 50cl</h4>
@@ -294,10 +321,18 @@
           </p>
         </div>
         <div class="footer-social">
-          <a href="https://www.instagram.com/balikciomerkaptan" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.instagram.com/balikciomerkaptan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../assets/instagram-logo.png" alt="Instagram" />
           </a>
-          <a href="https://wa.me/905458372324" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://wa.me/905458372324"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="../assets/whatsapp-logo.png" alt="WhatsApp" />
           </a>
         </div>
@@ -332,7 +367,10 @@
       const scrollToTopBtn = document.querySelector(".scroll-to-top");
 
       function toggleScrollButton() {
-        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const scrollY =
+          window.scrollY ||
+          window.pageYOffset ||
+          document.documentElement.scrollTop;
         if (scrollY > 300) {
           scrollToTopBtn.classList.add("show");
         } else {
@@ -344,14 +382,14 @@
       function checkScrollLoop() {
         // Her frame'de scroll pozisyonunu kontrol et ve butonu güncelle
         toggleScrollButton();
-        
+
         // Bir sonraki frame'de tekrar kontrol et
         requestAnimationFrame(checkScrollLoop);
       }
 
       // Scroll event listener'ı da ekle (hızlı güncelleme için)
       window.addEventListener("scroll", toggleScrollButton, { passive: true });
-      
+
       // İlk kontrol
       toggleScrollButton();
       // Sürekli kontrol döngüsünü başlat
@@ -364,7 +402,6 @@
         });
       });
     </script>
-    <script src="../dynamic-products.js"></script>
     <script src="../dynamic-products.js"></script>
     <script src="../product-visibility.js"></script>
   </body>

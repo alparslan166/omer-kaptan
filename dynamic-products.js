@@ -40,8 +40,8 @@
       return;
     }
     
-    // Alkollü İçecekler için özel işlem
-    if (currentCategory === 'Alkollü İçecekler') {
+    // Alkollü İçecekler ve Mezeler için özel işlem (kategori başlıkları ile)
+    if (currentCategory === 'Alkollü İçecekler' || currentCategory === 'Mezeler') {
       // Mevcut içeriği bul (section-head'den sonraki tüm içeriği temizle)
       const main = document.querySelector('main .container');
       if (!main) {
@@ -108,6 +108,12 @@
       return;
     }
     
+    // Mezeler için özel işlem
+    if (category === 'Mezeler') {
+      renderMezeler(products, container);
+      return;
+    }
+    
     // Mevcut içeriği temizle
     container.innerHTML = '';
     
@@ -118,6 +124,195 @@
     });
     
     console.log(`${products.length} ürün render edildi`);
+  }
+  
+  function renderMezeler(products, container) {
+    // Mezeleri kategorilere ayır (öncelik sırasına göre)
+    
+    // 1. Deniz Mahsullü Mezeler (en özel kategori)
+    const denizMahsulleri = products.filter(p => 
+      p.name.includes('Karides') ||
+      p.name.includes('Ahtapot') ||
+      p.name.includes('Kalamar') ||
+      p.name.includes('Midye') ||
+      p.name.includes('Lakerda') ||
+      p.name.includes('Marine') ||
+      p.name.includes('Marin') ||
+      (p.name.includes('Tarama') && !p.name.includes('Ezme')) ||
+      p.name.includes('Balık Köftesi') ||
+      p.name.includes('Deniz Börülcesi') ||
+      p.name === 'Deniz Mahsullü'
+    );
+    
+    // 2. Zeytinyağlı Mezeler
+    const zeytinyagli = products.filter(p => 
+      (p.name.includes('Zeytinyağlı') || p.name.includes('zeytinyağlı')) &&
+      !denizMahsulleri.includes(p)
+    );
+    
+    // 3. Yoğurtlu Mezeler
+    const yogurtlu = products.filter(p => 
+      (p.name.includes('Yoğurtlu') || p.name.includes('yoğurtlu') || p.name === 'Atom') &&
+      !p.name.includes('Zeytinyağlı') &&
+      !denizMahsulleri.includes(p) &&
+      !p.name.includes('Salata')
+    );
+    
+    // 4. Ezmeler (deniz ürünü olmayan)
+    const ezmeler = products.filter(p => 
+      (p.name.includes('Ezme') || p.name.includes('ezme')) &&
+      !denizMahsulleri.includes(p) &&
+      !zeytinyagli.includes(p) &&
+      !p.name.includes('Salata')
+    ).concat(
+      products.filter(p => 
+        (p.name === 'Muhammara' ||
+         p.name === 'Fava' ||
+         p.name === 'Babagannuş' ||
+         p.name === 'Girit Ezmesi' ||
+         p.name === 'Tahinli Patlıcan' ||
+         p.name === 'Zeytin Ezmesi') &&
+        !denizMahsulleri.includes(p)
+      )
+    );
+    
+    // 5. Salatalar (diğer kategorilere dahil olmayan)
+    const salatalar = products.filter(p => 
+      (p.name.includes('Salata') || 
+       p.name.includes('salata') ||
+       p.name.includes('Salatası') ||
+       p.name.includes('Piyazı') ||
+       p.name.includes('Kısır') ||
+       p.name.includes('Gavurdağı') ||
+       p.name.includes('Mercimek Köftesi') ||
+       p.name.includes('Havuç Tarator')) &&
+      !denizMahsulleri.includes(p) &&
+      !zeytinyagli.includes(p) &&
+      !yogurtlu.includes(p) &&
+      !ezmeler.includes(p)
+    );
+    
+    // 6. Diğer Mezeler
+    const digerMezeler = products.filter(p => 
+      !zeytinyagli.includes(p) &&
+      !yogurtlu.includes(p) &&
+      !ezmeler.includes(p) &&
+      !denizMahsulleri.includes(p) &&
+      !salatalar.includes(p)
+    );
+    
+    // Mevcut içeriği temizle
+    container.innerHTML = '';
+    
+    // Zeytinyağlı Mezeler
+    if (zeytinyagli.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Zeytinyağlı Mezeler</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Zeytinyağlı Mezeler');
+      
+      zeytinyagli.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    // Yoğurtlu Mezeler
+    if (yogurtlu.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Yoğurtlu Mezeler</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Yoğurtlu Mezeler');
+      
+      yogurtlu.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    // Ezmeler
+    if (ezmeler.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Ezmeler</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Ezmeler');
+      
+      ezmeler.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    // Salatalar
+    if (salatalar.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Salatalar</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Salatalar');
+      
+      salatalar.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    // Deniz Mahsullü Mezeler
+    if (denizMahsulleri.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Deniz Mahsullü Mezeler</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Deniz Mahsullü Mezeler');
+      
+      denizMahsulleri.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    // Diğer Mezeler
+    if (digerMezeler.length > 0) {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4 class="category-title">Diğer Mezeler</h4>`;
+      container.appendChild(section);
+      
+      const grid = document.createElement('section');
+      grid.className = 'product-grid';
+      grid.setAttribute('aria-label', 'Diğer Mezeler');
+      
+      digerMezeler.forEach(product => {
+        const card = createProductCard(product);
+        grid.appendChild(card);
+      });
+      
+      container.appendChild(grid);
+    }
+    
+    console.log(`Mezeler render edildi - Zeytinyağlı: ${zeytinyagli.length}, Yoğurtlu: ${yogurtlu.length}, Ezme: ${ezmeler.length}, Salata: ${salatalar.length}, Deniz: ${denizMahsulleri.length}, Diğer: ${digerMezeler.length}`);
   }
   
   function renderAlkolluIcecekler(products, container) {
