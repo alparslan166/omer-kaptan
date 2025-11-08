@@ -560,26 +560,7 @@ function showGitHubSettingsModal() {
         throw new Error('GitHub API testConnection fonksiyonu bulunamadı! github-api.js dosyası eksik veya hatalı olabilir.');
       }
       
-      // Önce script dosyalarının yüklendiğini kontrol et
-      const scriptCheck = {
-        githubConfig: typeof window.GitHubConfig !== 'undefined',
-        githubAPI: typeof window.GitHubAPI !== 'undefined',
-        testConnection: !!(window.GitHubAPI && window.GitHubAPI.testConnection)
-      };
-      
-      console.log('🔍 Script yükleme kontrolü:', scriptCheck);
-      
-      if (!scriptCheck.githubConfig) {
-        throw new Error('GitHubConfig modülü yüklenmedi! github-api-config.js dosyası yüklenememiş olabilir.');
-      }
-      
-      if (!scriptCheck.githubAPI) {
-        throw new Error('GitHubAPI modülü yüklenmedi! github-api.js dosyası yüklenememiş olabilir.');
-      }
-      
-      if (!scriptCheck.testConnection) {
-        throw new Error('testConnection fonksiyonu bulunamadı! github-api.js dosyası eksik veya hatalı olabilir.');
-      }
+      console.log('✅ Tüm script dosyaları yüklendi, bağlantı testi başlatılıyor...');
       
       const testResult = await window.GitHubAPI.testConnection();
       console.log('GitHub connection test result:', testResult);
