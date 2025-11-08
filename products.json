@@ -30,7 +30,8 @@
         "Fıstık",
         "Peynir"
       ],
-      "hidden": false
+      "hidden": false,
+      "outOfStock": false
     },
     {
       "id": 2,
