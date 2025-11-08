@@ -411,9 +411,32 @@ async function testGitHubConnection() {
     
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
+      let errorMessage = errorData.message || response.statusText;
+      
+      // 401 Unauthorized hatası için özel mesaj
+      if (response.status === 401) {
+        errorMessage = 'Token geçersiz veya yanlış! Lütfen token\'ı kontrol edin.';
+        return {
+          success: false,
+          error: errorMessage,
+          details: {
+            status: response.status,
+            statusText: response.statusText,
+            repository: config.repository,
+            error: errorData,
+            suggestions: [
+              'Token\'ı doğru kopyaladığınızdan emin olun (başında ve sonunda boşluk olmamalı)',
+              'Token\'ın süresi dolmuş olabilir, yeni bir token oluşturun',
+              'Token\'ın "repo" iznine sahip olduğundan emin olun',
+              'Token\'ı GitHub\'dan yeniden oluşturup deneyin: https://github.com/settings/tokens'
+            ]
+          }
+        };
+      }
+      
       return {
         success: false,
-        error: `Repository erişilemiyor: ${errorData.message || response.statusText}`,
+        error: `Repository erişilemiyor: ${errorMessage}`,
         details: {
           status: response.status,
           statusText: response.statusText,

@@ -522,9 +522,26 @@ function showGitHubSettingsModal() {
         throw new Error('Repository formatı hatalı! Format: owner/repo (örn: alparslan166/omer-kaptan)');
       }
       
-      // Token formatını kontrol et
+      // Token formatını kontrol et ve temizle
+      tempConfig.token = tempConfig.token.trim(); // Başında ve sonundaki boşlukları temizle
+      
+      if (!tempConfig.token) {
+        throw new Error('Token alanı boş olamaz!');
+      }
+      
+      if (tempConfig.token.length < 40) {
+        throw new Error('Token çok kısa görünüyor! Token\'ı doğru kopyaladığınızdan emin olun.');
+      }
+      
       if (!tempConfig.token.startsWith('ghp_') && !tempConfig.token.startsWith('github_pat_')) {
-        console.warn('⚠️ Token formatı beklenmeyen bir formatta. Genellikle "ghp_" ile başlar.');
+        console.warn('⚠️ Token formatı beklenmeyen bir formatta. Genellikle "ghp_" veya "github_pat_" ile başlar.');
+        console.warn('⚠️ Token\'ın başında ve sonunda boşluk olmamalıdır!');
+      }
+      
+      // Token'da gizli karakterler var mı kontrol et
+      if (tempConfig.token.includes(' ') || tempConfig.token.includes('\n') || tempConfig.token.includes('\t')) {
+        console.warn('⚠️ Token\'da boşluk veya gizli karakterler tespit edildi! Token\'ı tekrar kopyalayın.');
+        tempConfig.token = tempConfig.token.replace(/\s+/g, ''); // Tüm boşlukları kaldır
       }
       
       if (window.GitHubConfig) {
