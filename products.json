@@ -31,7 +31,7 @@
         "Peynir"
       ],
       "hidden": false,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "id": 2,
