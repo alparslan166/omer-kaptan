@@ -358,28 +358,49 @@ async function deleteFileViaGitHubAPI(filePath) {
 
 /**
  * GitHub API bağlantısını test et
- * @returns {Promise<boolean>} - Bağlantı başarılı mı?
+ * @returns {Promise<Object>} - Test sonucu ve detaylı bilgiler
  */
 async function testGitHubConnection() {
   // Config fonksiyonlarını al
   const configFuncs = getConfigFunctions();
   if (!configFuncs) {
-    return false;
+    return {
+      success: false,
+      error: 'GitHub Config modülü yüklenmedi! Sayfayı yenileyin.',
+      details: {}
+    };
   }
   
   const { loadGitHubConfig, isGitHubConfigComplete } = configFuncs;
   const config = loadGitHubConfig();
   
   if (!isGitHubConfigComplete()) {
-    return false;
+    return {
+      success: false,
+      error: 'GitHub API ayarları eksik! Repository veya Token eksik.',
+      details: {
+        hasRepository: !!config.repository,
+        hasToken: !!config.token,
+        repository: config.repository || '(boş)',
+        branch: config.branch || '(boş)',
+        filePath: config.filePath || '(boş)'
+      }
+    };
   }
   
   const [owner, repo] = config.repository.split('/');
   if (!owner || !repo) {
-    return false;
+    return {
+      success: false,
+      error: 'Repository formatı hatalı! Format: owner/repo',
+      details: {
+        repository: config.repository
+      }
+    };
   }
   
   try {
+    // 1. Repository erişimini test et
     const testUrl = `https://api.github.com/repos/${owner}/${repo}`;
     const response = await fetch(testUrl, {
       headers: {
@@ -388,10 +409,85 @@ async function testGitHubConnection() {
       }
     });
     
-    return response.ok;
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      return {
+        success: false,
+        error: `Repository erişilemiyor: ${errorData.message || response.statusText}`,
+        details: {
+          status: response.status,
+          statusText: response.statusText,
+          repository: config.repository,
+          error: errorData
+        }
+      };
+    }
+    
+    // 2. products.json dosyasının varlığını kontrol et
+    const fileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}`;
+    const fileResponse = await fetch(fileUrl, {
+      headers: {
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (fileResponse.status === 404) {
+      return {
+        success: false,
+        error: `products.json dosyası bulunamadı!`,
+        details: {
+          repository: config.repository,
+          branch: config.branch,
+          filePath: config.filePath,
+          suggestion: 'Dosya yolunu kontrol edin veya products.json dosyasını repository\'ye ekleyin.'
+        }
+      };
+    } else if (!fileResponse.ok) {
+      const errorData = await fileResponse.json().catch(() => ({}));
+      return {
+        success: false,
+        error: `products.json dosyası kontrol edilemedi: ${errorData.message || fileResponse.statusText}`,
+        details: {
+          status: fileResponse.status,
+          statusText: fileResponse.statusText,
+          repository: config.repository,
+          branch: config.branch,
+          filePath: config.filePath,
+          error: errorData
+        }
+      };
+    }
+    
+    // Başarılı!
+    const repoData = await response.json();
+    const fileData = await fileResponse.json();
+    
+    return {
+      success: true,
+      error: null,
+      details: {
+        repository: config.repository,
+        branch: config.branch,
+        filePath: config.filePath,
+        repoExists: true,
+        fileExists: true,
+        repoName: repoData.full_name,
+        fileSize: fileData.size || 0
+      }
+    };
   } catch (error) {
     console.error('GitHub connection test error:', error);
-    return false;
+    return {
+      success: false,
+      error: `Bağlantı hatası: ${error.message}`,
+      details: {
+        repository: config.repository,
+        branch: config.branch,
+        filePath: config.filePath,
+        networkError: true
+      }
+    };
   }
 }
 

@@ -515,15 +515,77 @@ function showGitHubSettingsModal() {
         throw new Error('GitHub API testConnection fonksiyonu bulunamadı!');
       }
       
-      const isConnected = await window.GitHubAPI.testConnection();
-      if (isConnected) {
-        resultDiv.innerHTML = '<p style="margin: 0; color: #28a745; font-weight: 600;">✅ Bağlantı başarılı!</p>';
+      const testResult = await window.GitHubAPI.testConnection();
+      console.log('GitHub connection test result:', testResult);
+      
+      if (testResult && testResult.success) {
+        resultDiv.innerHTML = `
+          <div style="padding: 15px; background: #d4edda; border: 2px solid #28a745; border-radius: 8px; margin-top: 10px;">
+            <p style="margin: 0 0 10px 0; color: #155724; font-weight: 600; font-size: 16px;">✅ Bağlantı başarılı!</p>
+            <div style="font-size: 13px; color: #155724; line-height: 1.6;">
+              <p style="margin: 5px 0;"><strong>Repository:</strong> ${testResult.details.repoName || testResult.details.repository}</p>
+              <p style="margin: 5px 0;"><strong>Branch:</strong> ${testResult.details.branch}</p>
+              <p style="margin: 5px 0;"><strong>Dosya Yolu:</strong> ${testResult.details.filePath}</p>
+              <p style="margin: 5px 0;"><strong>Dosya Boyutu:</strong> ${(testResult.details.fileSize / 1024).toFixed(2)} KB</p>
+            </div>
+          </div>
+        `;
       } else {
-        throw new Error('Bağlantı başarısız. Token ve repository bilgilerini kontrol edin.');
+        // Detaylı hata mesajı göster
+        const errorMessage = testResult?.error || 'Bilinmeyen hata';
+        const details = testResult?.details || {};
+        
+        let errorDetailsHtml = '<div style="margin-top: 10px; font-size: 13px; color: #721c24;">';
+        errorDetailsHtml += `<p style="margin: 5px 0;"><strong>Hata:</strong> ${errorMessage}</p>`;
+        
+        if (details.repository) {
+          errorDetailsHtml += `<p style="margin: 5px 0;"><strong>Repository:</strong> ${details.repository}</p>`;
+        }
+        if (details.branch) {
+          errorDetailsHtml += `<p style="margin: 5px 0;"><strong>Branch:</strong> ${details.branch}</p>`;
+        }
+        if (details.filePath) {
+          errorDetailsHtml += `<p style="margin: 5px 0;"><strong>Dosya Yolu:</strong> ${details.filePath}</p>`;
+        }
+        if (details.status) {
+          errorDetailsHtml += `<p style="margin: 5px 0;"><strong>HTTP Status:</strong> ${details.status} ${details.statusText || ''}</p>`;
+        }
+        if (details.suggestion) {
+          errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"><strong>💡 Öneri:</strong> ${details.suggestion}</p>`;
+        }
+        if (details.hasRepository === false) {
+          errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"><strong>⚠️ Uyarı:</strong> Repository adı girilmedi. Örnek: alparslan166/omer-kaptan</p>`;
+        }
+        if (details.hasToken === false) {
+          errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"><strong>⚠️ Uyarı:</strong> Token girilmedi. GitHub'dan Personal Access Token oluşturun.</p>`;
+        }
+        if (details.filePath && details.filePath !== 'products.json') {
+          errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"><strong>💡 Not:</strong> Dosya yolu "${details.filePath}" olarak ayarlanmış. Eğer dosya bulunamıyorsa, dosya yolunu "products.json" olarak değiştirmeyi deneyin.</p>`;
+        }
+        if (details.networkError) {
+          errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #f8d7da; border-left: 4px solid #dc3545; border-radius: 4px;"><strong>🌐 Ağ Hatası:</strong> İnternet bağlantınızı kontrol edin.</p>`;
+        }
+        
+        errorDetailsHtml += '</div>';
+        
+        resultDiv.innerHTML = `
+          <div style="padding: 15px; background: #f8d7da; border: 2px solid #dc3545; border-radius: 8px; margin-top: 10px;">
+            <p style="margin: 0 0 10px 0; color: #721c24; font-weight: 600; font-size: 16px;">❌ Bağlantı başarısız!</p>
+            ${errorDetailsHtml}
+          </div>
+        `;
       }
     } catch (error) {
       console.error('GitHub connection test error:', error);
-      resultDiv.innerHTML = `<p style="margin: 0; color: #dc3545; font-weight: 600;">❌ ${error.message}</p>`;
+      resultDiv.innerHTML = `
+        <div style="padding: 15px; background: #f8d7da; border: 2px solid #dc3545; border-radius: 8px; margin-top: 10px;">
+          <p style="margin: 0 0 10px 0; color: #721c24; font-weight: 600; font-size: 16px;">❌ Hata!</p>
+          <p style="margin: 0; color: #721c24; font-size: 14px;">${error.message}</p>
+          <p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px; font-size: 13px;">
+            <strong>💡 Çözüm:</strong> Lütfen script dosyalarının yüklendiğinden emin olun (github-api-config.js, github-api.js). Tarayıcı konsolunu (F12) kontrol edin.
+          </p>
+        </div>
+      `;
     } finally {
       testBtn.disabled = false;
       testBtn.textContent = '🔍 Bağlantıyı Test Et';
