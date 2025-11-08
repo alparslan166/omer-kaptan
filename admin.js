@@ -482,6 +482,15 @@ function showGitHubSettingsModal() {
     resultDiv.innerHTML = '<p style="margin: 0; color: #17a2b8;">⏳ Bağlantı test ediliyor...</p>';
     
     try {
+      // Script dosyalarının yüklendiğini kontrol et
+      console.log('🔍 Script dosyaları kontrol ediliyor...');
+      console.log('GitHubConfig:', typeof window.GitHubConfig !== 'undefined' ? '✅ Yüklendi' : '❌ Yüklenmedi');
+      console.log('GitHubAPI:', typeof window.GitHubAPI !== 'undefined' ? '✅ Yüklendi' : '❌ Yüklenmedi');
+      
+      if (typeof window.GitHubConfig === 'undefined') {
+        throw new Error('GitHubConfig modülü yüklenmedi! github-api-config.js dosyası yüklenememiş olabilir. Sayfayı yenileyin (F5).');
+      }
+      
       // Geçici config ile test et
       const tempConfig = {
         repository: document.getElementById('github-repo').value.trim(),
@@ -490,29 +499,86 @@ function showGitHubSettingsModal() {
         filePath: document.getElementById('github-filepath').value.trim() || 'products.json'
       };
       
+      console.log('📋 Test edilecek ayarlar:', {
+        repository: tempConfig.repository ? '✅' : '❌',
+        token: tempConfig.token ? '✅ (uzunluk: ' + tempConfig.token.length + ')' : '❌',
+        branch: tempConfig.branch,
+        filePath: tempConfig.filePath
+      });
+      
       if (!tempConfig.repository || !tempConfig.token) {
-        throw new Error('Repository ve Token alanları doldurulmalıdır!');
+        const missing = [];
+        if (!tempConfig.repository) missing.push('Repository');
+        if (!tempConfig.token) missing.push('Token');
+        throw new Error(`${missing.join(' ve ')} alanları doldurulmalıdır!`);
+      }
+      
+      // Repository formatını kontrol et
+      if (!tempConfig.repository.includes('/')) {
+        throw new Error('Repository formatı hatalı! Format: owner/repo (örn: alparslan166/omer-kaptan)');
+      }
+      
+      if (tempConfig.repository.split('/').length !== 2) {
+        throw new Error('Repository formatı hatalı! Format: owner/repo (örn: alparslan166/omer-kaptan)');
+      }
+      
+      // Token formatını kontrol et
+      if (!tempConfig.token.startsWith('ghp_') && !tempConfig.token.startsWith('github_pat_')) {
+        console.warn('⚠️ Token formatı beklenmeyen bir formatta. Genellikle "ghp_" ile başlar.');
       }
       
       if (window.GitHubConfig) {
         window.GitHubConfig.saveGitHubConfig(tempConfig);
+        console.log('✅ Geçici config kaydedildi');
       } else {
         throw new Error('GitHub Config modülü yüklenmedi! Sayfayı yenileyin.');
       }
       
       // GitHubAPI'nin yüklendiğinden emin ol
+      console.log('⏳ GitHubAPI modülü bekleniyor...');
       let retries = 0;
-      while (!window.GitHubAPI && retries < 10) {
+      while (!window.GitHubAPI && retries < 20) {
         await new Promise(resolve => setTimeout(resolve, 100));
         retries++;
+        if (retries % 5 === 0) {
+          console.log(`⏳ GitHubAPI bekleniyor... (${retries}/20)`);
+        }
       }
       
       if (!window.GitHubAPI) {
-        throw new Error('GitHub API modülü yüklenmedi! Lütfen sayfayı yenileyin ve script dosyalarının doğru yüklendiğinden emin olun.');
+        // Debug bilgisi
+        const scripts = Array.from(document.querySelectorAll('script[src]'));
+        console.error('❌ GitHubAPI yüklenemedi. Yüklenen script dosyaları:');
+        scripts.forEach(s => console.error('  -', s.src));
+        throw new Error('GitHub API modülü yüklenmedi! Lütfen sayfayı yenileyin ve script dosyalarının doğru yüklendiğinden emin olun. (github-api.js)');
       }
       
+      console.log('✅ GitHubAPI modülü bulundu:', Object.keys(window.GitHubAPI));
+      
       if (!window.GitHubAPI.testConnection) {
-        throw new Error('GitHub API testConnection fonksiyonu bulunamadı!');
+        console.error('❌ testConnection fonksiyonu bulunamadı. Mevcut fonksiyonlar:', Object.keys(window.GitHubAPI));
+        throw new Error('GitHub API testConnection fonksiyonu bulunamadı! github-api.js dosyası eksik veya hatalı olabilir.');
+      }
+      
+      // Önce script dosyalarının yüklendiğini kontrol et
+      const scriptCheck = {
+        githubConfig: typeof window.GitHubConfig !== 'undefined',
+        githubAPI: typeof window.GitHubAPI !== 'undefined',
+        testConnection: !!(window.GitHubAPI && window.GitHubAPI.testConnection)
+      };
+      
+      console.log('🔍 Script yükleme kontrolü:', scriptCheck);
+      
+      if (!scriptCheck.githubConfig) {
+        throw new Error('GitHubConfig modülü yüklenmedi! github-api-config.js dosyası yüklenememiş olabilir.');
+      }
+      
+      if (!scriptCheck.githubAPI) {
+        throw new Error('GitHubAPI modülü yüklenmedi! github-api.js dosyası yüklenememiş olabilir.');
+      }
+      
+      if (!scriptCheck.testConnection) {
+        throw new Error('testConnection fonksiyonu bulunamadı! github-api.js dosyası eksik veya hatalı olabilir.');
       }
       
       const testResult = await window.GitHubAPI.testConnection();
