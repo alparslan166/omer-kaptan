@@ -1,53 +1,218 @@
---AÇIKLAMA--
+--ÖMER KAPTAN BALIK RESTAURANT QR MENÜ SİSTEMİ--
 
-ANA SAYFA:
-- Ana sayfada tüm kategoriler sergilenir (Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Salatalar, Pideler, Tatlılar, Mezeler, Alkolsüz İçecekler, Alkollü Alkolsüz İçecekler)
+📱 KULLANICI ARAYÜZÜ
+
+ANA SAYFA
+- Tüm ürün kategorileri görsel kartlar halinde sergilenir
 - Her kategori kartında kategori resmi ve "Ürünleri Gör" butonu bulunur
-- Sayfa yüklendiğinde otomatik olarak en üste scroll yapılır
+- Kategoriler: Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Salatalar, Pideler, Tatlılar, Mezeler, Alkolsüz İçecekler, Alkollü İçecekler
+- Sayfa yüklendiğinde otomatik olarak en üste kaydırılır
+- "Ömer Kaptan" logosuna tıklanarak ana sayfaya dönülebilir
 
-KATEGORİ SAYFALARI:
+KATEGORİ SAYFALARI
 - Her kategori sayfasında o kategoriye ait tüm ürünler listelenir
-- Her ürün kartında: ürün resmi, ürün adı, fiyat (₺340), kısa açıklama ve "Detay" butonu bulunur
-- Kullanıcı "Detay" butonuna tıklayarak ürün detay sayfasına gidebilir
+- Ürün kartlarında şunlar gösterilir:
+  • Ürün resmi
+  • Ürün adı
+  • Fiyat (₺340)
+  • Kısa açıklama
+  • "Detay" butonu
+- "Detay" butonuna tıklanarak ürün detay sayfasına gidilir
+- Alkollü İçecekler kategorisi alt başlıklara ayrılmıştır: "Rakılar" ve "Diğer Alkoller"
+- Mezeler kategorisi alt başlıklara ayrılmıştır: "Zeytinyağlı Mezeler", "Yoğurtlu Mezeler", "Ezmeler", "Salatalar", "Deniz Mahsullü Mezeler", "Diğer Mezeler"
 
-ÜRÜN DETAY SAYFASI:
-- Ürün detay sayfasında ürüne ait resim, başlık, açıklama ve ücretsiz eşlikçiler gösterilir
-- Ücretsiz eşlikçiler görsel kartlar halinde gösterilir (her satırda 3 adet, tüm cihazlarda optimize edilmiş)
-- Ücretsiz eşlikçiler bölümü bazı kategorilerde gösterilmez: Tatlılar, Mezeler, Alkolsüz İçecekler, Alkollü Alkolsüz İçecekler
+ÜRÜN DETAY SAYFASI
+- Ürün detay sayfasında şunlar gösterilir:
+  • Ürün resmi (tüm resimler aynı boyutta)
+  • Ürün adı
+  • Kategori bilgisi
+  • Detaylı açıklama
+  • İçindekiler listesi (sadece Mezeler kategorisi için)
+  • Ücretsiz eşlikçiler (görsel kartlar halinde, her satırda 3 adet)
+- Ücretsiz eşlikçiler bölümü şu kategorilerde gösterilmez:
+  • Tatlılar
+  • Mezeler
+  • Alkolsüz İçecekler
+  • Alkollü İçecekler
 - Eğer ürün için eşlikçi tanımlanmamışsa, "Ücretsiz Eşlikçiler" başlığı ve bölümü gizlenir
+- Ürün stokta yoksa "Maalesef Tükendi" mesajı gösterilir
 
-ŞEFİN ÖNERDİĞİ MEZELER:
-- Ürün detay sayfasında alt kısımda "Şefin Önerdiği Mezeler" bölümü gösterilir
-- Bu bölüm sadece şu kategorilerde gösterilir: Tavalar, Izgaralar, Buğulamalar, Kavurmalar, Ara Sıcaklar, Şişler, Balık Ekmekler, Çorbalar, Pideler
+ŞEFİN ÖNERDİĞİ MEZELER
+- Ürün detay sayfasının alt kısmında "Şefin Önerdiği Mezeler" bölümü gösterilir
+- Bu bölüm sadece şu kategorilerde gösterilir:
+  • Tavalar
+  • Izgaralar
+  • Buğulamalar
+  • Kavurmalar
+  • Ara Sıcaklar
+  • Şişler
+  • Balık Ekmekler
+  • Çorbalar
+  • Pideler
 - Mezeler listesinden rastgele 6 meze seçilip gösterilir
 - Her meze kartında meze resmi, adı, fiyat ve "Detay" butonu bulunur
 - Sayfanın sonunda "Tüm Mezeler" butonu ile mezeler kategorisine ulaşılabilir
 
-MEZE DETAY SAYFASI:
-- Meze detay sayfasında mezenin resim, açıklama ve içindekiler listesi gösterilir
-- İçindekiler listesi sadece Mezeler kategorisi için gösterilir
-- Meze detay sayfasında "Ücretsiz Eşlikçiler" bölümü gösterilmez (Mezeler kategorisi olduğu için)
-- "Şefin Önerdiği Mezeler" bölümü gösterilmez (Mezeler kategorisi olduğu için)
+MEZE DETAY SAYFASI
+- Meze detay sayfasında şunlar gösterilir:
+  • Meze resmi
+  • Meze adı
+  • Açıklama
+  • İçindekiler listesi (Mezeler kategorisi için)
+- Meze detay sayfasında "Ücretsiz Eşlikçiler" bölümü gösterilmez
+- "Şefin Önerdiği Mezeler" bölümü gösterilmez
 
-KULLANICI DENEYİMİ:
+KULLANICI DENEYİMİ
 - Sağ üst kısımda "Geri" butonu bulunur (tarayıcı geçmişine dönüş)
-- Sayfada aşağı inildiğinde (300px'den fazla) sağ alt kısımda "Yukarı Çık" butonu gözükür
-- Sayfa yüklendiğinde otomatik olarak en üste scroll yapılır
+- Sayfada aşağı inildiğinde (300px'den fazla) sağ alt kısımda "Yukarı Çık" butonu görünür
+- Sayfa yüklendiğinde otomatik olarak en üste kaydırılır
+- Sayfa yüklenirken ortada yükleniyor animasyonu gösterilir
+- Tüm sayfalar mobil, tablet ve masaüstü cihazlarda optimize edilmiştir
 
-TASARIM:
-- Sayfanın üst kısmında "Ömer Kaptan" logosu ve "Mavi-Beyaz QR Menü" alt metni bulunur
-- Sayfanın alt kısmında (footer) "Ömer Kaptan Balık Restaurant" logosu, "Hakkımızda" metni, "Ödeme Yöntemleri" görseli, "Adres" bilgisi ve "Copyright" metni bulunur
+TASARIM VE GÖRSEL
+- Sayfanın üst kısmında "Ömer Kaptan" logosu bulunur
+- "Ömer Kaptan" logosuna tıklanarak ana sayfaya dönülebilir
+- Sayfanın alt kısmında (footer) şunlar bulunur:
+  • "Ömer Kaptan Balık Restaurant" logosu
+  • "Hakkımızda" açıklama metni
+  • "Ödeme Yöntemleri" görseli
+  • Adres bilgisi: Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara
+  • Copyright metni
+  • Instagram ve WhatsApp sosyal medya linkleri
+  • "Designed by Alparslan Turan" linki
 - Tüm sayfalar responsive tasarıma sahiptir (mobil, tablet, masaüstü uyumlu)
+- Ürün resimleri tutarlı boyutlarda gösterilir
+- Ücretsiz eşlikçiler kartları her satırda 3 adet olacak şekilde düzenlenmiştir (tüm cihazlarda)
 
+🔧 YÖNETİM PANELİ (ADMİN)
 
-ADMİN PANELİ TASARIMI:
-- Admin panelinde tüm ürünler listelenir
-- Her ürün kartında ürün resmi, ürün adı, fiyat, kısa açıklama ve "Düzenle" butonu bulunur
-- "Düzenle" butonuna tıklanınca admin paneli açılır
-- Admin panelinde ürünün fotoğraf, isim, fiyat, açıklama vb. alanları güncellenir
-- Admin panelinde ürünün kategorisi, alt kategori, gizli mi, stokta mı vb. alanları güncellenir
-- Admin panelinde ürünün resmi güncellenir
-- Admin panelinde ürünün adı güncellenir
-- Admin panelinde ürünün fiyatı güncellenir
-- Admin panelinde ürünün kısa açıklamaı güncellenir
-- Admin panelinde ürünün açıklamaı güncellenir
+YÖNETİM PANELİ ÖZELLİKLERİ
+- Tüm ürünlerin listesi görüntülenir
+- Her ürün için şu bilgiler gösterilir:
+  • Ürün resmi
+  • Ürün adı
+  • Kategori
+  • Fiyat
+  • Kısa açıklama
+  • Gizli/Görünür durumu
+  • Stokta var/yok durumu
+- Ürünler üzerinde şu işlemler yapılabilir:
+  • Ürün düzenleme
+  • Ürün silme
+  • Ürün gizleme/gösterme
+  • Ürün stok durumu güncelleme
+
+ÜRÜN YÖNETİMİ
+- Yeni ürün ekleme:
+  • Kategori seçimi
+  • Alt kategori seçimi (Alkollü İçecekler ve Mezeler için)
+  • Ürün adı
+  • Fiyat
+  • Kısa açıklama
+  • Detaylı açıklama
+  • Ürün resmi yükleme (otomatik yol oluşturma)
+  • Ücretsiz eşlikçiler seçimi
+  • Gizli/Görünür durumu
+  • Stok durumu
+- Ürün düzenleme:
+  • Tüm ürün bilgileri güncellenebilir
+  • Resim değiştirildiğinde eski resim otomatik olarak silinir
+  • Yeni resim aynı dosya adıyla kaydedilir (ürün adı ve kategori değişmediyse)
+  • Ürün adı veya kategori değiştiyse yeni dosya adı oluşturulur ve eski resim silinir
+- Ürün silme:
+  • Silme işlemi için onay mesajı gösterilir
+  • Silinen ürün kalıcı olarak kaldırılır
+
+KATEGORİ YÖNETİMİ
+- Yeni kategori ekleme
+- Kategori silme (onay ile)
+- Kategori listesi görüntüleme
+
+EŞLİKÇİ YÖNETİMİ
+- Eşlikçi listesi görüntüleme
+- Yeni eşlikçi ekleme (ad ve resim)
+- Eşlikçi düzenleme
+- Eşlikçi silme (onay ile)
+- Eşlikçiler ürün ekleme/düzenleme formlarında seçilebilir
+
+GİZLİ ÜRÜNLER
+- Gizlenen ürünler ayrı bir bölümde listelenir
+- Gizli ürünler kategori sayfalarında ve ana sayfada gösterilmez
+- Gizli ürünlerin detay sayfasına erişilemez
+- Ürünler gizlenebilir veya tekrar görünür yapılabilir
+
+STOK YÖNETİMİ
+- Ürünler "Stokta Var" veya "Stokta Yok" olarak işaretlenebilir
+- Stokta olmayan ürünler kategori sayfalarında görünür
+- Stokta olmayan ürünlerin detay sayfasında "Maalesef Tükendi" mesajı gösterilir
+
+OTOMATIK GÜNCELLEME
+- Tüm değişiklikler otomatik olarak GitHub'a yüklenir
+- GitHub ayarları yapılandırıldıktan sonra tüm güncellemeler otomatik olarak tüm cihazlarda görünür
+- Resim yükleme, ürün güncelleme ve dosya silme işlemleri GitHub API üzerinden yapılır
+- Değişiklikler anında tüm cihazlarda (mobil, tablet, masaüstü) görünür hale gelir
+
+TEKNİK ÖZELLİKLER
+- Tüm veriler products.json dosyasında saklanır
+- Resimler assets klasörü altında kategorilere göre organize edilir
+- Eşlikçi resimleri assets/companions klasöründe saklanır
+- Ürün resimleri otomatik olarak kategorize edilir ve uygun klasörlere kaydedilir
+- Resim yolları otomatik olarak oluşturulur (kategori ve ürün adına göre)
+
+🎨 TASARIM ÖZELLİKLERİ
+
+RENK PALETİ
+- Mavi tonları (ana renk)
+- Beyaz (arka plan)
+- Site genelinde tutarlı renk kullanımı
+
+TIPOGRAFİ
+- Okunabilir fontlar
+- Mobil uyumlu font boyutları
+- Başlıklar ve metinler için uygun font ağırlıkları
+
+RESPONSİV TASARIM
+- Mobil cihazlar için optimize edilmiş görünüm
+- Tablet cihazlar için uygun düzen
+- Masaüstü cihazlar için geniş ekran düzeni
+- Tüm cihazlarda tutarlı kullanıcı deneyimi
+
+YÜKLEME ANİMASYONU
+- Sayfa yüklenirken ortada dönen logo animasyonu
+- Yükleniyor metni
+- Sayfa yüklendiğinde animasyon otomatik olarak kaybolur
+
+SOCIAL MEDYA ENTEGRASYONU
+- Instagram linki (footer'da)
+- WhatsApp linki (footer'da)
+- Sosyal medya ikonları görsel olarak düzenlenmiştir
+
+💡 KULLANIM İPUÇLARI
+
+MÜŞTERİLER İÇİN
+- QR kodu okutarak menüye erişebilirsiniz
+- Kategorilere tıklayarak ürünleri görüntüleyebilirsiniz
+- Ürün kartlarındaki "Detay" butonuna tıklayarak detaylı bilgi alabilirsiniz
+- "Yukarı Çık" butonu ile sayfanın en üstüne hızlıca dönebilirsiniz
+- Mobil cihazlarda kaydırarak menüyü gezebilirsiniz
+
+YÖNETİCİLER İÇİN
+- Admin panelinden tüm ürünleri yönetebilirsiniz
+- Yeni ürün ekleyebilir, mevcut ürünleri düzenleyebilir veya silebilirsiniz
+- Ürünleri gizleyebilir veya tekrar görünür yapabilirsiniz
+- Stok durumunu güncelleyebilirsiniz
+- Resim yüklediğinizde eski resim otomatik olarak silinir
+- Tüm değişiklikler otomatik olarak GitHub'a yüklenir ve tüm cihazlarda görünür
+
+📞 İLETİŞİM
+
+ADRES
+Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara
+
+SOSYAL MEDYA
+- Instagram: @balikciomerkaptan
+- WhatsApp: 0545 837 23 24
+
+TASARIM
+Designed by Alparslan Turan
+Email: alp84202@gmail.com
