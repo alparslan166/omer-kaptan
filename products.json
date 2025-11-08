@@ -31,7 +31,7 @@
         "Peynir"
       ],
       "hidden": false,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "id": 2,
@@ -48,7 +48,7 @@
         "Roka",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "outOfStock": false
     },
     {
@@ -2493,22 +2493,6 @@
       "image": "alkollu-icecekler/viski.jpg",
       "companions": [],
       "hidden": false
-    },
-    {
-      "id": 157,
-      "name": "nazoşş",
-      "category": "Tatlılar",
-      "price": "0",
-      "shortDesc": "Mersin'in Tatlısı",
-      "description": "fhgjkl",
-      "image": "tatlilar/nazoss.jpg",
-      "companions": [
-        "Beyaz Peynir",
-        "Fıstık"
-      ],
-      "hidden": true,
-      "outOfStock": false,
-      "subcategory": ""
     }
   ],
   "companions": [
