@@ -614,7 +614,28 @@ function showGitHubSettingsModal() {
         if (details.status) {
           errorDetailsHtml += `<p style="margin: 5px 0;"><strong>HTTP Status:</strong> ${details.status} ${details.statusText || ''}</p>`;
         }
-        if (details.suggestion) {
+        
+        // 401 Token hatası için özel mesaj
+        if (details.status === 401) {
+          errorDetailsHtml += `<div style="margin: 10px 0 0 0; padding: 15px; background: #f8d7da; border-left: 4px solid #dc3545; border-radius: 4px;">`;
+          errorDetailsHtml += `<p style="margin: 0 0 10px 0; color: #721c24; font-weight: 600;">🔐 Token Hatası (401 Unauthorized)</p>`;
+          errorDetailsHtml += `<p style="margin: 0 0 10px 0; color: #721c24; font-size: 13px;">Token geçersiz veya yanlış girilmiş. Aşağıdaki adımları takip edin:</p>`;
+          errorDetailsHtml += `<ul style="margin: 5px 0; padding-left: 20px; color: #721c24; font-size: 13px;">`;
+          if (details.suggestions && Array.isArray(details.suggestions)) {
+            details.suggestions.forEach(suggestion => {
+              errorDetailsHtml += `<li style="margin: 5px 0;">${suggestion}</li>`;
+            });
+          } else {
+            errorDetailsHtml += `<li style="margin: 5px 0;">Token'ı doğru kopyaladığınızdan emin olun (başında ve sonunda boşluk olmamalı)</li>`;
+            errorDetailsHtml += `<li style="margin: 5px 0;">Token'ın süresi dolmuş olabilir, yeni bir token oluşturun</li>`;
+            errorDetailsHtml += `<li style="margin: 5px 0;">Token'ın "repo" iznine sahip olduğundan emin olun</li>`;
+            errorDetailsHtml += `<li style="margin: 5px 0;">Token'ı GitHub'dan yeniden oluşturup deneyin: <a href="https://github.com/settings/tokens" target="_blank" style="color: #0056b3; text-decoration: underline;">https://github.com/settings/tokens</a></li>`;
+          }
+          errorDetailsHtml += `</ul>`;
+          errorDetailsHtml += `</div>`;
+        }
+        
+        if (details.suggestion && details.status !== 401) {
           errorDetailsHtml += `<p style="margin: 10px 0 0 0; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;"><strong>💡 Öneri:</strong> ${details.suggestion}</p>`;
         }
         if (details.hasRepository === false) {
