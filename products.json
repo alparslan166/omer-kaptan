@@ -40,7 +40,9 @@
       "ikramlar": [
         "Glutensiz Ekmek"
       ],
-      "hidden": false
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": null
     },
     {
       "id": 59,
