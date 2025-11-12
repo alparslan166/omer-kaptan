@@ -106,10 +106,23 @@
     // LocalStorage sadece cache olarak kullanılır
     try {
       console.log('products.json yükleniyor...');
-      const response = await fetch('../products.json');
+      const response = await fetch('../products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
         const jsonData = await response.json();
         console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');
+        
+        // products.json'da bu kategori var mı kontrol et
+        const hasCategory = jsonData.categories && jsonData.categories.includes(category);
+        const categoryProductsCount = jsonData.products ? jsonData.products.filter(p => p.category === category).length : 0;
+        
+        console.log(`Kategori kontrolü: ${category} - Mevcut: ${hasCategory}, Ürün sayısı: ${categoryProductsCount}`);
+        
+        // Eğer products.json'da bu kategori yoksa veya ürün yoksa, statik HTML'i kullan
+        if (!hasCategory || categoryProductsCount === 0) {
+          console.log(`⚠️ products.json'da "${category}" kategorisi bulunamadı veya ürün yok, statik HTML kullanılıyor`);
+          organizeStaticProducts(category);
+          return;
+        }
         
         // LocalStorage'daki veri ile karşılaştır, eğer products.json daha yeniyse onu kullan
         if (productsData && productsData.products && Array.isArray(productsData.products)) {
@@ -155,7 +168,7 @@
     
     if (categoryProducts.length === 0) {
       // LocalStorage ve products.json'da yoksa, statik HTML'den topla
-      console.log('Veri bulunamadı, statik HTML\'den parse ediliyor...');
+      console.log('⚠️ Veri bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
       return;
     }

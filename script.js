@@ -278,11 +278,22 @@
       if (response.ok) {
         const productsData = await response.json();
         console.log('products.json yüklendi:', productsData);
-        if (productsData && productsData.products && Array.isArray(productsData.products)) {
-          // URL'den gelen name ve category ile ürünü bul
+        
+        // products.json'da bu kategori var mı kontrol et
+        const hasCategory = productsData.categories && productsData.categories.includes(category);
+        
+        if (hasCategory && productsData.products && Array.isArray(productsData.products)) {
+          // URL'den gelen name ve category ile ürünü bul (daha esnek eşleştirme)
           const product = productsData.products.find(p => {
-            const nameMatch = p.name === name || p.name.toLowerCase() === name.toLowerCase();
-            const categoryMatch = p.category === category || p.category.toLowerCase() === category.toLowerCase();
+            // İsim eşleştirmesi: tam eşleşme veya küçük harf eşleşmesi
+            const nameMatch = p.name === name || 
+                             p.name.toLowerCase() === name.toLowerCase() ||
+                             p.name.toLowerCase().trim() === name.toLowerCase().trim();
+            
+            // Kategori eşleştirmesi
+            const categoryMatch = p.category === category || 
+                                 p.category.toLowerCase() === category.toLowerCase();
+            
             return nameMatch && categoryMatch;
           });
           
@@ -308,8 +319,13 @@
             return; // Başarılı yükleme, çık
           } else {
             console.warn('⚠️ Ürün products.json\'da bulunamadı:', { name, category });
-            console.log('Tüm ürünler:', productsData.products.map(p => ({ name: p.name, category: p.category })));
+            // Kategori varsa ama ürün yoksa, URL parametrelerini kullan
+            if (hasCategory) {
+              console.log('📋 Kategori mevcut ama ürün bulunamadı, URL parametreleri kullanılıyor');
+            }
           }
+        } else {
+          console.warn('⚠️ products.json\'da kategori bulunamadı veya ürün listesi yok:', { category, hasCategory });
         }
       } else {
         console.error('❌ products.json yüklenemedi, HTTP status:', response.status);
