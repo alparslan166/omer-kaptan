@@ -32,19 +32,44 @@
   
   // Kategori resim dosya adını al
   function getCategoryImageFileName(categoryName) {
+    if (!categoryName || typeof categoryName !== 'string') {
+      return 'omerkaptanlogo';
+    }
+    
+    // Özel durumlar - mevcut klasör yapısına uygun
     const categoryImageNames = {
       'Ara Sıcaklar': 'ara-sicaklar',
       'Alkolsüz İçecekler': 'alkolsuz-icecekler',
       'Alkollü İçecekler': 'alkollu-icecekler'
     };
     
-    return categoryImageNames[categoryName] || normalizeForFileGlobal(categoryName);
+    // Özel durum varsa kullan, yoksa normalize et (yeni kategoriler için de çalışır)
+    if (categoryImageNames[categoryName]) {
+      return categoryImageNames[categoryName];
+    }
+    
+    // Yeni kategoriler için otomatik normalizasyon
+    const normalized = normalizeForFileGlobal(categoryName);
+    return normalized || 'omerkaptanlogo';
   }
   
   // Kategori HTML'i oluştur
   function createCategoryCard(category) {
+    // Geçersiz kategori kontrolü
+    if (!category || typeof category !== 'string' || category.trim() === '') {
+      console.warn('Geçersiz kategori:', category);
+      return '';
+    }
+    
     const categorySlug = normalizeForFileGlobal(category);
     const imageFileName = getCategoryImageFileName(category);
+    
+    // Slug veya dosya adı boşsa fallback kullan
+    if (!categorySlug || !imageFileName) {
+      console.warn('Kategori slug veya dosya adı oluşturulamadı:', category);
+      return '';
+    }
+    
     const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
     const categoryUrl = `categories/${categorySlug}.html`;
     
@@ -99,8 +124,18 @@
       // Kategorileri products.json'daki sıraya göre göster
       categoryGrid.innerHTML = '';
       data.categories.forEach(category => {
+        // Geçersiz kategori kontrolü
+        if (!category || typeof category !== 'string' || category.trim() === '') {
+          console.warn('Geçersiz kategori atlandı:', category);
+          return;
+        }
+        
         const cardHtml = createCategoryCard(category);
-        categoryGrid.insertAdjacentHTML('beforeend', cardHtml);
+        if (cardHtml) {
+          categoryGrid.insertAdjacentHTML('beforeend', cardHtml);
+        } else {
+          console.warn('Kategori kartı oluşturulamadı:', category);
+        }
       });
       
       console.log('Kategoriler dinamik olarak yüklendi:', data.categories.length);
