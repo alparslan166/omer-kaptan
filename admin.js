@@ -2635,14 +2635,28 @@ function displayCompanions() {
   companionsList.innerHTML = '';
   
   productsData.companions.forEach(companion => {
+    // Geçersiz eşlikçi kontrolü
+    if (!companion || !companion.name || typeof companion.name !== 'string') {
+      console.warn('Geçersiz eşlikçi objesi:', companion);
+      return;
+    }
+    
     const card = document.createElement('div');
     card.className = 'product-card-admin';
     card.dataset.companionId = companion.id;
+    
     // Eşlikçi resim yolu: assets/companions/ veya mevcut yol
-    let imagePath = companion.image || `companions/${normalizeForFileGlobal(companion.name)}.jpg`;
-    // Eğer assets/ ile başlamıyorsa ekle
-    if (!imagePath.startsWith('assets/')) {
-      imagePath = imagePath.startsWith('companions/') ? `assets/${imagePath}` : `assets/companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+    let imagePath = companion.image;
+    
+    // Eğer resim yolu yoksa veya geçersizse, isimden oluştur
+    if (!imagePath || typeof imagePath !== 'string' || imagePath.trim() === '') {
+      const normalizedName = normalizeForFileGlobal(companion.name);
+      imagePath = normalizedName ? `assets/companions/${normalizedName}.jpg` : 'assets/omerkaptanlogo.png';
+    } else {
+      // Eğer assets/ ile başlamıyorsa ekle
+      if (!imagePath.startsWith('assets/') && !imagePath.startsWith('http://') && !imagePath.startsWith('https://') && !imagePath.startsWith('/')) {
+        imagePath = imagePath.startsWith('companions/') ? `assets/${imagePath}` : `assets/companions/${normalizeForFileGlobal(companion.name)}.jpg`;
+      }
     }
     card.innerHTML = `
       <div class="product-card-image">
