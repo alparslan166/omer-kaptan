@@ -1325,10 +1325,19 @@ function editProduct(id) {
   document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
   
-  document.getElementById('edit-product-tab').classList.add('active');
+  const editTab = document.getElementById('edit-product-tab');
+  editTab.classList.add('active');
   
-  // Scroll to top
-  window.scrollTo(0, 0);
+  // Düzenleme formuna yumuşak scroll
+  setTimeout(() => {
+    editTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Eğer header sabitse, header yüksekliği kadar offset ekle
+    const header = document.querySelector('.admin-header');
+    if (header) {
+      const headerHeight = header.offsetHeight;
+      window.scrollBy(0, -headerHeight - 20); // 20px ekstra boşluk
+    }
+  }, 100);
 }
 
 // Ürün görünürlüğünü değiştir
@@ -1637,6 +1646,20 @@ function setupForms() {
       // Başarı mesajı
       alert('Ürün başarıyla eklendi!');
       
+      // Yeni eklenen ürüne scroll yap
+      setTimeout(() => {
+        const newProductCard = document.querySelector(`[data-product-id="${newProduct.id}"]`);
+        if (newProductCard) {
+          newProductCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Ürünler listesine scroll yap
+          const productsList = document.getElementById('products-list');
+          if (productsList) {
+            productsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 100);
+      
       // Ürünler listesine geç
       document.querySelector('[data-tab="products"]').click();
     });
@@ -1863,8 +1886,24 @@ function setupForms() {
       // Ürünler tab'ına geç
       document.querySelector('[data-tab="products"]').click();
       
-      // Scroll to top
-      window.scrollTo(0, 0);
+      // Güncellenen ürüne scroll yap
+      setTimeout(() => {
+        const updatedProductCard = document.querySelector(`[data-product-id="${product.id}"]`);
+        if (updatedProductCard) {
+          updatedProductCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const header = document.querySelector('.admin-header');
+          if (header) {
+            const headerHeight = header.offsetHeight;
+            window.scrollBy(0, -headerHeight - 20);
+          }
+        } else {
+          // Ürün bulunamazsa ürünler listesine scroll yap
+          const productsList = document.getElementById('products-list');
+          if (productsList) {
+            productsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 100);
       
       alert(`Ürün başarıyla güncellendi!\n\nEski ad: ${oldName}\nYeni ad: ${product.name}\n\nNot: Değişikliklerin GitHub'a gönderilmesi için "GitHub'da Güncelle" butonuna basın.`);
     });
@@ -1934,6 +1973,14 @@ function setupForms() {
       document.getElementById('new-category-name').value = '';
       populateCategories();
       displayCategories();
+      
+      // Yeni eklenen kategoriye scroll yap
+      setTimeout(() => {
+        const newCategoryItem = document.querySelector(`[data-category="${categoryName}"]`);
+        if (newCategoryItem) {
+          newCategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
       
       alert('Kategori başarıyla eklendi!');
     });
@@ -2112,6 +2159,14 @@ function moveCategory(categoryName, direction) {
   displayCategories();
   populateCategories();
   
+  // Taşınan kategoriye scroll yap
+  setTimeout(() => {
+    const movedCategoryItem = document.querySelector(`[data-category="${categoryName}"]`);
+    if (movedCategoryItem) {
+      movedCategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 100);
+  
   console.log(`Kategori "${categoryName}" ${direction === 'up' ? 'yukarı' : 'aşağı'} taşındı`);
 }
 
@@ -2145,6 +2200,19 @@ function deleteCategory(categoryName) {
   displayCategories();
   displayProducts();
   
+  // Kategoriler tabına scroll yap
+  setTimeout(() => {
+    const categoriesTab = document.getElementById('categories-tab');
+    if (categoriesTab) {
+      categoriesTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const header = document.querySelector('.admin-header');
+      if (header) {
+        const headerHeight = header.offsetHeight;
+        window.scrollBy(0, -headerHeight - 20);
+      }
+    }
+  }, 100);
+  
   if (categoryProducts.length > 0) {
     alert(`"${categoryName}" kategorisi başarıyla silindi!\n\n${categoryProducts.length} ürünün kategorisi kaldırıldı.`);
   } else {
@@ -2167,6 +2235,7 @@ function displayCompanions() {
   productsData.companions.forEach(companion => {
     const card = document.createElement('div');
     card.className = 'product-card-admin';
+    card.dataset.companionId = companion.id;
     // Eşlikçi resim yolu: assets/companions/ veya mevcut yol
     let imagePath = companion.image || `companions/${normalizeForFileGlobal(companion.name)}.jpg`;
     // Eğer assets/ ile başlamıyorsa ekle
@@ -2199,7 +2268,8 @@ function editCompanion(id) {
   document.getElementById('edit-companion-image').value = companion.image || '';
   
   // Düzenleme formunu göster
-  document.getElementById('edit-companion-section').style.display = 'block';
+  const editCompanionSection = document.getElementById('edit-companion-section');
+  editCompanionSection.style.display = 'block';
   document.querySelector('.add-companion-form').style.display = 'none';
   
   // Companions tabını göster
@@ -2209,7 +2279,16 @@ function editCompanion(id) {
   document.querySelector('[data-tab="companions"]').classList.add('active');
   document.getElementById('companions-tab').classList.add('active');
   
-  window.scrollTo(0, 0);
+  // Düzenleme formuna yumuşak scroll
+  setTimeout(() => {
+    editCompanionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Eğer header sabitse, header yüksekliği kadar offset ekle
+    const header = document.querySelector('.admin-header');
+    if (header) {
+      const headerHeight = header.offsetHeight;
+      window.scrollBy(0, -headerHeight - 20); // 20px ekstra boşluk
+    }
+  }, 100);
 }
 
 // Eşlikçi sil
@@ -2231,11 +2310,25 @@ function deleteCompanion(id) {
   productsData.companions = productsData.companions.filter(c => c.id !== id);
   saveProducts(productsData);
   
-  displayCompanions();
-  // Eşlikçi dropdown'larını güncelle
-  populateCompanionSelect(document.getElementById('add-companions'));
-  populateCompanionSelect(document.getElementById('edit-companions'));
-  alert(`"${companion.name}" eşlikçisi başarıyla silindi.`);
+      displayCompanions();
+      // Eşlikçi dropdown'larını güncelle
+      populateCompanionSelect(document.getElementById('add-companions'));
+      populateCompanionSelect(document.getElementById('edit-companions'));
+      
+      // Eşlikçiler listesine scroll yap
+      setTimeout(() => {
+        const companionsList = document.getElementById('companions-list');
+        if (companionsList) {
+          companionsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const header = document.querySelector('.admin-header');
+          if (header) {
+            const headerHeight = header.offsetHeight;
+            window.scrollBy(0, -headerHeight - 20);
+          }
+        }
+      }, 100);
+      
+      alert(`"${companion.name}" eşlikçisi başarıyla silindi.`);
 }
 
 // normalizeForFile global fonksiyonu
@@ -2323,6 +2416,21 @@ function setupCompanionForms() {
       // Eşlikçi dropdown'larını güncelle
       populateCompanionSelect(document.getElementById('add-companions'));
       populateCompanionSelect(document.getElementById('edit-companions'));
+      
+      // Yeni eklenen eşlikçiye scroll yap
+      setTimeout(() => {
+        const newCompanionCard = document.querySelector(`[data-companion-id="${newCompanion.id}"]`);
+        if (newCompanionCard) {
+          newCompanionCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Eğer data attribute yoksa, companions listesine scroll yap
+          const companionsList = document.getElementById('companions-list');
+          if (companionsList) {
+            companionsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 100);
+      
       alert('Eşlikçi başarıyla eklendi!');
     });
   }
@@ -2420,6 +2528,15 @@ function setupCompanionForms() {
       // Eşlikçi dropdown'larını güncelle
       populateCompanionSelect(document.getElementById('add-companions'));
       populateCompanionSelect(document.getElementById('edit-companions'));
+      
+      // Güncellenen eşlikçiye scroll yap
+      setTimeout(() => {
+        const updatedCompanionCard = document.querySelector(`[data-companion-id="${companion.id}"]`);
+        if (updatedCompanionCard) {
+          updatedCompanionCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+      
       alert('Eşlikçi başarıyla güncellendi!');
     });
   }
