@@ -1941,6 +1941,19 @@ function setupForms() {
       // Ürünler tab'ına geç
       document.querySelector('[data-tab="products"]').click();
       
+      // Ürünler listesine scroll yap
+      setTimeout(() => {
+        const productsList = document.getElementById('products-list');
+        if (productsList) {
+          productsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const header = document.querySelector('.admin-header');
+          if (header) {
+            const headerHeight = header.offsetHeight;
+            window.scrollBy(0, -headerHeight - 20);
+          }
+        }
+      }, 100);
+      
       alert(`"${product.name}" ürünü başarıyla silindi!\n\nNot: Değişikliklerin GitHub'a gönderilmesi için "GitHub'da Güncelle" butonuna basın.`);
     });
   }
