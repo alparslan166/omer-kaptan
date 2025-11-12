@@ -2409,7 +2409,8 @@ function displayCategories() {
   productsData.categories.forEach((category, index) => {
     // Kategori slug'ını oluştur (resim yolu için)
     const categorySlug = normalizeForFileGlobal(category);
-    const categoryImage = `assets/${categorySlug}/${categorySlug}.jpg`;
+    const imageFileName = getCategoryImageFileName(category);
+    const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
     
     const li = document.createElement('li');
     li.className = 'category-item';
@@ -2559,7 +2560,8 @@ function editCategory(index) {
   
   const categoryName = productsData.categories[index];
   const categorySlug = normalizeForFileGlobal(categoryName);
-  const categoryImage = `assets/${categorySlug}/${categorySlug}.jpg`;
+  const imageFileName = getCategoryImageFileName(categoryName);
+  const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
   
   // Formu doldur
   document.getElementById('edit-category-index').value = index;
@@ -2724,6 +2726,17 @@ function deleteCompanion(id) {
       }, 100);
       
       alert(`"${companion.name}" eşlikçisi başarıyla silindi.`);
+}
+
+// Kategori resim dosya adını al
+function getCategoryImageFileName(categoryName) {
+  const categoryImageNames = {
+    'Ara Sıcaklar': 'ara-sicaklar',
+    'Alkolsüz İçecekler': 'alkolsuz-icecekler',
+    'Alkollü İçecekler': 'alkollu-icecekler'
+  };
+  
+  return categoryImageNames[categoryName] || normalizeForFileGlobal(categoryName);
 }
 
 // normalizeForFile global fonksiyonu
