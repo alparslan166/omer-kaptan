@@ -2027,14 +2027,92 @@ function displayCategories() {
   
   categoriesList.innerHTML = '';
   
-  productsData.categories.forEach(category => {
+  if (!productsData.categories || productsData.categories.length === 0) {
+    categoriesList.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Henüz kategori eklenmemiş.</p>';
+    return;
+  }
+  
+  productsData.categories.forEach((category, index) => {
+    // Kategori slug'ını oluştur (resim yolu için)
+    const categorySlug = normalizeForFileGlobal(category);
+    const categoryImage = `assets/${categorySlug}/${categorySlug}.jpg`;
+    
     const li = document.createElement('li');
+    li.className = 'category-item';
+    li.dataset.category = category;
+    li.dataset.index = index;
+    
     li.innerHTML = `
-      <span>${category}</span>
-      <button class="btn-danger btn-small" onclick="deleteCategory('${category}')">Sil</button>
+      <div class="category-item-content">
+        <div class="category-image-container">
+          <img src="${categoryImage}" alt="${category}" 
+               onerror="this.src='assets/omerkaptanlogo.png'; this.style.opacity='0.5';"
+               class="category-image" />
+        </div>
+        <div class="category-info">
+          <span class="category-name">${escapeHtml(category)}</span>
+          <span class="category-product-count">${getCategoryProductCount(category)} ürün</span>
+        </div>
+      </div>
+      <div class="category-actions">
+        <button class="btn-move btn-move-up" 
+                onclick="moveCategory('${category}', 'up')" 
+                ${index === 0 ? 'disabled' : ''}
+                title="Yukarı taşı">
+          ↑
+        </button>
+        <button class="btn-move btn-move-down" 
+                onclick="moveCategory('${category}', 'down')" 
+                ${index === productsData.categories.length - 1 ? 'disabled' : ''}
+                title="Aşağı taşı">
+          ↓
+        </button>
+        <button class="btn-danger btn-small" onclick="deleteCategory('${category}')" title="Sil">
+          Sil
+        </button>
+      </div>
     `;
     categoriesList.appendChild(li);
   });
+}
+
+// Kategori ürün sayısını al
+function getCategoryProductCount(categoryName) {
+  if (!productsData || !productsData.products) return 0;
+  return productsData.products.filter(p => p.category === categoryName && !p.hidden).length;
+}
+
+// Kategori sırasını değiştir
+function moveCategory(categoryName, direction) {
+  if (!productsData || !productsData.categories) return;
+  
+  const currentIndex = productsData.categories.indexOf(categoryName);
+  if (currentIndex === -1) return;
+  
+  let newIndex;
+  if (direction === 'up') {
+    if (currentIndex === 0) return; // Zaten en üstte
+    newIndex = currentIndex - 1;
+  } else if (direction === 'down') {
+    if (currentIndex === productsData.categories.length - 1) return; // Zaten en altta
+    newIndex = currentIndex + 1;
+  } else {
+    return;
+  }
+  
+  // Kategorileri yer değiştir
+  const temp = productsData.categories[currentIndex];
+  productsData.categories[currentIndex] = productsData.categories[newIndex];
+  productsData.categories[newIndex] = temp;
+  
+  // Değişiklikleri kaydet
+  saveProducts(productsData);
+  
+  // Kategorileri yeniden göster
+  displayCategories();
+  populateCategories();
+  
+  console.log(`Kategori "${categoryName}" ${direction === 'up' ? 'yukarı' : 'aşağı'} taşındı`);
 }
 
 // Kategori sil
