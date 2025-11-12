@@ -288,6 +288,56 @@
               <button type="submit" class="btn-primary">Ekle</button>
             </form>
           </div>
+          <div
+            class="edit-category-form"
+            id="edit-category-section"
+            style="display: none"
+          >
+            <h3>Kategori Düzenle</h3>
+            <form id="edit-category-form" class="admin-form">
+              <input type="hidden" id="edit-category-index" />
+              <div class="form-group">
+                <label for="edit-category-name">Kategori Adı *</label>
+                <input type="text" id="edit-category-name" required />
+              </div>
+              <div class="form-group">
+                <label for="edit-category-image-file">Kategori Resmi</label>
+                <div style="margin-bottom: 10px;">
+                  <img id="edit-category-image-preview" 
+                       src="" 
+                       alt="Mevcut resim" 
+                       style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;" />
+                </div>
+                <input
+                  type="file"
+                  id="edit-category-image-file"
+                  accept="image/*"
+                />
+                <small
+                  style="
+                    color: #666;
+                    font-size: 12px;
+                    display: block;
+                    margin-top: 4px;
+                  "
+                >
+                  Yeni resim dosyası seçin (isteğe bağlı). Resim yolu otomatik
+                  olarak oluşturulacaktır.
+                </small>
+                <input type="hidden" id="edit-category-image" />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Güncelle</button>
+                <button
+                  type="button"
+                  id="cancel-edit-category-btn"
+                  class="btn-secondary"
+                >
+                  İptal
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 

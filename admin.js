@@ -2001,6 +2001,192 @@ function setupForms() {
     });
   }
   
+  // Kategori düzenleme formu
+  const editCategoryForm = document.getElementById('edit-category-form');
+  if (editCategoryForm) {
+    // Resim önizleme
+    const editCategoryImageFile = document.getElementById('edit-category-image-file');
+    if (editCategoryImageFile) {
+      editCategoryImageFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const previewImg = document.getElementById('edit-category-image-preview');
+            if (previewImg) {
+              previewImg.src = event.target.result;
+              previewImg.style.display = 'block';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+    
+    // Form submit
+    editCategoryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const index = parseInt(document.getElementById('edit-category-index').value);
+      if (isNaN(index) || index < 0 || index >= productsData.categories.length) {
+        alert('Geçersiz kategori index!');
+        return;
+      }
+      
+      const oldCategoryName = productsData.categories[index];
+      const newCategoryName = document.getElementById('edit-category-name').value.trim();
+      
+      if (!newCategoryName) {
+        alert('Kategori adı boş olamaz!');
+        return;
+      }
+      
+      // Aynı isimde başka bir kategori var mı kontrol et
+      if (newCategoryName !== oldCategoryName && productsData.categories.includes(newCategoryName)) {
+        alert('Bu kategori adı zaten kullanılıyor!');
+        return;
+      }
+      
+      const imageFile = document.getElementById('edit-category-image-file').files[0];
+      const oldCategorySlug = normalizeForFileGlobal(oldCategoryName);
+      const newCategorySlug = normalizeForFileGlobal(newCategoryName);
+      
+      let imagePath = `assets/${newCategorySlug}/${newCategorySlug}.jpg`;
+      
+      // Yeni resim seçilmişse
+      if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop().toLowerCase();
+        imagePath = `assets/${newCategorySlug}/${newCategorySlug}.${fileExt}`;
+        
+        // Resmi GitHub'a yükle
+        const updateButton = editCategoryForm.querySelector('button[type="submit"]');
+        const originalButtonText = updateButton ? updateButton.textContent : 'Güncelle';
+        
+        try {
+          if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.uploadImage) {
+            if (updateButton) {
+              updateButton.disabled = true;
+              updateButton.textContent = '⏳ Resim yükleniyor...';
+            }
+            
+            console.log('Yeni kategori resmi GitHub\'a yükleniyor:', imagePath);
+            
+            const uploadResult = await window.GitHubAPI.uploadImage(imageFile, imagePath);
+            
+            if (uploadResult && uploadResult.success) {
+              console.log('✅ Kategori resmi başarıyla yüklendi:', uploadResult.url);
+              
+              // Eski resmi sil (eğer kategori adı değiştiyse veya farklı bir dosya adıysa)
+              if (oldCategoryName !== newCategoryName) {
+                const oldImagePath = `assets/${oldCategorySlug}/${oldCategorySlug}.jpg`;
+                try {
+                  await window.GitHubAPI.deleteFile(oldImagePath);
+                  console.log('✅ Eski kategori resmi silindi:', oldImagePath);
+                } catch (deleteError) {
+                  console.warn('⚠️ Eski kategori resmi silinemedi (dosya bulunamadı olabilir):', deleteError);
+                }
+              }
+            } else {
+              console.error('❌ Kategori resmi yüklenemedi:', uploadResult);
+              alert('Resim yüklenemedi! Lütfen GitHub ayarlarını kontrol edin.');
+              if (updateButton) {
+                updateButton.disabled = false;
+                updateButton.textContent = originalButtonText;
+              }
+              return;
+            }
+          } else {
+            console.warn('⚠️ GitHub API yapılandırılmamış, resim yüklenmeyecek');
+            alert('⚠️ GitHub API yapılandırılmamış! Resim GitHub\'a yüklenmeyecek. Lütfen ayarlardan GitHub API\'yi yapılandırın.');
+          }
+        } catch (error) {
+          console.error('❌ Kategori resmi yükleme hatası:', error);
+          alert('Resim yüklenirken bir hata oluştu: ' + error.message);
+          if (updateButton) {
+            updateButton.disabled = false;
+            updateButton.textContent = originalButtonText;
+          }
+          return;
+        }
+        
+        if (updateButton) {
+          updateButton.disabled = false;
+          updateButton.textContent = originalButtonText;
+        }
+      }
+      
+      // Kategori adını güncelle
+      productsData.categories[index] = newCategoryName;
+      
+      // Eğer kategori adı değiştiyse, bu kategorideki tüm ürünlerin kategorisini de güncelle
+      if (oldCategoryName !== newCategoryName) {
+        productsData.products.forEach(product => {
+          if (product.category === oldCategoryName) {
+            product.category = newCategoryName;
+          }
+        });
+      }
+      
+      // Değişiklikleri kaydet
+      saveProducts(productsData);
+      
+      // Formu temizle ve gizle
+      editCategoryForm.reset();
+      const editCategorySection = document.getElementById('edit-category-section');
+      if (editCategorySection) {
+        editCategorySection.style.display = 'none';
+      }
+      
+      const previewImg = document.getElementById('edit-category-image-preview');
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
+      
+      // Kategorileri ve ürünleri yeniden göster
+      populateCategories();
+      displayCategories();
+      displayProducts();
+      
+      // Güncellenen kategoriye scroll yap
+      setTimeout(() => {
+        const updatedCategoryItem = document.querySelector(`[data-category="${newCategoryName}"]`);
+        if (updatedCategoryItem) {
+          updatedCategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const header = document.querySelector('.admin-header');
+          if (header) {
+            const headerHeight = header.offsetHeight;
+            window.scrollBy(0, -headerHeight - 20);
+          }
+        }
+      }, 100);
+      
+      alert('Kategori başarıyla güncellendi!');
+    });
+  }
+  
+  // Kategori düzenleme iptal butonu
+  const cancelEditCategoryBtn = document.getElementById('cancel-edit-category-btn');
+  if (cancelEditCategoryBtn) {
+    cancelEditCategoryBtn.addEventListener('click', () => {
+      const editCategoryForm = document.getElementById('edit-category-form');
+      if (editCategoryForm) {
+        editCategoryForm.reset();
+      }
+      
+      const editCategorySection = document.getElementById('edit-category-section');
+      if (editCategorySection) {
+        editCategorySection.style.display = 'none';
+      }
+      
+      const previewImg = document.getElementById('edit-category-image-preview');
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
+    });
+  }
+  
   // Kategori filtreleme
   const categoryFilter = document.getElementById('category-filter');
   if (categoryFilter) {
@@ -2117,6 +2303,9 @@ function displayCategories() {
         </div>
       </div>
       <div class="category-actions">
+        <button class="btn-primary btn-small" onclick="editCategory(${index})" title="Düzenle">
+          Düzenle
+        </button>
         <button class="btn-move btn-move-up" 
                 onclick="moveCategory('${category}', 'up')" 
                 ${index === 0 ? 'disabled' : ''}
@@ -2233,6 +2422,59 @@ function deleteCategory(categoryName) {
   } else {
     alert(`"${categoryName}" kategorisi başarıyla silindi!`);
   }
+}
+
+// Kategori düzenle
+function editCategory(index) {
+  if (!productsData || !productsData.categories || index < 0 || index >= productsData.categories.length) {
+    console.error('Geçersiz kategori index:', index);
+    return;
+  }
+  
+  const categoryName = productsData.categories[index];
+  const categorySlug = normalizeForFileGlobal(categoryName);
+  const categoryImage = `assets/${categorySlug}/${categorySlug}.jpg`;
+  
+  // Formu doldur
+  document.getElementById('edit-category-index').value = index;
+  document.getElementById('edit-category-name').value = categoryName;
+  document.getElementById('edit-category-image').value = categoryImage;
+  
+  // Mevcut resmi göster
+  const previewImg = document.getElementById('edit-category-image-preview');
+  if (previewImg) {
+    previewImg.src = categoryImage;
+    previewImg.style.display = 'block';
+    previewImg.onerror = function() {
+      this.src = 'assets/omerkaptanlogo.png';
+      this.style.opacity = '0.5';
+    };
+  }
+  
+  // Düzenleme formunu göster
+  const editCategorySection = document.getElementById('edit-category-section');
+  if (editCategorySection) {
+    editCategorySection.style.display = 'block';
+  }
+  
+  // Categories tabını göster
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+  
+  document.querySelector('[data-tab="categories"]').classList.add('active');
+  document.getElementById('categories-tab').classList.add('active');
+  
+  // Düzenleme formuna yumuşak scroll
+  setTimeout(() => {
+    if (editCategorySection) {
+      editCategorySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const header = document.querySelector('.admin-header');
+      if (header) {
+        const headerHeight = header.offsetHeight;
+        window.scrollBy(0, -headerHeight - 20);
+      }
+    }
+  }, 100);
 }
 
 // Eşlikçileri listele
