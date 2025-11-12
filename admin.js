@@ -1303,6 +1303,19 @@ function editProduct(id) {
   document.getElementById('edit-short-desc').value = product.shortDesc || '';
   document.getElementById('edit-description').value = product.description;
   document.getElementById('edit-image').value = product.image;
+  
+  // Mevcut resmi göster
+  const previewImg = document.getElementById('edit-product-image-preview');
+  if (previewImg && product.image) {
+    previewImg.src = product.image;
+    previewImg.alt = product.name;
+    previewImg.style.display = 'block';
+    previewImg.onerror = function() {
+      this.src = 'assets/omerkaptanlogo.png';
+      this.style.opacity = '0.5';
+    };
+  }
+  
   // Eşlikçi dropdown'unu doldur ve seçili olanları işaretle
   const editCompanionsSelect = document.getElementById('edit-companions');
   if (editCompanionsSelect) {
@@ -1681,6 +1694,25 @@ function setupForms() {
       });
     }
     
+    // Resim önizleme
+    const editImageFile = document.getElementById('edit-image-file');
+    if (editImageFile) {
+      editImageFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const previewImg = document.getElementById('edit-product-image-preview');
+            if (previewImg) {
+              previewImg.src = event.target.result;
+              previewImg.style.display = 'block';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+    
     editForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -1906,6 +1938,13 @@ function setupForms() {
           }
         }
       }, 100);
+      
+      // Preview'ı temizle
+      const previewImg = document.getElementById('edit-product-image-preview');
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
       
       alert(`Ürün başarıyla güncellendi!\n\nEski ad: ${oldName}\nYeni ad: ${product.name}\n\nNot: Değişikliklerin GitHub'a gönderilmesi için "GitHub'da Güncelle" butonuna basın.`);
     });
@@ -2524,6 +2563,18 @@ function editCompanion(id) {
   document.getElementById('edit-companion-name').value = companion.name;
   document.getElementById('edit-companion-image').value = companion.image || '';
   
+  // Mevcut resmi göster
+  const previewImg = document.getElementById('edit-companion-image-preview');
+  if (previewImg && companion.image) {
+    previewImg.src = companion.image;
+    previewImg.alt = companion.name;
+    previewImg.style.display = 'block';
+    previewImg.onerror = function() {
+      this.src = 'assets/omerkaptanlogo.png';
+      this.style.opacity = '0.5';
+    };
+  }
+  
   // Düzenleme formunu göster
   const editCompanionSection = document.getElementById('edit-companion-section');
   editCompanionSection.style.display = 'block';
@@ -2695,6 +2746,25 @@ function setupCompanionForms() {
   // Eşlikçi düzenleme formu
   const editCompanionForm = document.getElementById('edit-companion-form');
   if (editCompanionForm) {
+    // Resim önizleme
+    const editCompanionImageFile = document.getElementById('edit-companion-image-file');
+    if (editCompanionImageFile) {
+      editCompanionImageFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const previewImg = document.getElementById('edit-companion-image-preview');
+            if (previewImg) {
+              previewImg.src = event.target.result;
+              previewImg.style.display = 'block';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+    
     editCompanionForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -2781,6 +2851,14 @@ function setupCompanionForms() {
       document.getElementById('edit-companion-section').style.display = 'none';
       document.querySelector('.add-companion-form').style.display = 'block';
       editCompanionForm.reset();
+      
+      // Preview'ı temizle
+      const previewImg = document.getElementById('edit-companion-image-preview');
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
+      
       displayCompanions();
       // Eşlikçi dropdown'larını güncelle
       populateCompanionSelect(document.getElementById('add-companions'));
@@ -2818,6 +2896,13 @@ function setupCompanionForms() {
       document.getElementById('edit-companion-section').style.display = 'none';
       document.querySelector('.add-companion-form').style.display = 'block';
       document.getElementById('edit-companion-form').reset();
+      
+      // Preview'ı temizle
+      const previewImg = document.getElementById('edit-companion-image-preview');
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
     });
   }
 }
@@ -2826,6 +2911,8 @@ function setupCompanionForms() {
 window.editProduct = editProduct;
 window.toggleProductVisibility = toggleProductVisibility;
 window.deleteCategory = deleteCategory;
+window.editCategory = editCategory;
+window.moveCategory = moveCategory;
 window.editCompanion = editCompanion;
 window.deleteCompanion = deleteCompanion;
 
