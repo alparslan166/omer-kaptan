@@ -2010,33 +2010,120 @@ function setupForms() {
   // Kategori ekleme
   const addCategoryForm = document.getElementById('add-category-form');
   if (addCategoryForm) {
-    addCategoryForm.addEventListener('submit', (e) => {
+    // Resim önizleme
+    const newCategoryImageFile = document.getElementById('new-category-image-file');
+    if (newCategoryImageFile) {
+      newCategoryImageFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const previewImg = document.getElementById('new-category-image-preview');
+            if (previewImg) {
+              previewImg.src = event.target.result;
+              previewImg.style.display = 'block';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+    
+    addCategoryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const categoryName = document.getElementById('new-category-name').value.trim();
-      if (!categoryName) return;
+      if (!categoryName) {
+        alert('Kategori adı boş olamaz!');
+        return;
+      }
       
       if (productsData.categories.includes(categoryName)) {
         alert('Bu kategori zaten mevcut!');
         return;
       }
       
-      productsData.categories.push(categoryName);
-      saveProducts(productsData);
+      const imageFile = document.getElementById('new-category-image-file').files[0];
+      if (!imageFile) {
+        alert('Kategori resmi seçilmedi!');
+        return;
+      }
       
-      document.getElementById('new-category-name').value = '';
-      populateCategories();
-      displayCategories();
+      const categorySlug = normalizeForFileGlobal(categoryName);
+      const fileExt = imageFile.name.split('.').pop().toLowerCase();
+      const imagePath = `assets/${categorySlug}/${categorySlug}.${fileExt}`;
+      const categoryHtmlPath = `categories/${categorySlug}.html`;
       
-      // Yeni eklenen kategoriye scroll yap
-      setTimeout(() => {
-        const newCategoryItem = document.querySelector(`[data-category="${categoryName}"]`);
-        if (newCategoryItem) {
-          newCategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const submitButton = addCategoryForm.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton ? submitButton.textContent : 'Kategori Ekle';
+      
+      try {
+        // GitHub API kontrolü
+        if (!window.GitHubConfig || !window.GitHubConfig.isGitHubConfigComplete() || !window.GitHubAPI) {
+          alert('⚠️ GitHub API yapılandırılmamış! Kategori eklemek için GitHub ayarlarını yapılandırın.');
+          return;
         }
-      }, 100);
-      
-      alert('Kategori başarıyla eklendi!');
+        
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = '⏳ Kategori ekleniyor...';
+        }
+        
+        // 1. Kategori resmini yükle
+        console.log('📸 Kategori resmi yükleniyor:', imagePath);
+        const uploadResult = await window.GitHubAPI.uploadImage(imageFile, imagePath);
+        if (!uploadResult || !uploadResult.success) {
+          throw new Error('Kategori resmi yüklenemedi!');
+        }
+        console.log('✅ Kategori resmi yüklendi:', uploadResult.url);
+        
+        // 2. Kategori HTML sayfası oluştur
+        const categoryHtml = generateCategoryHtml(categoryName, categorySlug);
+        console.log('📄 Kategori HTML sayfası oluşturuluyor:', categoryHtmlPath);
+        const htmlResult = await window.GitHubAPI.createOrUpdateFile(
+          categoryHtml,
+          categoryHtmlPath,
+          `Add category page: ${categoryName}`
+        );
+        if (!htmlResult || !htmlResult.success) {
+          throw new Error('Kategori HTML sayfası oluşturulamadı!');
+        }
+        console.log('✅ Kategori HTML sayfası oluşturuldu:', categoryHtmlPath);
+        
+        // 3. Kategoriyi products.json'a ekle
+        productsData.categories.push(categoryName);
+        saveProducts(productsData);
+        
+        // 4. Formu temizle
+        addCategoryForm.reset();
+        const previewImg = document.getElementById('new-category-image-preview');
+        if (previewImg) {
+          previewImg.src = '';
+          previewImg.style.display = 'none';
+        }
+        
+        // 5. Kategorileri yeniden göster
+        populateCategories();
+        displayCategories();
+        
+        // 6. Yeni eklenen kategoriye scroll yap
+        setTimeout(() => {
+          const newCategoryItem = document.querySelector(`[data-category="${categoryName}"]`);
+          if (newCategoryItem) {
+            newCategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+        
+        alert(`✅ Kategori başarıyla eklendi!\n\nKategori: ${categoryName}\nResim: ${imagePath}\nSayfa: ${categoryHtmlPath}`);
+      } catch (error) {
+        console.error('❌ Kategori ekleme hatası:', error);
+        alert('Kategori eklenirken bir hata oluştu: ' + error.message);
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
     });
   }
   
@@ -2641,6 +2728,23 @@ function deleteCompanion(id) {
 
 // normalizeForFile global fonksiyonu
 function normalizeForFileGlobal(text) {
+  if (!text || typeof text !== 'string') {
+    console.warn('normalizeForFileGlobal: geçersiz text parametresi:', text);
+    return '';
+  }
+  
+  // Özel durumlar - mevcut klasör yapısına uygun
+  const specialCases = {
+    'Ara Sıcaklar': 'arasicaklar',
+    'Alkolsüz İçecekler': 'alkolsuz-icecekler',
+    'Alkollü İçecekler': 'alkollu-icecekler',
+    'İçecekler': 'icecekler' // Eğer böyle bir kategori varsa
+  };
+  
+  if (specialCases[text]) {
+    return specialCases[text];
+  }
+  
   return text
     .toLowerCase()
     .replace(/ğ/g, 'g')
@@ -2905,6 +3009,126 @@ function setupCompanionForms() {
       }
     });
   }
+}
+
+// Kategori HTML sayfası oluştur
+function generateCategoryHtml(categoryName, categorySlug) {
+  return `<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${escapeHtml(categoryName)} - Menü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner">
+        <img src="../assets/capasimgesi.png" alt="Yükleniyor" />
+      </div>
+      <p class="loading-text">Yükleniyor...</p>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
+          </div>
+          <div class="titles">
+            <a href="../index.html" style="text-decoration: none; color: inherit;">
+              <h1 class="site-title">Ömer Kaptan</h1>
+            </a>
+            <p class="site-subtitle">${escapeHtml(categoryName)}</p>
+          </div>
+        </div>
+        <nav class="main-nav" aria-label="Geri">
+          <a
+            class="nav-link"
+            href="../index.html"
+            style="
+              text-decoration: none;
+              color: #4da6ff;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <span
+              class="icon"
+              style="display: inline-block; margin-bottom: 5px"
+            >
+              <img
+                src="../assets/capasimgesi.png"
+                alt=""
+                style="width: 35px; height: 35px; object-fit: contain"
+              />
+            </span>
+            <span style="font-size: 14px">Geri</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <div class="section-head"><h3>${escapeHtml(categoryName)}</h3></div>
+      <section class="product-grid" aria-label="${escapeHtml(categoryName)} ürünleri">
+      </section>
+    </main>
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Yukarı çık">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
+    <script>
+      // Scroll to top butonu
+      (function () {
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        if (!scrollToTopBtn) return;
+
+        function toggleScrollButton() {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = "flex";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        }
+
+        function checkScrollLoop() {
+          toggleScrollButton();
+          requestAnimationFrame(checkScrollLoop);
+        }
+
+        // İlk kontrol
+        toggleScrollButton();
+        // Sürekli kontrol döngüsünü başlat
+        requestAnimationFrame(checkScrollLoop);
+
+        scrollToTopBtn.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      })();
+    </script>
+    <script src="../dynamic-products.js"></script>
+    <script src="../product-visibility.js"></script>
+  </body>
+</html>`;
 }
 
 // Global fonksiyonlar (inline onclick için)

@@ -514,6 +514,114 @@ async function testGitHubConnection() {
   }
 }
 
+/**
+ * GitHub API ile herhangi bir dosya oluşturma/güncelleme
+ * @param {string} content - Dosya içeriği (string olarak)
+ * @param {string} filePath - Dosya yolu (örn: "categories/yeni-kategori.html")
+ * @param {string} commitMessage - Commit mesajı (opsiyonel)
+ * @returns {Promise<Object>} - API yanıtı
+ */
+async function createOrUpdateFileViaGitHubAPI(content, filePath, commitMessage = null) {
+  const configFuncs = getConfigFunctions();
+  if (!configFuncs) {
+    throw new Error('GitHub Config modülü yüklenmedi! Sayfayı yenileyin.');
+  }
+  
+  const { loadGitHubConfig, isGitHubConfigComplete } = configFuncs;
+  const config = loadGitHubConfig();
+  
+  if (!isGitHubConfigComplete()) {
+    throw new Error('GitHub API ayarları eksik! Lütfen ayarları yapılandırın.');
+  }
+  
+  const [owner, repo] = config.repository.split('/');
+  if (!owner || !repo) {
+    throw new Error('Repository formatı hatalı! Format: owner/repo');
+  }
+  
+  const maxRetries = 3;
+  let retryCount = 0;
+  
+  while (retryCount < maxRetries) {
+    try {
+      // Mevcut dosyayı al (SHA için)
+      const cacheBuster = Date.now();
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}&t=${cacheBuster}`;
+      const getFileResponse = await fetch(getFileUrl, {
+        headers: {
+          'Authorization': `token ${config.token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        cache: 'no-store'
+      });
+      
+      let sha = null;
+      if (getFileResponse.ok) {
+        const fileData = await getFileResponse.json();
+        sha = fileData.sha;
+      } else if (getFileResponse.status !== 404) {
+        const error = await getFileResponse.json().catch(() => ({}));
+        throw new Error(`Dosya bilgisi alınamadı: ${error.message || getFileResponse.statusText}`);
+      }
+      
+      // Dosyayı oluştur veya güncelle
+      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      const utf8Content = unescape(encodeURIComponent(content));
+      const base64Content = btoa(utf8Content);
+      
+      const updatePayload = {
+        message: commitMessage || `Update ${filePath} (${new Date().toISOString()})`,
+        content: base64Content,
+        branch: config.branch
+      };
+      
+      if (sha) {
+        updatePayload.sha = sha;
+      }
+      
+      const updateResponse = await fetch(updateUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${config.token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatePayload),
+        cache: 'no-store'
+      });
+      
+      if (updateResponse.ok) {
+        const result = await updateResponse.json();
+        return {
+          success: true,
+          commit: result.commit,
+          content: result.content
+        };
+      } else {
+        const errorData = await updateResponse.json().catch(() => ({}));
+        const errorMessage = errorData.message || updateResponse.statusText || 'Bilinmeyen hata';
+        
+        if (updateResponse.status === 409 && retryCount < maxRetries - 1) {
+          retryCount++;
+          const waitTime = Math.min(2000 * retryCount, 6000);
+          console.warn(`⚠️ SHA uyuşmazlığı, ${waitTime/1000} saniye bekleniyor...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          continue;
+        }
+        
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      if (retryCount < maxRetries - 1) {
+        retryCount++;
+        await new Promise(resolve => setTimeout(resolve, 2000 * retryCount));
+        continue;
+      }
+      throw error;
+    }
+  }
+}
+
 // Global erişim için (script tag ile yüklenirse)
 // Hemen window.GitHubAPI'yi oluştur (script yüklendiğinde)
 if (typeof window !== 'undefined') {
@@ -521,6 +629,7 @@ if (typeof window !== 'undefined') {
     updateFile: updateFileViaGitHubAPI,
     uploadImage: uploadImageFileViaGitHubAPI,
     deleteFile: deleteFileViaGitHubAPI,
+    createOrUpdateFile: createOrUpdateFileViaGitHubAPI,
     testConnection: testGitHubConnection
   };
   console.log('✅ GitHub API modülü yüklendi');
