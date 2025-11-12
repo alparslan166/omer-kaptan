@@ -757,6 +757,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // normalizeForFileGlobal fonksiyonunu burada tanımla (henüz tanımlanmamış olabilir)
     const normalizeForMigration = (text) => {
+      // Null/undefined kontrolü
+      if (!text || typeof text !== 'string') {
+        console.warn('normalizeForMigration: geçersiz text parametresi:', text);
+        return '';
+      }
+      
       return text
         .toLowerCase()
         .replace(/ğ/g, 'g')
@@ -774,9 +780,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       const existingCompanionNames = new Set();
       
       // Mevcut companions array'inden isimleri topla
+      // Companions hem string array hem de obje array olabilir
       if (productsData.companions && Array.isArray(productsData.companions)) {
         productsData.companions.forEach(c => {
-          if (c.name) existingCompanionNames.add(c.name);
+          if (typeof c === 'string') {
+            // String formatı
+            existingCompanionNames.add(c);
+          } else if (c && typeof c === 'object' && c.name) {
+            // Obje formatı
+            existingCompanionNames.add(c.name);
+          }
         });
       }
       
@@ -815,25 +828,64 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
       
-      // Mevcut eşlikçilerin resim yollarını assets/companions/ formatına çevir
+      // Mevcut eşlikçileri obje formatına çevir (eğer string array ise)
       if (productsData.companions && Array.isArray(productsData.companions)) {
-        productsData.companions.forEach(companion => {
-          if (companion.image) {
-            // Eğer assets/companions/ ile başlamıyorsa güncelle
-            if (!companion.image.startsWith('assets/companions/')) {
-              if (companion.image.startsWith('companions/')) {
-                companion.image = `assets/${companion.image}`;
-              } else if (!companion.image.startsWith('assets/')) {
-                companion.image = `assets/companions/${companion.image}`;
-              }
-              companionsUpdated = true;
+        // Eğer ilk eleman string ise, tüm array'i obje formatına çevir
+        if (productsData.companions.length > 0 && typeof productsData.companions[0] === 'string') {
+          console.log('Companions array string formatında, obje formatına çevriliyor...');
+          const companionObjects = [];
+          let maxId = 0;
+          
+          productsData.companions.forEach((companionName, index) => {
+            if (typeof companionName === 'string' && companionName.trim()) {
+              const normalizedName = normalizeForMigration(companionName.trim());
+              companionObjects.push({
+                id: index + 1,
+                name: companionName.trim(),
+                image: `assets/companions/${normalizedName}.jpg`
+              });
+              maxId = Math.max(maxId, index + 1);
             }
-          } else {
-            // Resim yolu yoksa oluştur
-            companion.image = `assets/companions/${normalizeForMigration(companion.name)}.jpg`;
-            companionsUpdated = true;
-          }
-        });
+          });
+          
+          productsData.companions = companionObjects;
+          companionsUpdated = true;
+          console.log(`${companionObjects.length} eşlikçi obje formatına çevrildi`);
+        } else {
+          // Zaten obje formatında, sadece resim yollarını kontrol et
+          productsData.companions.forEach(companion => {
+            // Companion objesi ve name property'si kontrolü
+            if (!companion || typeof companion !== 'object') {
+              return; // Geçersiz companion objesi, atla
+            }
+            
+            if (!companion.name || typeof companion.name !== 'string') {
+              console.warn('Geçersiz eşlikçi objesi (name yok):', companion);
+              return; // Name yoksa atla
+            }
+            
+            if (companion.image) {
+              // Eğer assets/companions/ ile başlamıyorsa güncelle
+              if (!companion.image.startsWith('assets/companions/')) {
+                if (companion.image.startsWith('companions/')) {
+                  companion.image = `assets/${companion.image}`;
+                } else if (!companion.image.startsWith('assets/')) {
+                  companion.image = `assets/companions/${companion.image}`;
+                }
+                companionsUpdated = true;
+              }
+            } else {
+              // Resim yolu yoksa oluştur
+              const normalizedName = normalizeForMigration(companion.name);
+              if (normalizedName) {
+                companion.image = `assets/companions/${normalizedName}.jpg`;
+                companionsUpdated = true;
+              } else {
+                console.warn('Eşlikçi için resim yolu oluşturulamadı:', companion.name);
+              }
+            }
+          });
+        }
       }
       
       if (companionsUpdated) {
