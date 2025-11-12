@@ -1307,7 +1307,13 @@ function editProduct(id) {
   // Mevcut resmi göster
   const previewImg = document.getElementById('edit-product-image-preview');
   if (previewImg && product.image) {
-    previewImg.src = product.image;
+    // Resim yolu assets/ ile başlamıyorsa ekle
+    let imagePath = product.image;
+    if (!imagePath.startsWith('assets/') && !imagePath.startsWith('http://') && !imagePath.startsWith('https://') && !imagePath.startsWith('/')) {
+      imagePath = `assets/${imagePath}`;
+    }
+    
+    previewImg.src = imagePath;
     previewImg.alt = product.name;
     previewImg.style.display = 'block';
     previewImg.onerror = function() {
@@ -2394,6 +2400,17 @@ function filterProducts() {
   displayProducts(filtered);
 }
 
+// Kategori resim dosya adını al
+function getCategoryImageFileName(categoryName) {
+  const categoryImageNames = {
+    'Ara Sıcaklar': 'ara-sicaklar',
+    'Alkolsüz İçecekler': 'alkolsuz-icecekler',
+    'Alkollü İçecekler': 'alkollu-icecekler'
+  };
+  
+  return categoryImageNames[categoryName] || normalizeForFileGlobal(categoryName);
+}
+
 // Kategorileri listele
 function displayCategories() {
   const categoriesList = document.getElementById('categories-list');
@@ -2726,17 +2743,6 @@ function deleteCompanion(id) {
       }, 100);
       
       alert(`"${companion.name}" eşlikçisi başarıyla silindi.`);
-}
-
-// Kategori resim dosya adını al
-function getCategoryImageFileName(categoryName) {
-  const categoryImageNames = {
-    'Ara Sıcaklar': 'ara-sicaklar',
-    'Alkolsüz İçecekler': 'alkolsuz-icecekler',
-    'Alkollü İçecekler': 'alkollu-icecekler'
-  };
-  
-  return categoryImageNames[categoryName] || normalizeForFileGlobal(categoryName);
 }
 
 // normalizeForFile global fonksiyonu
