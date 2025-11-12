@@ -1217,6 +1217,7 @@ function displayHiddenProducts() {
     
     const card = document.createElement('div');
     card.className = 'product-card-admin';
+    card.dataset.productId = product.id;
     
     // Resim div'i oluştur
     const imageDiv = document.createElement('div');
