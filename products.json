@@ -1,7 +1,7 @@
 {
   "categories": [
-    "Tavalar",
     "Izgaralar",
+    "Tavalar",
     "Buğulamalar",
     "Kavurmalar",
     "Ara Sıcaklar",
@@ -2647,16 +2647,60 @@
     }
   ],
   "companions": [
-    "Beyaz Peynir",
-    "Fıstık",
-    "Kavun",
-    "Kraker",
-    "Limon",
-    "Peynir",
-    "Pide",
-    "Roka",
-    "Sos",
-    "Soğan",
-    "Turşu"
+    {
+      "id": 1,
+      "name": "Beyaz Peynir",
+      "image": "assets/companions/beyaz-peynir.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Fıstık",
+      "image": "assets/companions/fistik.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Kavun",
+      "image": "assets/companions/kavun.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Kraker",
+      "image": "assets/companions/kraker.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Limon",
+      "image": "assets/companions/limon.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Peynir",
+      "image": "assets/companions/peynir.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Pide",
+      "image": "assets/companions/pide.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Roka",
+      "image": "assets/companions/roka.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Sos",
+      "image": "assets/companions/sos.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Soğan",
+      "image": "assets/companions/sogan.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Turşu",
+      "image": "assets/companions/tursu.jpg"
+    }
   ]
 }
