@@ -86,78 +86,273 @@ TASARIM VE GÖRSEL
 
 🔧 YÖNETİM PANELİ (ADMİN)
 
-YÖNETİM PANELİ ÖZELLİKLERİ
-- Tüm ürünlerin listesi görüntülenir
-- Her ürün için şu bilgiler gösterilir:
-  • Ürün resmi
-  • Ürün adı
-  • Kategori
-  • Fiyat
-  • Kısa açıklama
-  • Gizli/Görünür durumu
-  • Stokta var/yok durumu
-- Ürünler üzerinde şu işlemler yapılabilir:
-  • Ürün düzenleme
-  • Ürün silme
-  • Ürün gizleme/gösterme
-  • Ürün stok durumu güncelleme
+ADMİN PANELİ ERİŞİMİ
+- Admin paneli: admin.html sayfasından erişilir
+- Panel 5 ana sekmeden oluşur: Ürünler, Yeni Ürün Ekle, Kategoriler, Eşlikçiler, Gizlenen Ürünler
+- Tüm işlemler tek bir arayüzden yönetilir
+- Responsive tasarım sayesinde mobil cihazlardan da yönetim yapılabilir
 
 ÜRÜN YÖNETİMİ
-- Yeni ürün ekleme:
-  • Kategori seçimi
-  • Alt kategori seçimi (Alkollü İçecekler ve Mezeler için)
+
+Ürün Listeleme:
+- Tüm ürünler görsel kartlar halinde listelenir
+- Her ürün kartında şunlar gösterilir:
+  • Ürün resmi
   • Ürün adı
+  • Kategori bilgisi
   • Fiyat
   • Kısa açıklama
-  • Detaylı açıklama
-  • Ürün resmi yükleme (otomatik yol oluşturma)
-  • Ücretsiz eşlikçiler seçimi
-  • Gizli/Görünür durumu
-  • Stok durumu
-- Ürün düzenleme:
-  • Tüm ürün bilgileri güncellenebilir
-  • Resim değiştirildiğinde eski resim otomatik olarak silinir
-  • Yeni resim aynı dosya adıyla kaydedilir (ürün adı ve kategori değişmediyse)
-  • Ürün adı veya kategori değiştiyse yeni dosya adı oluşturulur ve eski resim silinir
-- Ürün silme:
-  • Silme işlemi için onay mesajı gösterilir
-  • Silinen ürün kalıcı olarak kaldırılır
+  • Gizli/Görünür durumu (badge ile)
+  • Stokta var/yok durumu (badge ile)
+- Kategori filtresi ile ürünler kategoriye göre filtrelenebilir
+- Arama kutusu ile ürün adına göre arama yapılabilir
+- "Düzenle" butonuna tıklandığında sayfa otomatik olarak düzenleme formuna kaydırılır
+
+Yeni Ürün Ekleme:
+- "Yeni Ürün Ekle" sekmesinden yeni ürün eklenir
+- Gerekli alanlar:
+  • Kategori seçimi (zorunlu)
+  • Alt kategori seçimi (Alkollü İçecekler ve Mezeler için otomatik görünür)
+  • Ürün adı (zorunlu)
+  • Fiyat (zorunlu, ₺ cinsinden)
+  • Kısa açıklama (isteğe bağlı)
+  • Detaylı açıklama (zorunlu)
+  • Ürün resmi (zorunlu, dosya seçimi)
+  • Ücretsiz eşlikçiler (çoklu seçim, Ctrl/Cmd ile)
+  • Gizli/Görünür durumu (checkbox)
+  • Stok durumu (checkbox)
+- Resim yolu otomatik olarak oluşturulur: assets/[kategori]/[ürün-adı].jpg
+- Form gönderildiğinde ürün products.json'a eklenir ve GitHub'a yüklenir
+
+Ürün Düzenleme:
+- Ürün listesindeki "Düzenle" butonuna tıklanarak ürün düzenlenir
+- Düzenleme formu açıldığında:
+  • Sayfa otomatik olarak düzenleme formuna kaydırılır
+  • Mevcut ürün bilgileri form alanlarına doldurulur
+  • Mevcut ürün resmi önizleme alanında gösterilir
+- Tüm ürün bilgileri güncellenebilir
+- Yeni resim seçildiğinde:
+  • Yeni resim anında önizleme alanında gösterilir
+  • Eski resim otomatik olarak GitHub'dan silinir
+  • Yeni resim GitHub'a yüklenir
+- Ürün adı veya kategori değiştiyse:
+  • Yeni dosya adı otomatik oluşturulur
+  • Eski resim dosyası silinir
+  • Yeni resim yeni yola kaydedilir
+- "Güncelle" butonu ile değişiklikler kaydedilir
+- "Sil" butonu ile ürün kalıcı olarak silinir (onay ile)
+- "İptal" butonu ile düzenleme iptal edilir
+
+Ürün Silme:
+- Düzenleme formundaki "Sil" butonuna tıklanır
+- Onay mesajı gösterilir
+- Onaylandığında ürün products.json'dan kaldırılır
+- Ürün resmi GitHub'dan otomatik olarak silinir
+- Değişiklikler GitHub'a yüklenir
 
 KATEGORİ YÖNETİMİ
-- Yeni kategori ekleme
-- Kategori silme (onay ile)
-- Kategori listesi görüntüleme
+
+Kategori Listeleme:
+- "Kategoriler" sekmesinde tüm kategoriler listelenir
+- Her kategori için şunlar gösterilir:
+  • Kategori resmi (küçük önizleme)
+  • Kategori adı
+  • Kategorideki ürün sayısı
+  • "Düzenle" butonu
+  • "Yukarı Taşı" butonu (ilk kategori hariç)
+  • "Aşağı Taşı" butonu (son kategori hariç)
+  • "Sil" butonu
+- Kategoriler products.json'daki sıraya göre listelenir
+- Ana sayfadaki kategori sıralaması bu sıraya göre belirlenir
+
+Yeni Kategori Ekleme:
+- "Kategoriler" sekmesindeki formdan yeni kategori eklenir
+- Gerekli alanlar:
+  • Kategori adı (zorunlu)
+  • Kategori resmi (zorunlu, dosya seçimi)
+- Resim seçildiğinde anında önizleme gösterilir
+- Kategori eklendiğinde:
+  • Kategori resmi GitHub'a yüklenir (assets/[kategori-slug]/[kategori-slug].jpg)
+  • Kategoriye özel HTML sayfası otomatik oluşturulur (categories/[kategori-slug].html)
+  • Kategori products.json'a eklenir
+  • Kategoriler listesi yenilenir
+  • Sayfa yeni eklenen kategoriye otomatik kaydırılır
+- Yeni kategori sayfası mevcut kategori sayfaları ile aynı yapıda oluşturulur
+
+Kategori Düzenleme:
+- Kategori listesindeki "Düzenle" butonuna tıklanır
+- Düzenleme formu açıldığında:
+  • Sayfa otomatik olarak düzenleme formuna kaydırılır
+  • Mevcut kategori adı form alanına doldurulur
+  • Mevcut kategori resmi önizleme alanında gösterilir
+- Kategori adı güncellenebilir
+- Yeni resim seçildiğinde:
+  • Yeni resim anında önizleme alanında gösterilir
+  • Eski resim otomatik olarak GitHub'dan silinir (kategori adı değiştiyse)
+  • Yeni resim GitHub'a yüklenir
+- Kategori adı değiştiyse:
+  • O kategorideki tüm ürünlerin kategorisi otomatik güncellenir
+  • Eski kategori resmi silinir
+  • Yeni kategori resmi yeni yola kaydedilir
+- "Güncelle" butonu ile değişiklikler kaydedilir
+- "İptal" butonu ile düzenleme iptal edilir
+- Güncelleme sonrası sayfa güncellenen kategoriye otomatik kaydırılır
+
+Kategori Sıralama:
+- Kategori listesindeki "Yukarı Taşı" veya "Aşağı Taşı" butonlarına tıklanır
+- Kategori bir sıra yukarı veya aşağı taşınır
+- Sıralama anında products.json'da güncellenir
+- Ana sayfadaki kategori sırası bu değişikliği yansıtır
+- Değişiklikler GitHub'a yüklenir
+
+Kategori Silme:
+- Kategori listesindeki "Sil" butonuna tıklanır
+- Onay mesajı gösterilir
+- Onaylandığında:
+  • Kategori products.json'dan kaldırılır
+  • O kategorideki tüm ürünler de silinir (veya uyarı verilir)
+  • Kategori resmi GitHub'dan silinir
+  • Kategori HTML sayfası GitHub'dan silinir
+- Değişiklikler GitHub'a yüklenir
 
 EŞLİKÇİ YÖNETİMİ
-- Eşlikçi listesi görüntüleme
-- Yeni eşlikçi ekleme (ad ve resim)
-- Eşlikçi düzenleme
-- Eşlikçi silme (onay ile)
-- Eşlikçiler ürün ekleme/düzenleme formlarında seçilebilir
+
+Eşlikçi Listeleme:
+- "Eşlikçiler" sekmesinde tüm eşlikçiler görsel kartlar halinde listelenir
+- Her eşlikçi kartında şunlar gösterilir:
+  • Eşlikçi resmi
+  • Eşlikçi adı
+  • "Düzenle" butonu
+  • "Sil" butonu
+
+Yeni Eşlikçi Ekleme:
+- "Eşlikçiler" sekmesindeki formdan yeni eşlikçi eklenir
+- Gerekli alanlar:
+  • Eşlikçi adı (zorunlu)
+  • Eşlikçi resmi (zorunlu, dosya seçimi)
+- Resim yolu otomatik oluşturulur: assets/companions/[eşlikçi-adı].jpg
+- Eşlikçi eklendiğinde:
+  • Resim GitHub'a yüklenir
+  • Eşlikçi products.json'a eklenir
+  • Eşlikçiler listesi yenilenir
+
+Eşlikçi Düzenleme:
+- Eşlikçi listesindeki "Düzenle" butonuna tıklanır
+- Düzenleme formu açıldığında:
+  • Sayfa otomatik olarak düzenleme formuna kaydırılır
+  • Mevcut eşlikçi adı form alanına doldurulur
+  • Mevcut eşlikçi resmi önizleme alanında gösterilir
+- Eşlikçi adı güncellenebilir
+- Yeni resim seçildiğinde:
+  • Yeni resim anında önizleme alanında gösterilir
+  • Eski resim otomatik olarak GitHub'dan silinir
+  • Yeni resim GitHub'a yüklenir
+- "Güncelle" butonu ile değişiklikler kaydedilir
+- "Sil" butonu ile eşlikçi kalıcı olarak silinir (onay ile)
+- "İptal" butonu ile düzenleme iptal edilir
+
+Eşlikçi Silme:
+- Düzenleme formundaki "Sil" butonuna tıklanır
+- Onay mesajı gösterilir
+- Onaylandığında:
+  • Eşlikçi products.json'dan kaldırılır
+  • Eşlikçi resmi GitHub'dan silinir
+  • Bu eşlikçiyi kullanan tüm ürünlerden eşlikçi kaldırılır
+- Değişiklikler GitHub'a yüklenir
 
 GİZLİ ÜRÜNLER
-- Gizlenen ürünler ayrı bir bölümde listelenir
+
+Gizli Ürün Yönetimi:
+- "Gizlenen Ürünler" sekmesinde gizlenen tüm ürünler listelenir
 - Gizli ürünler kategori sayfalarında ve ana sayfada gösterilmez
 - Gizli ürünlerin detay sayfasına erişilemez
-- Ürünler gizlenebilir veya tekrar görünür yapılabilir
+- Ürün düzenleme formundaki "Gizli" checkbox'ı ile ürün gizlenebilir veya tekrar görünür yapılabilir
+- Gizli ürünler ayrı bir sekmede yönetilir
 
 STOK YÖNETİMİ
-- Ürünler "Stokta Var" veya "Stokta Yok" olarak işaretlenebilir
-- Stokta olmayan ürünler kategori sayfalarında görünür
-- Stokta olmayan ürünlerin detay sayfasında "Maalesef Tükendi" mesajı gösterilir
 
-OTOMATIK GÜNCELLEME
+Stok Durumu:
+- Ürün düzenleme formundaki "Stokta Yok" checkbox'ı ile ürün stok durumu güncellenir
+- Stokta olmayan ürünler:
+  • Kategori sayfalarında görünür (normal şekilde listelenir)
+  • Detay sayfasında "Maalesef Tükendi" mesajı gösterilir
+  • Ürün kartında "Stokta Yok" badge'i gösterilir
+- Stok durumu anında güncellenir ve GitHub'a yüklenir
+
+OTOMATİK GÜNCELLEME SİSTEMİ
+
+GitHub API Entegrasyonu:
 - Tüm değişiklikler otomatik olarak GitHub'a yüklenir
-- GitHub ayarları yapılandırıldıktan sonra tüm güncellemeler otomatik olarak tüm cihazlarda görünür
-- Resim yükleme, ürün güncelleme ve dosya silme işlemleri GitHub API üzerinden yapılır
+- GitHub ayarları yapılandırıldıktan sonra:
+  • Resim yükleme işlemleri GitHub API üzerinden yapılır
+  • Dosya güncelleme işlemleri GitHub API üzerinden yapılır
+  • Dosya silme işlemleri GitHub API üzerinden yapılır
+  • products.json güncellemeleri GitHub API üzerinden yapılır
 - Değişiklikler anında tüm cihazlarda (mobil, tablet, masaüstü) görünür hale gelir
+- GitHub ayarları için "GitHub Ayarları" butonuna tıklanır
+- GitHub API yapılandırması için GITHUB_AUTO_UPDATE_SETUP.md dosyasına bakılır
+
+Manuel Güncelleme:
+- GitHub API yapılandırılmamışsa:
+  • "Dosyayı İndir" butonu ile products.json dosyası indirilir
+  • İndirilen dosya manuel olarak GitHub repository'ye yüklenir
+  • Veya FTP/dosya yönetimi ile sunucuya yüklenir
+
+KULLANICI DENEYİMİ ÖZELLİKLERİ
+
+Otomatik Kaydırma:
+- Ürün düzenleme butonuna tıklandığında sayfa otomatik olarak düzenleme formuna kaydırılır
+- Kategori düzenleme butonuna tıklandığında sayfa otomatik olarak düzenleme formuna kaydırılır
+- Eşlikçi düzenleme butonuna tıklandığında sayfa otomatik olarak düzenleme formuna kaydırılır
+- Yeni kategori eklendiğinde sayfa yeni kategoriye otomatik kaydırılır
+- Kategori güncellendiğinde sayfa güncellenen kategoriye otomatik kaydırılır
+- Sabit header için otomatik offset hesaplanır
+
+Resim Önizleme:
+- Ürün düzenleme formunda mevcut resim anında gösterilir
+- Yeni resim seçildiğinde anında önizleme alanında gösterilir
+- Kategori düzenleme formunda mevcut resim anında gösterilir
+- Yeni kategori resmi seçildiğinde anında önizleme gösterilir
+- Eşlikçi düzenleme formunda mevcut resim anında gösterilir
+- Yeni eşlikçi resmi seçildiğinde anında önizleme gösterilir
+
+Bildirimler:
+- Başarılı işlemler için yeşil bildirim mesajları gösterilir
+- Hata durumlarında kırmızı bildirim mesajları gösterilir
+- GitHub API hatalarında açıklayıcı mesajlar gösterilir
 
 TEKNİK ÖZELLİKLER
+
+Veri Yapısı:
 - Tüm veriler products.json dosyasında saklanır
+- products.json yapısı:
+  • categories: Kategori adları array'i
+  • products: Ürün objeleri array'i
+  • companions: Eşlikçi objeleri array'i
+- LocalStorage cache mekanizması ile hızlı yükleme sağlanır
+- products.json yüklenemezse LocalStorage'dan yedek yükleme yapılır
+
+Dosya Organizasyonu:
 - Resimler assets klasörü altında kategorilere göre organize edilir
-- Eşlikçi resimleri assets/companions klasöründe saklanır
-- Ürün resimleri otomatik olarak kategorize edilir ve uygun klasörlere kaydedilir
-- Resim yolları otomatik olarak oluşturulur (kategori ve ürün adına göre)
+  • Ürün resimleri: assets/[kategori-slug]/[ürün-slug].jpg
+  • Kategori resimleri: assets/[kategori-slug]/[kategori-slug].jpg
+  • Eşlikçi resimleri: assets/companions/[eşlikçi-slug].jpg
+- Kategori sayfaları categories klasöründe saklanır
+  • Format: categories/[kategori-slug].html
+- Resim yolları otomatik olarak oluşturulur (Türkçe karakterler normalize edilir)
+
+Özel Kategori İşlemleri:
+- "Ara Sıcaklar" kategorisi için özel dosya adı: ara-sicaklar
+- "Alkolsüz İçecekler" kategorisi için özel dosya adı: alkolsuz-icecekler
+- "Alkollü İçecekler" kategorisi için özel dosya adı: alkollu-icecekler
+- Diğer kategoriler için otomatik slug oluşturulur
+
+GitHub API İşlemleri:
+- Resim yükleme: uploadImage() fonksiyonu
+- Dosya oluşturma/güncelleme: createOrUpdateFile() fonksiyonu
+- Dosya silme: deleteFile() fonksiyonu
+- Tüm işlemler commit mesajları ile yapılır
+- Hata durumlarında kullanıcıya bilgilendirme yapılır
 
 🎨 TASARIM ÖZELLİKLERİ
 
@@ -195,14 +390,56 @@ MÜŞTERİLER İÇİN
 - Ürün kartlarındaki "Detay" butonuna tıklayarak detaylı bilgi alabilirsiniz
 - "Yukarı Çık" butonu ile sayfanın en üstüne hızlıca dönebilirsiniz
 - Mobil cihazlarda kaydırarak menüyü gezebilirsiniz
+- Ürün detay sayfalarında "Şefin Önerdiği Mezeler" bölümünü inceleyebilirsiniz
 
 YÖNETİCİLER İÇİN
-- Admin panelinden tüm ürünleri yönetebilirsiniz
-- Yeni ürün ekleyebilir, mevcut ürünleri düzenleyebilir veya silebilirsiniz
-- Ürünleri gizleyebilir veya tekrar görünür yapabilirsiniz
-- Stok durumunu güncelleyebilirsiniz
-- Resim yüklediğinizde eski resim otomatik olarak silinir
-- Tüm değişiklikler otomatik olarak GitHub'a yüklenir ve tüm cihazlarda görünür
+
+İlk Kurulum:
+1. Admin paneline admin.html sayfasından erişin
+2. GitHub API ayarlarını yapılandırın (GITHUB_AUTO_UPDATE_SETUP.md dosyasına bakın)
+3. GitHub ayarları için admin panelindeki "GitHub Ayarları" butonuna tıklayın
+4. Repository bilgilerini, token'ı ve branch adını girin
+5. Ayarları kaydedin
+
+Ürün Yönetimi:
+- Yeni ürün eklerken tüm zorunlu alanları doldurun
+- Ürün resmi seçerken yüksek kaliteli görseller kullanın
+- Eşlikçileri seçerken Ctrl (Windows) veya Cmd (Mac) tuşuna basılı tutarak çoklu seçim yapın
+- Ürün düzenlerken mevcut resim önizleme alanında görünecektir
+- Yeni resim seçtiğinizde anında önizleme göreceksiniz
+- Ürün adı veya kategori değiştirdiğinizde resim yolu otomatik güncellenir
+
+Kategori Yönetimi:
+- Yeni kategori eklerken kategori resmi mutlaka seçin
+- Kategori resmi seçildiğinde anında önizleme gösterilir
+- Yeni kategori eklendiğinde otomatik olarak kategori sayfası oluşturulur
+- Kategorilerin sırasını değiştirmek için "Yukarı Taşı" veya "Aşağı Taşı" butonlarını kullanın
+- Kategori adı değiştirdiğinizde o kategorideki tüm ürünlerin kategorisi otomatik güncellenir
+- Kategori silmeden önce o kategorideki ürünleri kontrol edin
+
+Eşlikçi Yönetimi:
+- Yeni eşlikçi eklerken resim mutlaka seçin
+- Eşlikçi düzenlerken mevcut resim önizleme alanında görünecektir
+- Eşlikçi silindiğinde o eşlikçiyi kullanan tüm ürünlerden otomatik kaldırılır
+
+Stok ve Gizlilik:
+- Stokta olmayan ürünleri "Stokta Yok" olarak işaretleyin
+- Geçici olarak menüden kaldırmak istediğiniz ürünleri "Gizli" olarak işaretleyin
+- Gizli ürünler "Gizlenen Ürünler" sekmesinden yönetilir
+
+GitHub Güncellemeleri:
+- GitHub API yapılandırıldıktan sonra tüm değişiklikler otomatik olarak GitHub'a yüklenir
+- "Otomatik Güncelle (GitHub)" butonu ile products.json dosyası GitHub'a yüklenir
+- GitHub API yapılandırılmamışsa "Dosyayı İndir" butonu ile products.json'u indirip manuel yükleyin
+- Değişiklikler birkaç dakika içinde tüm cihazlarda görünür hale gelir
+
+İpuçları:
+- Resim yüklerken JPG veya PNG formatı kullanın
+- Resim dosya adlarında Türkçe karakter kullanmayın (otomatik normalize edilir)
+- Ürün eklerken/düzenlerken tüm bilgileri eksiksiz doldurun
+- Kategori sıralamasını değiştirerek ana sayfadaki kategori sırasını kontrol edebilirsiniz
+- Düzenleme formlarına otomatik kaydırma özelliği sayesinde kolayca erişebilirsiniz
+- Resim önizleme özelliği sayesinde yüklediğiniz resmi anında görebilirsiniz
 
 📞 İLETİŞİM
 
