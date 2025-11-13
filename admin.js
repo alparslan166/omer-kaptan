@@ -2186,13 +2186,18 @@ function setupForms() {
       const imageFile = document.getElementById('edit-category-image-file').files[0];
       const oldCategorySlug = normalizeForFileGlobal(oldCategoryName);
       const newCategorySlug = normalizeForFileGlobal(newCategoryName);
+      const newImageFileName = getCategoryImageFileName(newCategoryName);
+      // "Ara Sıcaklar" için assets klasör adı "arasicaklar" (tire olmadan)
+      const newImageCategorySlug = newCategoryName === 'Ara Sıcaklar' ? 'arasicaklar' : newCategorySlug;
+      const oldImageCategorySlug = oldCategoryName === 'Ara Sıcaklar' ? 'arasicaklar' : oldCategorySlug;
+      const oldImageFileName = getCategoryImageFileName(oldCategoryName);
       
-      let imagePath = `assets/${newCategorySlug}/${newCategorySlug}.jpg`;
+      let imagePath = `assets/${newImageCategorySlug}/${newImageFileName}.jpg`;
       
       // Yeni resim seçilmişse
       if (imageFile) {
         const fileExt = imageFile.name.split('.').pop().toLowerCase();
-        imagePath = `assets/${newCategorySlug}/${newCategorySlug}.${fileExt}`;
+        imagePath = `assets/${newImageCategorySlug}/${newImageFileName}.${fileExt}`;
         
         // Resmi GitHub'a yükle
         const updateButton = editCategoryForm.querySelector('button[type="submit"]');
@@ -2213,8 +2218,8 @@ function setupForms() {
               console.log('✅ Kategori resmi başarıyla yüklendi:', uploadResult.url);
               
               // Eski resmi sil (eğer kategori adı değiştiyse veya farklı bir dosya adıysa)
-              if (oldCategoryName !== newCategoryName) {
-                const oldImagePath = `assets/${oldCategorySlug}/${oldCategorySlug}.jpg`;
+              if (oldCategoryName !== newCategoryName || oldImageCategorySlug !== newImageCategorySlug || oldImageFileName !== newImageFileName) {
+                const oldImagePath = `assets/${oldImageCategorySlug}/${oldImageFileName}.jpg`;
                 try {
                   await window.GitHubAPI.deleteFile(oldImagePath);
                   console.log('✅ Eski kategori resmi silindi:', oldImagePath);
@@ -2584,8 +2589,9 @@ function editCategory(index) {
   const categoryName = productsData.categories[index];
   const categorySlug = normalizeForFileGlobal(categoryName);
   const imageFileName = getCategoryImageFileName(categoryName);
-  const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
-  
+  // "Ara Sıcaklar" için assets klasör adı "arasicaklar" (tire olmadan)
+  const imageCategorySlug = categoryName === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
+  const categoryImage = `assets/${imageCategorySlug}/${imageFileName}.jpg`;
   
   // Formu doldur
   document.getElementById('edit-category-index').value = index;
