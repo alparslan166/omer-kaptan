@@ -7,8 +7,9 @@
     }
     
     // Özel durumlar - mevcut klasör yapısına uygun
+    // Not: HTML dosya adları için (categories/ klasöründe)
     const specialCases = {
-      'Ara Sıcaklar': 'arasicaklar',
+      'Ara Sıcaklar': 'ara-sicaklar', // HTML dosyası: ara-sicaklar.html
       'Alkolsüz İçecekler': 'alkolsuz-icecekler',
       'Alkollü İçecekler': 'alkollu-icecekler',
       'İçecekler': 'icecekler'
@@ -70,7 +71,10 @@
       return '';
     }
     
-    const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
+    // Resim yolu için assets klasör adını kullan (arasicaklar)
+    // HTML dosyası için normalize edilmiş slug kullan (ara-sicaklar)
+    const imageCategorySlug = category === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
+    const categoryImage = `assets/${imageCategorySlug}/${imageFileName}.jpg`;
     const categoryUrl = `categories/${categorySlug}.html`;
     
     return `

@@ -2056,9 +2056,13 @@ function setupForms() {
       }
       
       const categorySlug = normalizeForFileGlobal(categoryName);
+      // HTML dosyası için özel kontrol: "Ara Sıcaklar" -> "ara-sicaklar.html"
+      const htmlSlug = categoryName === 'Ara Sıcaklar' ? 'ara-sicaklar' : categorySlug;
       const fileExt = imageFile.name.split('.').pop().toLowerCase();
-      const imagePath = `assets/${categorySlug}/${categorySlug}.${fileExt}`;
-      const categoryHtmlPath = `categories/${categorySlug}.html`;
+      // Resim yolu için assets klasör adını kullan (arasicaklar)
+      const imageCategorySlug = categoryName === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
+      const imagePath = `assets/${imageCategorySlug}/${getCategoryImageFileName(categoryName)}.${fileExt}`;
+      const categoryHtmlPath = `categories/${htmlSlug}.html`;
       
       const submitButton = addCategoryForm.querySelector('button[type="submit"]');
       const originalButtonText = submitButton ? submitButton.textContent : 'Kategori Ekle';
@@ -2427,7 +2431,9 @@ function displayCategories() {
     // Kategori slug'ını oluştur (resim yolu için)
     const categorySlug = normalizeForFileGlobal(category);
     const imageFileName = getCategoryImageFileName(category);
-    const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
+    // "Ara Sıcaklar" için assets klasör adı "arasicaklar" (tire olmadan)
+    const imageCategorySlug = category === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
+    const categoryImage = `assets/${imageCategorySlug}/${imageFileName}.jpg`;
     
     const li = document.createElement('li');
     li.className = 'category-item';
@@ -2579,6 +2585,7 @@ function editCategory(index) {
   const categorySlug = normalizeForFileGlobal(categoryName);
   const imageFileName = getCategoryImageFileName(categoryName);
   const categoryImage = `assets/${categorySlug}/${imageFileName}.jpg`;
+  
   
   // Formu doldur
   document.getElementById('edit-category-index').value = index;
