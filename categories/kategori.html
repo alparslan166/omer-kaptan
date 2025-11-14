@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kategori - Menü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner">
+        <img src="../assets/capasimgesi.png" alt="Yükleniyor" />
+      </div>
+      <p class="loading-text">Yükleniyor...</p>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
+          </div>
+          <div class="titles">
+            <a href="../index.html" style="text-decoration: none; color: inherit;">
+              <h1 class="site-title">Ömer Kaptan</h1>
+            </a>
+            <p class="site-subtitle">kategori</p>
+          </div>
+        </div>
+        <nav class="main-nav" aria-label="Geri">
+          <a
+            class="nav-link"
+            href="../index.html"
+            style="
+              text-decoration: none;
+              color: #4da6ff;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            "
+          >
+            <span
+              class="icon"
+              style="display: inline-block; margin-bottom: 5px"
+            >
+              <img
+                src="../assets/capasimgesi.png"
+                alt=""
+                style="width: 35px; height: 35px; object-fit: contain"
+              />
+            </span>
+            <span style="font-size: 14px">Geri</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <div class="section-head"><h3>kategori</h3></div>
+      <section class="product-grid" aria-label="kategori ürünleri">
+      </section>
+    </main>
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Yukarı çık">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
+    <script>
+      // Scroll to top butonu
+      (function () {
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        if (!scrollToTopBtn) return;
+
+        function toggleScrollButton() {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = "flex";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        }
+
+        function checkScrollLoop() {
+          toggleScrollButton();
+          requestAnimationFrame(checkScrollLoop);
+        }
+
+        // İlk kontrol
+        toggleScrollButton();
+        // Sürekli kontrol döngüsünü başlat
+        requestAnimationFrame(checkScrollLoop);
+
+        scrollToTopBtn.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      })();
+    </script>
+    <script src="../dynamic-products.js"></script>
+    <script src="../product-visibility.js"></script>
+  </body>
+</html>
