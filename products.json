@@ -1,7 +1,7 @@
 {
   "categories": [
-    "Izgaralar",
     "Buğulamalar",
+    "Izgaralar",
     "Tavalar",
     "Ara Sıcaklar",
     "Kavurmalar",
@@ -37,7 +37,7 @@
     {
       "name": "İstavrit Tava",
       "category": "Tavalar",
-      "price": "627",
+      "price": "342",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/istavrit-tava.jpg",
