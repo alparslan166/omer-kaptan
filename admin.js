@@ -136,7 +136,7 @@ function updateDownloadButton(data) {
         </div>
         <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.15); border-radius: 8px; text-align: center;">
           <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.9); font-size: 13px;">
-            💡 <strong>Otomatik Güncelleme:</strong> GitHub API ile otomatik güncelleme özelliğini aktifleştirmek için <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">GitHub Ayarları</code> bölümüne bakın.
+            💡 <strong>Otomatik Güncelleme:</strong> GitHub API ile otomatik güncelleme özelliğini aktifleştirmek için <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">⚙️ GitHub Ayarları</code> bölümüne bakın.
           </p>
         </div>
         <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: left;">
