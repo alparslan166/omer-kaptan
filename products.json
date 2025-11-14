@@ -14,7 +14,7 @@
     "Mezeler",
     "Alkolsüz İçecekler",
     "Alkollü İçecekler",
-    "kategoriTEST"
+    "kategori"
   ],
   "products": [
     {
@@ -38,20 +38,21 @@
     {
       "name": "İstavrit Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "567",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "tavalar/istavrit-tava.jpg",
+      "image": "tavalar/i-stavrit-tava.jpg",
       "companions": [
-        "Kraker",
+        "Fıstık",
         "Kavun",
-        "Sos",
+        "Kraker",
         "Roka",
-        "Fıstık"
+        "Sos"
       ],
       "hidden": false,
-      "subcategory": null,
-      "id": 2
+      "subcategory": "",
+      "id": 2,
+      "outOfStock": false
     },
     {
       "name": "Alabalık Tava",
@@ -2649,14 +2650,14 @@
     },
     {
       "id": 154,
-      "name": "2",
-      "category": "kategoriTEST",
-      "price": "3",
-      "shortDesc": "32",
-      "description": "dsf",
-      "image": "kategori/2.jpg",
+      "name": "sdfg",
+      "category": "kategori",
+      "price": "14",
+      "shortDesc": "afg",
+      "description": "hgjd",
+      "image": "kategori/sdfg.jpg",
       "companions": [
-        "Beyaz Peynir"
+        "Fıstık"
       ],
       "hidden": false,
       "outOfStock": false,
