@@ -1040,8 +1040,18 @@ function escapeHtml(text) {
 function generateImagePath(category, productName) {
   // normalizeForFile fonksiyonunu admin.js'de de kullanabilmek için
   function normalizeForFile(text) {
-    return text
-      .toLowerCase()
+    if (!text) return '';
+    
+    let normalizedText = text.toLowerCase();
+    
+    // Unicode normalizasyonu (İ -> i) sırasında oluşan birleşik karakterleri temizle
+    if (typeof normalizedText.normalize === 'function') {
+      normalizedText = normalizedText
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+    
+    return normalizedText
       .replace(/ğ/g, 'g')
       .replace(/ü/g, 'u')
       .replace(/ş/g, 's')
@@ -2845,9 +2855,16 @@ function normalizeForFileGlobal(text) {
   if (specialCases[text]) {
     return specialCases[text];
   }
+
+  let normalizedText = text.toLowerCase();
+
+  if (typeof normalizedText.normalize === 'function') {
+    normalizedText = normalizedText
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
   
-  return text
-    .toLowerCase()
+  return normalizedText
     .replace(/ğ/g, 'g')
     .replace(/ü/g, 'u')
     .replace(/ş/g, 's')

@@ -708,6 +708,8 @@ main {
 }
 .scroll-to-top.show {
   display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
   animation: slideInUp 0.4s ease forwards;
 }
 .scroll-to-top.show:hover {
