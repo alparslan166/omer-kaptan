@@ -1302,7 +1302,11 @@ function editProduct(id) {
   document.getElementById('edit-price').value = product.price;
   document.getElementById('edit-short-desc').value = product.shortDesc || '';
   document.getElementById('edit-description').value = product.description;
-  document.getElementById('edit-image').value = product.image;
+  const editImageInput = document.getElementById('edit-image');
+  if (editImageInput) {
+    editImageInput.value = product.image || '';
+    editImageInput.dataset.originalImage = product.image || '';
+  }
   
   // Mevcut resmi göster
   const previewImg = document.getElementById('edit-product-image-preview');
@@ -1463,23 +1467,28 @@ function setupImageFileInputs() {
   const editName = document.getElementById('edit-name');
   
   const updateEditImagePath = () => {
+    if (!editImage) return;
+    
     const category = editCategory.value;
     const name = editName.value;
     const file = editImageFile?.files[0];
+    const originalImage = editImage.dataset.originalImage || '';
     
-    if (category && name) {
-      if (file) {
-        // Yeni dosya seçilmişse, yeni dosya uzantısını kullan
-        const fileExt = file.name.split('.').pop().toLowerCase();
-        const autoPath = generateImagePath(category, name);
-        const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
-        editImage.value = finalPath;
+    if (file && category && name) {
+      // Yeni dosya seçilmişse, yeni dosya uzantısını kullan
+      const fileExt = file.name.split('.').pop().toLowerCase();
+      const autoPath = generateImagePath(category, name);
+      const finalPath = autoPath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+      editImage.value = finalPath;
+    } else {
+      // Dosya değiştirilmemişse, mevcut resim yolunu aynen koru
+      if (originalImage && originalImage.trim() !== '') {
+        editImage.value = originalImage;
+      } else if (category && name) {
+        // Hiç resim yoksa ve ürünün resmi oluşturulmamışsa, otomatik oluşturulmuş bir yol öner
+        editImage.value = generateImagePath(category, name);
       } else {
-        // Dosya değiştirilmemişse, mevcut resim yolunu koru veya otomatik oluştur
-        if (!editImage.value || editImage.value.trim() === '') {
-          editImage.value = generateImagePath(category, name);
-        }
-        // Mevcut değeri koru (değiştirme)
+        editImage.value = '';
       }
     }
   };
@@ -1746,25 +1755,23 @@ function setupForms() {
         yeniKategori: category
       });
       
-      const imageFile = document.getElementById('edit-image-file').files[0];
-      
-      // Resim yolu belirleme - HER ZAMAN otomatik oluştur (kategori ve ürün adına göre)
-      let imagePath = generateImagePath(category, name);
-      
-      // Eğer yeni dosya seçilmişse, yeni dosya uzantısını kullan
-      if (imageFile) {
-        const fileExt = imageFile.name.split('.').pop().toLowerCase();
-        imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
-      } else {
-        // Dosya seçilmemişse, mevcut resmin uzantısını koru (eğer varsa)
-        if (product.image) {
-          const currentExt = product.image.split('.').pop();
-          imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${currentExt}`);
-        }
-      }
-      
-      // Hidden input'u güncelle
-      document.getElementById('edit-image').value = imagePath;
+  const imageFile = document.getElementById('edit-image-file').files[0];
+  const editImageHidden = document.getElementById('edit-image');
+  const originalImagePath = editImageHidden?.dataset.originalImage || product.image || '';
+  
+  let imagePath = originalImagePath;
+  
+  if (imageFile) {
+    const fileExt = imageFile.name.split('.').pop().toLowerCase();
+    const autoPath = generateImagePath(category, name);
+    imagePath = autoPath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+  } else if (!imagePath || imagePath.trim() === '') {
+    imagePath = generateImagePath(category, name);
+  }
+  
+  if (editImageHidden) {
+    editImageHidden.value = imagePath;
+  }
       
       // Eğer yeni resim dosyası seçilmişse GitHub'a yükle
       if (imageFile) {
@@ -1897,6 +1904,10 @@ function setupForms() {
       product.shortDesc = document.getElementById('edit-short-desc').value.trim();
       product.description = document.getElementById('edit-description').value.trim();
       product.image = imagePath;
+      if (editImageHidden) {
+        editImageHidden.dataset.originalImage = imagePath;
+        editImageHidden.value = imagePath;
+      }
       product.companions = Array.from(document.getElementById('edit-companions').selectedOptions)
         .map(option => option.value)
         .filter(Boolean);
@@ -2056,8 +2067,7 @@ function setupForms() {
       }
       
       const categorySlug = normalizeForFileGlobal(categoryName);
-      // HTML dosyası için özel kontrol: "Ara Sıcaklar" -> "ara-sicaklar.html"
-      const htmlSlug = categoryName === 'Ara Sıcaklar' ? 'ara-sicaklar' : categorySlug;
+      const htmlSlug = getCategoryHtmlSlug(categoryName);
       const fileExt = imageFile.name.split('.').pop().toLowerCase();
       // Resim yolu için assets klasör adını kullan (arasicaklar)
       const imageCategorySlug = categoryName === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
@@ -2088,7 +2098,7 @@ function setupForms() {
         console.log('✅ Kategori resmi yüklendi:', uploadResult.url);
         
         // 2. Kategori HTML sayfası oluştur
-        const categoryHtml = generateCategoryHtml(categoryName, categorySlug);
+        const categoryHtml = generateCategoryHtml(categoryName, htmlSlug);
         console.log('📄 Kategori HTML sayfası oluşturuluyor:', categoryHtmlPath);
         const htmlResult = await window.GitHubAPI.createOrUpdateFile(
           categoryHtml,
@@ -2191,6 +2201,8 @@ function setupForms() {
       const newImageCategorySlug = newCategoryName === 'Ara Sıcaklar' ? 'arasicaklar' : newCategorySlug;
       const oldImageCategorySlug = oldCategoryName === 'Ara Sıcaklar' ? 'arasicaklar' : oldCategorySlug;
       const oldImageFileName = getCategoryImageFileName(oldCategoryName);
+      const oldHtmlSlug = getCategoryHtmlSlug(oldCategoryName);
+      const newHtmlSlug = getCategoryHtmlSlug(newCategoryName);
       
       let imagePath = `assets/${newImageCategorySlug}/${newImageFileName}.jpg`;
       
@@ -2253,6 +2265,43 @@ function setupForms() {
         if (updateButton) {
           updateButton.disabled = false;
           updateButton.textContent = originalButtonText;
+        }
+      }
+      
+      const shouldUpdateCategoryHtml = oldCategoryName !== newCategoryName || oldHtmlSlug !== newHtmlSlug;
+      
+      if (shouldUpdateCategoryHtml) {
+        const categoryHtmlContent = generateCategoryHtml(newCategoryName, newHtmlSlug);
+        const categoryHtmlPath = `categories/${newHtmlSlug}.html`;
+        
+        if (window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete() && window.GitHubAPI && window.GitHubAPI.createOrUpdateFile) {
+          console.log('📄 Kategori HTML sayfası güncelleniyor:', categoryHtmlPath);
+          try {
+            await window.GitHubAPI.createOrUpdateFile(
+              categoryHtmlContent,
+              categoryHtmlPath,
+              `Update category page: ${newCategoryName}`
+            );
+            console.log('✅ Kategori HTML sayfası güncellendi:', categoryHtmlPath);
+            
+            if (oldHtmlSlug !== newHtmlSlug && window.GitHubAPI.deleteFile) {
+              const oldHtmlPath = `categories/${oldHtmlSlug}.html`;
+              try {
+                await window.GitHubAPI.deleteFile(oldHtmlPath);
+                console.log('🗑️ Eski kategori sayfası silindi:', oldHtmlPath);
+              } catch (deleteHtmlError) {
+                console.warn('⚠️ Eski kategori sayfası silinemedi (devam ediliyor):', deleteHtmlError);
+              }
+            }
+          } catch (htmlError) {
+            console.error('❌ Kategori HTML sayfası güncellenemedi:', htmlError);
+            alert('Kategori sayfası güncellenirken bir hata oluştu: ' + htmlError.message);
+            return;
+          }
+        } else {
+          console.warn('⚠️ GitHub API kategori sayfasını güncellemek için hazır değil. createOrUpdateFile veya ayarlar eksik olabilir.');
+          alert('GitHub API ayarları tamamlanmadığı için kategori sayfası güncellenmedi. Lütfen GitHub ayarlarını kontrol edin.');
+          return;
         }
       }
       
@@ -2418,6 +2467,12 @@ function getCategoryImageFileName(categoryName) {
   };
   
   return categoryImageNames[categoryName] || normalizeForFileGlobal(categoryName);
+}
+
+// Kategori HTML dosyası slug'ını al
+function getCategoryHtmlSlug(categoryName) {
+  if (!categoryName || typeof categoryName !== 'string') return '';
+  return categoryName === 'Ara Sıcaklar' ? 'ara-sicaklar' : normalizeForFileGlobal(categoryName);
 }
 
 // Kategorileri listele
