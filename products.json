@@ -2649,14 +2649,14 @@
     },
     {
       "id": 154,
-      "name": "2",
+      "name": "sdfg",
       "category": "kategori",
-      "price": "3",
-      "shortDesc": "32",
-      "description": "dsf",
-      "image": "kategori/2.jpg",
+      "price": "14",
+      "shortDesc": "afg",
+      "description": "hgjd",
+      "image": "kategori/sdfg.jpg",
       "companions": [
-        "Beyaz Peynir"
+        "Fıstık"
       ],
       "hidden": false,
       "outOfStock": false,
