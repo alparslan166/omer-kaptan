@@ -136,7 +136,7 @@ function updateDownloadButton(data) {
         </div>
         <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.15); border-radius: 8px; text-align: center;">
           <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.9); font-size: 13px;">
-            💡 <strong>Otomatik Güncelleme:</strong> GitHub API ile otomatik güncelleme özelliğini aktifleştirmek için <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">GITHUB_AUTO_UPDATE_SETUP.md</code> dosyasına bakın.
+            💡 <strong>Otomatik Güncelleme:</strong> GitHub API ile otomatik güncelleme özelliğini aktifleştirmek için <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">GitHub Ayarları</code> bölümüne bakın.
           </p>
         </div>
         <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: left;">
@@ -144,7 +144,7 @@ function updateDownloadButton(data) {
           <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.8;">
             <li>"Github Ayarları" butonuna tıklayın</li>
             <li><code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">Repository ve Token</code> bilgilerini girin</li>
-            <li>Bağlantıyı test et butonuna tıklayın</li>
+            <li>"Bağlantıyı Test Et" butonuna tıklayın</li>
             <li>Bağlantı başarılı olursa "Kaydet" butonuna tıklayın</li>
             <li>Artık "Otomatik Güncelle (GitHub)" butonu görünecek</li>
             <li>Bu butona tıkladığınızda yapılan değişiklikler otomatik olarak GitHub'a gönderilir</li>
