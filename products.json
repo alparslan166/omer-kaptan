@@ -2646,6 +2646,21 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
+    },
+    {
+      "id": 154,
+      "name": "2",
+      "category": "kategori",
+      "price": "3",
+      "shortDesc": "32",
+      "description": "dsf",
+      "image": "kategori/2.jpg",
+      "companions": [
+        "Beyaz Peynir"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
