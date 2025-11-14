@@ -20,19 +20,20 @@
     {
       "name": "Hamsi Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "370",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/hamsi-tava.jpg",
       "companions": [
         "Beyaz Peynir",
-        "Sos",
         "Fıstık",
-        "Peynir"
+        "Peynir",
+        "Sos"
       ],
       "hidden": false,
-      "subcategory": null,
-      "id": 1
+      "subcategory": "",
+      "id": 1,
+      "outOfStock": false
     },
     {
       "name": "İstavrit Tava",
@@ -2645,21 +2646,6 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
-    },
-    {
-      "id": 154,
-      "name": "asd",
-      "category": "kategori",
-      "price": "1221",
-      "shortDesc": "asd",
-      "description": "sad",
-      "image": "kategori/asd.jpg",
-      "companions": [
-        "Beyaz Peynir"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": ""
     }
   ],
   "companions": [
