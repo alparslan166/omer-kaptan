@@ -2645,6 +2645,21 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
+    },
+    {
+      "id": 154,
+      "name": "asd",
+      "category": "kategori",
+      "price": "1221",
+      "shortDesc": "asd",
+      "description": "sad",
+      "image": "kategori/asd.jpg",
+      "companions": [
+        "Beyaz Peynir"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
