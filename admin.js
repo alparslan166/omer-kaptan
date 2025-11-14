@@ -3180,6 +3180,54 @@ function generateCategoryHtml(categoryName, categorySlug) {
       <section class="product-grid" aria-label="${escapeHtml(categoryName)} ürünleri">
       </section>
     </main>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
+        </div>
+        <div class="footer-about">
+          <h4>Hakkımızda</h4>
+          <p>
+            Ömer Kaptan Balık Restaurant olarak, taze deniz ürünlerini en lezzetli şekilde sunmak için çalışıyoruz.
+            Deniz mahsullerinin en taze halini müşterilerimize ulaştırmak bizim önceliğimizdir.
+          </p>
+        </div>
+        <div class="footer-payments">
+          <img src="../assets/odemeler.png" alt="Ödeme Yöntemleri" />
+        </div>
+        <div class="footer-address">
+          <p>Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara</p>
+        </div>
+        <div class="footer-reservation">
+          <p>Rezervasyon için</p>
+          <a href="tel:03122136000">0312 213 60 00</a>
+        </div>
+        <div class="footer-copyright">
+          <p>
+            © 2025 Ömer Kaptan Balık Restaurant - İskenderun Balıkçılık. Her Hakkı Saklıdır.
+          </p>
+        </div>
+        <div class="footer-social">
+          <a
+            href="https://www.instagram.com/balikciomerkaptan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="../assets/instagram-logo.png" alt="Instagram" />
+          </a>
+          <a
+            href="https://wa.me/903122136000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="../assets/whatsapp-logo.png" alt="WhatsApp" />
+          </a>
+        </div>
+        <div class="footer-designer">
+          <a href="mailto:alp84202@gmail.com">Designed by Alparslan Turan➚</a>
+        </div>
+      </div>
+    </footer>
     <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Yukarı çık">
       <svg
         width="24"
