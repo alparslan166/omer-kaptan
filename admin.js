@@ -143,7 +143,7 @@ function updateDownloadButton(data) {
           <p style="margin: 0 0 10px 0; font-weight: 600; color: white; font-size: 14px;">📌 Adımlar:</p>
           <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.8;">
             <li>"Github Ayarları" butonuna tıklayın</li>
-            <li>Oradan <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">Repository ve Token</code> bilgilerini girin</li>
+            <li><code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">Repository ve Token</code> bilgilerini girin</li>
             <li>Bağlantıyı test et butonuna tıklayın</li>
             <li>Bağlantı başarılı olursa "Kaydet" butonuna tıklayın</li>
             <li>Artık "Otomatik Güncelle (GitHub)" butonu görünecek</li>
