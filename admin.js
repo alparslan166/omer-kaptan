@@ -142,11 +142,13 @@ function updateDownloadButton(data) {
         <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: left;">
           <p style="margin: 0 0 10px 0; font-weight: 600; color: white; font-size: 14px;">📌 Adımlar:</p>
           <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.8;">
-            <li>"Dosyayı İndir" butonuna tıklayın</li>
-            <li>İndirilen <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">products.json</code> dosyasını sunucunuza yükleyin</li>
-            <li>GitHub Pages kullanıyorsanız: Dosyayı GitHub repository'nize commit edin</li>
-            <li>Diğer hosting servislerinde: FTP veya dosya yönetimi ile yükleyin</li>
-            <li>Birkaç dakika içinde tüm cihazlarda değişiklikler görünecektir</li>
+            <li>"Github Ayarları" butonuna tıklayın</li>
+            <li>Oradan <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">Repository ve Token</code> bilgilerini girin</li>
+            <li>Bağlantıyı test et butonuna tıklayın</li>
+            <li>Bağlantı başarılı olursa "Kaydet" butonuna tıklayın</li>
+            <li>Artık "Otomatik Güncelle (GitHub)" butonu görünecek</li>
+            <li>Bu butona tıkladığınızda yapılan değişiklikler otomatik olarak GitHub'a gönderilir</li>
+            <li>Birkaç dakika içinde değişiklikler tüm cihazlarda görünür</li>
           </ol>
         </div>
         <div id="last-update-info" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); font-size: 12px;">
