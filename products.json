@@ -13,8 +13,7 @@
     "Tatlılar",
     "Mezeler",
     "Alkolsüz İçecekler",
-    "Alkollü İçecekler",
-    "kategori"
+    "Alkollü İçecekler"
   ],
   "products": [
     {
@@ -2647,21 +2646,6 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
-    },
-    {
-      "id": 154,
-      "name": "sdfg",
-      "category": "kategori",
-      "price": "14",
-      "shortDesc": "afg",
-      "description": "hgjd",
-      "image": "kategori/sdfg.jpg",
-      "companions": [
-        "Fıstık"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": ""
     }
   ],
   "companions": [
