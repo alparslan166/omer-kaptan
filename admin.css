@@ -118,9 +118,15 @@
 
 .change-log-desc {
   margin: 0;
-  color: #2f3b52;
+  color: #1f2b46;
   font-size: 13px;
   line-height: 1.5;
+  background: linear-gradient(135deg, #fff6db, #ffe8b3);
+  border: 1px solid #ffd88a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-weight: 600;
+  box-shadow: inset 0 1px 3px rgba(255, 216, 138, 0.4);
 }
 
 .empty-log {
