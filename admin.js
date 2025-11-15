@@ -1120,6 +1120,14 @@ function normalizeAssetPathForDeletion(imagePath) {
   return `assets/${cleanPath}`;
 }
 
+function parseIngredientsInput(value) {
+  if (!value || typeof value !== 'string') return [];
+  return value
+    .split(',')
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
 // Ürünleri listele
 function displayProducts(filteredProducts = null) {
   const productsList = document.getElementById('products-list');
@@ -1377,6 +1385,22 @@ function editProduct(id) {
   document.getElementById('edit-price').value = product.price;
   document.getElementById('edit-short-desc').value = product.shortDesc || '';
   document.getElementById('edit-description').value = product.description;
+  const editIngredientsGroupEl = document.getElementById('edit-ingredients-group');
+  const editIngredientsInputEl = document.getElementById('edit-ingredients');
+  if (editIngredientsGroupEl) {
+    if (product.category === 'Mezeler') {
+      editIngredientsGroupEl.style.display = 'block';
+      if (editIngredientsInputEl) {
+        const existingIngredients = Array.isArray(product.ingredients) ? product.ingredients.join(', ') : '';
+        editIngredientsInputEl.value = existingIngredients;
+      }
+    } else {
+      editIngredientsGroupEl.style.display = 'none';
+      if (editIngredientsInputEl) {
+        editIngredientsInputEl.value = '';
+      }
+    }
+  }
   const editImageInput = document.getElementById('edit-image');
   if (editImageInput) {
     editImageInput.value = product.image || '';
@@ -1602,10 +1626,31 @@ function setupForms() {
   const addCategory = document.getElementById('add-category');
   const addSubcategory = document.getElementById('add-subcategory');
   const addSubcategoryGroup = document.getElementById('add-subcategory-group');
+  const addIngredientsGroup = document.getElementById('add-ingredients-group');
+  const addIngredientsInput = document.getElementById('add-ingredients');
+  const editIngredientsGroup = document.getElementById('edit-ingredients-group');
+  const editIngredientsInput = document.getElementById('edit-ingredients');
+  
+  const toggleIngredientsField = (categoryValue, groupEl, inputEl) => {
+    if (!groupEl) return;
+    if (categoryValue === 'Mezeler') {
+      groupEl.style.display = 'block';
+    } else {
+      groupEl.style.display = 'none';
+      if (inputEl) {
+        inputEl.value = '';
+      }
+    }
+  };
+  
+  if (addCategory && addIngredientsGroup) {
+    toggleIngredientsField(addCategory.value, addIngredientsGroup, addIngredientsInput);
+  }
   
   if (addCategory && addSubcategory && addSubcategoryGroup) {
     addCategory.addEventListener('change', () => {
       updateSubcategoryOptions(addCategory, addSubcategory, addSubcategoryGroup);
+      toggleIngredientsField(addCategory.value, addIngredientsGroup, addIngredientsInput);
     });
   }
   
@@ -1756,6 +1801,13 @@ function setupForms() {
         subcategory: addSubcategory ? addSubcategory.value : null
       };
       
+      if (category === 'Mezeler' && addIngredientsInput) {
+        const parsedIngredients = parseIngredientsInput(addIngredientsInput.value);
+        if (parsedIngredients.length > 0) {
+          newProduct.ingredients = parsedIngredients;
+        }
+      }
+      
       if (localPreviewUrl) {
         Object.defineProperty(newProduct, '_localPreviewUrl', {
           value: localPreviewUrl,
@@ -1776,6 +1828,8 @@ function setupForms() {
       const addImagePreview = document.getElementById('add-product-image-preview');
       if (addImage) addImage.value = '';
       if (addImageFile) addImageFile.value = '';
+      if (addIngredientsInput) addIngredientsInput.value = '';
+      if (addIngredientsGroup) addIngredientsGroup.style.display = 'none';
       if (addImagePreview) {
         addImagePreview.src = '';
         addImagePreview.style.display = 'none';
@@ -1852,6 +1906,7 @@ function setupForms() {
       
       const category = document.getElementById('edit-category').value.trim();
       const name = document.getElementById('edit-name').value.trim();
+      const editIngredientsInputField = document.getElementById('edit-ingredients');
       
       // Ürün adı boş olamaz
       if (!name) {
@@ -2038,6 +2093,17 @@ function setupForms() {
       product.hidden = document.getElementById('edit-hidden').checked;
       product.outOfStock = document.getElementById('edit-out-of-stock') ? document.getElementById('edit-out-of-stock').checked : false;
       product.subcategory = editSubcategory ? editSubcategory.value : null;
+      
+      if (category === 'Mezeler' && editIngredientsInputField) {
+        const parsedIngredients = parseIngredientsInput(editIngredientsInputField.value);
+        if (parsedIngredients.length > 0) {
+          product.ingredients = parsedIngredients;
+        } else {
+          delete product.ingredients;
+        }
+      } else {
+        delete product.ingredients;
+      }
       
       console.log('✅ Ürün bilgileri güncellendi:', {
         id: product.id,

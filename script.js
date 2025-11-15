@@ -18,6 +18,7 @@
     
     // products.json'dan ürün bilgilerini yükle (kalıcı kaynak)
     let productImagePath = null; // products.json'dan gelen resim yolu
+    let productIngredients = null;
     
     // updateProductPage fonksiyonu - resim yolunu parametre olarak alabilir
     function updateProductPage(imagePathFromJson = null) {
@@ -106,12 +107,18 @@
 
       // İçindekiler listesini göster (sadece Mezeler kategorisi için)
       if (category === 'Mezeler' && ingredientsTitleEl && ingredientsListEl) {
-        const ingredients = getMezeIngredients(name);
-        if (ingredients && ingredients.length > 0) {
+        let resolvedIngredients = null;
+        if (Array.isArray(productIngredients) && productIngredients.length > 0) {
+          resolvedIngredients = productIngredients;
+        } else {
+          resolvedIngredients = getMezeIngredients(name);
+        }
+        
+        if (resolvedIngredients && resolvedIngredients.length > 0) {
           ingredientsTitleEl.style.display = 'block';
           ingredientsListEl.style.display = 'block';
           ingredientsListEl.innerHTML = '';
-          ingredients.forEach(ingredient => {
+          resolvedIngredients.forEach(ingredient => {
             const li = document.createElement('li');
             li.textContent = ingredient;
             ingredientsListEl.appendChild(li);
@@ -304,6 +311,7 @@
             category = product.category;
             desc = product.description || product.shortDesc || desc;
             companions = product.companions || companions;
+            productIngredients = Array.isArray(product.ingredients) ? product.ingredients : null;
             
             // products.json'dan gelen resim yolunu kullan
             const imagePath = product.image || null;
@@ -336,6 +344,7 @@
     
     // Hata durumunda veya ürün bulunamadığında URL parametreleri ile sayfayı güncelle
     console.log('📋 URL parametreleri ile sayfa güncelleniyor...');
+    productIngredients = null;
     updateProductPage();
   })();
   }
