@@ -316,18 +316,18 @@
     {
       "name": "Hamsi Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "3403",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi balığı, özenle hazırlanmış ızgara lezzeti.",
       "image": "izgaralar/hamsi-izgara.jpg",
       "companions": [
-        "Kraker",
         "Fıstık",
-        "Pide",
-        "Kavun"
+        "Kavun",
+        "Kraker",
+        "Pide"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 16,
       "outOfStock": false
     },
