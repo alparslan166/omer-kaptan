@@ -2663,6 +2663,21 @@
       "hidden": false,
       "outOfStock": false,
       "subcategory": ""
+    },
+    {
+      "id": 155,
+      "name": "testb",
+      "category": "Buğulamalar",
+      "price": "1",
+      "shortDesc": "324",
+      "description": "324324a",
+      "image": "bugulamalar/testb.jpg",
+      "companions": [
+        "Kraker"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
