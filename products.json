@@ -13,7 +13,8 @@
     "Tatlılar",
     "Mezeler",
     "Alkolsüz İçecekler",
-    "Alkollü İçecekler"
+    "Alkollü İçecekler",
+    "kategoriTest"
   ],
   "products": [
     {
@@ -32,7 +33,7 @@
       "hidden": false,
       "subcategory": "",
       "id": 1,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "İstavrit Tava",
@@ -68,7 +69,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 3,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Mezgit Tava",
