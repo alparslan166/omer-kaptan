@@ -1097,6 +1097,29 @@ function generateImagePath(category, productName) {
   return `${categorySlug}/${productSlug}.jpg`;
 }
 
+function normalizeAssetPathForDeletion(imagePath) {
+  if (!imagePath || typeof imagePath !== 'string') return '';
+  
+  let cleanPath = imagePath.trim();
+  if (!cleanPath) return '';
+  
+  if (cleanPath.startsWith('http://') || cleanPath.startsWith('https://')) {
+    return '';
+  }
+  
+  cleanPath = cleanPath.replace(/^(\.\.\/)+/, '');
+  cleanPath = cleanPath.replace(/^\/+/, '');
+  
+  if (cleanPath.startsWith('assets/')) {
+    return cleanPath;
+  }
+  
+  cleanPath = cleanPath.replace(/^assets\//, '');
+  if (!cleanPath) return '';
+  
+  return `assets/${cleanPath}`;
+}
+
 // Ürünleri listele
 function displayProducts(filteredProducts = null) {
   const productsList = document.getElementById('products-list');
@@ -2715,9 +2738,28 @@ function moveCategory(categoryName, direction) {
 }
 
 // Kategori sil
-function deleteCategory(categoryName) {
+async function deleteCategory(categoryName) {
   // Kategorideki ürünleri kontrol et
   const categoryProducts = productsData.products.filter(p => p.category === categoryName);
+  const assetPathsToDelete = new Set();
+  
+  const categorySlug = normalizeForFileGlobal(categoryName);
+  const imageCategorySlug = categoryName === 'Ara Sıcaklar' ? 'arasicaklar' : categorySlug;
+  const categoryImageBaseName = getCategoryImageFileName(categoryName);
+  const categoryHeroPath = `assets/${imageCategorySlug}/${categoryImageBaseName}.jpg`;
+  assetPathsToDelete.add(categoryHeroPath);
+  
+  const categoryHtmlSlug = getCategoryHtmlSlug(categoryName);
+  if (categoryHtmlSlug) {
+    assetPathsToDelete.add(`categories/${categoryHtmlSlug}.html`);
+  }
+  
+  categoryProducts.forEach(product => {
+    const normalizedPath = normalizeAssetPathForDeletion(product.image);
+    if (normalizedPath) {
+      assetPathsToDelete.add(normalizedPath);
+    }
+  });
   
   // Onay mesajı oluştur
   let confirmMessage = `⚠️ DİKKAT!\n\n"${categoryName}" kategorisini silmek istediğinizden emin misiniz?\n\n`;
@@ -2761,6 +2803,27 @@ function deleteCategory(categoryName) {
     alert(`"${categoryName}" kategorisi başarıyla silindi!\n\n${categoryProducts.length} ürünün kategorisi kaldırıldı.`);
   } else {
     alert(`"${categoryName}" kategorisi başarıyla silindi!`);
+  }
+  
+  if (assetPathsToDelete.size > 0) {
+    const githubReady = window.GitHubConfig && 
+      window.GitHubConfig.isGitHubConfigComplete && 
+      window.GitHubConfig.isGitHubConfigComplete() &&
+      window.GitHubAPI && 
+      window.GitHubAPI.deleteFile;
+    
+    if (githubReady) {
+      for (const assetPath of assetPathsToDelete) {
+        try {
+          console.log('🗑️ Kategoriye ait dosya siliniyor:', assetPath);
+          await window.GitHubAPI.deleteFile(assetPath);
+        } catch (error) {
+          console.warn('⚠️ Dosya silinirken hata oluştu (devam ediliyor):', assetPath, error);
+        }
+      }
+    } else {
+      console.warn('⚠️ GitHub API yapılandırılmadığı için kategori klasörü silinemedi. Silinmesi gereken dosyalar:', Array.from(assetPathsToDelete));
+    }
   }
 }
 
