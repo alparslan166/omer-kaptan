@@ -2650,17 +2650,17 @@
     },
     {
       "id": 154,
-      "name": "ürünTest",
-      "category": "kategoriTest",
-      "price": "312",
-      "shortDesc": "dfghj",
-      "description": "DFGHJKLŞ",
+      "name": "DEĞİŞİK",
+      "category": "Tatlılar",
+      "price": "4536789",
+      "shortDesc": "DEĞİŞİM",
+      "description": "açıklama değişti",
       "image": "kategoritest/uruntest.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kavun"
       ],
-      "hidden": true,
+      "hidden": false,
       "outOfStock": false,
       "subcategory": ""
     },
