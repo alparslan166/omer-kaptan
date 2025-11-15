@@ -227,12 +227,19 @@ function renderChangeLog() {
           <span class="change-log-product">${escapeHtml(productName)}</span>
           <span class="change-log-date">${escapeHtml(dateLabel)}</span>
         </div>
-        <p class="change-log-desc">${escapeHtml(description)}</p>
+        <p class="change-log-desc">${formatChangeDescription(description)}</p>
       </div>
     `;
   }).join('');
   
   listEl.innerHTML = itemsHtml;
+}
+
+function formatChangeDescription(text) {
+  if (!text) {
+    return '<span class="change-log-highlight">Değişiklik yok</span>';
+  }
+  return `<span class="change-log-highlight">${escapeHtml(text)}</span>`;
 }
 
 function addPendingChangeEntry(description, productName = '') {
