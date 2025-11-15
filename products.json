@@ -2660,7 +2660,7 @@
         "Beyaz Peynir",
         "Kavun"
       ],
-      "hidden": false,
+      "hidden": true,
       "outOfStock": false,
       "subcategory": ""
     },
