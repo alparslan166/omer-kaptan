@@ -239,6 +239,16 @@ function formatChangeDescription(text) {
   if (!text) {
     return '<span class="change-log-highlight">Değişiklik yok</span>';
   }
+  
+  const firstBreak = text.indexOf('. ');
+  if (firstBreak !== -1) {
+    const prefix = text.slice(0, firstBreak + 1);
+    const detail = text.slice(firstBreak + 2);
+    if (detail.trim()) {
+      return `${escapeHtml(prefix)} <span class="change-log-highlight">${escapeHtml(detail)}</span>`;
+    }
+  }
+  
   return `<span class="change-log-highlight">${escapeHtml(text)}</span>`;
 }
 
