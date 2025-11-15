@@ -1149,6 +1149,8 @@ function setupTabs() {
         if (productsData) {
           displayCompanions();
         }
+      } else if (targetTab === 'changes') {
+        renderChangeLog();
       }
     });
   });

@@ -49,22 +49,18 @@
             border: none;
             cursor: pointer;
           "
+          Ürünler
+          Yeni
+          Ürün
+          Ekle
+          Kategoriler
+          Eşlikçiler
+          Gizlenen
+          Ürünler
         >
           LocalStorage'ı Temizle ve Yenile
         </button>
       </div>
-      <section class="change-log-panel" aria-labelledby="change-log-title">
-        <div class="change-log-header">
-          <h3 id="change-log-title">Son Değişiklikler</h3>
-          <p class="change-log-hint">
-            "🚀 GitHub'da Güncelle" butonuna bastıktan sonra yapılan
-            değişiklikler burada listelenir.
-          </p>
-        </div>
-        <div id="change-log-list" class="change-log-list">
-          <p class="empty-log">Henüz kayıt yok.</p>
-        </div>
-      </section>
       <!-- Navigation Tabs -->
       <div class="admin-tabs">
         <button class="admin-tab active" data-tab="products">Ürünler</button>
@@ -72,6 +68,7 @@
         <button class="admin-tab" data-tab="categories">Kategoriler</button>
         <button class="admin-tab" data-tab="companions">Eşlikçiler</button>
         <button class="admin-tab" data-tab="hidden">Gizlenen Ürünler</button>
+        <button class="admin-tab" data-tab="changes">Son Değişiklikler</button>
       </div>
 
       <!-- Products List Tab -->
@@ -84,6 +81,23 @@
           <input type="text" id="search-products" placeholder="Ürün ara..." />
         </div>
         <div id="products-list" class="products-grid-admin"></div>
+      </div>
+
+      <!-- Change Log Tab -->
+      <div class="admin-tab-content" id="changes-tab">
+        <h2>Son Değişiklikler</h2>
+        <section class="change-log-panel" aria-labelledby="change-log-title">
+          <div class="change-log-header">
+            <h3 id="change-log-title">Son Değişiklikler</h3>
+            <p class="change-log-hint">
+              "🚀 GitHub'da Güncelle" butonuna bastıktan sonra yapılan
+              değişiklikler burada listelenir.
+            </p>
+          </div>
+          <div id="change-log-list" class="change-log-list">
+            <p class="empty-log">Henüz kayıt yok.</p>
+          </div>
+        </section>
       </div>
 
       <!-- Add Product Tab -->
