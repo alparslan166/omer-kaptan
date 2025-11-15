@@ -2648,21 +2648,6 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
-    },
-    {
-      "id": 155,
-      "name": "testb",
-      "category": "Buğulamalar",
-      "price": "1",
-      "shortDesc": "324",
-      "description": "324324a",
-      "image": "bugulamalar/testb.jpg",
-      "companions": [
-        "Kraker"
-      ],
-      "hidden": false,
-      "outOfStock": true,
-      "subcategory": ""
     }
   ],
   "companions": [
