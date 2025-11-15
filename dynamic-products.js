@@ -4,6 +4,13 @@
 (function() {
   const STORAGE_KEY = 'omer_kaptan_products';
   
+  function hideLoadingOverlay() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+      loadingOverlay.classList.add('hide');
+    }
+  }
+  
   // Sayfa yüklendiğinde çalıştır
   async function initDynamicProducts() {
     // Mevcut sayfanın kategorisini bul
@@ -61,6 +68,7 @@
     }
     
     if (!productsData || !productsData.products || !Array.isArray(productsData.products)) {
+      hideLoadingOverlay();
       console.log('Veri yüklenemedi, statik içerik gösteriliyor');
       return; // Veri yoksa statik HTML'i göster
     }
@@ -71,6 +79,7 @@
     );
     
     if (categoryProducts.length === 0) {
+      hideLoadingOverlay();
       console.log(`"${currentCategory}" kategorisinde ürün bulunamadı`);
       return;
     }
@@ -78,6 +87,7 @@
     // Diğer kategoriler için normal işlem
     const productGrid = document.querySelector('.product-grid');
     if (!productGrid) {
+      hideLoadingOverlay();
       console.log('product-grid bulunamadı');
       return;
     }
@@ -184,6 +194,7 @@
     }
     
     if (!main) {
+      hideLoadingOverlay();
       console.log('main container bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
       return;
@@ -191,6 +202,7 @@
     
     const sectionHead = main.querySelector('.section-head');
     if (!sectionHead) {
+      hideLoadingOverlay();
       console.log('section-head bulunamadı, statik HTML\'den parse ediliyor...');
       organizeStaticProducts(category);
       return;
@@ -225,12 +237,14 @@
     
     const productGrid = document.querySelector('.product-grid');
     if (!productGrid) {
+      hideLoadingOverlay();
       console.log('product-grid bulunamadı');
       return;
     }
     
     const productCards = Array.from(productGrid.querySelectorAll('.product-card'));
     if (productCards.length === 0) {
+      hideLoadingOverlay();
       console.log('Ürün kartı bulunamadı');
       return;
     }
@@ -315,12 +329,14 @@
     }
     
     if (!main) {
+      hideLoadingOverlay();
       console.log('main container bulunamadı (organizeStaticProducts)');
       return;
     }
     
     const sectionHead = main.querySelector('.section-head');
     if (!sectionHead) {
+      hideLoadingOverlay();
       console.log('section-head bulunamadı (organizeStaticProducts)');
       return;
     }
@@ -390,6 +406,7 @@
       container.appendChild(card);
     });
     
+    hideLoadingOverlay();
     console.log(`${products.length} ürün render edildi`);
   }
   
@@ -559,6 +576,7 @@
       container.appendChild(grid);
     }
     
+    hideLoadingOverlay();
     console.log(`Mezeler render edildi - Zeytinyağlı: ${zeytinyagli.length}, Yoğurtlu: ${yogurtlu.length}, Ezme: ${ezmeler.length}, Salata: ${salatalar.length}, Deniz: ${denizMahsulleri.length}, Diğer: ${digerMezeler.length}`);
   }
   
@@ -612,6 +630,7 @@
       container.appendChild(digerGrid);
     }
     
+    hideLoadingOverlay();
     console.log(`Alkollü İçecekler render edildi - Rakılar: ${rakiProducts.length}, Diğer: ${digerAlkoller.length}`);
   }
   

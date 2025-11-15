@@ -3336,16 +3336,31 @@ function generateCategoryHtml(categoryName, categorySlug) {
       </svg>
     </button>
     <script>
-      // Scroll to top butonu
       (function () {
+        // Loading overlay kontrolü
+        window.addEventListener("load", function () {
+          const loadingOverlay = document.getElementById("loadingOverlay");
+          if (loadingOverlay) {
+            setTimeout(function () {
+              loadingOverlay.classList.add("hide");
+            }, 400);
+          }
+
+          const navEntry = performance.getEntriesByType("navigation")[0];
+          if (navEntry && navEntry.type === "navigate") {
+            window.scrollTo(0, 0);
+          }
+        });
+
+        // Scroll to top butonu
         const scrollToTopBtn = document.getElementById("scrollToTopBtn");
         if (!scrollToTopBtn) return;
 
         function toggleScrollButton() {
           if (window.scrollY > 300) {
-            scrollToTopBtn.style.display = "flex";
+            scrollToTopBtn.classList.add("show");
           } else {
-            scrollToTopBtn.style.display = "none";
+            scrollToTopBtn.classList.remove("show");
           }
         }
 
@@ -3354,9 +3369,7 @@ function generateCategoryHtml(categoryName, categorySlug) {
           requestAnimationFrame(checkScrollLoop);
         }
 
-        // İlk kontrol
         toggleScrollButton();
-        // Sürekli kontrol döngüsünü başlat
         requestAnimationFrame(checkScrollLoop);
 
         scrollToTopBtn.addEventListener("click", function () {
