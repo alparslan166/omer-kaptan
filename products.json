@@ -68,7 +68,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 3
+      "id": 3,
+      "outOfStock": false
     },
     {
       "name": "Mezgit Tava",
@@ -86,7 +87,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 4
+      "id": 4,
+      "outOfStock": false
     },
     {
       "name": "Tekir Tava",
@@ -102,7 +104,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 5
+      "id": 5,
+      "outOfStock": false
     },
     {
       "name": "Barbun Tava",
@@ -120,7 +123,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 6
+      "id": 6,
+      "outOfStock": false
     },
     {
       "name": "Dil Tava",
@@ -138,7 +142,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 7
+      "id": 7,
+      "outOfStock": false
     },
     {
       "name": "Zargana Tava",
@@ -155,7 +160,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 8
+      "id": 8,
+      "outOfStock": false
     },
     {
       "name": "Kalkan Tava",
@@ -172,7 +178,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 9
+      "id": 9,
+      "outOfStock": false
     },
     {
       "name": "Palamut Tava",
@@ -188,7 +195,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 10
+      "id": 10,
+      "outOfStock": false
     },
     {
       "name": "Bako Mezgit",
@@ -206,7 +214,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 11
+      "id": 11,
+      "outOfStock": false
     },
     {
       "name": "Iskorpit Tava",
@@ -224,7 +233,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 12
+      "id": 12,
+      "outOfStock": false
     },
     {
       "name": "Gümüş Tava",
@@ -241,7 +251,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 13
+      "id": 13,
+      "outOfStock": false
     },
     {
       "name": "Mercan Tava",
@@ -257,7 +268,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 14
+      "id": 14,
+      "outOfStock": false
     },
     {
       "name": "Çinekop Tava",
@@ -274,7 +286,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 15
+      "id": 15,
+      "outOfStock": false
     },
     {
       "name": "Hamsi Izgara",
@@ -291,7 +304,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 16
+      "id": 16,
+      "outOfStock": false
     },
     {
       "name": "İstavrit Izgara",
@@ -309,7 +323,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 17
+      "id": 17,
+      "outOfStock": false
     },
     {
       "name": "Alabalık Izgara",
@@ -328,7 +343,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 18
+      "id": 18,
+      "outOfStock": false
     },
     {
       "name": "Çupra Izgara",
@@ -347,7 +363,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 19
+      "id": 19,
+      "outOfStock": false
     },
     {
       "name": "Levrek Izgara",
@@ -363,7 +380,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 20
+      "id": 20,
+      "outOfStock": false
     },
     {
       "name": "Palamut Izgara",
@@ -379,7 +397,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 21
+      "id": 21,
+      "outOfStock": false
     },
     {
       "name": "Torik Izgara",
@@ -397,7 +416,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 22
+      "id": 22,
+      "outOfStock": false
     },
     {
       "name": "Çinekop Izgara",
@@ -415,7 +435,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 23
+      "id": 23,
+      "outOfStock": false
     },
     {
       "name": "Sarıkanat Izgara",
@@ -432,7 +453,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 24
+      "id": 24,
+      "outOfStock": false
     },
     {
       "name": "Lüfer Izgara",
@@ -450,7 +472,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 25
+      "id": 25,
+      "outOfStock": false
     },
     {
       "name": "Sardalya Izgara",
@@ -468,7 +491,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 26
+      "id": 26,
+      "outOfStock": false
     },
     {
       "name": "Karadeniz Somonu Izgara",
@@ -486,7 +510,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 27
+      "id": 27,
+      "outOfStock": false
     },
     {
       "name": "Norveç Somonu Izgara",
@@ -504,7 +529,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 28
+      "id": 28,
+      "outOfStock": false
     },
     {
       "name": "Deniz Çupra Izgara",
@@ -522,7 +548,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 29
+      "id": 29,
+      "outOfStock": false
     },
     {
       "name": "Deniz Levrek Izgara",
@@ -541,7 +568,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 30
+      "id": 30,
+      "outOfStock": false
     },
     {
       "name": "Uskumru Izgara",
@@ -560,7 +588,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 31
+      "id": 31,
+      "outOfStock": false
     },
     {
       "name": "Akya Izgara",
@@ -578,7 +607,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 32
+      "id": 32,
+      "outOfStock": false
     },
     {
       "name": "Lagos Izgara",
@@ -595,7 +625,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 33
+      "id": 33,
+      "outOfStock": false
     },
     {
       "name": "Mavruşgil Izgara",
@@ -614,7 +645,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 34
+      "id": 34,
+      "outOfStock": false
     },
     {
       "name": "Kılıç Izgara",
@@ -631,7 +663,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 35
+      "id": 35,
+      "outOfStock": false
     },
     {
       "name": "Kaya Levrek Izgara",
@@ -648,7 +681,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 36
+      "id": 36,
+      "outOfStock": false
     },
     {
       "name": "Ceylan Izgara",
@@ -667,7 +701,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 37
+      "id": 37,
+      "outOfStock": false
     },
     {
       "name": "D. Levrek Buğulama",
@@ -686,7 +721,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 38
+      "id": 38,
+      "outOfStock": false
     },
     {
       "name": "D. Çupra Buğulama",
@@ -702,7 +738,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 39
+      "id": 39,
+      "outOfStock": false
     },
     {
       "name": "Kaya Levrek Buğulama",
@@ -720,7 +757,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 40
+      "id": 40,
+      "outOfStock": false
     },
     {
       "name": "Akya Buğulama",
@@ -737,7 +775,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 41
+      "id": 41,
+      "outOfStock": false
     },
     {
       "name": "Lagos Buğulama",
@@ -755,7 +794,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 42
+      "id": 42,
+      "outOfStock": false
     },
     {
       "name": "Hamsi Buğulama",
@@ -773,7 +813,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 43
+      "id": 43,
+      "outOfStock": false
     },
     {
       "name": "Palamut Buğulama",
@@ -807,7 +848,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 45
+      "id": 45,
+      "outOfStock": false
     },
     {
       "name": "D. Çupra Kavurma",
@@ -823,7 +865,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 46
+      "id": 46,
+      "outOfStock": false
     },
     {
       "name": "Kaya Levrek Kavurma",
@@ -840,7 +883,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 47
+      "id": 47,
+      "outOfStock": false
     },
     {
       "name": "Akya Kavurma",
@@ -858,7 +902,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 48
+      "id": 48,
+      "outOfStock": false
     },
     {
       "name": "Lagos Kavurma",
@@ -875,7 +920,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 49
+      "id": 49,
+      "outOfStock": false
     },
     {
       "name": "Karides Tereyağında",
@@ -893,7 +939,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 50
+      "id": 50,
+      "outOfStock": false
     },
     {
       "name": "Karides Güveç",
@@ -912,7 +959,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 51
+      "id": 51,
+      "outOfStock": false
     },
     {
       "name": "Kalamar Tava",
@@ -929,7 +977,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 52
+      "id": 52,
+      "outOfStock": false
     },
     {
       "name": "Kalamar Izgara",
@@ -946,7 +995,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 53
+      "id": 53,
+      "outOfStock": false
     },
     {
       "name": "Ahtapot Tereyağında",
@@ -965,7 +1015,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 54
+      "id": 54,
+      "outOfStock": false
     },
     {
       "name": "Ahtapot Izgara",
@@ -983,7 +1034,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 55
+      "id": 55,
+      "outOfStock": false
     },
     {
       "name": "Hamsili Pilav",
@@ -1001,7 +1053,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 56
+      "id": 56,
+      "outOfStock": false
     },
     {
       "name": "Kılıç Şiş",
@@ -1020,7 +1073,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 57
+      "id": 57,
+      "outOfStock": false
     },
     {
       "name": "Akya Şiş",
@@ -1037,7 +1091,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 58
+      "id": 58,
+      "outOfStock": false
     },
     {
       "name": "Lagos Şiş",
@@ -1053,7 +1108,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 59
+      "id": 59,
+      "outOfStock": false
     },
     {
       "name": "Mavruşgil Şiş",
@@ -1072,7 +1128,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 60
+      "id": 60,
+      "outOfStock": false
     },
     {
       "name": "Kaya Levrek Şiş",
@@ -1088,7 +1145,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 61
+      "id": 61,
+      "outOfStock": false
     },
     {
       "name": "Deniz Levrek Şiş",
@@ -1107,7 +1165,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 62
+      "id": 62,
+      "outOfStock": false
     },
     {
       "name": "Hamsi Ekmek",
@@ -1125,7 +1184,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 63
+      "id": 63,
+      "outOfStock": false
     },
     {
       "name": "Alabalık Ekmek",
@@ -1141,7 +1201,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 64
+      "id": 64,
+      "outOfStock": false
     },
     {
       "name": "Çupra Ekmek",
@@ -1159,7 +1220,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 65
+      "id": 65,
+      "outOfStock": false
     },
     {
       "name": "Levrek Ekmek",
@@ -1178,7 +1240,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 66
+      "id": 66,
+      "outOfStock": false
     },
     {
       "name": "Palamut Ekmek",
@@ -1195,7 +1258,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 67
+      "id": 67,
+      "outOfStock": false
     },
     {
       "name": "Uskumru Ekmek",
@@ -1212,7 +1276,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 68
+      "id": 68,
+      "outOfStock": false
     },
     {
       "name": "Bako Mezgit Ekmek",
@@ -1231,7 +1296,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 69
+      "id": 69,
+      "outOfStock": false
     },
     {
       "name": "Balık Çorbası",
@@ -1248,7 +1314,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 70
+      "id": 70,
+      "outOfStock": false
     },
     {
       "name": "Mevsim Salatası",
@@ -1266,7 +1333,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 71
+      "id": 71,
+      "outOfStock": false
     },
     {
       "name": "Roka Salatası",
@@ -1284,7 +1352,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 72
+      "id": 72,
+      "outOfStock": false
     },
     {
       "name": "Levrekli Pide",
@@ -1301,7 +1370,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 73
+      "id": 73,
+      "outOfStock": false
     },
     {
       "name": "Karidesli Pide",
@@ -1318,7 +1388,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 74
+      "id": 74,
+      "outOfStock": false
     },
     {
       "name": "Hamsili Pide",
@@ -1334,7 +1405,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 75
+      "id": 75,
+      "outOfStock": false
     },
     {
       "name": "Kıymalı Pide",
@@ -1352,7 +1424,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 76
+      "id": 76,
+      "outOfStock": false
     },
     {
       "name": "Kuşbaşılı Pide",
@@ -1371,7 +1444,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 77
+      "id": 77,
+      "outOfStock": false
     },
     {
       "name": "Kaşarlı Pide",
@@ -1387,7 +1461,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 78
+      "id": 78,
+      "outOfStock": false
     },
     {
       "name": "Kuşbaşılı Kaşarlı Pide",
@@ -1406,7 +1481,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 79
+      "id": 79,
+      "outOfStock": false
     },
     {
       "name": "Kıymalı Kaşarlı Pide",
@@ -1423,7 +1499,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 80
+      "id": 80,
+      "outOfStock": false
     },
     {
       "name": "Kabak Tatlısı",
@@ -1441,7 +1518,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 81
+      "id": 81,
+      "outOfStock": false
     },
     {
       "name": "Laz Böreği",
@@ -1459,7 +1537,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 82
+      "id": 82,
+      "outOfStock": false
     },
     {
       "name": "Sıcak Helva",
@@ -1478,7 +1557,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 83
+      "id": 83,
+      "outOfStock": false
     },
     {
       "name": "Haydari",
@@ -1496,7 +1576,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 84
+      "id": 84,
+      "outOfStock": false
     },
     {
       "name": "Cacık",
@@ -1515,7 +1596,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 85
+      "id": 85,
+      "outOfStock": false
     },
     {
       "name": "Şakşuka",
@@ -1532,7 +1614,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 86
+      "id": 86,
+      "outOfStock": false
     },
     {
       "name": "Közlenmiş Patlıcan Salatası",
@@ -1551,7 +1634,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 87
+      "id": 87,
+      "outOfStock": false
     },
     {
       "name": "Muhammara",
@@ -1567,7 +1651,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 88
+      "id": 88,
+      "outOfStock": false
     },
     {
       "name": "Fava",
@@ -1583,7 +1668,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 89
+      "id": 89,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Yaprak Sarma",
@@ -1601,7 +1687,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 90
+      "id": 90,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Barbunya",
@@ -1620,7 +1707,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 91
+      "id": 91,
+      "outOfStock": false
     },
     {
       "name": "Patlıcan Ezme",
@@ -1636,7 +1724,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 92
+      "id": 92,
+      "outOfStock": false
     },
     {
       "name": "Acılı Ezme",
@@ -1654,7 +1743,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 93
+      "id": 93,
+      "outOfStock": false
     },
     {
       "name": "Yoğurtlu Semizotu",
@@ -1673,7 +1763,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 94
+      "id": 94,
+      "outOfStock": false
     },
     {
       "name": "Yoğurtlu Kabak",
@@ -1691,7 +1782,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 95
+      "id": 95,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Enginar",
@@ -1708,7 +1800,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 96
+      "id": 96,
+      "outOfStock": false
     },
     {
       "name": "Havuç Tarator",
@@ -1726,7 +1819,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 97
+      "id": 97,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Taze Fasulye",
@@ -1745,7 +1839,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 98
+      "id": 98,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Kereviz",
@@ -1763,7 +1858,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 99
+      "id": 99,
+      "outOfStock": false
     },
     {
       "name": "Közlenmiş Kırmızı Biber Dolması",
@@ -1779,7 +1875,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 100
+      "id": 100,
+      "outOfStock": false
     },
     {
       "name": "Zeytin Ezmesi",
@@ -1796,7 +1893,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 101
+      "id": 101,
+      "outOfStock": false
     },
     {
       "name": "Börülce Salatası",
@@ -1813,7 +1911,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 102
+      "id": 102,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Bakla",
@@ -1831,7 +1930,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 103
+      "id": 103,
+      "outOfStock": false
     },
     {
       "name": "Atom",
@@ -1849,7 +1949,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 104
+      "id": 104,
+      "outOfStock": false
     },
     {
       "name": "Babagannuş",
@@ -1867,7 +1968,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 105
+      "id": 105,
+      "outOfStock": false
     },
     {
       "name": "Girit Ezmesi",
@@ -1886,7 +1988,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 106
+      "id": 106,
+      "outOfStock": false
     },
     {
       "name": "Deniz Börülcesi",
@@ -1903,7 +2006,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 107
+      "id": 107,
+      "outOfStock": false
     },
     {
       "name": "Yoğurtlu Pancar",
@@ -1922,7 +2026,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 108
+      "id": 108,
+      "outOfStock": false
     },
     {
       "name": "Yoğurtlu Patates Salatası",
@@ -1940,7 +2045,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 109
+      "id": 109,
+      "outOfStock": false
     },
     {
       "name": "Kabak Borani",
@@ -1959,7 +2065,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 110
+      "id": 110,
+      "outOfStock": false
     },
     {
       "name": "Yoğurtlu Havuç",
@@ -1975,7 +2082,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 111
+      "id": 111,
+      "outOfStock": false
     },
     {
       "name": "Tahinli Patlıcan",
@@ -1994,7 +2102,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 112
+      "id": 112,
+      "outOfStock": false
     },
     {
       "name": "Sarımsaklı Yoğurtlu Mantar",
@@ -2011,7 +2120,8 @@
       ],
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
-      "id": 113
+      "id": 113,
+      "outOfStock": false
     },
     {
       "name": "Kısır",
@@ -2029,7 +2139,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 114
+      "id": 114,
+      "outOfStock": false
     },
     {
       "name": "Patates Salatası",
@@ -2046,7 +2157,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 115
+      "id": 115,
+      "outOfStock": false
     },
     {
       "name": "Gavurdağı Salatası",
@@ -2063,7 +2175,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 116
+      "id": 116,
+      "outOfStock": false
     },
     {
       "name": "Arnavut Ciğeri",
@@ -2082,7 +2195,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 117
+      "id": 117,
+      "outOfStock": false
     },
     {
       "name": "Mercimek Köftesi",
@@ -2101,7 +2215,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 118
+      "id": 118,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Pırasa",
@@ -2120,7 +2235,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 119
+      "id": 119,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Patlıcan",
@@ -2138,7 +2254,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 120
+      "id": 120,
+      "outOfStock": false
     },
     {
       "name": "Zeytinyağlı Kabak",
@@ -2154,7 +2271,8 @@
       ],
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
-      "id": 121
+      "id": 121,
+      "outOfStock": false
     },
     {
       "name": "Börülce Piyazı",
@@ -2170,7 +2288,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 122
+      "id": 122,
+      "outOfStock": false
     },
     {
       "name": "Yeşil Mercimek Salatası",
@@ -2188,7 +2307,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 123
+      "id": 123,
+      "outOfStock": false
     },
     {
       "name": "Karides Güveç",
@@ -2205,7 +2325,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 124
+      "id": 124,
+      "outOfStock": false
     },
     {
       "name": "Ahtapot Salatası",
@@ -2222,7 +2343,8 @@
       ],
       "hidden": false,
       "subcategory": "Salatalar",
-      "id": 125
+      "id": 125,
+      "outOfStock": false
     },
     {
       "name": "Kalamar Tava",
@@ -2238,7 +2360,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 126
+      "id": 126,
+      "outOfStock": false
     },
     {
       "name": "Midye Dolma",
@@ -2256,7 +2379,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 127
+      "id": 127,
+      "outOfStock": false
     },
     {
       "name": "Lakerda",
@@ -2273,7 +2397,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 128
+      "id": 128,
+      "outOfStock": false
     },
     {
       "name": "Hamsi Marine",
@@ -2289,7 +2414,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 129
+      "id": 129,
+      "outOfStock": false
     },
     {
       "name": "Levrek Marin",
@@ -2307,7 +2433,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 130
+      "id": 130,
+      "outOfStock": false
     },
     {
       "name": "Tarama (Balık Yumurtası Ezmesi)",
@@ -2324,7 +2451,8 @@
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
-      "id": 131
+      "id": 131,
+      "outOfStock": false
     },
     {
       "name": "Balık Köftesi",
@@ -2341,7 +2469,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 132
+      "id": 132,
+      "outOfStock": false
     },
     {
       "name": "Deniz Mahsullü",
@@ -2360,7 +2489,8 @@
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
-      "id": 133
+      "id": 133,
+      "outOfStock": false
     },
     {
       "name": "Şalgam / Acılı-Acısız",
@@ -2376,7 +2506,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 134
+      "id": 134,
+      "outOfStock": false
     },
     {
       "name": "Su",
@@ -2393,7 +2524,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 135
+      "id": 135,
+      "outOfStock": false
     },
     {
       "name": "Kola",
@@ -2412,7 +2544,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 136
+      "id": 136,
+      "outOfStock": false
     },
     {
       "name": "Fanta",
@@ -2429,7 +2562,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 137
+      "id": 137,
+      "outOfStock": false
     },
     {
       "name": "Kola Zero",
@@ -2447,7 +2581,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 138
+      "id": 138,
+      "outOfStock": false
     },
     {
       "name": "Sprite",
@@ -2463,7 +2598,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 139
+      "id": 139,
+      "outOfStock": false
     },
     {
       "name": "Soda",
@@ -2482,7 +2618,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 140
+      "id": 140,
+      "outOfStock": false
     },
     {
       "name": "Cappy Meyve Suyu",
@@ -2498,7 +2635,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 141
+      "id": 141,
+      "outOfStock": false
     },
     {
       "name": "Ice Tea Çeşitleri",
@@ -2515,7 +2653,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 142
+      "id": 142,
+      "outOfStock": false
     },
     {
       "name": "Tek Rakı",
@@ -2527,7 +2666,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 143
+      "id": 143,
+      "outOfStock": false
     },
     {
       "name": "Duble Rakı",
@@ -2539,7 +2679,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 144
+      "id": 144,
+      "outOfStock": false
     },
     {
       "name": "Yeni Rakı 20cl",
@@ -2551,7 +2692,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 145
+      "id": 145,
+      "outOfStock": false
     },
     {
       "name": "Yeni Rakı 35cl",
@@ -2563,7 +2705,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 146
+      "id": 146,
+      "outOfStock": false
     },
     {
       "name": "Yeni Rakı 50cl",
@@ -2575,7 +2718,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 147
+      "id": 147,
+      "outOfStock": false
     },
     {
       "name": "Tekirdağ Rakı 20cl",
@@ -2587,7 +2731,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 148
+      "id": 148,
+      "outOfStock": false
     },
     {
       "name": "Tekirdağ Rakı 35cl",
@@ -2599,7 +2744,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 149
+      "id": 149,
+      "outOfStock": false
     },
     {
       "name": "Tekirdağ Rakı 50cl",
@@ -2611,7 +2757,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
-      "id": 150
+      "id": 150,
+      "outOfStock": false
     },
     {
       "name": "Bira",
@@ -2623,7 +2770,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
-      "id": 151
+      "id": 151,
+      "outOfStock": false
     },
     {
       "name": "Şarap",
@@ -2635,7 +2783,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
-      "id": 152
+      "id": 152,
+      "outOfStock": false
     },
     {
       "name": "Viski",
@@ -2647,7 +2796,8 @@
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
-      "id": 153
+      "id": 153,
+      "outOfStock": false
     }
   ],
   "companions": [
