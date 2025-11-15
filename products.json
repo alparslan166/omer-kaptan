@@ -83,11 +83,7 @@
         "Beyaz Peynir",
         "Fıstık",
         "Kavun",
-        "Kraker",
         "Limon",
-        "Peynir",
-        "Roka",
-        "Sos",
         "Turşu"
       ],
       "hidden": false,
@@ -96,26 +92,19 @@
       "outOfStock": false
     },
     {
-      "name": "Karadeniz Tekir Tava",
+      "name": "Tekir Tava",
       "category": "Tavalar",
-      "price": "550",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/tekir-tava.jpg",
       "companions": [
-        "Beyaz Peynir",
-        "Fıstık",
-        "Kavun",
-        "Kraker",
-        "Limon",
-        "Peynir",
-        "Roka",
         "Sos",
         "Soğan",
-        "Turşu"
+        "Beyaz Peynir"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 5,
       "outOfStock": false
     },
