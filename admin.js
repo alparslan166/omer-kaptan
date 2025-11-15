@@ -113,7 +113,9 @@ function safeParseJSON(value, fallback = []) {
 }
 
 async function loadChangeTrackingData() {
-  pendingChangeEntries = safeParseJSON(localStorage.getItem(PENDING_CHANGES_STORAGE_KEY));
+  pendingChangeEntries = normalizePendingEntries(
+    safeParseJSON(localStorage.getItem(PENDING_CHANGES_STORAGE_KEY))
+  );
   await loadChangeLogFromFile();
 }
 
@@ -132,20 +134,70 @@ function formatDateTime(timestamp) {
   }
 }
 
+function normalizePendingEntries(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.map(item => {
+    if (item && typeof item === 'object') {
+      return {
+        timestamp: item.timestamp || Date.now(),
+        productName: item.productName || '',
+        description: (item.description || '').trim()
+      };
+    }
+    return {
+      timestamp: Date.now(),
+      productName: '',
+      description: typeof item === 'string' ? item.trim() : ''
+    };
+  }).filter(item => item.description);
+}
+
+function normalizeChangeLogEntries(entries) {
+  if (!Array.isArray(entries)) return [];
+  const normalized = [];
+  entries.forEach(entry => {
+    if (!entry) return;
+    if (entry.description) {
+      normalized.push({
+        timestamp: entry.timestamp || Date.now(),
+        productName: entry.productName || '',
+        description: entry.description
+      });
+    } else if (Array.isArray(entry.entries)) {
+      entry.entries.forEach(text => {
+        if (typeof text === 'string' && text.trim()) {
+          normalized.push({
+            timestamp: entry.timestamp || Date.now(),
+            productName: entry.productName || '',
+            description: text.trim()
+          });
+        }
+      });
+    } else if (typeof entry === 'string' && entry.trim()) {
+      normalized.push({
+        timestamp: Date.now(),
+        productName: '',
+        description: entry.trim()
+      });
+    }
+  });
+  normalized.sort((a, b) => b.timestamp - a.timestamp);
+  return normalized.slice(0, 100);
+}
+
 async function loadChangeLogFromFile() {
   try {
     const response = await fetch(`${CHANGE_LOG_FILE_PATH}?${Date.now()}`);
     if (response.ok) {
       const data = await response.json();
-      if (data && Array.isArray(data.entries)) {
-        changeLogData = data;
-      } else {
-        changeLogData = { entries: [] };
-      }
+      const normalized = normalizeChangeLogEntries(data && data.entries ? data.entries : []);
+      changeLogData = { entries: normalized };
     } else if (response.status === 404) {
       changeLogData = { entries: [] };
     } else {
-      changeLogData = changeLogData || { entries: [] };
+      changeLogData = changeLogData && Array.isArray(changeLogData.entries)
+        ? changeLogData
+        : { entries: [] };
     }
   } catch (error) {
     console.warn('change-log.json yüklenirken hata:', error);
@@ -167,11 +219,15 @@ function renderChangeLog() {
   
   const itemsHtml = entries.map(entry => {
     const dateLabel = formatDateTime(entry.timestamp);
-    const lines = (entry.entries || []).map(line => `<li>${escapeHtml(line)}</li>`).join('');
+    const productName = entry.productName || 'Genel';
+    const description = entry.description || '';
     return `
       <div class="change-log-entry">
-        <div class="change-log-date">${escapeHtml(dateLabel)}</div>
-        <ul>${lines || '<li>Detay bulunamadı.</li>'}</ul>
+        <div class="change-log-entry-title">
+          <span class="change-log-product">${escapeHtml(productName)}</span>
+          <span class="change-log-date">${escapeHtml(dateLabel)}</span>
+        </div>
+        <p class="change-log-desc">${escapeHtml(description)}</p>
       </div>
     `;
   }).join('');
@@ -179,10 +235,11 @@ function renderChangeLog() {
   listEl.innerHTML = itemsHtml;
 }
 
-function addPendingChangeEntry(description) {
+function addPendingChangeEntry(description, productName = '') {
   if (!description || typeof description !== 'string') return;
   pendingChangeEntries.push({
     timestamp: Date.now(),
+    productName: productName || '',
     description: description.trim()
   });
   if (pendingChangeEntries.length > 200) {
@@ -196,17 +253,16 @@ async function appendPendingChangesToChangeLogOnGitHub() {
     return;
   }
   
-  const sorted = [...pendingChangeEntries].sort((a, b) => a.timestamp - b.timestamp);
-  const messages = sorted.map(item => `[${formatDateTime(item.timestamp)}] ${item.description}`);
-  
-  const entries = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
-  entries.unshift({
-    timestamp: Date.now(),
-    entries: messages
-  });
+  const existing = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
+  const merged = [...pendingChangeEntries, ...existing];
+  merged.sort((a, b) => b.timestamp - a.timestamp);
   
   changeLogData = {
-    entries: entries.slice(0, 100)
+    entries: merged.slice(0, 100).map(entry => ({
+      timestamp: entry.timestamp || Date.now(),
+      productName: entry.productName || '',
+      description: entry.description || ''
+    }))
   };
   
   const payload = JSON.stringify(changeLogData, null, 2);
@@ -1353,19 +1409,18 @@ function recordProductAddition(product) {
   if (Array.isArray(product.ingredients) && product.ingredients.length) {
     details.push(`İçindekiler: ${product.ingredients.join(', ')}`);
   }
-  addPendingChangeEntry(`Yeni ürün eklendi: ${product.name} (${product.category}). ${details.join(' | ')}`);
+  addPendingChangeEntry(`Yeni ürün eklendi. ${details.join(' | ')}`, product.name);
 }
 
 function recordProductDeletion(product) {
   if (!product) return;
-  addPendingChangeEntry(`Ürün silindi: ${product.name} (${product.category}).`);
+  addPendingChangeEntry('Ürün silindi.', product.name);
 }
 
 function recordProductUpdate(previousState, currentState, changeDescriptions) {
   if (!previousState || !currentState || !changeDescriptions || changeDescriptions.length === 0) return;
-  const header = `Ürün güncellendi: ${previousState.name} (${previousState.category})`;
   const details = changeDescriptions.join(' | ');
-  addPendingChangeEntry(`${header} → ${currentState.name} (${currentState.category}). ${details}`);
+  addPendingChangeEntry(`Ürün güncellendi. ${details}`, currentState.name);
 }
 
 // Ürünleri listele

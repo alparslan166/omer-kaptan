@@ -97,8 +97,30 @@
   line-height: 1.5;
 }
 
-.change-log-entry li + li {
-  margin-top: 4px;
+.change-log-entry-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.change-log-product {
+  font-weight: 600;
+  color: #24335a;
+  font-size: 14px;
+}
+
+.change-log-date {
+  font-size: 12px;
+  color: #7582a3;
+}
+
+.change-log-desc {
+  margin: 0;
+  color: #2f3b52;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .empty-log {
