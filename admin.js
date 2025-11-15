@@ -2,6 +2,11 @@
 
 // LocalStorage'dan veri yükleme ve kaydetme
 const STORAGE_KEY = 'omer_kaptan_products';
+const CHANGE_LOG_STORAGE_KEY = 'omer_kaptan_change_log';
+const PENDING_CHANGES_STORAGE_KEY = 'omer_kaptan_pending_changes';
+
+let changeLogEntries = [];
+let pendingChangeEntries = [];
 
 async function loadProducts(forceRefresh = false) {
   // Eğer forceRefresh true ise, önce products.json'dan yükle (GitHub güncellemesi sonrası)
@@ -94,6 +99,100 @@ function saveProducts(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   // Güncellenmiş products.json'u indirme butonunu güncelle
   updateDownloadButton(data);
+}
+
+function safeParseJSON(value, fallback = []) {
+  if (!value) return fallback;
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : fallback;
+  } catch (error) {
+    console.warn('JSON parse error:', error);
+    return fallback;
+  }
+}
+
+function loadChangeTrackingData() {
+  changeLogEntries = safeParseJSON(localStorage.getItem(CHANGE_LOG_STORAGE_KEY));
+  pendingChangeEntries = safeParseJSON(localStorage.getItem(PENDING_CHANGES_STORAGE_KEY));
+  renderChangeLog();
+}
+
+function saveChangeLogEntries() {
+  localStorage.setItem(CHANGE_LOG_STORAGE_KEY, JSON.stringify(changeLogEntries));
+}
+
+function savePendingChangeEntries() {
+  localStorage.setItem(PENDING_CHANGES_STORAGE_KEY, JSON.stringify(pendingChangeEntries));
+}
+
+function formatDateTime(timestamp) {
+  try {
+    return new Date(timestamp).toLocaleString('tr-TR', {
+      dateStyle: 'short',
+      timeStyle: 'short'
+    });
+  } catch (error) {
+    return new Date(timestamp).toLocaleString('tr-TR');
+  }
+}
+
+function renderChangeLog() {
+  const listEl = document.getElementById('change-log-list');
+  if (!listEl) return;
+  
+  if (!changeLogEntries || changeLogEntries.length === 0) {
+    listEl.innerHTML = '<p class="empty-log">Henüz kayıt yok.</p>';
+    return;
+  }
+  
+  const itemsHtml = changeLogEntries.map(entry => {
+    const dateLabel = formatDateTime(entry.timestamp);
+    const lines = (entry.entries || []).map(line => `<li>${escapeHtml(line)}</li>`).join('');
+    return `
+      <div class="change-log-entry">
+        <div class="change-log-date">${escapeHtml(dateLabel)}</div>
+        <ul>${lines || '<li>Detay bulunamadı.</li>'}</ul>
+      </div>
+    `;
+  }).join('');
+  
+  listEl.innerHTML = itemsHtml;
+}
+
+function addPendingChangeEntry(description) {
+  if (!description || typeof description !== 'string') return;
+  pendingChangeEntries.push({
+    timestamp: Date.now(),
+    description: description.trim()
+  });
+  if (pendingChangeEntries.length > 200) {
+    pendingChangeEntries = pendingChangeEntries.slice(-200);
+  }
+  savePendingChangeEntries();
+}
+
+function flushPendingChangesToLog() {
+  if (!pendingChangeEntries || pendingChangeEntries.length === 0) {
+    return;
+  }
+  
+  const sorted = [...pendingChangeEntries].sort((a, b) => a.timestamp - b.timestamp);
+  const messages = sorted.map(item => `[${formatDateTime(item.timestamp)}] ${item.description}`);
+  
+  changeLogEntries.unshift({
+    timestamp: Date.now(),
+    entries: messages
+  });
+  
+  if (changeLogEntries.length > 30) {
+    changeLogEntries = changeLogEntries.slice(0, 30);
+  }
+  
+  pendingChangeEntries = [];
+  savePendingChangeEntries();
+  saveChangeLogEntries();
+  renderChangeLog();
 }
 
 // Güncellenmiş products.json'u indirme butonunu güncelle
@@ -288,6 +387,7 @@ function updateDownloadButton(data) {
           if (result && result.success) {
             // GitHub güncellemesi başarılı, LocalStorage'ı temizle ve products.json'dan yeniden yükle
             console.log('🔄 GitHub güncellemesi başarılı, cache temizleniyor ve veri yeniden yükleniyor...');
+            flushPendingChangesToLog();
             localStorage.removeItem(STORAGE_KEY);
             
             // Birkaç saniye bekle (GitHub Pages'in güncellemesi için)
@@ -748,6 +848,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Debug bilgisi göster
   const debugInfo = document.getElementById('debug-info');
   const debugText = document.getElementById('debug-text');
+  loadChangeTrackingData();
   
   // Veriyi yükle
   try {
@@ -1184,6 +1285,54 @@ function formatIngredientsList(list) {
   return list
     .map(item => (typeof item === 'string' ? item.trim() : ''))
     .filter(Boolean);
+}
+
+function normalizeArrayForComparison(arr) {
+  if (!Array.isArray(arr)) return [];
+  return arr
+    .map(item => (typeof item === 'string' ? item.trim() : item))
+    .filter(item => item !== undefined && item !== null && `${item}`.trim() !== '');
+}
+
+function arraysEqual(a, b) {
+  const arrA = normalizeArrayForComparison(a);
+  const arrB = normalizeArrayForComparison(b);
+  if (arrA.length !== arrB.length) return false;
+  for (let i = 0; i < arrA.length; i++) {
+    if (arrA[i] !== arrB[i]) return false;
+  }
+  return true;
+}
+
+function formatArrayList(list) {
+  const normalized = normalizeArrayForComparison(list);
+  return normalized.length ? normalized.join(', ') : '—';
+}
+
+function formatCurrency(value) {
+  if (value === undefined || value === null || value === '') return '—';
+  return `₺${value}`;
+}
+
+function recordProductAddition(product) {
+  if (!product) return;
+  const details = [`Fiyat: ${formatCurrency(product.price)}`];
+  if (Array.isArray(product.ingredients) && product.ingredients.length) {
+    details.push(`İçindekiler: ${product.ingredients.join(', ')}`);
+  }
+  addPendingChangeEntry(`Yeni ürün eklendi: ${product.name} (${product.category}). ${details.join(' | ')}`);
+}
+
+function recordProductDeletion(product) {
+  if (!product) return;
+  addPendingChangeEntry(`Ürün silindi: ${product.name} (${product.category}).`);
+}
+
+function recordProductUpdate(previousState, currentState, changeDescriptions) {
+  if (!previousState || !currentState || !changeDescriptions || changeDescriptions.length === 0) return;
+  const header = `Ürün güncellendi: ${previousState.name} (${previousState.category})`;
+  const details = changeDescriptions.join(' | ');
+  addPendingChangeEntry(`${header} → ${currentState.name} (${currentState.category}). ${details}`);
 }
 
 // Ürünleri listele
@@ -1885,6 +2034,7 @@ function setupForms() {
       
       productsData.products.push(newProduct);
       saveProducts(productsData);
+      recordProductAddition(newProduct);
       
       // Formu temizle
       addForm.reset();
@@ -1969,6 +2119,8 @@ function setupForms() {
         alert('Ürün bulunamadı!');
         return;
       }
+      
+      const previousState = JSON.parse(JSON.stringify(product));
       
       const category = document.getElementById('edit-category').value.trim();
       const name = document.getElementById('edit-name').value.trim();
@@ -2171,6 +2323,41 @@ function setupForms() {
         delete product.ingredients;
       }
       
+      const changeDescriptions = [];
+      if (previousState.name !== product.name) {
+        changeDescriptions.push(`İsim: "${previousState.name}" → "${product.name}"`);
+      }
+      if (previousState.category !== product.category) {
+        changeDescriptions.push(`Kategori: "${previousState.category}" → "${product.category}"`);
+      }
+      if ((previousState.price || '') !== (product.price || '')) {
+        changeDescriptions.push(`Fiyat: ${formatCurrency(previousState.price)} → ${formatCurrency(product.price)}`);
+      }
+      if ((previousState.shortDesc || '') !== (product.shortDesc || '')) {
+        changeDescriptions.push(`Kısa Açıklama güncellendi.`);
+      }
+      if ((previousState.description || '') !== (product.description || '')) {
+        changeDescriptions.push(`Açıklama güncellendi.`);
+      }
+      if ((previousState.image || '') !== (product.image || '')) {
+        changeDescriptions.push('Görsel güncellendi.');
+      }
+      if (!arraysEqual(previousState.companions, product.companions)) {
+        changeDescriptions.push(`Eşlikçiler: ${formatArrayList(previousState.companions)} → ${formatArrayList(product.companions)}`);
+      }
+      if (!arraysEqual(previousState.ingredients, product.ingredients)) {
+        changeDescriptions.push(`İçindekiler: ${formatArrayList(previousState.ingredients)} → ${formatArrayList(product.ingredients)}`);
+      }
+      if (!!previousState.hidden !== !!product.hidden) {
+        changeDescriptions.push(`Görünürlük: ${previousState.hidden ? 'Gizli' : 'Görünür'} → ${product.hidden ? 'Gizli' : 'Görünür'}`);
+      }
+      if (!!previousState.outOfStock !== !!product.outOfStock) {
+        changeDescriptions.push(`Stok Durumu: ${previousState.outOfStock ? 'Stokta Yok' : 'Stokta Var'} → ${product.outOfStock ? 'Stokta Yok' : 'Stokta Var'}`);
+      }
+      if ((previousState.subcategory || '') !== (product.subcategory || '')) {
+        changeDescriptions.push(`Alt Kategori: ${previousState.subcategory || '—'} → ${product.subcategory || '—'}`);
+      }
+      
       console.log('✅ Ürün bilgileri güncellendi:', {
         id: product.id,
         eskiAd: oldName,
@@ -2179,6 +2366,10 @@ function setupForms() {
         fiyat: product.price,
         resim: product.image
       });
+      
+      if (changeDescriptions.length > 0) {
+        recordProductUpdate(previousState, product, changeDescriptions);
+      }
       
       // Veriyi kaydet
       saveProducts(productsData);
@@ -2259,6 +2450,7 @@ function setupForms() {
       
       // Onay verildi, sil
       productsData.products = productsData.products.filter(p => p.id !== id);
+      recordProductDeletion(product);
       saveProducts(productsData);
       
       // Ürünün resmini GitHub'dan sil

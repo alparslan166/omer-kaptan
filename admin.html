@@ -53,6 +53,18 @@
           LocalStorage'ı Temizle ve Yenile
         </button>
       </div>
+      <section class="change-log-panel" aria-labelledby="change-log-title">
+        <div class="change-log-header">
+          <h3 id="change-log-title">Son Değişiklikler</h3>
+          <p class="change-log-hint">
+            "🚀 GitHub'da Güncelle" butonuna bastıktan sonra yapılan
+            değişiklikler burada listelenir.
+          </p>
+        </div>
+        <div id="change-log-list" class="change-log-list">
+          <p class="empty-log">Henüz kayıt yok.</p>
+        </div>
+      </section>
       <!-- Navigation Tabs -->
       <div class="admin-tabs">
         <button class="admin-tab active" data-tab="products">Ürünler</button>
@@ -100,25 +112,43 @@
             <label for="add-description">Açıklama *</label>
             <textarea id="add-description" rows="4" required></textarea>
           </div>
-          <div class="form-group" id="add-ingredients-group" style="display: none;">
+          <div
+            class="form-group"
+            id="add-ingredients-group"
+            style="display: none"
+          >
             <label for="add-ingredients">İçindekiler (virgülle ayırın)</label>
             <textarea
               id="add-ingredients"
               rows="3"
               placeholder="Yoğurt, Sarımsak, Zeytinyağı..."
             ></textarea>
-            <small style="color: #666; font-size: 12px; display: block; margin-top: 4px;">
-              Sadece Mezeler için gereklidir. Malzemeleri virgülle ayırarak yazın.
+            <small
+              style="
+                color: #666;
+                font-size: 12px;
+                display: block;
+                margin-top: 4px;
+              "
+            >
+              Sadece Mezeler için gereklidir. Malzemeleri virgülle ayırarak
+              yazın.
             </small>
           </div>
           <div class="form-group">
             <label for="add-image-file">Resim Dosyası *</label>
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 10px">
               <img
                 id="add-product-image-preview"
                 src=""
                 alt="Önizleme"
-                style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;"
+                style="
+                  max-width: 200px;
+                  max-height: 200px;
+                  border: 1px solid #ddd;
+                  border-radius: 4px;
+                  display: none;
+                "
               />
             </div>
             <input type="file" id="add-image-file" accept="image/*" required />
@@ -202,15 +232,27 @@
             <label for="edit-description">Açıklama *</label>
             <textarea id="edit-description" rows="4" required></textarea>
           </div>
-          <div class="form-group" id="edit-ingredients-group" style="display: none;">
+          <div
+            class="form-group"
+            id="edit-ingredients-group"
+            style="display: none"
+          >
             <label for="edit-ingredients">İçindekiler (virgülle ayırın)</label>
             <textarea
               id="edit-ingredients"
               rows="3"
               placeholder="Yoğurt, Sarımsak, Zeytinyağı..."
             ></textarea>
-            <small style="color: #666; font-size: 12px; display: block; margin-top: 4px;">
-              Sadece Mezeler için gereklidir. Malzemeleri virgülle ayırarak yazın.
+            <small
+              style="
+                color: #666;
+                font-size: 12px;
+                display: block;
+                margin-top: 4px;
+              "
+            >
+              Sadece Mezeler için gereklidir. Malzemeleri virgülle ayırarak
+              yazın.
             </small>
           </div>
           <div class="form-group">
@@ -242,11 +284,19 @@
           </div>
           <div class="form-group">
             <label for="edit-image-file">Resim Dosyası</label>
-            <div style="margin-bottom: 10px;">
-              <img id="edit-product-image-preview" 
-                   src="" 
-                   alt="Mevcut resim" 
-                   style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;" />
+            <div style="margin-bottom: 10px">
+              <img
+                id="edit-product-image-preview"
+                src=""
+                alt="Mevcut resim"
+                style="
+                  max-width: 200px;
+                  max-height: 200px;
+                  border: 1px solid #ddd;
+                  border-radius: 4px;
+                  display: none;
+                "
+              />
             </div>
             <input type="file" id="edit-image-file" accept="image/*" />
             <small
@@ -326,11 +376,19 @@
               </div>
               <div class="form-group">
                 <label for="new-category-image-file">Kategori Resmi *</label>
-                <div style="margin-bottom: 10px;">
-                  <img id="new-category-image-preview" 
-                       src="" 
-                       alt="Önizleme" 
-                       style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;" />
+                <div style="margin-bottom: 10px">
+                  <img
+                    id="new-category-image-preview"
+                    src=""
+                    alt="Önizleme"
+                    style="
+                      max-width: 200px;
+                      max-height: 200px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                      display: none;
+                    "
+                  />
                 </div>
                 <input
                   type="file"
@@ -346,7 +404,8 @@
                     margin-top: 4px;
                   "
                 >
-                  Kategori resmi seçin. Resim yolu otomatik olarak oluşturulacaktır.
+                  Kategori resmi seçin. Resim yolu otomatik olarak
+                  oluşturulacaktır.
                 </small>
               </div>
               <button type="submit" class="btn-primary">Kategori Ekle</button>
@@ -366,11 +425,19 @@
               </div>
               <div class="form-group">
                 <label for="edit-category-image-file">Kategori Resmi</label>
-                <div style="margin-bottom: 10px;">
-                  <img id="edit-category-image-preview" 
-                       src="" 
-                       alt="Mevcut resim" 
-                       style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;" />
+                <div style="margin-bottom: 10px">
+                  <img
+                    id="edit-category-image-preview"
+                    src=""
+                    alt="Mevcut resim"
+                    style="
+                      max-width: 200px;
+                      max-height: 200px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                      display: none;
+                    "
+                  />
                 </div>
                 <input
                   type="file"
@@ -458,11 +525,19 @@
               </div>
               <div class="form-group">
                 <label for="edit-companion-image-file">Eşlikçi Resmi</label>
-                <div style="margin-bottom: 10px;">
-                  <img id="edit-companion-image-preview" 
-                       src="" 
-                       alt="Mevcut resim" 
-                       style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; display: none;" />
+                <div style="margin-bottom: 10px">
+                  <img
+                    id="edit-companion-image-preview"
+                    src=""
+                    alt="Mevcut resim"
+                    style="
+                      max-width: 200px;
+                      max-height: 200px;
+                      border: 1px solid #ddd;
+                      border-radius: 4px;
+                      display: none;
+                    "
+                  />
                 </div>
                 <input
                   type="file"
