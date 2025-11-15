@@ -1144,27 +1144,52 @@ function displayProducts(filteredProducts = null) {
     const img = document.createElement('img');
     img.alt = product.name;
     
-    // Resim yükleme stratejisi: Önce gerçek resmi yükle, yüklenemezse varsayılan resmi kullan
-    // Bu sayede 404 hataları konsola yazılmaz
-    const testImg = new Image();
-    testImg.onload = function() {
-      // Resim başarıyla yüklendi
-      img.src = `assets/${imagePath}`;
+    const loadServerImage = (onSuccess, onError) => {
+      const testImg = new Image();
+      testImg.onload = onSuccess;
+      testImg.onerror = onError;
+      testImg.src = `assets/${imagePath}`;
     };
-    testImg.onerror = function() {
-      // Resim yüklenemedi, varsayılan resmi kullan (sessizce)
+    
+    if (product._localPreviewUrl) {
+      const previewUrl = product._localPreviewUrl;
+      img.src = previewUrl;
+      img.onerror = null;
+      
+      loadServerImage(
+        () => {
+          img.src = `assets/${imagePath}`;
+          try {
+            if (window.URL && window.URL.revokeObjectURL) {
+              window.URL.revokeObjectURL(previewUrl);
+            } else if (window.webkitURL && window.webkitURL.revokeObjectURL) {
+              window.webkitURL.revokeObjectURL(previewUrl);
+            }
+          } catch (err) {
+            console.warn('Local preview URL revoke hatası:', err);
+          }
+          delete product._localPreviewUrl;
+        },
+        () => {
+          // Sunucu resmi hazır değilse, lokal önizleme gösterilmeye devam etsin
+        }
+      );
+    } else {
+      // Önce varsayılan resmi göster, sonra gerçek resmi yükle
       img.src = 'assets/omerkaptanlogo.png';
-    };
-    
-    // Önce varsayılan resmi göster, sonra gerçek resmi yükle
-    img.src = 'assets/omerkaptanlogo.png';
-    img.onerror = function() {
-      // Varsayılan resim de yüklenemezse, hiçbir şey yapma (sonsuz döngüyü önle)
-      this.onerror = null;
-    };
-    
-    // Gerçek resmi yüklemeyi dene (sessizce)
-    testImg.src = `assets/${imagePath}`;
+      img.onerror = function() {
+        this.onerror = null;
+      };
+      
+      loadServerImage(
+        () => {
+          img.src = `assets/${imagePath}`;
+        },
+        () => {
+          img.src = 'assets/omerkaptanlogo.png';
+        }
+      );
+    }
     
     imageDiv.appendChild(img);
     
@@ -1445,6 +1470,23 @@ function setupImageFileInputs() {
   const addImage = document.getElementById('add-image');
   const addCategory = document.getElementById('add-category');
   const addName = document.getElementById('add-name');
+  const addImagePreview = document.getElementById('add-product-image-preview');
+  
+  const showAddImagePreview = (file) => {
+    if (!addImagePreview) return;
+    
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        addImagePreview.src = event.target.result;
+        addImagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      addImagePreview.src = '';
+      addImagePreview.style.display = 'none';
+    }
+  };
   
   // Kategori veya ürün adı değiştiğinde resim yolunu güncelle
   const updateAddImagePath = () => {
@@ -1467,7 +1509,11 @@ function setupImageFileInputs() {
   };
   
   if (addImageFile && addImage && addCategory && addName) {
-    addImageFile.addEventListener('change', updateAddImagePath);
+    addImageFile.addEventListener('change', () => {
+      updateAddImagePath();
+      const file = addImageFile.files ? addImageFile.files[0] : null;
+      showAddImagePreview(file);
+    });
     addCategory.addEventListener('change', updateAddImagePath);
     addName.addEventListener('input', updateAddImagePath);
   }
@@ -1543,6 +1589,8 @@ function setupForms() {
       
       // Resim yolu otomatik oluştur
       const fileExt = imageFile.name.split('.').pop().toLowerCase();
+      const objectUrlCreator = (window.URL && window.URL.createObjectURL) || (window.webkitURL && window.webkitURL.createObjectURL);
+      const localPreviewUrl = objectUrlCreator ? objectUrlCreator(imageFile) : null;
       let imagePath = generateImagePath(category, name);
       imagePath = imagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
       
@@ -1670,6 +1718,15 @@ function setupForms() {
         subcategory: addSubcategory ? addSubcategory.value : null
       };
       
+      if (localPreviewUrl) {
+        Object.defineProperty(newProduct, '_localPreviewUrl', {
+          value: localPreviewUrl,
+          enumerable: false,
+          configurable: true,
+          writable: true
+        });
+      }
+      
       productsData.products.push(newProduct);
       saveProducts(productsData);
       
@@ -1678,8 +1735,13 @@ function setupForms() {
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
       const addImage = document.getElementById('add-image');
       const addImageFile = document.getElementById('add-image-file');
+      const addImagePreview = document.getElementById('add-product-image-preview');
       if (addImage) addImage.value = '';
       if (addImageFile) addImageFile.value = '';
+      if (addImagePreview) {
+        addImagePreview.src = '';
+        addImagePreview.style.display = 'none';
+      }
       if (uploadButton) {
         uploadButton.disabled = false;
         uploadButton.textContent = originalButtonText;
@@ -1916,6 +1978,18 @@ function setupForms() {
       product.shortDesc = document.getElementById('edit-short-desc').value.trim();
       product.description = document.getElementById('edit-description').value.trim();
       product.image = imagePath;
+      if (imageFile) {
+        const editObjectUrlCreator = (window.URL && window.URL.createObjectURL) || (window.webkitURL && window.webkitURL.createObjectURL);
+        const editLocalPreviewUrl = editObjectUrlCreator ? editObjectUrlCreator(imageFile) : null;
+        if (editLocalPreviewUrl) {
+          Object.defineProperty(product, '_localPreviewUrl', {
+            value: editLocalPreviewUrl,
+            enumerable: false,
+            configurable: true,
+            writable: true
+          });
+        }
+      }
       if (editImageHidden) {
         editImageHidden.dataset.originalImage = imagePath;
         editImageHidden.value = imagePath;
