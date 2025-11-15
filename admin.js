@@ -2,11 +2,11 @@
 
 // LocalStorage'dan veri yükleme ve kaydetme
 const STORAGE_KEY = 'omer_kaptan_products';
-const CHANGE_LOG_STORAGE_KEY = 'omer_kaptan_change_log';
+const CHANGE_LOG_FILE_PATH = 'change-log.json';
 const PENDING_CHANGES_STORAGE_KEY = 'omer_kaptan_pending_changes';
 
-let changeLogEntries = [];
 let pendingChangeEntries = [];
+let changeLogData = { entries: [] };
 
 async function loadProducts(forceRefresh = false) {
   // Eğer forceRefresh true ise, önce products.json'dan yükle (GitHub güncellemesi sonrası)
@@ -112,14 +112,9 @@ function safeParseJSON(value, fallback = []) {
   }
 }
 
-function loadChangeTrackingData() {
-  changeLogEntries = safeParseJSON(localStorage.getItem(CHANGE_LOG_STORAGE_KEY));
+async function loadChangeTrackingData() {
   pendingChangeEntries = safeParseJSON(localStorage.getItem(PENDING_CHANGES_STORAGE_KEY));
-  renderChangeLog();
-}
-
-function saveChangeLogEntries() {
-  localStorage.setItem(CHANGE_LOG_STORAGE_KEY, JSON.stringify(changeLogEntries));
+  await loadChangeLogFromFile();
 }
 
 function savePendingChangeEntries() {
@@ -137,16 +132,40 @@ function formatDateTime(timestamp) {
   }
 }
 
+async function loadChangeLogFromFile() {
+  try {
+    const response = await fetch(`${CHANGE_LOG_FILE_PATH}?${Date.now()}`);
+    if (response.ok) {
+      const data = await response.json();
+      if (data && Array.isArray(data.entries)) {
+        changeLogData = data;
+      } else {
+        changeLogData = { entries: [] };
+      }
+    } else if (response.status === 404) {
+      changeLogData = { entries: [] };
+    } else {
+      changeLogData = changeLogData || { entries: [] };
+    }
+  } catch (error) {
+    console.warn('change-log.json yüklenirken hata:', error);
+    changeLogData = changeLogData || { entries: [] };
+  }
+  renderChangeLog();
+}
+
 function renderChangeLog() {
   const listEl = document.getElementById('change-log-list');
   if (!listEl) return;
   
-  if (!changeLogEntries || changeLogEntries.length === 0) {
+  const entries = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
+  
+  if (entries.length === 0) {
     listEl.innerHTML = '<p class="empty-log">Henüz kayıt yok.</p>';
     return;
   }
   
-  const itemsHtml = changeLogEntries.map(entry => {
+  const itemsHtml = entries.map(entry => {
     const dateLabel = formatDateTime(entry.timestamp);
     const lines = (entry.entries || []).map(line => `<li>${escapeHtml(line)}</li>`).join('');
     return `
@@ -172,7 +191,7 @@ function addPendingChangeEntry(description) {
   savePendingChangeEntries();
 }
 
-function flushPendingChangesToLog() {
+async function appendPendingChangesToChangeLogOnGitHub() {
   if (!pendingChangeEntries || pendingChangeEntries.length === 0) {
     return;
   }
@@ -180,18 +199,25 @@ function flushPendingChangesToLog() {
   const sorted = [...pendingChangeEntries].sort((a, b) => a.timestamp - b.timestamp);
   const messages = sorted.map(item => `[${formatDateTime(item.timestamp)}] ${item.description}`);
   
-  changeLogEntries.unshift({
+  const entries = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
+  entries.unshift({
     timestamp: Date.now(),
     entries: messages
   });
   
-  if (changeLogEntries.length > 30) {
-    changeLogEntries = changeLogEntries.slice(0, 30);
+  changeLogData = {
+    entries: entries.slice(0, 100)
+  };
+  
+  const payload = JSON.stringify(changeLogData, null, 2);
+  if (window.GitHubAPI && window.GitHubAPI.createOrUpdateFile) {
+    await window.GitHubAPI.createOrUpdateFile(payload, CHANGE_LOG_FILE_PATH, 'Update change log');
+  } else {
+    throw new Error('GitHub API createOrUpdateFile fonksiyonu mevcut değil.');
   }
   
   pendingChangeEntries = [];
   savePendingChangeEntries();
-  saveChangeLogEntries();
   renderChangeLog();
 }
 
@@ -387,7 +413,12 @@ function updateDownloadButton(data) {
           if (result && result.success) {
             // GitHub güncellemesi başarılı, LocalStorage'ı temizle ve products.json'dan yeniden yükle
             console.log('🔄 GitHub güncellemesi başarılı, cache temizleniyor ve veri yeniden yükleniyor...');
-            flushPendingChangesToLog();
+            try {
+              await appendPendingChangesToChangeLogOnGitHub();
+              await loadChangeLogFromFile();
+            } catch (logError) {
+              console.warn('Değişiklik kaydı güncellenemedi:', logError);
+            }
             localStorage.removeItem(STORAGE_KEY);
             
             // Birkaç saniye bekle (GitHub Pages'in güncellemesi için)
@@ -848,7 +879,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Debug bilgisi göster
   const debugInfo = document.getElementById('debug-info');
   const debugText = document.getElementById('debug-text');
-  loadChangeTrackingData();
+  await loadChangeTrackingData();
   
   // Veriyi yükle
   try {
