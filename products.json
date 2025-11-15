@@ -2861,6 +2861,23 @@
       "subcategory": "Diğer Alkoller",
       "id": 153,
       "outOfStock": false
+    },
+    {
+      "id": 154,
+      "name": "mezeTEST",
+      "category": "Mezeler",
+      "price": "113",
+      "shortDesc": "fghjk",
+      "description": "fgjhkjkl",
+      "image": "mezeler/mezetest.jpg",
+      "companions": [],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": "Ezmeler",
+      "ingredients": [
+        "Yoğurt",
+        "Limon"
+      ]
     }
   ],
   "companions": [
