@@ -83,7 +83,11 @@
         "Beyaz Peynir",
         "Fıstık",
         "Kavun",
+        "Kraker",
         "Limon",
+        "Peynir",
+        "Roka",
+        "Sos",
         "Turşu"
       ],
       "hidden": false,
@@ -92,38 +96,45 @@
       "outOfStock": false
     },
     {
-      "name": "Tekir Tava",
+      "name": "Karadeniz Tekir Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "550",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/tekir-tava.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
         "Sos",
         "Soğan",
-        "Beyaz Peynir"
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 5,
       "outOfStock": false
     },
     {
-      "name": "Barbun Tava",
+      "name": "Karadeniz Barbun Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Barbun balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/barbun-tava.jpg",
       "companions": [
-        "Roka",
         "Fıstık",
         "Kraker",
-        "Turşu",
-        "Sos"
+        "Roka",
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 6,
       "outOfStock": false
     },
@@ -144,7 +155,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 7,
-      "outOfStock": true
+      "outOfStock": false
     },
     {
       "name": "Zargana Tava",
@@ -162,15 +173,33 @@
       "hidden": false,
       "subcategory": null,
       "id": 8,
-      "outOfStock": true
+      "outOfStock": false
     },
     {
       "name": "Kalkan Tava",
       "category": "Tavalar",
-      "price": "1000",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kalkan balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/kalkan-tava.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Fıstık",
+        "Limon"
+      ],
+      "hidden": false,
+      "subcategory": null,
+      "id": 9,
+      "outOfStock": false
+    },
+    {
+      "name": "Palamut Tava",
+      "category": "Tavalar",
+      "price": "750",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/palamut-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -183,42 +212,29 @@
       ],
       "hidden": false,
       "subcategory": "",
-      "id": 9,
-      "outOfStock": false
-    },
-    {
-      "name": "Palamut Tava",
-      "category": "Tavalar",
-      "price": "340",
-      "shortDesc": "Şefin önerisi.",
-      "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "tavalar/palamut-tava.jpg",
-      "companions": [
-        "Peynir",
-        "Roka",
-        "Sos"
-      ],
-      "hidden": false,
-      "subcategory": null,
       "id": 10,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
-      "name": "Bako Mezgit",
+      "name": "Bako Mezgit Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze bako mezgit, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/bako-mezgit-tava.jpg",
       "companions": [
-        "Soğan",
-        "Limon",
-        "Roka",
+        "Beyaz Peynir",
         "Fıstık",
-        "Sos"
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 11,
       "outOfStock": false
     },
@@ -239,7 +255,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 12,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Gümüş Tava",
@@ -257,7 +273,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 13,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Mercan Tava",
@@ -274,7 +290,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 14,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Çinekop Tava",
