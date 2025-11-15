@@ -160,7 +160,7 @@
     {
       "name": "Zargana Tava",
       "category": "Tavalar",
-      "price": "355",
+      "price": "647",
       "shortDesc": "Şefin önerisi.",
       "description": "Zargana balığının nefis tava lezzeti, şefin özel hazırlığı.",
       "image": "tavalar/zargana-tava.jpg",
@@ -348,7 +348,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 17,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Alabalık Izgara",
