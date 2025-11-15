@@ -1,10 +1,14 @@
 {
   "entries": [
     {
+      "timestamp": 1763211164103,
+      "productName": "Levrek Izgara",
+      "description": "Ürün güncellendi. Fiyat: ₺12321 → ₺123"
+    },
+    {
       "timestamp": 1763210312512,
-      "entries": [
-        "[15.11.2025 15:38] Ürün güncellendi: Hamsi Izgara (Izgaralar) → Hamsi Izgara (Izgaralar). Fiyat: ₺340 → ₺3403 | Eşlikçiler: Kraker, Fıstık, Pide, Kavun → Fıstık, Kavun, Kraker, Pide"
-      ]
+      "productName": "",
+      "description": "[15.11.2025 15:38] Ürün güncellendi: Hamsi Izgara (Izgaralar) → Hamsi Izgara (Izgaralar). Fiyat: ₺340 → ₺3403 | Eşlikçiler: Kraker, Fıstık, Pide, Kavun → Fıstık, Kavun, Kraker, Pide"
     }
   ]
 }
