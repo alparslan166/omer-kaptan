@@ -2647,6 +2647,22 @@
       "hidden": false,
       "subcategory": "Diğer Alkoller",
       "id": 153
+    },
+    {
+      "id": 154,
+      "name": "ürünTest",
+      "category": "kategoriTest",
+      "price": "312",
+      "shortDesc": "dfghj",
+      "description": "DFGHJKLŞ",
+      "image": "kategoritest/uruntest.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Kavun"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
