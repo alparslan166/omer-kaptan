@@ -790,7 +790,8 @@
       ],
       "hidden": false,
       "subcategory": null,
-      "id": 44
+      "id": 44,
+      "outOfStock": true
     },
     {
       "name": "D. Levrek Kavurma",
