@@ -73,38 +73,49 @@
       "outOfStock": true
     },
     {
-      "name": "Mezgit Tava",
+      "name": "Karadeniz Mezgit Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "700",
       "shortDesc": "Şefin önerisi.",
       "description": "Mezgit balığının nefis tava lezzeti, şefin özel hazırlığı.",
       "image": "tavalar/mezgit-tava.jpg",
       "companions": [
-        "Turşu",
         "Beyaz Peynir",
         "Fıstık",
+        "Kavun",
+        "Kraker",
         "Limon",
-        "Kavun"
+        "Peynir",
+        "Roka",
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 4,
       "outOfStock": false
     },
     {
-      "name": "Tekir Tava",
+      "name": "Karadeniz Tekir Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "550",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/tekir-tava.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
         "Sos",
         "Soğan",
-        "Beyaz Peynir"
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 5,
       "outOfStock": false
     },
