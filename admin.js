@@ -2074,13 +2074,26 @@ function setupForms() {
   // Ürün silme
   const deleteBtn = document.getElementById('delete-product-btn');
   if (deleteBtn) {
-    deleteBtn.addEventListener('click', () => {
+    deleteBtn.addEventListener('click', async () => {
       const id = parseInt(document.getElementById('edit-id').value);
       const product = productsData.products.find(p => p.id === id);
       
       if (!product) {
         alert('Ürün bulunamadı!');
         return;
+      }
+      
+      const originalImagePath = product.image || '';
+      let normalizedImagePath = '';
+      const isLocalImage = originalImagePath &&
+        !originalImagePath.startsWith('http://') &&
+        !originalImagePath.startsWith('https://');
+      
+      if (isLocalImage) {
+        normalizedImagePath = originalImagePath.trim().replace(/^\/+/, '');
+        if (normalizedImagePath && !normalizedImagePath.startsWith('assets/')) {
+          normalizedImagePath = `assets/${normalizedImagePath}`;
+        }
       }
       
       // Onay mesajı
@@ -2092,6 +2105,22 @@ function setupForms() {
       // Onay verildi, sil
       productsData.products = productsData.products.filter(p => p.id !== id);
       saveProducts(productsData);
+      
+      // Ürünün resmini GitHub'dan sil
+      if (normalizedImagePath) {
+        const githubReady = window.GitHubConfig && window.GitHubConfig.isGitHubConfigComplete();
+        if (githubReady && window.GitHubAPI && window.GitHubAPI.deleteFile) {
+          try {
+            console.log('🗑️ Ürün resmi GitHub\'dan siliniyor:', normalizedImagePath);
+            await window.GitHubAPI.deleteFile(normalizedImagePath);
+            console.log('✅ Ürün resmi GitHub\'dan silindi');
+          } catch (error) {
+            console.warn('⚠️ Ürün resmi silinirken hata oluştu (devam ediliyor):', error);
+          }
+        } else {
+          console.warn('⚠️ GitHub API yapılandırılmadığı için ürün resmi silinemedi:', normalizedImagePath);
+        }
+      }
       
       // Ürünler listesini yenile (sayfa yenilemeden)
       displayProducts();
