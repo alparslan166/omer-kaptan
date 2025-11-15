@@ -2650,22 +2650,6 @@
       "id": 153
     },
     {
-      "id": 154,
-      "name": "DEĞİŞİK",
-      "category": "Tatlılar",
-      "price": "4536789",
-      "shortDesc": "DEĞİŞİM",
-      "description": "açıklama değişti",
-      "image": "kategoritest/uruntest.jpg",
-      "companions": [
-        "Beyaz Peynir",
-        "Kavun"
-      ],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": ""
-    },
-    {
       "id": 155,
       "name": "testb",
       "category": "Buğulamalar",
