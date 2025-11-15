@@ -61,10 +61,6 @@
       .filter(p => p.hidden === true)
       .map(p => ({ name: p.name.trim(), category: p.category.trim() }));
     
-    if (hiddenProducts.length === 0) {
-      return; // Gizlenen ürün yoksa işlem yapma
-    }
-    
     // Product detail sayfası mı kontrol et
     const isProductDetailPage = window.location.pathname.includes('product.html') || 
                                  window.location.href.includes('product.html');
@@ -129,6 +125,8 @@
             productImage.style.opacity = '';
           }
         }
+        
+        return;
       }
     } else {
       // Kategori sayfasında gizlenen ürünleri gizle
@@ -139,6 +137,10 @@
       }
       
       // Bu kategoriye ait gizlenen ürünleri bul
+      if (hiddenProducts.length === 0) {
+        return; // Gizlenen ürün yoksa kategori tarafında işlem yapmaya gerek yok
+      }
+      
       const hiddenInCategory = hiddenProducts.filter(p => p.category === currentCategory.trim());
       
       if (hiddenInCategory.length === 0) {
