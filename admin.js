@@ -777,6 +777,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         .replace(/^-+|-+$/g, '');
     };
     
+    // Ürünlerde eksik outOfStock alanlarını false olarak tamamla
+    if (productsData && Array.isArray(productsData.products)) {
+      let outOfStockUpdated = false;
+      productsData.products.forEach(product => {
+        if (typeof product.outOfStock === 'undefined') {
+          product.outOfStock = false;
+          outOfStockUpdated = true;
+        }
+      });
+      if (outOfStockUpdated) {
+        console.log('Eksik outOfStock alanları false olarak güncellendi.');
+        saveProducts(productsData);
+      }
+    }
+    
     // Mevcut eşlikçileri products.json'dan topla ve companions listesine ekle
     if (productsData && productsData.products && Array.isArray(productsData.products)) {
       const existingCompanionNames = new Set();
