@@ -37,14 +37,16 @@
     {
       "name": "İstavrit Tava",
       "category": "Tavalar",
-      "price": "342",
+      "price": "450",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/istavrit-tava.jpg",
       "companions": [
+        "Beyaz Peynir",
         "Fıstık",
         "Kavun",
         "Kraker",
+        "Peynir",
         "Roka",
         "Sos"
       ],
@@ -68,7 +70,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 3,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Mezgit Tava",
