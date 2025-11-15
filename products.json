@@ -1640,7 +1640,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 84,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Yoğurt",
+        "Sarımsak",
+        "Ceviz",
+        "Dereotu",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Cacık",
@@ -1660,7 +1668,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 85,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Yoğurt",
+        "Salatalık",
+        "Sarımsak",
+        "Nane",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Şakşuka",
@@ -1678,7 +1694,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 86,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Biber",
+        "Domates",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Közlenmiş Patlıcan Salatası",
@@ -1698,7 +1722,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 87,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Biber",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Muhammara",
@@ -1715,7 +1747,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 88,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kırmızı Biber",
+        "Ceviz",
+        "Ekmek",
+        "Zeytinyağı",
+        "Nar Ekşisi",
+        "Tuz"
+      ]
     },
     {
       "name": "Fava",
@@ -1732,7 +1772,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 89,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Bakla",
+        "Soğan",
+        "Zeytinyağı",
+        "Dereotu",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Yaprak Sarma",
@@ -1751,7 +1799,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 90,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Asma Yaprağı",
+        "Pirinç",
+        "Soğan",
+        "Zeytinyağı",
+        "Dereotu",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Barbunya",
@@ -1771,7 +1827,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 91,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Barbunya",
+        "Soğan",
+        "Domates",
+        "Zeytinyağı",
+        "Havuç",
+        "Tuz"
+      ]
     },
     {
       "name": "Patlıcan Ezme",
@@ -1788,7 +1852,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 92,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Biber",
+        "Domates",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon"
+      ]
     },
     {
       "name": "Acılı Ezme",
@@ -1807,7 +1879,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 93,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Domates",
+        "Biber",
+        "Sarımsak",
+        "Acı Biber",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Yoğurtlu Semizotu",
@@ -1827,7 +1907,15 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 94,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Semizotu",
+        "Yoğurt",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Yoğurtlu Kabak",
@@ -1846,7 +1934,15 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 95,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kabak",
+        "Yoğurt",
+        "Sarımsak",
+        "Dereotu",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Enginar",
@@ -1864,7 +1960,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 96,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Enginar",
+        "Soğan",
+        "Havuç",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Havuç Tarator",
@@ -1883,7 +1987,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 97,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Havuç",
+        "Ceviz",
+        "Sarımsak",
+        "Ekmek",
+        "Zeytinyağı",
+        "Limon"
+      ]
     },
     {
       "name": "Zeytinyağlı Taze Fasulye",
@@ -1903,7 +2015,14 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 98,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Taze Fasulye",
+        "Soğan",
+        "Domates",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Kereviz",
@@ -1922,7 +2041,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 99,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kereviz",
+        "Havuç",
+        "Soğan",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Közlenmiş Kırmızı Biber Dolması",
@@ -1939,7 +2066,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 100,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kırmızı Biber",
+        "Pirinç",
+        "Soğan",
+        "Zeytinyağı",
+        "Fıstık",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytin Ezmesi",
@@ -1957,7 +2092,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 101,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Siyah Zeytin",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Kekik",
+        "Tuz"
+      ]
     },
     {
       "name": "Börülce Salatası",
@@ -1975,7 +2118,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 102,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Börülce",
+        "Soğan",
+        "Zeytinyağı",
+        "Limon",
+        "Maydanoz",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Bakla",
@@ -1994,7 +2145,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 103,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Bakla",
+        "Soğan",
+        "Dereotu",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Atom",
@@ -2013,7 +2172,14 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 104,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Yoğurt",
+        "Acı Biber",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Babagannuş",
@@ -2032,7 +2198,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 105,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Tahin",
+        "Sarımsak",
+        "Limon",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Girit Ezmesi",
@@ -2052,7 +2226,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 106,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Biber",
+        "Domates",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Kekik"
+      ]
     },
     {
       "name": "Deniz Börülcesi",
@@ -2070,7 +2252,14 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 107,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Deniz Börülcesi",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Yoğurtlu Pancar",
@@ -2090,7 +2279,15 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 108,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Pancar",
+        "Yoğurt",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Yoğurtlu Patates Salatası",
@@ -2109,7 +2306,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 109,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patates",
+        "Yoğurt",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Maydanoz",
+        "Tuz"
+      ]
     },
     {
       "name": "Kabak Borani",
@@ -2129,7 +2334,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 110,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kabak",
+        "Yoğurt",
+        "Sarımsak",
+        "Dereotu",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Yoğurtlu Havuç",
@@ -2146,7 +2359,15 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 111,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Havuç",
+        "Yoğurt",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Tahinli Patlıcan",
@@ -2166,7 +2387,15 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 112,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Tahin",
+        "Sarımsak",
+        "Limon",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Sarımsaklı Yoğurtlu Mantar",
@@ -2184,7 +2413,15 @@
       "hidden": false,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 113,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Mantar",
+        "Yoğurt",
+        "Sarımsak",
+        "Zeytinyağı",
+        "Dereotu",
+        "Tuz"
+      ]
     },
     {
       "name": "Kısır",
@@ -2203,7 +2440,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 114,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Bulgur",
+        "Domates",
+        "Soğan",
+        "Maydanoz",
+        "Zeytinyağı",
+        "Nar Ekşisi"
+      ]
     },
     {
       "name": "Patates Salatası",
@@ -2221,7 +2466,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 115,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patates",
+        "Soğan",
+        "Maydanoz",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Gavurdağı Salatası",
@@ -2239,7 +2492,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 116,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Domates",
+        "Biber",
+        "Soğan",
+        "Ceviz",
+        "Nar Ekşisi",
+        "Zeytinyağı"
+      ]
     },
     {
       "name": "Arnavut Ciğeri",
@@ -2259,7 +2520,15 @@
       "hidden": false,
       "subcategory": null,
       "id": 117,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Dana Ciğeri",
+        "Soğan",
+        "Biber",
+        "Zeytinyağı",
+        "Limon",
+        "Kırmızı Biber"
+      ]
     },
     {
       "name": "Mercimek Köftesi",
@@ -2279,7 +2548,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 118,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kırmızı Mercimek",
+        "Bulgur",
+        "Soğan",
+        "Maydanoz",
+        "Nar Ekşisi",
+        "Zeytinyağı"
+      ]
     },
     {
       "name": "Zeytinyağlı Pırasa",
@@ -2299,7 +2576,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 119,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Pırasa",
+        "Havuç",
+        "Soğan",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Patlıcan",
@@ -2318,7 +2603,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 120,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Patlıcan",
+        "Soğan",
+        "Domates",
+        "Zeytinyağı",
+        "Biber",
+        "Tuz"
+      ]
     },
     {
       "name": "Zeytinyağlı Kabak",
@@ -2335,7 +2628,15 @@
       "hidden": false,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 121,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kabak",
+        "Soğan",
+        "Domates",
+        "Zeytinyağı",
+        "Dereotu",
+        "Tuz"
+      ]
     },
     {
       "name": "Börülce Piyazı",
@@ -2352,7 +2653,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 122,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Börülce",
+        "Soğan",
+        "Maydanoz",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Yeşil Mercimek Salatası",
@@ -2371,7 +2680,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 123,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Yeşil Mercimek",
+        "Soğan",
+        "Maydanoz",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Karides Güveç",
@@ -2389,7 +2706,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 124,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Karides",
+        "Sarımsak",
+        "Domates",
+        "Biber",
+        "Zeytinyağı",
+        "Tuz"
+      ]
     },
     {
       "name": "Ahtapot Salatası",
@@ -2407,7 +2732,15 @@
       "hidden": false,
       "subcategory": "Salatalar",
       "id": 125,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Ahtapot",
+        "Soğan",
+        "Maydanoz",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Kalamar Tava",
@@ -2424,7 +2757,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 126,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Kalamar",
+        "Un",
+        "Yumurta",
+        "Zeytinyağı",
+        "Limon",
+        "Tuz"
+      ]
     },
     {
       "name": "Midye Dolma",
@@ -2443,7 +2784,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 127,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Midye",
+        "Pirinç",
+        "Soğan",
+        "Zeytinyağı",
+        "Dereotu",
+        "Baharat"
+      ]
     },
     {
       "name": "Lakerda",
@@ -2461,7 +2810,14 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 128,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Lüfer",
+        "Tuz",
+        "Zeytinyağı",
+        "Limon",
+        "Soğan"
+      ]
     },
     {
       "name": "Hamsi Marine",
@@ -2478,7 +2834,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 129,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Hamsi",
+        "Zeytinyağı",
+        "Limon",
+        "Sarımsak",
+        "Kekik",
+        "Tuz"
+      ]
     },
     {
       "name": "Levrek Marin",
@@ -2497,7 +2861,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 130,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Levrek",
+        "Zeytinyağı",
+        "Limon",
+        "Sarımsak",
+        "Dereotu",
+        "Tuz"
+      ]
     },
     {
       "name": "Tarama (Balık Yumurtası Ezmesi)",
@@ -2515,7 +2887,14 @@
       "hidden": false,
       "subcategory": "Ezmeler",
       "id": 131,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Balık Yumurtası",
+        "Ekmek",
+        "Limon",
+        "Zeytinyağı",
+        "Sarımsak"
+      ]
     },
     {
       "name": "Balık Köftesi",
@@ -2533,7 +2912,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 132,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Balık",
+        "Soğan",
+        "Ekmek",
+        "Yumurta",
+        "Baharat",
+        "Tuz"
+      ]
     },
     {
       "name": "Deniz Mahsullü",
@@ -2553,7 +2940,15 @@
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 133,
-      "outOfStock": false
+      "outOfStock": false,
+      "ingredients": [
+        "Karides",
+        "Kalamar",
+        "Ahtapot",
+        "Zeytinyağı",
+        "Limon",
+        "Sarımsak"
+      ]
     },
     {
       "name": "Şalgam / Acılı-Acısız",
@@ -2861,23 +3256,6 @@
       "subcategory": "Diğer Alkoller",
       "id": 153,
       "outOfStock": false
-    },
-    {
-      "id": 154,
-      "name": "mezeTEST",
-      "category": "Mezeler",
-      "price": "113",
-      "shortDesc": "fghjk",
-      "description": "fgjhkjkl",
-      "image": "mezeler/mezetest.jpg",
-      "companions": [],
-      "hidden": false,
-      "outOfStock": false,
-      "subcategory": "Ezmeler",
-      "ingredients": [
-        "Yoğurt",
-        "Limon"
-      ]
     }
   ],
   "companions": [
