@@ -83,7 +83,11 @@
         "Beyaz Peynir",
         "Fıstık",
         "Kavun",
+        "Kraker",
         "Limon",
+        "Peynir",
+        "Roka",
+        "Sos",
         "Turşu"
       ],
       "hidden": false,
@@ -92,38 +96,45 @@
       "outOfStock": false
     },
     {
-      "name": "Tekir Tava",
+      "name": "Karadeniz Tekir Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "550",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/tekir-tava.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
         "Sos",
         "Soğan",
-        "Beyaz Peynir"
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 5,
       "outOfStock": false
     },
     {
-      "name": "Barbun Tava",
+      "name": "Karadeniz Barbun Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Barbun balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/barbun-tava.jpg",
       "companions": [
-        "Roka",
         "Fıstık",
         "Kraker",
-        "Turşu",
-        "Sos"
+        "Roka",
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 6,
       "outOfStock": false
     },
@@ -162,15 +173,33 @@
       "hidden": false,
       "subcategory": null,
       "id": 8,
-      "outOfStock": true
+      "outOfStock": false
     },
     {
       "name": "Kalkan Tava",
       "category": "Tavalar",
-      "price": "1000",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kalkan balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/kalkan-tava.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Peynir",
+        "Fıstık",
+        "Limon"
+      ],
+      "hidden": false,
+      "subcategory": null,
+      "id": 9,
+      "outOfStock": false
+    },
+    {
+      "name": "Palamut Tava",
+      "category": "Tavalar",
+      "price": "750",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
+      "image": "tavalar/palamut-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -183,42 +212,29 @@
       ],
       "hidden": false,
       "subcategory": "",
-      "id": 9,
-      "outOfStock": false
-    },
-    {
-      "name": "Palamut Tava",
-      "category": "Tavalar",
-      "price": "340",
-      "shortDesc": "Şefin önerisi.",
-      "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "tavalar/palamut-tava.jpg",
-      "companions": [
-        "Peynir",
-        "Roka",
-        "Sos"
-      ],
-      "hidden": false,
-      "subcategory": null,
       "id": 10,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
-      "name": "Bako Mezgit",
+      "name": "Bako Mezgit Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze bako mezgit, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/bako-mezgit-tava.jpg",
       "companions": [
-        "Soğan",
-        "Limon",
-        "Roka",
+        "Beyaz Peynir",
         "Fıstık",
-        "Sos"
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 11,
       "outOfStock": false
     },
@@ -239,7 +255,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 12,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Gümüş Tava",
@@ -257,7 +273,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 13,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Mercan Tava",
@@ -274,7 +290,7 @@
       "hidden": false,
       "subcategory": null,
       "id": 14,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Çinekop Tava",
@@ -297,39 +313,37 @@
     {
       "name": "Hamsi Izgara",
       "category": "Izgaralar",
-      "price": "450",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi balığı, özenle hazırlanmış ızgara lezzeti.",
       "image": "izgaralar/hamsi-izgara.jpg",
       "companions": [
-        "Fıstık",
-        "Kavun",
         "Kraker",
-        "Pide"
+        "Fıstık",
+        "Pide",
+        "Kavun"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 16,
       "outOfStock": false
     },
     {
       "name": "İstavrit Izgara",
       "category": "Izgaralar",
-      "price": "450",
+      "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis ızgara lezzeti, şefin özel tarifi.",
       "image": "izgaralar/istavrit-izgara.jpg",
       "companions": [
-        "Fıstık",
         "Kavun",
         "Kraker",
-        "Peynir",
-        "Pide",
         "Roka",
+        "Peynir",
         "Sos"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 17,
       "outOfStock": false
     },
@@ -351,63 +365,133 @@
       "hidden": false,
       "subcategory": null,
       "id": 18,
-      "outOfStock": true
+      "outOfStock": false
     },
     {
       "name": "Çupra Izgara",
       "category": "Izgaralar",
-      "price": "350",
+      "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Çupra balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
       "image": "izgaralar/cupra-izgara.jpg",
       "companions": [
-        "Beyaz Peynir",
-        "Fıstık",
         "Kavun",
-        "Kraker",
-        "Limon",
-        "Peynir",
         "Pide",
-        "Roka",
         "Sos",
-        "Turşu"
+        "Limon",
+        "Turşu",
+        "Beyaz Peynir"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 19,
       "outOfStock": false
     },
     {
       "name": "Levrek Izgara",
       "category": "Izgaralar",
-      "price": "350",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze levrek balığı, özenle hazırlanmış ızgara lezzeti.",
       "image": "izgaralar/levrek-izgara.jpg",
       "companions": [
-        "Beyaz Peynir",
-        "Fıstık",
-        "Kavun",
-        "Kraker",
-        "Limon",
-        "Peynir",
         "Pide",
-        "Roka",
-        "Sos",
-        "Turşu"
+        "Beyaz Peynir",
+        "Kraker"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 20,
       "outOfStock": false
     },
     {
       "name": "Palamut Izgara",
       "category": "Izgaralar",
-      "price": "750",
+      "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Palamut balığının nefis ızgara lezzeti, şefin özel tarifi.",
       "image": "izgaralar/palamut-izgara.jpg",
+      "companions": [
+        "Kraker",
+        "Kavun",
+        "Beyaz Peynir"
+      ],
+      "hidden": false,
+      "subcategory": null,
+      "id": 21,
+      "outOfStock": false
+    },
+    {
+      "name": "Torik Izgara",
+      "category": "Izgaralar",
+      "price": "700",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze torik balığı, özenle pişirilmiş ızgara lezzeti.",
+      "image": "izgaralar/torik-izgara.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Kavun",
+        "Kraker",
+        "Peynir",
+        "Roka"
+      ],
+      "hidden": false,
+      "subcategory": "",
+      "id": 22,
+      "outOfStock": false
+    },
+    {
+      "name": "Çinekop Izgara",
+      "category": "Izgaralar",
+      "price": "550",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Çinekop balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
+      "image": "izgaralar/cinekop-izgara.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Roka",
+        "Sos"
+      ],
+      "hidden": false,
+      "subcategory": "",
+      "id": 23,
+      "outOfStock": false
+    },
+    {
+      "name": "Sarıkanat Izgara",
+      "category": "Izgaralar",
+      "price": "650",
+      "shortDesc": "Taze, lezzetli, günlük.",
+      "description": "Taze sarıkanat balığı, özenle hazırlanmış ızgara lezzeti.",
+      "image": "izgaralar/sarikanat-izgara.jpg",
+      "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos"
+      ],
+      "hidden": false,
+      "subcategory": "",
+      "id": 24,
+      "outOfStock": false
+    },
+    {
+      "name": "Lüfer Izgara",
+      "category": "Izgaralar",
+      "price": "750",
+      "shortDesc": "Şefin önerisi.",
+      "description": "Lüfer balığının nefis ızgara lezzeti, şefin özel tarifi.",
+      "image": "izgaralar/lufer-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -422,177 +506,131 @@
       ],
       "hidden": false,
       "subcategory": "",
-      "id": 21,
-      "outOfStock": false
-    },
-    {
-      "name": "Torik Izgara",
-      "category": "Izgaralar",
-      "price": "340",
-      "shortDesc": "Taze, lezzetli, günlük.",
-      "description": "Taze torik balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "izgaralar/torik-izgara.jpg",
-      "companions": [
-        "Roka",
-        "Kavun",
-        "Beyaz Peynir",
-        "Peynir",
-        "Kraker"
-      ],
-      "hidden": false,
-      "subcategory": null,
-      "id": 22,
-      "outOfStock": false
-    },
-    {
-      "name": "Çinekop Izgara",
-      "category": "Izgaralar",
-      "price": "340",
-      "shortDesc": "Şefin önerisi.",
-      "description": "Çinekop balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "izgaralar/cinekop-izgara.jpg",
-      "companions": [
-        "Roka",
-        "Fıstık",
-        "Peynir",
-        "Limon",
-        "Sos"
-      ],
-      "hidden": false,
-      "subcategory": null,
-      "id": 23,
-      "outOfStock": false
-    },
-    {
-      "name": "Sarıkanat Izgara",
-      "category": "Izgaralar",
-      "price": "340",
-      "shortDesc": "Taze, lezzetli, günlük.",
-      "description": "Taze sarıkanat balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "izgaralar/sarikanat-izgara.jpg",
-      "companions": [
-        "Limon",
-        "Kavun",
-        "Kraker",
-        "Pide"
-      ],
-      "hidden": false,
-      "subcategory": null,
-      "id": 24,
-      "outOfStock": false
-    },
-    {
-      "name": "Lüfer Izgara",
-      "category": "Izgaralar",
-      "price": "340",
-      "shortDesc": "Şefin önerisi.",
-      "description": "Lüfer balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "izgaralar/lufer-izgara.jpg",
-      "companions": [
-        "Sos",
-        "Turşu",
-        "Limon",
-        "Peynir",
-        "Roka"
-      ],
-      "hidden": false,
-      "subcategory": null,
       "id": 25,
       "outOfStock": false
     },
     {
       "name": "Sardalya Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze sardalya balığı, özenle pişirilmiş ızgara lezzeti.",
       "image": "izgaralar/sardalya-izgara.jpg",
       "companions": [
-        "Soğan",
-        "Kraker",
-        "Turşu",
         "Beyaz Peynir",
-        "Kavun"
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 26,
       "outOfStock": false
     },
     {
       "name": "Karadeniz Somonu Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "350",
       "shortDesc": "Şefin önerisi.",
       "description": "Karadeniz somonunun nefis ızgara lezzeti, şefin özel hazırlığı.",
       "image": "izgaralar/karadeniz-somonu-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
         "Sos",
-        "Turşu",
         "Soğan",
-        "Kraker"
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 27,
       "outOfStock": false
     },
     {
       "name": "Norveç Somonu Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "500",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Norveç somonunun taze ızgara lezzeti, özenle hazırlanmış.",
       "image": "izgaralar/norvec-somonu-izgara.jpg",
       "companions": [
+        "Beyaz Peynir",
         "Fıstık",
-        "Peynir",
         "Kavun",
-        "Turşu",
-        "Kraker"
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 28,
       "outOfStock": false
     },
     {
       "name": "Deniz Çupra Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz çupra balığının nefis ızgara lezzeti, şefin özel tarifi.",
       "image": "izgaralar/deniz-cupra-izgara.jpg",
       "companions": [
-        "Pide",
-        "Sos",
-        "Roka",
+        "Beyaz Peynir",
         "Fıstık",
-        "Limon"
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 29,
       "outOfStock": false
     },
     {
       "name": "Deniz Levrek Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Deniz levrek balığı, özenle pişirilmiş ızgara lezzeti.",
       "image": "izgaralar/deniz-levrek-izgara.jpg",
       "companions": [
-        "Pide",
-        "Soğan",
-        "Kavun",
         "Beyaz Peynir",
         "Fıstık",
-        "Limon"
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 30,
       "outOfStock": false
     },
