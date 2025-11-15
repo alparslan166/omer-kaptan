@@ -108,8 +108,25 @@
         } else if (product.outOfStock) {
           // Ürün stokta yok - mesajı göster
           const outOfStockMessage = document.getElementById('out-of-stock-message');
+          const productImage = document.querySelector('[data-product-image]');
+          
           if (outOfStockMessage) {
             outOfStockMessage.style.display = 'block';
+          }
+          
+          if (productImage) {
+            productImage.style.opacity = '0.4';
+          }
+        } else {
+          const outOfStockMessage = document.getElementById('out-of-stock-message');
+          const productImage = document.querySelector('[data-product-image]');
+          
+          if (outOfStockMessage) {
+            outOfStockMessage.style.display = 'none';
+          }
+          
+          if (productImage) {
+            productImage.style.opacity = '';
           }
         }
       }

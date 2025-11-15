@@ -26,7 +26,7 @@
             <img src="assets/omerkaptanlogo.png" alt="Ömer Kaptan" />
           </div>
           <div class="titles">
-            <a href="index.html" style="text-decoration: none; color: inherit;">
+            <a href="index.html" style="text-decoration: none; color: inherit">
               <h1 class="site-title">Ömer Kaptan</h1>
             </a>
             <p class="site-subtitle"><span data-product-name></span></p>
@@ -62,9 +62,17 @@
     <main class="container">
       <section class="detail">
         <h2 class="product-name-title" data-product-name-title></h2>
-        <div id="out-of-stock-message" style="display: none; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 20px; margin-bottom: 20px; text-align: center;">
-          <h3 style="color: #856404; margin: 0 0 10px 0; font-size: 24px;">⚠️ Maalesef Tükendi</h3>
-          <p style="color: #856404; margin: 0; font-size: 16px;">Bu ürün şu anda stokta bulunmamaktadır. Yakında tekrar hizmetinizde olacaktır.</p>
+        <div
+          id="out-of-stock-message"
+          class="out-of-stock-banner"
+          aria-live="polite"
+          style="display: none"
+        >
+          <h3>⚠️ Maalesef Tükendi</h3>
+          <p>
+            Bu ürün şu anda stokta bulunmamaktadır. Yakında tekrar hizmetinizde
+            olacaktır.
+          </p>
         </div>
         <div class="product-image-container">
           <img class="product-detail-image" data-product-image src="" alt="" />
@@ -120,7 +128,14 @@
           <img src="assets/odemeler.png" alt="Ödeme Yöntemleri" />
         </div>
         <div class="footer-address">
-          <p><a href="https://www.google.com/maps?q=Bah%C3%A7elievler,+Azerbaycan+Cd.+No:57,+06490+%C3%87ankaya/Ankara" target="_blank" rel="noopener noreferrer">Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara</a></p>
+          <p>
+            <a
+              href="https://www.google.com/maps?q=Bah%C3%A7elievler,+Azerbaycan+Cd.+No:57,+06490+%C3%87ankaya/Ankara"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Bahçelievler, Azerbaycan Cd. No:57, 06490 Çankaya/Ankara</a
+            >
+          </p>
         </div>
         <div class="footer-reservation">
           <p>Rezervasyon için</p>
@@ -133,10 +148,18 @@
           </p>
         </div>
         <div class="footer-social">
-          <a href="https://www.instagram.com/balikciomerkaptan" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.instagram.com/balikciomerkaptan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="assets/instagram-logo.png" alt="Instagram" />
           </a>
-          <a href="https://wa.me/903122136000" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://wa.me/903122136000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src="assets/whatsapp-logo.png" alt="WhatsApp" />
           </a>
         </div>
@@ -167,7 +190,10 @@
       const scrollToTopBtn = document.querySelector(".scroll-to-top");
 
       function toggleScrollButton() {
-        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const scrollY =
+          window.scrollY ||
+          window.pageYOffset ||
+          document.documentElement.scrollTop;
         if (scrollY > 300) {
           scrollToTopBtn.classList.add("show");
         } else {
@@ -179,14 +205,14 @@
       function checkScrollLoop() {
         // Her frame'de scroll pozisyonunu kontrol et ve butonu güncelle
         toggleScrollButton();
-        
+
         // Bir sonraki frame'de tekrar kontrol et
         requestAnimationFrame(checkScrollLoop);
       }
 
       // Scroll event listener'ı da ekle (hızlı güncelleme için)
       window.addEventListener("scroll", toggleScrollButton, { passive: true });
-      
+
       // İlk kontrol
       toggleScrollButton();
       // Sürekli kontrol döngüsünü başlat
