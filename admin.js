@@ -777,6 +777,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         .replace(/^-+|-+$/g, '');
     };
     
+    let dataUpdated = false;
+    
     // Ürünlerde eksik outOfStock alanlarını false olarak tamamla
     if (productsData && Array.isArray(productsData.products)) {
       let outOfStockUpdated = false;
@@ -788,8 +790,39 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
       if (outOfStockUpdated) {
         console.log('Eksik outOfStock alanları false olarak güncellendi.');
-        saveProducts(productsData);
+        dataUpdated = true;
       }
+    }
+    
+    // Mevcut mezelerin içindekilerini varsayılanlarla doldur
+    if (productsData && Array.isArray(productsData.products)) {
+      let mezeUpdated = false;
+      productsData.products.forEach(product => {
+        if (product.category === 'Mezeler') {
+          if (Array.isArray(product.ingredients) && product.ingredients.length > 0) {
+            const formatted = formatIngredientsList(product.ingredients);
+            if (formatted.length !== product.ingredients.length ||
+                formatted.some((item, idx) => item !== product.ingredients[idx])) {
+              product.ingredients = formatted;
+              mezeUpdated = true;
+            }
+          } else {
+            const defaults = getDefaultMezeIngredients(product.name);
+            if (defaults && defaults.length > 0) {
+              product.ingredients = defaults;
+              mezeUpdated = true;
+            }
+          }
+        }
+      });
+      if (mezeUpdated) {
+        console.log('Eksik meze içindekileri varsayılanlarla dolduruldu.');
+        dataUpdated = true;
+      }
+    }
+    
+    if (dataUpdated) {
+      saveProducts(productsData);
     }
     
     // Mevcut eşlikçileri products.json'dan topla ve companions listesine ekle
@@ -1121,10 +1154,35 @@ function normalizeAssetPathForDeletion(imagePath) {
 }
 
 function parseIngredientsInput(value) {
+  if (window.MezeIngredients && typeof window.MezeIngredients.parseIngredientsInput === 'function') {
+    return window.MezeIngredients.parseIngredientsInput(value);
+  }
   if (!value || typeof value !== 'string') return [];
   return value
     .split(',')
-    .map(item => item.trim())
+    .map(item => {
+      const trimmed = item.trim();
+      if (!trimmed) return '';
+      return trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
+    })
+    .filter(Boolean);
+}
+
+function getDefaultMezeIngredients(name) {
+  if (window.MezeIngredients && typeof window.MezeIngredients.getDefaultIngredients === 'function') {
+    const defaults = window.MezeIngredients.getDefaultIngredients(name);
+    return defaults ? [...defaults] : null;
+  }
+  return null;
+}
+
+function formatIngredientsList(list) {
+  if (window.MezeIngredients && typeof window.MezeIngredients.formatIngredientsList === 'function') {
+    return window.MezeIngredients.formatIngredientsList(list);
+  }
+  if (!Array.isArray(list)) return [];
+  return list
+    .map(item => (typeof item === 'string' ? item.trim() : ''))
     .filter(Boolean);
 }
 
@@ -1391,7 +1449,15 @@ function editProduct(id) {
     if (product.category === 'Mezeler') {
       editIngredientsGroupEl.style.display = 'block';
       if (editIngredientsInputEl) {
-        const existingIngredients = Array.isArray(product.ingredients) ? product.ingredients.join(', ') : '';
+        let existingIngredients = Array.isArray(product.ingredients) && product.ingredients.length > 0
+          ? product.ingredients.join(', ')
+          : '';
+        if (!existingIngredients) {
+          const defaults = getDefaultMezeIngredients(product.name);
+          if (defaults && defaults.length) {
+            existingIngredients = defaults.join(', ');
+          }
+        }
         editIngredientsInputEl.value = existingIngredients;
       }
     } else {
