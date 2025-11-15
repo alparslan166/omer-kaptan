@@ -393,17 +393,17 @@
     {
       "name": "Levrek Izgara",
       "category": "Izgaralar",
-      "price": "340",
+      "price": "12321",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze levrek balığı, özenle hazırlanmış ızgara lezzeti.",
       "image": "izgaralar/levrek-izgara.jpg",
       "companions": [
-        "Pide",
         "Beyaz Peynir",
-        "Kraker"
+        "Kraker",
+        "Pide"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 20,
       "outOfStock": false
     },
