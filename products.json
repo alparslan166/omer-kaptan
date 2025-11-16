@@ -58,17 +58,17 @@
     {
       "name": "Alabalık Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "350",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze alabalık balığı, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/alabalik-tava.jpg",
       "companions": [
-        "Turşu",
         "Kraker",
-        "Sos"
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 3,
       "outOfStock": true
     },
@@ -141,36 +141,41 @@
     {
       "name": "Dil Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze dil balığı, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/dil-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kraker",
-        "Soğan",
+        "Limon",
         "Pide",
-        "Limon"
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 7,
       "outOfStock": true
     },
     {
       "name": "Zargana Tava",
       "category": "Tavalar",
-      "price": "647",
+      "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Zargana balığının nefis tava lezzeti, şefin özel hazırlığı.",
       "image": "tavalar/zargana-tava.jpg",
       "companions": [
+        "Beyaz Peynir",
         "Kavun",
         "Kraker",
+        "Limon",
         "Peynir",
         "Pide",
         "Roka",
         "Sos",
+        "Soğan",
         "Turşu"
       ],
       "hidden": false,
@@ -181,15 +186,22 @@
     {
       "name": "Kalkan Tava",
       "category": "Tavalar",
-      "price": "1000",
+      "price": "1250",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kalkan balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/kalkan-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
+        "Kavun",
+        "Kraker",
         "Limon",
-        "Peynir"
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
       "subcategory": "",
@@ -255,7 +267,7 @@
         "Kraker",
         "Beyaz Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 12,
       "outOfStock": true
@@ -273,7 +285,7 @@
         "Peynir",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 13,
       "outOfStock": true
@@ -281,17 +293,25 @@
     {
       "name": "Mercan Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Mercan balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/mercan-tava.jpg",
       "companions": [
-        "Limon",
+        "Beyaz Peynir",
         "Fıstık",
-        "Peynir"
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 14,
       "outOfStock": true
     },
