@@ -58,17 +58,17 @@
     {
       "name": "Alabalık Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "389",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze alabalık balığı, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/alabalik-tava.jpg",
       "companions": [
-        "Turşu",
         "Kraker",
-        "Sos"
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 3,
       "outOfStock": true
     },
