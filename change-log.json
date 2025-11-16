@@ -1,6 +1,31 @@
 {
   "entries": [
     {
+      "timestamp": 1763301102741,
+      "productName": "Mercan Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Limon, Fıstık, Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1763301050367,
+      "productName": "Kalkan Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺1000 → ₺1250 | Eşlikçiler: Beyaz Peynir, Fıstık, Limon, Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1763301037445,
+      "productName": "Zargana Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺647 → ₺650 | Eşlikçiler: Kavun, Kraker, Peynir, Pide, Roka, Sos, Turşu → Beyaz Peynir, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1763301027455,
+      "productName": "Dil Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Beyaz Peynir, Kraker, Soğan, Pide, Limon → Beyaz Peynir, Kraker, Limon, Pide, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1763300999709,
+      "productName": "Alabalık Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺350 | Eşlikçiler: Turşu, Kraker, Sos → Kraker, Sos, Turşu"
+    },
+    {
       "timestamp": 1763211164103,
       "productName": "Levrek Izgara",
       "description": "Ürün güncellendi. Fiyat: ₺12321 → ₺123"
