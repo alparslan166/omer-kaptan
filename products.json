@@ -281,17 +281,17 @@
     {
       "name": "Mercan Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "456",
       "shortDesc": "Şefin önerisi.",
       "description": "Mercan balığının nefis tava lezzeti, şefin özel tarifi.",
       "image": "tavalar/mercan-tava.jpg",
       "companions": [
-        "Limon",
         "Fıstık",
+        "Limon",
         "Peynir"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 14,
       "outOfStock": true
     },
