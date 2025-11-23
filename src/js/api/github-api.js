@@ -128,7 +128,7 @@ async function updateFileViaGitHubAPI(content) {
       const updateResponse = await fetch(updateUrl, {
         method: 'PUT',
         headers: {
-          'Authorization': `token ${config.token}`,
+          'Authorization': `token ${cleanTokenValue}`,
           'Accept': 'application/vnd.github.v3+json',
           'Content-Type': 'application/json'
         },
@@ -655,7 +655,7 @@ async function createOrUpdateFileViaGitHubAPI(content, filePath, commitMessage =
       const updateResponse = await fetch(updateUrl, {
         method: 'PUT',
         headers: {
-          'Authorization': `token ${config.token}`,
+          'Authorization': `token ${cleanTokenValue}`,
           'Accept': 'application/vnd.github.v3+json',
           'Content-Type': 'application/json'
         },
