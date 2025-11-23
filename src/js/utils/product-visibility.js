@@ -10,9 +10,9 @@
     try {
       console.log('products.json yükleniyor (product-visibility)...');
       // Sayfa konumuna göre products.json yolunu belirle
-      let jsonPath = 'products.json';
+      let jsonPath = 'data/products.json';
       if (window.location.pathname.includes('/categories/')) {
-        jsonPath = '../products.json';
+        jsonPath = '../../data/products.json';
       }
       
       const response = await fetch(jsonPath);

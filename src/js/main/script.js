@@ -281,7 +281,7 @@
     (async function() {
       try {
       console.log('products.json yükleniyor (product detail)...');
-      const response = await fetch('products.json?' + Date.now()); // Cache-busting
+      const response = await fetch('data/products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
         const productsData = await response.json();
         console.log('products.json yüklendi:', productsData);

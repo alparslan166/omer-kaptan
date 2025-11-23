@@ -2,7 +2,7 @@
 
 // LocalStorage'dan veri yükleme ve kaydetme
 const STORAGE_KEY = 'omer_kaptan_products';
-const CHANGE_LOG_FILE_PATH = 'change-log.json';
+const CHANGE_LOG_FILE_PATH = '../data/change-log.json';
 const PENDING_CHANGES_STORAGE_KEY = 'omer_kaptan_pending_changes';
 
 let pendingChangeEntries = [];
@@ -13,7 +13,7 @@ async function loadProducts(forceRefresh = false) {
   if (forceRefresh) {
     console.log('Force refresh: Loading from products.json (GitHub güncellemesi sonrası)');
     try {
-      const response = await fetch('products.json?' + Date.now()); // Cache bypass
+      const response = await fetch('../data/products.json?' + Date.now()); // Cache bypass
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -44,7 +44,7 @@ async function loadProducts(forceRefresh = false) {
   // Önce products.json'dan yükle (kalıcı kaynak)
   console.log('Loading from products.json');
   try {
-    const response = await fetch('products.json?' + Date.now()); // Cache bypass
+    const response = await fetch('../data/products.json?' + Date.now()); // Cache bypass
     if (response.ok) {
       const data = await response.json();
       console.log('Fetched data from products.json:', data);
@@ -2602,7 +2602,7 @@ function setupForms() {
   const cancelBtn = document.getElementById('cancel-edit-btn');
   if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
-      window.location.href = 'admin.html';
+      window.location.href = '../admin/admin.html';
     });
   }
   
@@ -3755,7 +3755,7 @@ function generateCategoryHtml(categoryName, categorySlug) {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../src/css/main.css" />
   </head>
   <body>
     <div class="loading-overlay" id="loadingOverlay">
@@ -3916,8 +3916,8 @@ function generateCategoryHtml(categoryName, categorySlug) {
         });
       })();
     </script>
-    <script src="../dynamic-products.js"></script>
-    <script src="../product-visibility.js"></script>
+    <script src="../src/js/main/dynamic-products.js"></script>
+    <script src="../src/js/utils/product-visibility.js"></script>
   </body>
 </html>`;
 }

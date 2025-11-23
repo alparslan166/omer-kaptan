@@ -13,9 +13,9 @@
       productsData = JSON.parse(stored);
     } else {
       // products.json'dan yükle
-      // Path'i belirle: category sayfalarından ../products.json, product.html'den products.json
+      // Path'i belirle: category sayfalarından ../../data/products.json, product.html'den data/products.json
       const isProductPage = window.location.pathname.includes('product.html');
-      const jsonPath = isProductPage ? 'products.json' : '../products.json';
+      const jsonPath = isProductPage ? 'data/products.json' : '../../data/products.json';
       const response = await fetch(jsonPath);
       productsData = await response.json();
     }
@@ -55,8 +55,8 @@
       if (productBody.querySelector('.admin-edit-btn')) return;
       
       const editBtn = document.createElement('a');
-      // product.html root dizinde, direkt admin.html
-      editBtn.href = `admin.html?product=${product.id}`;
+      // product.html root dizinde, admin/admin.html
+      editBtn.href = `admin/admin.html?product=${product.id}`;
       editBtn.className = 'admin-edit-btn';
       editBtn.innerHTML = `
         <span class="icon">
@@ -118,9 +118,9 @@
       
       // Düzenle butonunu oluştur
       const editBtn = document.createElement('a');
-      // Path'i belirle (product.html'den admin.html'e direkt, category sayfalarından ../admin.html)
+      // Path'i belirle (product.html'den admin/admin.html'e, category sayfalarından ../../admin/admin.html)
       const isProductPage = window.location.pathname.includes('product.html');
-      editBtn.href = isProductPage ? `admin.html?product=${product.id}` : `../admin.html?product=${product.id}`;
+      editBtn.href = isProductPage ? `admin/admin.html?product=${product.id}` : `../../admin/admin.html?product=${product.id}`;
       editBtn.className = 'admin-edit-btn';
       editBtn.innerHTML = `
         <span class="icon">

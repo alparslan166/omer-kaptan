@@ -30,7 +30,7 @@
     let productsData = null;
     try {
       console.log('products.json yükleniyor...');
-      const response = await fetch('../products.json');
+      const response = await fetch('../../data/products.json');
       if (response.ok) {
         const jsonData = await response.json();
         console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');
@@ -116,7 +116,7 @@
     // LocalStorage sadece cache olarak kullanılır
     try {
       console.log('products.json yükleniyor...');
-      const response = await fetch('../products.json?' + Date.now()); // Cache-busting
+      const response = await fetch('../../data/products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
         const jsonData = await response.json();
         console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');

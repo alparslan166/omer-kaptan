@@ -113,7 +113,7 @@
     
     try {
       // products.json'dan kategorileri yükle
-      const response = await fetch('products.json?' + Date.now()); // Cache-busting
+      const response = await fetch('data/products.json?' + Date.now()); // Cache-busting
       if (!response.ok) {
         console.warn('products.json yüklenemedi, statik içerik gösteriliyor');
         return; // Statik HTML'i göster
