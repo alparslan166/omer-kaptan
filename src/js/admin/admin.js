@@ -2,7 +2,7 @@
 
 // LocalStorage'dan veri yükleme ve kaydetme
 const STORAGE_KEY = 'omer_kaptan_products';
-const CHANGE_LOG_FILE_PATH = '../data/change-log.json';
+const CHANGE_LOG_FILE_PATH = 'data/change-log.json';
 const PENDING_CHANGES_STORAGE_KEY = 'omer_kaptan_pending_changes';
 
 let pendingChangeEntries = [];
@@ -13,7 +13,7 @@ async function loadProducts(forceRefresh = false) {
   if (forceRefresh) {
     console.log('Force refresh: Loading from products.json (GitHub güncellemesi sonrası)');
     try {
-      const response = await fetch('../data/products.json?' + Date.now()); // Cache bypass
+      const response = await fetch('data/products.json?' + Date.now()); // Cache bypass
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -2602,7 +2602,7 @@ function setupForms() {
   const cancelBtn = document.getElementById('cancel-edit-btn');
   if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
-      window.location.href = '../admin/admin.html';
+      window.location.href = 'admin.html';
     });
   }
   

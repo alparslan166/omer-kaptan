@@ -55,8 +55,8 @@
       if (productBody.querySelector('.admin-edit-btn')) return;
       
       const editBtn = document.createElement('a');
-      // product.html root dizinde, admin/admin.html
-      editBtn.href = `admin/admin.html?product=${product.id}`;
+      // product.html root dizinde, admin.html root dizinde
+      editBtn.href = `admin.html?product=${product.id}`;
       editBtn.className = 'admin-edit-btn';
       editBtn.innerHTML = `
         <span class="icon">
@@ -118,9 +118,9 @@
       
       // Düzenle butonunu oluştur
       const editBtn = document.createElement('a');
-      // Path'i belirle (product.html'den admin/admin.html'e, category sayfalarından ../../admin/admin.html)
+      // Path'i belirle (product.html'den admin.html root dizinde, category sayfalarından ../admin.html)
       const isProductPage = window.location.pathname.includes('product.html');
-      editBtn.href = isProductPage ? `admin/admin.html?product=${product.id}` : `../../admin/admin.html?product=${product.id}`;
+      editBtn.href = isProductPage ? `admin.html?product=${product.id}` : `../admin.html?product=${product.id}`;
       editBtn.className = 'admin-edit-btn';
       editBtn.innerHTML = `
         <span class="icon">
