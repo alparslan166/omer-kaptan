@@ -16,7 +16,7 @@ const GITHUB_CONFIG = {
   branch: 'main',
   
   // Dosya yolu (products.json'un repository'deki yolu)
-  filePath: 'products.json',
+  filePath: 'data/products.json',
   
   // Commit mesajı
   commitMessage: 'Update products.json from admin panel'

@@ -44,7 +44,7 @@ async function loadProducts(forceRefresh = false) {
   // Önce products.json'dan yükle (kalıcı kaynak)
   console.log('Loading from products.json');
   try {
-    const response = await fetch('../data/products.json?' + Date.now()); // Cache bypass
+    const response = await fetch('data/products.json?' + Date.now()); // Cache bypass
     if (response.ok) {
       const data = await response.json();
       console.log('Fetched data from products.json:', data);
@@ -556,7 +556,7 @@ function showGitHubSettingsModal() {
     repository: '',
     token: '',
     branch: 'main',
-    filePath: 'products.json'
+    filePath: 'data/products.json'
   };
   
   if (window.GitHubConfig) {
@@ -661,7 +661,7 @@ function showGitHubSettingsModal() {
       repository: document.getElementById('github-repo').value.trim(),
       token: document.getElementById('github-token').value.trim(),
       branch: document.getElementById('github-branch').value.trim() || 'main',
-      filePath: document.getElementById('github-filepath').value.trim() || 'products.json',
+      filePath: document.getElementById('github-filepath').value.trim() || 'data/products.json',
       commitMessage: 'Update products.json from admin panel'
     };
     
