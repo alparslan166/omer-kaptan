@@ -263,18 +263,18 @@
     {
       "name": "Gümüş Tava",
       "category": "Tavalar",
-      "price": "340",
+      "price": "444",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze gümüş balığı, özenle hazırlanmış tava lezzeti.",
       "image": "tavalar/gumus-tava.jpg",
       "companions": [
-        "Kraker",
+        "Fıstık",
         "Kavun",
-        "Peynir",
-        "Fıstık"
+        "Kraker",
+        "Peynir"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 13,
       "outOfStock": true
     },
