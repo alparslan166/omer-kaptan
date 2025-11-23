@@ -13,6 +13,25 @@ function getConfigFunctions() {
   return null;
 }
 
+// Token'ı temizle ve doğrula (ISO-8859-1 uyumluluğu için)
+function cleanToken(token) {
+  if (!token || typeof token !== 'string') {
+    return '';
+  }
+  // Token'ı temizle: sadece görünür ASCII karakterler (0x20-0x7E)
+  const cleaned = token.trim().replace(/[^\x20-\x7E]/g, '');
+  return cleaned;
+}
+
+// URL path'ini encode et (GitHub API için)
+function encodeFilePath(filePath) {
+  if (!filePath || typeof filePath !== 'string') {
+    return '';
+  }
+  // Önce encode et, sonra / karakterlerini geri getir (GitHub API path'lerde / kabul eder)
+  return encodeURIComponent(filePath).replace(/%2F/g, '/');
+}
+
 /**
  * GitHub API ile dosya güncelleme
  * @param {string} content - JSON içeriği (string olarak)
@@ -47,10 +66,16 @@ async function updateFileViaGitHubAPI(content) {
     try {
       // 1. Mevcut dosyayı al (SHA için) - Her retry'da güncel SHA'yı al (cache bypass için timestamp ekle)
       const cacheBuster = Date.now();
-      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}&t=${cacheBuster}`;
+      // URL encode filePath to handle special characters
+      const encodedFilePath = encodeFilePath(config.filePath);
+      const cleanTokenValue = cleanToken(config.token);
+      if (!cleanTokenValue) {
+        throw new Error('Token boş veya geçersiz!');
+      }
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}&t=${cacheBuster}`;
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
-          'Authorization': `token ${config.token}`,
+          'Authorization': `token ${cleanTokenValue}`,
           'Accept': 'application/vnd.github.v3+json'
         },
         cache: 'no-store'
@@ -78,14 +103,19 @@ async function updateFileViaGitHubAPI(content) {
       }
       
       // 2. Dosyayı güncelle veya oluştur
-      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}`;
+      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}`;
       
       // Base64 encode (Türkçe karakter desteği ile)
       const utf8Content = unescape(encodeURIComponent(content));
       const base64Content = btoa(utf8Content);
       
+      // Clean commit message to avoid encoding issues
+      const cleanCommitMessage = (config.commitMessage || 'Update products.json from admin panel')
+        .replace(/[^\x00-\x7F]/g, '') // Remove non-ASCII characters
+        .trim() || 'Update products.json from admin panel';
+      
       const updatePayload = {
-        message: `${config.commitMessage} (${new Date().toISOString()})`,
+        message: `${cleanCommitMessage} (${new Date().toISOString()})`,
         content: base64Content,
         branch: config.branch
       };
@@ -195,10 +225,16 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     // 1. Mevcut dosyayı kontrol et (SHA için) - sadece dosya varsa SHA al
     let sha = null;
     try {
-      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}`;
+      // URL encode filePath to handle special characters
+      const encodedFilePath = encodeFilePath(filePath);
+      const cleanTokenValue = cleanToken(config.token);
+      if (!cleanTokenValue) {
+        throw new Error('Token boş veya geçersiz!');
+      }
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}`;
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
-          'Authorization': `token ${config.token}`,
+          'Authorization': `token ${cleanTokenValue}`,
           'Accept': 'application/vnd.github.v3+json'
         }
       });
@@ -220,10 +256,12 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     }
     
     // 2. Dosyayı yükle veya güncelle
-    const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}`;
     
+    // Clean filePath for commit message (remove special characters)
+    const cleanFilePath = filePath.replace(/[^\x00-\x7F]/g, '');
     const updatePayload = {
-      message: `Upload image: ${filePath}`,
+      message: `Upload image: ${cleanFilePath}`,
       content: base64Content,
       branch: config.branch
     };
@@ -236,7 +274,7 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
       headers: {
-        'Authorization': `token ${config.token}`,
+        'Authorization': `token ${cleanTokenValue}`,
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
@@ -292,10 +330,16 @@ async function deleteFileViaGitHubAPI(filePath) {
   
   try {
     // 1. Mevcut dosyayı al (SHA için)
-    const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}`;
+    // URL encode filePath to handle special characters
+    const encodedFilePath = encodeFilePath(filePath);
+    const cleanTokenValue = cleanToken(config.token);
+    if (!cleanTokenValue) {
+      throw new Error('Token boş veya geçersiz!');
+    }
+    const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}`;
     const getFileResponse = await fetch(getFileUrl, {
       headers: {
-        'Authorization': `token ${config.token}`,
+        'Authorization': `token ${cleanTokenValue}`,
         'Accept': 'application/vnd.github.v3+json'
       }
     });
@@ -317,10 +361,12 @@ async function deleteFileViaGitHubAPI(filePath) {
     console.log(`📋 Dosya bulundu, SHA: ${sha.substring(0, 8)}...`);
     
     // 2. Dosyayı sil
-    const deleteUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    const deleteUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}`;
     
+    // Clean filePath for commit message
+    const cleanFilePath = filePath.replace(/[^\x00-\x7F]/g, '');
     const deletePayload = {
-      message: `Delete old image: ${filePath}`,
+      message: `Delete old image: ${cleanFilePath}`,
       sha: sha,
       branch: config.branch
     };
@@ -328,7 +374,7 @@ async function deleteFileViaGitHubAPI(filePath) {
     const deleteResponse = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
-        'Authorization': `token ${config.token}`,
+        'Authorization': `token ${cleanTokenValue}`,
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
@@ -401,10 +447,24 @@ async function testGitHubConnection() {
   
   try {
     // 1. Repository erişimini test et
+    const cleanTokenValue = cleanToken(config.token);
+    if (!cleanTokenValue) {
+      return {
+        success: false,
+        error: 'Token boş veya geçersiz karakterler içeriyor!',
+        details: {
+          hasRepository: !!config.repository,
+          hasToken: false,
+          repository: config.repository || '(boş)',
+          branch: config.branch || '(boş)',
+          filePath: config.filePath || '(boş)'
+        }
+      };
+    }
     const testUrl = `https://api.github.com/repos/${owner}/${repo}`;
     const response = await fetch(testUrl, {
       headers: {
-        'Authorization': `token ${config.token}`,
+        'Authorization': `token ${cleanTokenValue}`,
         'Accept': 'application/vnd.github.v3+json'
       }
     });
@@ -447,10 +507,12 @@ async function testGitHubConnection() {
     }
     
     // 2. products.json dosyasının varlığını kontrol et
-    const fileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${config.filePath}?ref=${config.branch}`;
+    // URL encode filePath to handle special characters
+    const encodedFilePath = encodeFilePath(config.filePath);
+    const fileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}`;
     const fileResponse = await fetch(fileUrl, {
       headers: {
-        'Authorization': `token ${config.token}`,
+        'Authorization': `token ${cleanTokenValue}`,
         'Accept': 'application/vnd.github.v3+json'
       }
     });
@@ -546,10 +608,16 @@ async function createOrUpdateFileViaGitHubAPI(content, filePath, commitMessage =
     try {
       // Mevcut dosyayı al (SHA için)
       const cacheBuster = Date.now();
-      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${config.branch}&t=${cacheBuster}`;
+      // URL encode filePath to handle special characters
+      const encodedFilePath = encodeFilePath(filePath);
+      const cleanTokenValue = cleanToken(config.token);
+      if (!cleanTokenValue) {
+        throw new Error('Token boş veya geçersiz!');
+      }
+      const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}&t=${cacheBuster}`;
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
-          'Authorization': `token ${config.token}`,
+          'Authorization': `token ${cleanTokenValue}`,
           'Accept': 'application/vnd.github.v3+json'
         },
         cache: 'no-store'
@@ -565,12 +633,17 @@ async function createOrUpdateFileViaGitHubAPI(content, filePath, commitMessage =
       }
       
       // Dosyayı oluştur veya güncelle
-      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      const updateUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}`;
       const utf8Content = unescape(encodeURIComponent(content));
       const base64Content = btoa(utf8Content);
       
+      // Clean commit message to avoid encoding issues
+      const cleanCommitMessage = (commitMessage || `Update ${filePath}`)
+        .replace(/[^\x00-\x7F]/g, '') // Remove non-ASCII characters
+        .trim() || `Update ${filePath.replace(/[^\x00-\x7F]/g, '')}`;
+      
       const updatePayload = {
-        message: commitMessage || `Update ${filePath} (${new Date().toISOString()})`,
+        message: `${cleanCommitMessage} (${new Date().toISOString()})`,
         content: base64Content,
         branch: config.branch
       };
