@@ -210,21 +210,33 @@ function renderChangeLog() {
   const listEl = document.getElementById('change-log-list');
   if (!listEl) return;
   
-  const entries = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
+  // Hem kayıtlı hem de pending (bekleyen) değişiklikleri birleştir
+  const savedEntries = (changeLogData && Array.isArray(changeLogData.entries)) ? changeLogData.entries : [];
+  const pendingEntries = (pendingChangeEntries && Array.isArray(pendingChangeEntries)) ? pendingChangeEntries : [];
   
-  if (entries.length === 0) {
+  // Pending entries'leri en üste ekle (en yeni olanlar üstte)
+  const allEntries = [...pendingEntries, ...savedEntries];
+  
+  // Timestamp'e göre sırala (en yeni üstte)
+  allEntries.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+  
+  if (allEntries.length === 0) {
     listEl.innerHTML = '<p class="empty-log">Henüz kayıt yok.</p>';
     return;
   }
   
-  const itemsHtml = entries.map(entry => {
+  const itemsHtml = allEntries.map((entry, index) => {
     const dateLabel = formatDateTime(entry.timestamp);
     const productName = entry.productName || 'Genel';
     const description = entry.description || '';
+    // Pending entries'leri vurgula (henüz GitHub'a gönderilmemiş)
+    const isPending = index < pendingEntries.length;
+    const pendingClass = isPending ? 'change-log-entry-pending' : '';
+    const pendingBadge = isPending ? '<span style="background: #ff9800; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 8px;">Beklemede</span>' : '';
     return `
-      <div class="change-log-entry">
+      <div class="change-log-entry ${pendingClass}">
         <div class="change-log-entry-title">
-          <span class="change-log-product">${escapeHtml(productName)}</span>
+          <span class="change-log-product">${escapeHtml(productName)}${pendingBadge}</span>
           <span class="change-log-date">${escapeHtml(dateLabel)}</span>
         </div>
         <p class="change-log-desc">${formatChangeDescription(description)}</p>
@@ -263,6 +275,9 @@ function addPendingChangeEntry(description, productName = '') {
     pendingChangeEntries = pendingChangeEntries.slice(-200);
   }
   savePendingChangeEntries();
+  
+  // Anında change-log listesini güncelle (pending değişiklikleri göster)
+  renderChangeLog();
 }
 
 async function appendPendingChangesToChangeLogOnGitHub() {
