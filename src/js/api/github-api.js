@@ -209,6 +209,13 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     throw new Error('Repository formatı hatalı! Format: owner/repo');
   }
   
+  // URL encode filePath to handle special characters (try bloğu dışında tanımla)
+  const encodedFilePath = encodeFilePath(filePath);
+  const cleanTokenValue = cleanToken(config.token);
+  if (!cleanTokenValue) {
+    throw new Error('Token boş veya geçersiz!');
+  }
+  
   try {
     // Dosyayı Base64'e çevir
     const base64Content = await new Promise((resolve, reject) => {
@@ -225,12 +232,6 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     // 1. Mevcut dosyayı kontrol et (SHA için) - sadece dosya varsa SHA al
     let sha = null;
     try {
-      // URL encode filePath to handle special characters
-      const encodedFilePath = encodeFilePath(filePath);
-      const cleanTokenValue = cleanToken(config.token);
-      if (!cleanTokenValue) {
-        throw new Error('Token boş veya geçersiz!');
-      }
       const getFileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedFilePath}?ref=${config.branch}`;
       const getFileResponse = await fetch(getFileUrl, {
         headers: {
