@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "timestamp": 1764110456695,
+      "productName": "Karides Güveç",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
+      "timestamp": 1764110454730,
+      "productName": "Karides Tereyağında",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
+      "timestamp": 1764110449930,
+      "productName": "Hamsi Tava",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
       "timestamp": 1764110303547,
       "productName": "Karides Güveç",
       "description": "Ürün güncellendi. Stok Durumu: Stokta Var → Stokta Yok"
@@ -484,21 +499,6 @@
       "timestamp": 1763301304631,
       "productName": "Palamut Izgara",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Kraker, Kavun, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301291431,
-      "productName": "Levrek Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺123 → ₺350 | Eşlikçiler: Beyaz Peynir, Kraker, Pide → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301279968,
-      "productName": "Çupra Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺350 | Eşlikçiler: Kavun, Pide, Sos, Limon, Turşu, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301272751,
-      "productName": "Alabalık Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺450 | Eşlikçiler: Roka, Pide, Turşu, Kraker, Beyaz Peynir, Sos → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
     }
   ]
 }
