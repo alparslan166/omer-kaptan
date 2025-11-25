@@ -29,7 +29,7 @@
         "Peynir",
         "Sos"
       ],
-      "hidden": true,
+      "hidden": false,
       "subcategory": "",
       "id": 1,
       "outOfStock": false
