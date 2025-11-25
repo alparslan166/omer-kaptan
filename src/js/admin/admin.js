@@ -1839,8 +1839,19 @@ function toggleProductVisibility(id) {
   const product = productsData.products.find(p => p.id === id);
   if (!product) return;
   
+  // Önceki durumu kaydet (change-log için)
+  const previousHidden = product.hidden;
+  
   product.hidden = !product.hidden;
   saveProducts(productsData);
+  
+  // Change-log'a kayıt ekle
+  const statusChange = previousHidden ? 'Görünür' : 'Gizli';
+  const newStatus = product.hidden ? 'Gizli' : 'Görünür';
+  addPendingChangeEntry(
+    `Ürün güncellendi. Görünürlük: ${statusChange} → ${newStatus}`,
+    product.name
+  );
   
   // Listeleri yenile
   displayProducts();
@@ -1856,8 +1867,20 @@ function toggleProductStock(id) {
   const product = productsData.products.find(p => p.id === id);
   if (!product) return;
   
+  // Önceki durumu kaydet (change-log için)
+  const previousOutOfStock = product.outOfStock;
+  
   product.outOfStock = !product.outOfStock;
   saveProducts(productsData);
+  
+  // Change-log'a kayıt ekle
+  const previousStatus = previousOutOfStock ? 'Stokta Yok' : 'Stokta Var';
+  const newStatus = product.outOfStock ? 'Stokta Yok' : 'Stokta Var';
+  addPendingChangeEntry(
+    `Ürün güncellendi. Stok Durumu: ${previousStatus} → ${newStatus}`,
+    product.name
+  );
+  
   displayProducts();
   displayHiddenProducts();
   
