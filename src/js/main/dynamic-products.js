@@ -30,7 +30,7 @@
     let productsData = null;
     try {
       console.log('products.json yükleniyor...');
-      const response = await fetch('../../data/products.json');
+      const response = await fetch('../../data/products.json?' + Date.now()); // Cache-busting
       if (response.ok) {
         const jsonData = await response.json();
         console.log('products.json yüklendi:', jsonData.products?.length, 'ürün');

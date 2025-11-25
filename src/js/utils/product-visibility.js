@@ -15,7 +15,7 @@
         jsonPath = '../../data/products.json';
       }
       
-      const response = await fetch(jsonPath);
+      const response = await fetch(jsonPath + '?' + Date.now()); // Cache-busting
       if (response.ok) {
         const jsonData = await response.json();
         console.log('products.json yüklendi (product-visibility):', jsonData.products?.length, 'ürün');
