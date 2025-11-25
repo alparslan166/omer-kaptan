@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "timestamp": 1764110456695,
+      "productName": "Karides Güveç",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
+      "timestamp": 1764110454730,
+      "productName": "Karides Tereyağında",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
+      "timestamp": 1764110449930,
+      "productName": "Hamsi Tava",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Yok → Stokta Var"
+    },
+    {
+      "timestamp": 1764110303547,
+      "productName": "Karides Güveç",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Var → Stokta Yok"
+    },
+    {
+      "timestamp": 1764110301663,
+      "productName": "Karides Tereyağında",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Var → Stokta Yok"
+    },
+    {
+      "timestamp": 1764110295597,
+      "productName": "Hamsi Tava",
+      "description": "Ürün güncellendi. Stok Durumu: Stokta Var → Stokta Yok"
+    },
+    {
+      "timestamp": 1764110204047,
+      "productName": "Cappy Meyve Suyu",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
+      "timestamp": 1764110201931,
+      "productName": "Şalgam / Acılı-Acısız",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
+      "timestamp": 1764110199197,
+      "productName": "Kola",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
       "timestamp": 1764109818832,
       "productName": "Cappy Meyve Suyu",
       "description": "Ürün güncellendi. Görünürlük: Gizli → Gizli"
@@ -454,46 +499,6 @@
       "timestamp": 1763301304631,
       "productName": "Palamut Izgara",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Kraker, Kavun, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301291431,
-      "productName": "Levrek Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺123 → ₺350 | Eşlikçiler: Beyaz Peynir, Kraker, Pide → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301279968,
-      "productName": "Çupra Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺350 | Eşlikçiler: Kavun, Pide, Sos, Limon, Turşu, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301272751,
-      "productName": "Alabalık Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺450 | Eşlikçiler: Roka, Pide, Turşu, Kraker, Beyaz Peynir, Sos → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301157583,
-      "productName": "İstavrit Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺450 | Eşlikçiler: Kavun, Kraker, Roka, Peynir, Sos → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301139530,
-      "productName": "Hamsi Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺3403 → ₺450 | Eşlikçiler: Fıstık, Kavun, Kraker, Pide → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301128110,
-      "productName": "Çinekop Tava",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Roka, Fıstık, Soğan, Kavun → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763211164103,
-      "productName": "Levrek Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺12321 → ₺123"
-    },
-    {
-      "timestamp": 1763210312512,
-      "productName": "",
-      "description": "[15.11.2025 15:38] Ürün güncellendi: Hamsi Izgara (Izgaralar) → Hamsi Izgara (Izgaralar). Fiyat: ₺340 → ₺3403 | Eşlikçiler: Kraker, Fıstık, Pide, Kavun → Fıstık, Kavun, Kraker, Pide"
     }
   ]
 }
