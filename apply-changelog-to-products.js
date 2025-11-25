@@ -58,11 +58,28 @@ function parseChangeDescription(description) {
 }
 
 // Ürünleri güncelle
+// ÖNEMLİ: Aynı ürün için birden fazla değişiklik varsa, en son (timestamp'a göre en büyük) değişikliği kullan
+// Önce tüm değişiklikleri ürün adına göre grupla ve en son değişikliği seç
+const changesByProduct = {};
+changeLog.entries.forEach(entry => {
+  if (!entry.productName || !entry.description) return;
+  
+  const productName = entry.productName.trim();
+  if (!changesByProduct[productName]) {
+    changesByProduct[productName] = { entry: null, timestamp: 0 };
+  }
+  
+  // En son (en büyük timestamp) değişikliği tut
+  if (entry.timestamp > changesByProduct[productName].timestamp) {
+    changesByProduct[productName] = { entry, timestamp: entry.timestamp };
+  }
+});
+
 let updatedCount = 0;
 const notFoundProducts = [];
 
-changeLog.entries.forEach(entry => {
-  if (!entry.productName || !entry.description) return;
+Object.values(changesByProduct).forEach(({ entry }) => {
+  if (!entry || !entry.productName || !entry.description) return;
 
   const productName = entry.productName.trim();
   const changes = parseChangeDescription(entry.description);

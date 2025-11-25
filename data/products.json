@@ -58,12 +58,16 @@
     {
       "name": "Alabalık Tava",
       "category": "Tavalar",
-      "price": "389",
+      "price": "400",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze alabalık balığı, özenle pişirilmiş tava lezzeti.",
       "image": "tavalar/alabalik-tava.jpg",
       "companions": [
+        "Kavun",
         "Kraker",
+        "Peynir",
+        "Pide",
+        "Roka",
         "Sos",
         "Turşu"
       ],
@@ -423,7 +427,7 @@
     {
       "name": "Levrek Izgara",
       "category": "Izgaralar",
-      "price": "123",
+      "price": "350",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze levrek balığı, özenle hazırlanmış ızgara lezzeti.",
       "image": "izgaralar/levrek-izgara.jpg",
