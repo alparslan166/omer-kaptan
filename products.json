@@ -1996,7 +1996,7 @@
         "Pide",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 84,
       "outOfStock": false,
@@ -2010,22 +2010,22 @@
       ]
     },
     {
-      "name": "Cacık",
+      "name": "Rum Cacık",
       "category": "Mezeler",
-      "price": "340",
+      "price": "215",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze cacık, serinletici lezzet.",
       "image": "mezeler/cacik.jpg",
       "companions": [
-        "Roka",
         "Kavun",
         "Kraker",
-        "Pide",
+        "Limon",
         "Peynir",
-        "Limon"
+        "Pide",
+        "Roka"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Yoğurtlu Mezeler",
       "id": 85,
       "outOfStock": false,
       "ingredients": [
@@ -2105,7 +2105,7 @@
         "Peynir",
         "Beyaz Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Ezmeler",
       "id": 88,
       "outOfStock": false,
@@ -2163,7 +2163,7 @@
         "Beyaz Peynir",
         "Pide"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 90,
       "outOfStock": false,
@@ -2191,7 +2191,7 @@
         "Turşu",
         "Soğan"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 91,
       "outOfStock": false,
@@ -2205,16 +2205,20 @@
       ]
     },
     {
-      "name": "Patlıcan Ezme",
+      "name": "Patlıcan Söğürme",
       "category": "Mezeler",
-      "price": "340",
+      "price": "315",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Patlıcan ezme, özenle hazırlanmış.",
       "image": "mezeler/patlican-ezme.jpg",
       "companions": [
         "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
         "Peynir",
-        "Limon"
+        "Pide",
+        "Roka"
       ],
       "hidden": false,
       "subcategory": "Ezmeler",
@@ -2243,7 +2247,7 @@
         "Peynir",
         "Pide"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Ezmeler",
       "id": 93,
       "outOfStock": false,
@@ -2363,7 +2367,7 @@
         "Limon",
         "Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 97,
       "outOfStock": false,
@@ -2391,7 +2395,7 @@
         "Kavun",
         "Pide"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 98,
       "outOfStock": false,
@@ -2417,7 +2421,7 @@
         "Soğan",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 99,
       "outOfStock": false,
@@ -2442,7 +2446,7 @@
         "Peynir",
         "Limon"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 100,
       "outOfStock": false,
@@ -2468,7 +2472,7 @@
         "Peynir",
         "Roka"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Ezmeler",
       "id": 101,
       "outOfStock": false,
@@ -2528,7 +2532,7 @@
         "Peynir",
         "Kavun"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 103,
       "outOfStock": false,
@@ -2587,7 +2591,7 @@
         "Fıstık",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Ezmeler",
       "id": 105,
       "outOfStock": false,
@@ -2636,15 +2640,19 @@
     {
       "name": "Deniz Börülcesi",
       "category": "Mezeler",
-      "price": "340",
+      "price": "210",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz börülcesi, özenle hazırlanmış.",
       "image": "mezeler/deniz-borulcesi.jpg",
       "companions": [
-        "Turşu",
         "Fıstık",
+        "Kavun",
         "Kraker",
-        "Pide"
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Turşu"
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
@@ -2673,7 +2681,7 @@
         "Pide",
         "Beyaz Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 108,
       "outOfStock": false,
@@ -2700,7 +2708,7 @@
         "Roka",
         "Turşu"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 109,
       "outOfStock": false,
@@ -2758,7 +2766,7 @@
         "Peynir",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 111,
       "outOfStock": false,
@@ -2817,7 +2825,7 @@
         "Limon",
         "Beyaz Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Yoğurtlu Mezeler",
       "id": 113,
       "outOfStock": false,
@@ -2844,7 +2852,7 @@
         "Beyaz Peynir",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 114,
       "outOfStock": false,
@@ -2870,7 +2878,7 @@
         "Pide",
         "Beyaz Peynir"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 115,
       "outOfStock": false,
@@ -2931,7 +2939,7 @@
         "Roka",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 117,
       "outOfStock": false,
@@ -2959,7 +2967,7 @@
         "Sos",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 118,
       "outOfStock": false,
@@ -2987,7 +2995,7 @@
         "Pide",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 119,
       "outOfStock": false,
@@ -3014,7 +3022,7 @@
         "Sos",
         "Limon"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 120,
       "outOfStock": false,
@@ -3039,7 +3047,7 @@
         "Sos",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Zeytinyağlı Mezeler",
       "id": 121,
       "outOfStock": false,
@@ -3064,7 +3072,7 @@
         "Turşu",
         "Soğan"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 122,
       "outOfStock": false,
@@ -3091,7 +3099,7 @@
         "Beyaz Peynir",
         "Kraker"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 123,
       "outOfStock": false,
@@ -3117,7 +3125,7 @@
         "Fıstık",
         "Roka"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 124,
       "outOfStock": false,
@@ -3143,7 +3151,7 @@
         "Peynir",
         "Sos"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Salatalar",
       "id": 125,
       "outOfStock": false,
@@ -3157,16 +3165,22 @@
       ]
     },
     {
-      "name": "Kalamar Tava",
+      "name": "Kalamar",
       "category": "Mezeler",
-      "price": "340",
+      "price": "600",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kalamar tava, özenle pişirilmiş.",
       "image": "mezeler/kalamar-tava.jpg",
       "companions": [
-        "Turşu",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
         "Kraker",
-        "Beyaz Peynir"
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Turşu"
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
@@ -3195,7 +3209,7 @@
         "Soğan",
         "Roka"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 127,
       "outOfStock": false,
@@ -3211,15 +3225,21 @@
     {
       "name": "Lakerda",
       "category": "Mezeler",
-      "price": "340",
+      "price": "165",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Lakerda, özenle hazırlanmış.",
       "image": "mezeler/lakerda.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
         "Limon",
-        "Sos",
+        "Peynir",
         "Pide",
-        "Beyaz Peynir"
+        "Roka",
+        "Sos",
+        "Turşu"
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
@@ -3245,7 +3265,7 @@
         "Peynir",
         "Soğan"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 129,
       "outOfStock": false,
@@ -3261,15 +3281,20 @@
     {
       "name": "Levrek Marin",
       "category": "Mezeler",
-      "price": "340",
+      "price": "265",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Levrek marin, özenle hazırlanmış.",
       "image": "mezeler/levrek-marin.jpg",
       "companions": [
-        "Sos",
-        "Limon",
-        "Roka",
+        "Beyaz Peynir",
+        "Fıstık",
         "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
         "Turşu"
       ],
       "hidden": false,
@@ -3298,7 +3323,7 @@
         "Kavun",
         "Limon"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Ezmeler",
       "id": 131,
       "outOfStock": false,
@@ -3323,7 +3348,7 @@
         "Pide",
         "Fıstık"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 132,
       "outOfStock": false,
@@ -3337,19 +3362,24 @@
       ]
     },
     {
-      "name": "Deniz Mahsullü",
+      "name": "Deniz Mahsulleri Salatası",
       "category": "Mezeler",
-      "price": "340",
+      "price": "400",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz mahsullü meze, şefin özel tarifi.",
       "image": "mezeler/deniz-mahsullu.jpg",
       "companions": [
-        "Sos",
-        "Pide",
+        "Beyaz Peynir",
         "Fıstık",
-        "Soğan",
+        "Kavun",
         "Kraker",
-        "Limon"
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
@@ -3367,73 +3397,100 @@
     {
       "name": "Şalgam / Acılı-Acısız",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "40",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze şalgam suyu, acılı ve acısız seçeneklerle sunulur.",
       "image": "alkolsuz-icecekler/salgam-acili-acisiz.jpg",
       "companions": [
-        "Pide",
         "Beyaz Peynir",
-        "Kraker"
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 134,
       "outOfStock": false
     },
     {
       "name": "Su",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "25",
       "shortDesc": "Şefin önerisi.",
       "description": "Doğal kaynak suyu, taze ve sağlıklı.",
       "image": "alkolsuz-icecekler/su.jpg",
       "companions": [
-        "Soğan",
+        "Beyaz Peynir",
+        "Fıstık",
         "Kavun",
+        "Kraker",
+        "Limon",
         "Peynir",
-        "Kraker"
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 135,
       "outOfStock": false
     },
     {
       "name": "Kola",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Klasik kola lezzeti, soğuk servis.",
       "image": "alkolsuz-icecekler/kola.jpg",
       "companions": [
-        "Fıstık",
-        "Peynir",
-        "Kavun",
         "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
         "Limon",
-        "Kraker"
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 136,
       "outOfStock": false
     },
     {
       "name": "Fanta",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Meyve aroması ile nefis Fanta, soğuk servis.",
       "image": "alkolsuz-icecekler/fanta.jpg",
       "companions": [
-        "Peynir",
-        "Limon",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
         "Kraker",
+        "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
         "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 137,
       "outOfStock": false
     },
@@ -3451,7 +3508,7 @@
         "Beyaz Peynir",
         "Soğan"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": null,
       "id": 138,
       "outOfStock": false
@@ -3459,72 +3516,100 @@
     {
       "name": "Sprite",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Serinletici Sprite, soğuk servis.",
       "image": "alkolsuz-icecekler/sprite.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
         "Kraker",
+        "Limon",
         "Peynir",
-        "Kavun"
+        "Pide",
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 139,
       "outOfStock": false
     },
     {
       "name": "Soda",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "30",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Doğal maden suyu, serinletici lezzet.",
       "image": "alkolsuz-icecekler/soda.jpg",
       "companions": [
-        "Pide",
-        "Soğan",
-        "Turşu",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
         "Limon",
+        "Peynir",
+        "Pide",
+        "Roka",
         "Sos",
-        "Kraker"
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 140,
       "outOfStock": false
     },
     {
       "name": "Cappy Meyve Suyu",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze meyve suyu çeşitleri, doğal lezzet.",
       "image": "alkolsuz-icecekler/cappy-meyve-suyu.jpg",
       "companions": [
-        "Sos",
+        "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Kraker",
+        "Limon",
+        "Peynir",
         "Pide",
-        "Roka"
+        "Roka",
+        "Sos",
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 141,
       "outOfStock": false
     },
     {
       "name": "Ice Tea Çeşitleri",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Çeşitli ice tea lezzetleri, soğuk servis.",
       "image": "alkolsuz-icecekler/ice-tea-cesitleri.jpg",
       "companions": [
+        "Beyaz Peynir",
+        "Fıstık",
         "Kavun",
+        "Kraker",
+        "Limon",
         "Peynir",
+        "Pide",
+        "Roka",
         "Sos",
-        "Roka"
+        "Soğan",
+        "Turşu"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "Deniz Mahsullü Mezeler",
       "id": 142,
       "outOfStock": false
     },
