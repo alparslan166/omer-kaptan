@@ -3414,7 +3414,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 134,
       "outOfStock": false
@@ -3464,7 +3464,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 136,
       "outOfStock": false
@@ -3497,19 +3497,19 @@
     {
       "name": "Kola Zero",
       "category": "Alkolsüz İçecekler",
-      "price": "60",
+      "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Şekersiz kola lezzeti, soğuk servis.",
       "image": "alkolsuz-icecekler/kola-zero.jpg",
       "companions": [
-        "Beyaz Peynir",
         "Fıstık",
-        "Kavun",
         "Peynir",
+        "Kavun",
+        "Beyaz Peynir",
         "Soğan"
       ],
       "hidden": false,
-      "subcategory": "",
+      "subcategory": null,
       "id": 138,
       "outOfStock": false
     },
@@ -3583,7 +3583,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": false,
+      "hidden": true,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 141,
       "outOfStock": false
