@@ -2833,7 +2833,17 @@ function setupForms() {
         productsData.categories.push(categoryName);
         saveProducts(productsData);
         
-        // 4. Formu temizle
+        // 4. products.json'u GitHub'a push et
+        console.log('📤 products.json GitHub\'a gönderiliyor (kategori eklendi)...');
+        const jsonStr = JSON.stringify(productsData, null, 2);
+        const productsResult = await window.GitHubAPI.updateFile(jsonStr);
+        if (!productsResult || !productsResult.success) {
+          console.warn('⚠️ products.json GitHub\'a gönderilemedi, ancak kategori eklendi. Lütfen "Otomatik Güncelle" butonuna basın.');
+        } else {
+          console.log('✅ products.json başarıyla GitHub\'a gönderildi (kategori eklendi)');
+        }
+        
+        // 5. Formu temizle
         addCategoryForm.reset();
         const previewImg = document.getElementById('new-category-image-preview');
         if (previewImg) {
@@ -2841,11 +2851,11 @@ function setupForms() {
           previewImg.style.display = 'none';
         }
         
-        // 5. Kategorileri yeniden göster
+        // 6. Kategorileri yeniden göster
         populateCategories();
         displayCategories();
         
-        // 6. Yeni eklenen kategoriye scroll yap
+        // 7. Yeni eklenen kategoriye scroll yap
         setTimeout(() => {
           const newCategoryItem = document.querySelector(`[data-category="${categoryName}"]`);
           if (newCategoryItem) {
