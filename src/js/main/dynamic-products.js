@@ -643,9 +643,20 @@
     
     const card = document.createElement('article');
     card.className = 'product-card';
+    
+    // Resim yolunu düzelt - eğer assets/ ile başlıyorsa direkt kullan, değilse ekle
+    let imageSrc = product.image;
+    if (imageSrc && imageSrc.startsWith('assets/')) {
+      imageSrc = `../${imageSrc}`;
+    } else if (imageSrc) {
+      imageSrc = `../assets/${imageSrc}`;
+    } else {
+      imageSrc = '../assets/omerkaptanlogo.png';
+    }
+    
     card.innerHTML = `
       <div class="media-figure">
-        <img src="../assets/${product.image}" alt="${escapeHtml(product.name)}" onerror="this.src='../assets/omerkaptanlogo.png'" />
+        <img src="${imageSrc}" alt="${escapeHtml(product.name)}" onerror="this.src='../assets/omerkaptanlogo.png'" />
       </div>
       <div class="product-body">
         <h4 class="product-title">${escapeHtml(product.name)}</h4>
