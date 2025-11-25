@@ -1869,7 +1869,19 @@ function toggleProductVisibility(id) {
   );
   
   // Listeleri yenile
-  displayProducts();
+  // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+  const categoryFilter = document.getElementById('category-filter');
+  const searchInput = document.getElementById('search-products');
+  if (categoryFilter && categoryFilter.value) {
+    // Kategori filtresi seçili, filtreyi uygula
+    filterProducts();
+  } else if (searchInput && searchInput.value.trim()) {
+    // Sadece arama filtresi var, filtreyi uygula
+    filterProducts();
+  } else {
+    // Filtre yok, tüm ürünleri göster
+    displayProducts();
+  }
   displayHiddenProducts();
   
   // Kullanıcıya bilgi ver
@@ -1896,7 +1908,19 @@ function toggleProductStock(id) {
     product.name
   );
   
-  displayProducts();
+  // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+  const categoryFilter = document.getElementById('category-filter');
+  const searchInput = document.getElementById('search-products');
+  if (categoryFilter && categoryFilter.value) {
+    // Kategori filtresi seçili, filtreyi uygula
+    filterProducts();
+  } else if (searchInput && searchInput.value.trim()) {
+    // Sadece arama filtresi var, filtreyi uygula
+    filterProducts();
+  } else {
+    // Filtre yok, tüm ürünleri göster
+    displayProducts();
+  }
   displayHiddenProducts();
   
   const status = product.outOfStock ? 'stokta yok olarak işaretlendi' : 'stokta var olarak işaretlendi';
@@ -2571,7 +2595,19 @@ function setupForms() {
         productsData.products.find(p => p.id === id));
       
       // Ürünler listesini yenile (sayfa yenilemeden)
-      displayProducts();
+      // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+      const categoryFilter = document.getElementById('category-filter');
+      const searchInput = document.getElementById('search-products');
+      if (categoryFilter && categoryFilter.value) {
+        // Kategori filtresi seçili, filtreyi uygula
+        filterProducts();
+      } else if (searchInput && searchInput.value.trim()) {
+        // Sadece arama filtresi var, filtreyi uygula
+        filterProducts();
+      } else {
+        // Filtre yok, tüm ürünleri göster
+        displayProducts();
+      }
       displayHiddenProducts();
       
       // Ürünler tab'ına geç
@@ -2663,7 +2699,19 @@ function setupForms() {
       }
       
       // Ürünler listesini yenile (sayfa yenilemeden)
-      displayProducts();
+      // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+      const categoryFilter = document.getElementById('category-filter');
+      const searchInput = document.getElementById('search-products');
+      if (categoryFilter && categoryFilter.value) {
+        // Kategori filtresi seçili, filtreyi uygula
+        filterProducts();
+      } else if (searchInput && searchInput.value.trim()) {
+        // Sadece arama filtresi var, filtreyi uygula
+        filterProducts();
+      } else {
+        // Filtre yok, tüm ürünleri göster
+        displayProducts();
+      }
       displayHiddenProducts();
       
       // Ürünler tab'ına geç
@@ -3006,7 +3054,19 @@ function setupForms() {
       // Kategorileri ve ürünleri yeniden göster
       populateCategories();
       displayCategories();
-      displayProducts();
+      // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+      const categoryFilter = document.getElementById('category-filter');
+      const searchInput = document.getElementById('search-products');
+      if (categoryFilter && categoryFilter.value) {
+        // Kategori filtresi seçili, filtreyi uygula
+        filterProducts();
+      } else if (searchInput && searchInput.value.trim()) {
+        // Sadece arama filtresi var, filtreyi uygula
+        filterProducts();
+      } else {
+        // Filtre yok, tüm ürünleri göster
+        displayProducts();
+      }
       
       // Güncellenen kategoriye scroll yap
       setTimeout(() => {
@@ -3301,7 +3361,19 @@ async function deleteCategory(categoryName) {
   
   populateCategories();
   displayCategories();
-  displayProducts();
+  // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
+  const categoryFilter = document.getElementById('category-filter');
+  const searchInput = document.getElementById('search-products');
+  if (categoryFilter && categoryFilter.value) {
+    // Kategori filtresi seçili, filtreyi uygula
+    filterProducts();
+  } else if (searchInput && searchInput.value.trim()) {
+    // Sadece arama filtresi var, filtreyi uygula
+    filterProducts();
+  } else {
+    // Filtre yok, tüm ürünleri göster
+    displayProducts();
+  }
   
   // Kategoriler tabına scroll yap
   setTimeout(() => {
