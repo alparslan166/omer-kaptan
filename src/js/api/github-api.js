@@ -272,6 +272,15 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
       updatePayload.sha = sha;
     }
     
+    console.log('📤 GitHub API resim yükleme isteği gönderiliyor:', {
+      url: updateUrl,
+      filePath: filePath,
+      encodedFilePath: encodedFilePath,
+      branch: config.branch,
+      hasSha: !!sha,
+      contentLength: base64Content.length
+    });
+    
     const updateResponse = await fetch(updateUrl, {
       method: 'PUT',
       headers: {
@@ -285,12 +294,24 @@ async function uploadImageFileViaGitHubAPI(file, filePath) {
     if (!updateResponse.ok) {
       const errorData = await updateResponse.json().catch(() => ({}));
       const errorMessage = errorData.message || updateResponse.statusText || 'Bilinmeyen hata';
-      console.error('GitHub API image upload error:', errorData);
+      console.error('❌ GitHub API image upload error:', {
+        status: updateResponse.status,
+        statusText: updateResponse.statusText,
+        error: errorData,
+        filePath: filePath,
+        encodedFilePath: encodedFilePath,
+        url: updateUrl
+      });
       throw new Error(`Resim yükleme hatası: ${errorMessage}`);
     }
     
     const result = await updateResponse.json();
-    console.log('GitHub API resim yükleme başarılı:', result);
+    console.log('✅ GitHub API resim yükleme başarılı:', {
+      commit: result.commit,
+      content: result.content,
+      url: result.content?.download_url,
+      path: result.content?.path
+    });
     return {
       success: true,
       commit: result.commit,

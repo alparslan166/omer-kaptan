@@ -2110,6 +2110,14 @@ function setupForms() {
     addForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      // GitHub API kontrolü - Form submit bloğunun başında yap (scope sorununu önlemek için)
+      let githubConfigReady = false;
+      let config = null;
+      if (window.GitHubConfig) {
+        config = window.GitHubConfig.loadGitHubConfig();
+        githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
+      }
+      
       const category = document.getElementById('add-category').value;
       const name = document.getElementById('add-name').value;
       const imageFile = document.getElementById('add-image-file').files[0];
@@ -2139,28 +2147,19 @@ function setupForms() {
       const uploadButton = addForm.querySelector('button[type="submit"]');
       const originalButtonText = uploadButton ? uploadButton.textContent : 'Ekle';
       
-      // GitHub API kontrolü - önce config'i yükle
-      let githubConfigReady = false;
-      let config = null;
-      if (window.GitHubConfig) {
-        config = window.GitHubConfig.loadGitHubConfig();
-        githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
-        console.log('🔧 GitHub Config durumu:', {
-          hasConfig: !!window.GitHubConfig,
-          configReady: githubConfigReady,
-          repository: config.repository || '(boş)',
-          hasToken: !!config.token,
-          tokenLength: config.token ? config.token.length : 0,
-          hasAPI: !!window.GitHubAPI,
-          hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
-        });
-        
-        if (!githubConfigReady) {
-          console.warn('⚠️ GitHub API yapılandırılmamış! Repository veya Token eksik.');
-          console.warn('💡 Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.');
-        }
-      } else {
-        console.error('❌ GitHubConfig bulunamadı! Script dosyaları yüklenmemiş olabilir.');
+      console.log('🔧 GitHub Config durumu:', {
+        hasConfig: !!window.GitHubConfig,
+        configReady: githubConfigReady,
+        repository: config ? config.repository || '(boş)' : '(yok)',
+        hasToken: !!(config && config.token),
+        tokenLength: config && config.token ? config.token.length : 0,
+        hasAPI: !!window.GitHubAPI,
+        hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage)
+      });
+      
+      if (!githubConfigReady) {
+        console.warn('⚠️ GitHub API yapılandırılmamış! Repository veya Token eksik.');
+        console.warn('💡 Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.');
       }
       
       try {
@@ -2284,6 +2283,22 @@ function setupForms() {
       saveProducts(productsData);
       recordProductAddition(newProduct);
       
+      // Resim yüklendiyse ve GitHub API hazırsa, products.json'u GitHub'a push et
+      if (githubConfigReady && window.GitHubAPI && window.GitHubAPI.updateFile) {
+        try {
+          console.log('📤 products.json GitHub\'a gönderiliyor (yeni ürün eklendi)...');
+          const jsonStr = JSON.stringify(productsData, null, 2);
+          const productsResult = await window.GitHubAPI.updateFile(jsonStr);
+          if (productsResult && productsResult.success) {
+            console.log('✅ products.json başarıyla GitHub\'a gönderildi (yeni ürün eklendi)');
+          } else {
+            console.warn('⚠️ products.json GitHub\'a gönderilemedi, ancak ürün eklendi. Lütfen "Otomatik Güncelle" butonuna basın.');
+          }
+        } catch (error) {
+          console.warn('⚠️ products.json GitHub\'a gönderilirken hata oluştu (ürün yine de eklendi):', error);
+        }
+      }
+      
       // Formu temizle
       addForm.reset();
       if (addSubcategoryGroup) addSubcategoryGroup.style.display = 'none';
@@ -2361,6 +2376,14 @@ function setupForms() {
     editForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      // GitHub API kontrolü - Form submit bloğunun başında yap (scope sorununu önlemek için)
+      let githubConfigReady = false;
+      let config = null;
+      if (window.GitHubConfig) {
+        config = window.GitHubConfig.loadGitHubConfig();
+        githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
+      }
+      
       const id = parseInt(document.getElementById('edit-id').value);
       const product = productsData.products.find(p => p.id === id);
       if (!product) {
@@ -2420,22 +2443,15 @@ function setupForms() {
           oldImagePath: product.image
         });
         
-        // GitHub API kontrolü - önce config'i yükle
-        let githubConfigReady = false;
-        let config = null;
-        if (window.GitHubConfig) {
-          config = window.GitHubConfig.loadGitHubConfig();
-          githubConfigReady = window.GitHubConfig.isGitHubConfigComplete();
-          console.log('🔧 GitHub Config durumu:', {
-            hasConfig: !!window.GitHubConfig,
-            configReady: githubConfigReady,
-            repository: config ? config.repository : '(yok)',
-            hasToken: !!(config && config.token),
-            hasAPI: !!window.GitHubAPI,
-            hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage),
-            hasDeleteFile: !!(window.GitHubAPI && window.GitHubAPI.deleteFile)
-          });
-        }
+        console.log('🔧 GitHub Config durumu (düzenleme):', {
+          hasConfig: !!window.GitHubConfig,
+          configReady: githubConfigReady,
+          repository: config ? config.repository : '(yok)',
+          hasToken: !!(config && config.token),
+          hasAPI: !!window.GitHubAPI,
+          hasUploadImage: !!(window.GitHubAPI && window.GitHubAPI.uploadImage),
+          hasDeleteFile: !!(window.GitHubAPI && window.GitHubAPI.deleteFile)
+        });
         
         try {
           if (githubConfigReady && window.GitHubAPI && window.GitHubAPI.uploadImage) {
@@ -2635,6 +2651,22 @@ function setupForms() {
       
       console.log('💾 Veri kaydedildi. productsData.products içinde güncellenmiş ürün:', 
         productsData.products.find(p => p.id === id));
+      
+      // Resim yüklendiyse ve GitHub API hazırsa, products.json'u GitHub'a push et
+      if (githubConfigReady && window.GitHubAPI && window.GitHubAPI.updateFile) {
+        try {
+          console.log('📤 products.json GitHub\'a gönderiliyor (ürün güncellendi)...');
+          const jsonStr = JSON.stringify(productsData, null, 2);
+          const productsResult = await window.GitHubAPI.updateFile(jsonStr);
+          if (productsResult && productsResult.success) {
+            console.log('✅ products.json başarıyla GitHub\'a gönderildi (ürün güncellendi)');
+          } else {
+            console.warn('⚠️ products.json GitHub\'a gönderilemedi, ancak ürün güncellendi. Lütfen "Otomatik Güncelle" butonuna basın.');
+          }
+        } catch (error) {
+          console.warn('⚠️ products.json GitHub\'a gönderilirken hata oluştu (ürün yine de güncellendi):', error);
+        }
+      }
       
       // Ürünler listesini yenile (sayfa yenilemeden)
       // Mevcut kategori filtresini kontrol et, eğer seçiliyse filtreyi uygula
