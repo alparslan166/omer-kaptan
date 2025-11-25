@@ -3497,19 +3497,19 @@
     {
       "name": "Kola Zero",
       "category": "Alkolsüz İçecekler",
-      "price": "340",
+      "price": "60",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Şekersiz kola lezzeti, soğuk servis.",
       "image": "alkolsuz-icecekler/kola-zero.jpg",
       "companions": [
-        "Fıstık",
-        "Peynir",
-        "Kavun",
         "Beyaz Peynir",
+        "Fıstık",
+        "Kavun",
+        "Peynir",
         "Soğan"
       ],
       "hidden": false,
-      "subcategory": null,
+      "subcategory": "",
       "id": 138,
       "outOfStock": false
     },
