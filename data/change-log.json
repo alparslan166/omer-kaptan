@@ -1,6 +1,11 @@
 {
   "entries": [
     {
+      "timestamp": 1764110982149,
+      "productName": "test",
+      "description": "Yeni ürün eklendi. Fiyat: ₺123"
+    },
+    {
       "timestamp": 1764110885282,
       "productName": "Hamsi Tava",
       "description": "Ürün güncellendi. Görünürlük: Gizli → Görünür"
@@ -494,11 +499,6 @@
       "timestamp": 1763301359055,
       "productName": "Lagos Izgara",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺1100 | Eşlikçiler: Kavun, Beyaz Peynir, Roka, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301346438,
-      "productName": "Akya Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺650 | Eşlikçiler: Limon, Fıstık, Roka, Kavun, Pide → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
     }
   ]
 }
