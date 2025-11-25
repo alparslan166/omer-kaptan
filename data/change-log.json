@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "timestamp": 1764110204047,
+      "productName": "Cappy Meyve Suyu",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
+      "timestamp": 1764110201931,
+      "productName": "Şalgam / Acılı-Acısız",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
+      "timestamp": 1764110199197,
+      "productName": "Kola",
+      "description": "Ürün güncellendi. Görünürlük: Görünür → Görünür"
+    },
+    {
       "timestamp": 1764109818832,
       "productName": "Cappy Meyve Suyu",
       "description": "Ürün güncellendi. Görünürlük: Gizli → Gizli"
@@ -484,16 +499,6 @@
       "timestamp": 1763301128110,
       "productName": "Çinekop Tava",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺750 | Eşlikçiler: Roka, Fıstık, Soğan, Kavun → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763211164103,
-      "productName": "Levrek Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺12321 → ₺123"
-    },
-    {
-      "timestamp": 1763210312512,
-      "productName": "",
-      "description": "[15.11.2025 15:38] Ürün güncellendi: Hamsi Izgara (Izgaralar) → Hamsi Izgara (Izgaralar). Fiyat: ₺340 → ₺3403 | Eşlikçiler: Kraker, Fıstık, Pide, Kavun → Fıstık, Kavun, Kraker, Pide"
     }
   ]
 }
