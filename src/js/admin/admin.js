@@ -422,17 +422,33 @@ function updateDownloadButton(data) {
             throw new Error('GitHub API ayarları eksik! Lütfen "⚙️ GitHub Ayarları" butonuna tıklayarak ayarları yapılandırın.');
           }
           
-          // Güncel productsData'yı kullan (butona basıldığında)
-          if (!productsData || !productsData.products) {
+          // ÖNEMLİ: Her zaman LocalStorage'dan güncel veriyi al (productsData değişkeni eski olabilir)
+          let currentData = productsData;
+          try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+              const parsed = JSON.parse(stored);
+              if (parsed && parsed.products && Array.isArray(parsed.products)) {
+                currentData = parsed;
+                console.log('✅ LocalStorage\'dan güncel veri alındı:', currentData.products.length, 'ürün');
+              }
+            }
+          } catch (e) {
+            console.warn('LocalStorage\'dan veri alınamadı, productsData kullanılıyor:', e);
+          }
+          
+          // Güncel veriyi kontrol et
+          if (!currentData || !currentData.products) {
             throw new Error('Ürün verisi bulunamadı! Lütfen sayfayı yenileyin.');
           }
           
-          const jsonStr = JSON.stringify(productsData, null, 2);
+          const jsonStr = JSON.stringify(currentData, null, 2);
           console.log('📤 GitHub\'a gönderilecek veri:', {
-            products: productsData.products.length,
-            categories: productsData.categories.length,
-            companions: productsData.companions ? productsData.companions.length : 0,
-            jsonSize: `${(jsonStr.length / 1024).toFixed(2)} KB`
+            products: currentData.products.length,
+            categories: currentData.categories.length,
+            companions: currentData.companions ? currentData.companions.length : 0,
+            jsonSize: `${(jsonStr.length / 1024).toFixed(2)} KB`,
+            source: 'LocalStorage (güncel veri)'
           });
           
           // GitHubAPI'nin yüklendiğinden emin ol (retry mekanizması ile)
