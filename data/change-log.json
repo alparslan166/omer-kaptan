@@ -1,6 +1,66 @@
 {
   "entries": [
     {
+      "timestamp": 1764100880624,
+      "productName": "Gavurdağı Salatası",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺130 | Eşlikçiler: Turşu, Limon, Beyaz Peynir, Kavun → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100863368,
+      "productName": "Tahinli Patlıcan",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺215 | Eşlikçiler: Beyaz Peynir, Kavun, Peynir, Pide, Roka, Sos → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100850176,
+      "productName": "Borani",
+      "description": "Ürün güncellendi. İsim: \"Kabak Borani\" → \"Borani\" | Fiyat: ₺340 → ₺210 | Eşlikçiler: Beyaz Peynir, Turşu, Peynir, Kavun, Roka, Limon → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Zeytinyağlı Mezeler"
+    },
+    {
+      "timestamp": 1764100821185,
+      "productName": "Girit Ezmesi",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺240 | Eşlikçiler: Soğan, Pide, Turşu, Fıstık, Peynir, Roka → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100806593,
+      "productName": "Deniz Börülcesi",
+      "description": "Ürün güncellendi. İsim: \"Deniz Börülce\" → \"Deniz Börülcesi\""
+    },
+    {
+      "timestamp": 1764100800481,
+      "productName": "Atom",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺210 | Eşlikçiler: Sos, Turşu, Pide, Roka, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100786768,
+      "productName": "Deniz Börülce",
+      "description": "Ürün güncellendi. İsim: \"Börülce Salatası\" → \"Deniz Börülce\" | Fiyat: ₺340 → ₺210 | Eşlikçiler: Soğan, Turşu, Sos, Roka → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100752080,
+      "productName": "Enginar Çanak",
+      "description": "Ürün güncellendi. İsim: \"Zeytinyağlı Enginar\" → \"Enginar Çanak\" | Fiyat: ₺340 → ₺250 | Eşlikçiler: Beyaz Peynir, Roka, Fıstık, Turşu → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100733185,
+      "productName": "Semizotu",
+      "description": "Ürün güncellendi. İsim: \"Yoğurtlu Semizotu\" → \"Semizotu\" | Fiyat: ₺340 → ₺210 | Eşlikçiler: Fıstık, Roka, Pide, Kraker, Sos, Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100693377,
+      "productName": "Fava",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺210 | Eşlikçiler: Limon, Roka, Peynir → Beyaz Peynir, Kavun, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100660337,
+      "productName": "Patlıcan Salatası",
+      "description": "Ürün güncellendi. İsim: \"Közlenmiş Patlıcan Salatası\" → \"Patlıcan Salatası\" | Fiyat: ₺340 → ₺210 | Eşlikçiler: Beyaz Peynir, Turşu, Sos, Peynir, Pide, Limon → Beyaz Peynir, Kavun, Limon, Peynir, Pide, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764100641560,
+      "productName": "Şakşuka",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺215 | Eşlikçiler: Kavun, Turşu, Soğan, Limon → Kavun, Limon, Soğan, Turşu | Alt Kategori: — → Zeytinyağlı Mezeler"
+    },
+    {
       "timestamp": 1764098341003,
       "productName": "Sıcak Helva",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺100 | Eşlikçiler: Pide, Soğan, Roka, Peynir, Beyaz Peynir, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
