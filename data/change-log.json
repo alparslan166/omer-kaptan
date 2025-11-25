@@ -1,9 +1,19 @@
 {
   "entries": [
     {
-      "timestamp": 1764102979898,
-      "productName": "Alabalık Tava",
-      "description": "Ürün güncellendi. Fiyat: ₺400 → ₺350"
+      "timestamp": 1764102896999,
+      "productName": "Deniz Börülcesi",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺210 | Eşlikçiler: Turşu, Fıstık, Kraker, Pide → Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Turşu"
+    },
+    {
+      "timestamp": 1764102845561,
+      "productName": "Patlıcan Söğürme",
+      "description": "Ürün güncellendi. İsim: \"Patlıcan Ezme\" → \"Patlıcan Söğürme\" | Fiyat: ₺340 → ₺315 | Eşlikçiler: Fıstık, Peynir, Limon → Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Turşu"
+    },
+    {
+      "timestamp": 1764102799215,
+      "productName": "Rum Cacık",
+      "description": "Ürün güncellendi. İsim: \"Cacık\" → \"Rum Cacık\" | Fiyat: ₺340 → ₺215 | Eşlikçiler: Roka, Kavun, Kraker, Pide, Peynir, Limon → Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Turşu | Alt Kategori: — → Yoğurtlu Mezeler"
     },
     {
       "timestamp": 1764102303832,
