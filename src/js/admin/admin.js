@@ -1861,8 +1861,8 @@ function toggleProductVisibility(id) {
   saveProducts(productsData);
   
   // Change-log'a kayıt ekle
-  const statusChange = previousHidden ? 'Görünür' : 'Gizli';
-  const newStatus = product.hidden ? 'Gizli' : 'Görünür';
+  const statusChange = previousHidden ? 'Gizli' : 'Görünür'; // Önceki durum
+  const newStatus = product.hidden ? 'Gizli' : 'Görünür'; // Yeni durum
   addPendingChangeEntry(
     `Ürün güncellendi. Görünürlük: ${statusChange} → ${newStatus}`,
     product.name
