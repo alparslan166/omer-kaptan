@@ -32,7 +32,7 @@
       "hidden": false,
       "subcategory": "",
       "id": 1,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "İstavrit Tava",
@@ -1165,7 +1165,7 @@
       "hidden": false,
       "subcategory": "",
       "id": 50,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Karides Güveç",
@@ -1190,7 +1190,7 @@
       "hidden": false,
       "subcategory": "",
       "id": 51,
-      "outOfStock": false
+      "outOfStock": true
     },
     {
       "name": "Kalamar",
