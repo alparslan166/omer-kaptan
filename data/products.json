@@ -3414,7 +3414,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": true,
+      "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 134,
       "outOfStock": false
@@ -3464,7 +3464,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": true,
+      "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 136,
       "outOfStock": false
@@ -3583,7 +3583,7 @@
         "Soğan",
         "Turşu"
       ],
-      "hidden": true,
+      "hidden": false,
       "subcategory": "Deniz Mahsullü Mezeler",
       "id": 141,
       "outOfStock": false
