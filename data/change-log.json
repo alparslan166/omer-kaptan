@@ -1,6 +1,86 @@
 {
   "entries": [
     {
+      "timestamp": 1764103243559,
+      "productName": "Cappy Meyve Suyu",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺60 | Eşlikçiler: Sos, Pide, Roka → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103237527,
+      "productName": "Ice Tea Çeşitleri",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺60 | Eşlikçiler: Kavun, Peynir, Sos, Roka → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103230175,
+      "productName": "Soda",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺30 | Eşlikçiler: Pide, Soğan, Turşu, Limon, Sos, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103218591,
+      "productName": "Sprite",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺60 | Eşlikçiler: Kraker, Peynir, Kavun → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103208559,
+      "productName": "Fanta",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺60 | Eşlikçiler: Peynir, Limon, Kraker, Turşu → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103201399,
+      "productName": "Kola",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺60 | Eşlikçiler: Fıstık, Peynir, Kavun, Beyaz Peynir, Limon, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103195055,
+      "productName": "Su",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺25 | Eşlikçiler: Soğan, Kavun, Peynir, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103186039,
+      "productName": "Şalgam / Acılı-Acısız",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺40 | Eşlikçiler: Pide, Beyaz Peynir, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu | Alt Kategori: — → Deniz Mahsullü Mezeler"
+    },
+    {
+      "timestamp": 1764103174006,
+      "productName": "Deniz Mahsulleri Salatası",
+      "description": "Ürün güncellendi. İsim: \"Deniz Mahsullü\" → \"Deniz Mahsulleri Salatası\" | Fiyat: ₺340 → ₺400 | Eşlikçiler: Sos, Pide, Fıstık, Soğan, Kraker, Limon → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
+    },
+    {
+      "timestamp": 1764103149726,
+      "productName": "Levrek Marin",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺265 | Eşlikçiler: Sos, Limon, Roka, Kavun, Turşu → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Turşu"
+    },
+    {
+      "timestamp": 1764103134735,
+      "productName": "Lakerda",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺165 | Eşlikçiler: Limon, Sos, Pide, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Turşu"
+    },
+    {
+      "timestamp": 1764103105847,
+      "productName": "Kalamar",
+      "description": "Ürün güncellendi. İsim: \"Kalamar Tava\" → \"Kalamar\" | Fiyat: ₺340 → ₺600 | Eşlikçiler: Turşu, Kraker, Beyaz Peynir → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Turşu"
+    },
+    {
+      "timestamp": 1764103071984,
+      "productName": "Deniz Börülcesi",
+      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺210 | Eşlikçiler: Turşu, Fıstık, Kraker, Pide → Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Turşu"
+    },
+    {
+      "timestamp": 1764103045974,
+      "productName": "Patlıcan Söğürme",
+      "description": "Ürün güncellendi. İsim: \"Patlıcan Ezme\" → \"Patlıcan Söğürme\" | Fiyat: ₺340 → ₺315 | Eşlikçiler: Fıstık, Peynir, Limon → Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka"
+    },
+    {
+      "timestamp": 1764103025594,
+      "productName": "Rum Cacık",
+      "description": "Ürün güncellendi. İsim: \"Cacık\" → \"Rum Cacık\" | Fiyat: ₺340 → ₺215 | Eşlikçiler: Roka, Kavun, Kraker, Pide, Peynir, Limon → Kavun, Kraker, Limon, Peynir, Pide, Roka | Alt Kategori: — → Yoğurtlu Mezeler"
+    },
+    {
+      "timestamp": 1764102303832,
+      "productName": "Alabalık Tava",
+      "description": "Ürün güncellendi. Fiyat: ₺389 → ₺350"
+    },
+    {
       "timestamp": 1764101863896,
       "productName": "Yeni Rakı 20cl",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺400"

@@ -500,15 +500,24 @@ function updateDownloadButton(data) {
           console.log('✅ GitHub API güncelleme sonucu:', result);
           
           if (result && result.success) {
-            // GitHub güncellemesi başarılı, LocalStorage'ı temizle ve products.json'dan yeniden yükle
-            console.log('🔄 GitHub güncellemesi başarılı, cache temizleniyor ve veri yeniden yükleniyor...');
+            // ÖNEMLİ: products.json başarıyla güncellendi!
+            console.log('✅ products.json başarıyla GitHub\'a gönderildi!');
+            console.log('   - Commit:', result.commit?.sha || 'bilinmiyor');
+            console.log('   - Dosya yolu:', config.filePath);
+            
+            // Change-log'u güncelle (bu products.json'a değil, sadece log'a yazıyor)
             try {
               await appendPendingChangesToChangeLogOnGitHub();
               await loadChangeLogFromFile();
+              console.log('✅ Change-log başarıyla güncellendi');
             } catch (logError) {
-              console.warn('Değişiklik kaydı güncellenemedi:', logError);
+              console.warn('⚠️ Change-log güncellenemedi (ama products.json güncellendi):', logError);
+              // Change-log hatası kritik değil, products.json zaten güncellendi
             }
+            
+            // LocalStorage'ı temizle (artık products.json güncel)
             localStorage.removeItem(STORAGE_KEY);
+            console.log('✅ LocalStorage temizlendi');
             
             // Birkaç saniye bekle (GitHub Pages'in güncellemesi için)
             await new Promise(resolve => setTimeout(resolve, 2000));
@@ -523,16 +532,20 @@ function updateDownloadButton(data) {
               displayProductsIfReady();
               displayCompanions();
               
-              showNotification('✅ Başarıyla güncellendi! Tüm cihazlarda görünecek. (Sayfa yenilendi)', 'success');
+              showNotification('✅ Başarıyla güncellendi! products.json GitHub\'a gönderildi. Menü sayfası 2-3 dakika içinde güncellenecek.', 'success');
             } catch (error) {
               console.error('Error reloading data:', error);
-              showNotification('✅ GitHub\'a güncellendi, ancak veri yeniden yüklenirken hata oluştu. Sayfayı yenileyin.', 'error');
+              showNotification('✅ products.json GitHub\'a gönderildi! Ancak veri yeniden yüklenirken hata oluştu. Sayfayı yenileyin.', 'error');
             }
           } else if (result) {
-            console.warn('GitHub API yanıtı:', result);
-            showNotification('✅ Güncelleme tamamlandı! (Yanıt bekleniyor...)', 'success');
+            console.warn('⚠️ GitHub API yanıtı belirsiz:', result);
+            // Sonuç var ama success false veya belirsiz
+            if (result.error) {
+              throw new Error(result.error);
+            }
+            showNotification('⚠️ Güncelleme tamamlandı ancak sonuç belirsiz. Lütfen GitHub repository\'nizi kontrol edin.', 'error');
           } else {
-            showNotification('⚠️ Güncelleme tamamlandı ancak yanıt alınamadı. Lütfen GitHub repository\'nizi kontrol edin.', 'error');
+            throw new Error('GitHub API yanıt alınamadı. Bağlantıyı kontrol edin.');
           }
         } catch (error) {
           console.error('GitHub API error:', error);
