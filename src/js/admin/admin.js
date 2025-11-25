@@ -337,12 +337,12 @@ function updateDownloadButton(data) {
           <button id="auto-update-github" class="btn-primary" style="font-size: 15px; padding: 12px 24px; background: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: none;">
             🚀 Otomatik Güncelle (GitHub)
           </button>
-          <button id="download-products-json" class="btn-primary" style="font-size: 15px; padding: 12px 24px; background: white; color: #667eea; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+          <!-- <button id="download-products-json" class="btn-primary" style="font-size: 15px; padding: 12px 24px; background: white; color: #667eea; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
             📥 Dosyayı İndir
           </button>
           <button id="copy-json-content" class="btn-secondary" style="font-size: 15px; padding: 12px 24px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: 600;">
             📋 JSON'u Kopyala
-          </button>
+          </button> -->
           <button id="github-settings-btn" class="btn-secondary" style="font-size: 15px; padding: 12px 24px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-weight: 600;">
             ⚙️ GitHub Ayarları
           </button>
