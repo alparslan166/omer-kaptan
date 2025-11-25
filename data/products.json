@@ -3755,6 +3755,21 @@
       "subcategory": "Diğer Alkoller",
       "id": 153,
       "outOfStock": false
+    },
+    {
+      "id": 154,
+      "name": "test",
+      "category": "Tavalar",
+      "price": "123",
+      "shortDesc": "q",
+      "description": "asd",
+      "image": "tavalar/test.png",
+      "companions": [
+        "Kavun"
+      ],
+      "hidden": false,
+      "outOfStock": false,
+      "subcategory": ""
     }
   ],
   "companions": [
