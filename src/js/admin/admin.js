@@ -431,25 +431,39 @@ function updateDownloadButton(data) {
               if (parsed && parsed.products && Array.isArray(parsed.products)) {
                 currentData = parsed;
                 console.log('✅ LocalStorage\'dan güncel veri alındı:', currentData.products.length, 'ürün');
+              } else {
+                console.warn('⚠️ LocalStorage\'daki veri geçersiz format, productsData kullanılıyor');
               }
+            } else {
+              console.warn('⚠️ LocalStorage\'da veri yok, productsData kullanılıyor');
             }
           } catch (e) {
-            console.warn('LocalStorage\'dan veri alınamadı, productsData kullanılıyor:', e);
+            console.warn('⚠️ LocalStorage\'dan veri alınamadı, productsData kullanılıyor:', e);
           }
           
           // Güncel veriyi kontrol et
-          if (!currentData || !currentData.products) {
+          if (!currentData || !currentData.products || !Array.isArray(currentData.products)) {
             throw new Error('Ürün verisi bulunamadı! Lütfen sayfayı yenileyin.');
           }
+          
+          // ÖNEMLİ: Change-log'daki pending değişikliklerin LocalStorage'daki veriyi etkilediğinden emin ol
+          // (Change-log sadece log, products.json gerçek veri kaynağı)
+          // LocalStorage'daki veri her zaman güncel olmalı çünkü her ürün düzenlemesi sonrası saveProducts() çağrılıyor
           
           const jsonStr = JSON.stringify(currentData, null, 2);
           console.log('📤 GitHub\'a gönderilecek veri:', {
             products: currentData.products.length,
-            categories: currentData.categories.length,
+            categories: currentData.categories ? currentData.categories.length : 0,
             companions: currentData.companions ? currentData.companions.length : 0,
             jsonSize: `${(jsonStr.length / 1024).toFixed(2)} KB`,
-            source: 'LocalStorage (güncel veri)'
+            source: 'LocalStorage (güncel veri)',
+            hasPendingChanges: pendingChangeEntries && pendingChangeEntries.length > 0
           });
+          
+          // Pending değişiklikler varsa bilgi ver
+          if (pendingChangeEntries && pendingChangeEntries.length > 0) {
+            console.log(`📝 ${pendingChangeEntries.length} adet pending değişiklik var, change-log.json'a yazılacak`);
+          }
           
           // GitHubAPI'nin yüklendiğinden emin ol (retry mekanizması ile)
           console.log('GitHubAPI kontrol ediliyor...', 'Mevcut:', typeof window.GitHubAPI !== 'undefined');
