@@ -22,7 +22,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi balığı, özenle hazırlanmış tava lezzeti.",
-      "image": "assets/tavalar/hamsi-tava.jpg",
+      "image": "tavalar/hamsi-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -40,7 +40,7 @@
       "price": "450",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "assets/tavalar/istavrit-tava.jpg",
+      "image": "tavalar/istavrit-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -61,7 +61,7 @@
       "price": "350",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze alabalık balığı, özenle pişirilmiş tava lezzeti.",
-      "image": "assets/tavalar/alabalik-tava.jpg",
+      "image": "tavalar/alabalik-tava.jpg",
       "companions": [
         "Kavun",
         "Kraker",
@@ -82,7 +82,7 @@
       "price": "700",
       "shortDesc": "Şefin önerisi.",
       "description": "Mezgit balığının nefis tava lezzeti, şefin özel hazırlığı.",
-      "image": "assets/tavalar/mezgit-tava.jpg",
+      "image": "tavalar/mezgit-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -105,7 +105,7 @@
       "price": "550",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze tekir balığı, özenle hazırlanmış tava lezzeti.",
-      "image": "assets/tavalar/tekir-tava.jpg",
+      "image": "tavalar/tekir-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -129,7 +129,7 @@
       "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Barbun balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "assets/tavalar/barbun-tava.jpg",
+      "image": "tavalar/barbun-tava.jpg",
       "companions": [
         "Fıstık",
         "Kraker",
@@ -148,7 +148,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze dil balığı, özenle pişirilmiş tava lezzeti.",
-      "image": "assets/tavalar/dil-tava.jpg",
+      "image": "tavalar/dil-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kraker",
@@ -167,7 +167,7 @@
       "price": "550",
       "shortDesc": "Şefin önerisi.",
       "description": "Zargana balığının nefis tava lezzeti, şefin özel hazırlığı.",
-      "image": "assets/tavalar/zargana-tava.jpg",
+      "image": "tavalar/zargana-tava.jpg",
       "companions": [
         "Kavun",
         "Kraker",
@@ -188,7 +188,7 @@
       "price": "1000",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kalkan balığı, özenle hazırlanmış tava lezzeti.",
-      "image": "assets/tavalar/kalkan-tava.jpg",
+      "image": "tavalar/kalkan-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -206,7 +206,7 @@
       "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Palamut balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "assets/tavalar/palamut-tava.jpg",
+      "image": "tavalar/palamut-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -228,7 +228,7 @@
       "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze bako mezgit, özenle pişirilmiş tava lezzeti.",
-      "image": "assets/tavalar/bako-mezgit-tava.jpg",
+      "image": "tavalar/bako-mezgit-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -251,7 +251,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Iskorpit balığının nefis tava lezzeti, şefin özel hazırlığı.",
-      "image": "assets/tavalar/iskorpit-tava.jpg",
+      "image": "tavalar/iskorpit-tava.jpg",
       "companions": [
         "Peynir",
         "Fıstık",
@@ -270,7 +270,7 @@
       "price": "444",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze gümüş balığı, özenle hazırlanmış tava lezzeti.",
-      "image": "assets/tavalar/gumus-tava.jpg",
+      "image": "tavalar/gumus-tava.jpg",
       "companions": [
         "Fıstık",
         "Kavun",
@@ -288,7 +288,7 @@
       "price": "456",
       "shortDesc": "Şefin önerisi.",
       "description": "Mercan balığının nefis tava lezzeti, şefin özel tarifi.",
-      "image": "assets/tavalar/mercan-tava.jpg",
+      "image": "tavalar/mercan-tava.jpg",
       "companions": [
         "Fıstık",
         "Limon",
@@ -305,7 +305,7 @@
       "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze çinekop balığı, özenle pişirilmiş tava lezzeti.",
-      "image": "assets/tavalar/cinekop-tava.jpg",
+      "image": "tavalar/cinekop-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -330,7 +330,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "assets/izgaralar/hamsi-izgara.jpg",
+      "image": "izgaralar/hamsi-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -355,7 +355,7 @@
       "price": "450",
       "shortDesc": "Şefin önerisi.",
       "description": "İstavrit balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/istavrit-izgara.jpg",
+      "image": "izgaralar/istavrit-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -380,7 +380,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze alabalık balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "assets/izgaralar/alabalik-izgara.jpg",
+      "image": "izgaralar/alabalik-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -405,7 +405,7 @@
       "price": "350",
       "shortDesc": "Şefin önerisi.",
       "description": "Çupra balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "assets/izgaralar/cupra-izgara.jpg",
+      "image": "izgaralar/cupra-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -430,7 +430,7 @@
       "price": "350",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze levrek balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "assets/izgaralar/levrek-izgara.jpg",
+      "image": "izgaralar/levrek-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -455,7 +455,7 @@
       "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Palamut balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/palamut-izgara.jpg",
+      "image": "izgaralar/palamut-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -480,7 +480,7 @@
       "price": "700",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze torik balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "assets/izgaralar/torik-izgara.jpg",
+      "image": "izgaralar/torik-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kavun",
@@ -499,7 +499,7 @@
       "price": "550",
       "shortDesc": "Şefin önerisi.",
       "description": "Çinekop balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "assets/izgaralar/cinekop-izgara.jpg",
+      "image": "izgaralar/cinekop-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -521,7 +521,7 @@
       "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze sarıkanat balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "assets/izgaralar/sarikanat-izgara.jpg",
+      "image": "izgaralar/sarikanat-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -544,7 +544,7 @@
       "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Lüfer balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/lufer-izgara.jpg",
+      "image": "izgaralar/lufer-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -568,7 +568,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze sardalya balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "assets/izgaralar/sardalya-izgara.jpg",
+      "image": "izgaralar/sardalya-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -593,7 +593,7 @@
       "price": "350",
       "shortDesc": "Şefin önerisi.",
       "description": "Karadeniz somonunun nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "assets/izgaralar/karadeniz-somonu-izgara.jpg",
+      "image": "izgaralar/karadeniz-somonu-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -618,7 +618,7 @@
       "price": "500",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Norveç somonunun taze ızgara lezzeti, özenle hazırlanmış.",
-      "image": "assets/izgaralar/norvec-somonu-izgara.jpg",
+      "image": "izgaralar/norvec-somonu-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -643,7 +643,7 @@
       "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz çupra balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/deniz-cupra-izgara.jpg",
+      "image": "izgaralar/deniz-cupra-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -668,7 +668,7 @@
       "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Deniz levrek balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "assets/izgaralar/deniz-levrek-izgara.jpg",
+      "image": "izgaralar/deniz-levrek-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -693,7 +693,7 @@
       "price": "600",
       "shortDesc": "Şefin önerisi.",
       "description": "Uskumru balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "assets/izgaralar/uskumru-izgara.jpg",
+      "image": "izgaralar/uskumru-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -718,7 +718,7 @@
       "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze akya balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "assets/izgaralar/akya-izgara.jpg",
+      "image": "izgaralar/akya-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -743,7 +743,7 @@
       "price": "1100",
       "shortDesc": "Şefin önerisi.",
       "description": "Lagos balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/lagos-izgara.jpg",
+      "image": "izgaralar/lagos-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -768,7 +768,7 @@
       "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze mavruşgil balığı, özenle pişirilmiş ızgara lezzeti.",
-      "image": "assets/izgaralar/mavrusgil-izgara.jpg",
+      "image": "izgaralar/mavrusgil-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -793,7 +793,7 @@
       "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Kılıç balığının nefis ızgara lezzeti, şefin özel hazırlığı.",
-      "image": "assets/izgaralar/kilic-izgara.jpg",
+      "image": "izgaralar/kilic-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -818,7 +818,7 @@
       "price": "650",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kaya levrek balığı, özenle hazırlanmış ızgara lezzeti.",
-      "image": "assets/izgaralar/kaya-levrek-izgara.jpg",
+      "image": "izgaralar/kaya-levrek-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -843,7 +843,7 @@
       "price": "650",
       "shortDesc": "Şefin önerisi.",
       "description": "Ceylan balığının nefis ızgara lezzeti, şefin özel tarifi.",
-      "image": "assets/izgaralar/ceylan-izgara.jpg",
+      "image": "izgaralar/ceylan-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -868,7 +868,7 @@
       "price": "700",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Deniz levrek balığının nefis buğulama lezzeti, özenle hazırlanmış.",
-      "image": "assets/bugulamalar/deniz-levrek-bugulama.jpg",
+      "image": "bugulamalar/deniz-levrek-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -893,7 +893,7 @@
       "price": "700",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz çupra balığının nefis buğulama lezzeti, şefin özel tarifi.",
-      "image": "assets/bugulamalar/deniz-cupra-bugulama.jpg",
+      "image": "bugulamalar/deniz-cupra-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -918,7 +918,7 @@
       "price": "700",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kaya levrek balığının nefis buğulama lezzeti, özenle pişirilmiş.",
-      "image": "assets/bugulamalar/kaya-levrek-bugulama.jpg",
+      "image": "bugulamalar/kaya-levrek-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -943,7 +943,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Akya balığının nefis buğulama lezzeti, şefin özel hazırlığı.",
-      "image": "assets/bugulamalar/akya-bugulama.jpg",
+      "image": "bugulamalar/akya-bugulama.jpg",
       "companions": [
         "Peynir",
         "Beyaz Peynir",
@@ -961,7 +961,7 @@
       "price": "1200",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Lagos balığının nefis buğulama lezzeti, özenle hazırlanmış.",
-      "image": "assets/bugulamalar/lagos-bugulama.jpg",
+      "image": "bugulamalar/lagos-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -986,7 +986,7 @@
       "price": "500",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze hamsi balığının nefis buğulama lezzeti, şefin özel tarifi.",
-      "image": "assets/bugulamalar/hamsi-bugulama.jpg",
+      "image": "bugulamalar/hamsi-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1011,7 +1011,7 @@
       "price": "800",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Palamut balığının nefis buğulama lezzeti, özenle pişirilmiş.",
-      "image": "assets/bugulamalar/palamut-bugulama.jpg",
+      "image": "bugulamalar/palamut-bugulama.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1036,7 +1036,7 @@
       "price": "900",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Deniz levrek balığının nefis kavurma lezzeti, özenle hazırlanmış.",
-      "image": "assets/kavurmalar/deniz-levrek-kavurma.jpg",
+      "image": "kavurmalar/deniz-levrek-kavurma.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1061,7 +1061,7 @@
       "price": "900",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz çupra balığının nefis kavurma lezzeti, şefin özel tarifi.",
-      "image": "assets/kavurmalar/deniz-cupra-kavurma.jpg",
+      "image": "kavurmalar/deniz-cupra-kavurma.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1086,7 +1086,7 @@
       "price": "900",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kaya levrek balığının nefis kavurma lezzeti, özenle pişirilmiş.",
-      "image": "assets/kavurmalar/kaya-levrek-kavurma.jpg",
+      "image": "kavurmalar/kaya-levrek-kavurma.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1111,7 +1111,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Akya balığının nefis kavurma lezzeti, şefin özel hazırlığı.",
-      "image": "assets/kavurmalar/akya-kavurma.jpg",
+      "image": "kavurmalar/akya-kavurma.jpg",
       "companions": [
         "Peynir",
         "Turşu",
@@ -1130,7 +1130,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Lagos balığının nefis kavurma lezzeti, özenle hazırlanmış.",
-      "image": "assets/kavurmalar/lagos-kavurma.jpg",
+      "image": "kavurmalar/lagos-kavurma.jpg",
       "companions": [
         "Kraker",
         "Pide",
@@ -1148,7 +1148,7 @@
       "price": "600",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze karides tereyağında pişirilmiş, nefis bir lezzet.",
-      "image": "assets/arasicaklar/karides-tereyaginda.jpg",
+      "image": "arasicaklar/karides-tereyaginda.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1173,7 +1173,7 @@
       "price": "750",
       "shortDesc": "Şefin önerisi.",
       "description": "Karides güveçte özenle hazırlanmış, şefin özel tarifi.",
-      "image": "assets/arasicaklar/karides-guvec.jpg",
+      "image": "arasicaklar/karides-guvec.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1198,7 +1198,7 @@
       "price": "600",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kalamar tavada pişirilmiş, nefis bir lezzet.",
-      "image": "assets/arasicaklar/kalamar-tava.jpg",
+      "image": "arasicaklar/kalamar-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1221,7 +1221,7 @@
       "price": "1000",
       "shortDesc": "Şefin önerisi.",
       "description": "Kalamar ızgara özenle pişirilmiş, şefin özel tarifi.",
-      "image": "assets/arasicaklar/kalamar-izgara.jpg",
+      "image": "arasicaklar/kalamar-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1246,7 +1246,7 @@
       "price": "1100",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze ahtapot tereyağında pişirilmiş, nefis bir lezzet.",
-      "image": "assets/arasicaklar/ahtapot-tereyaginda.jpg",
+      "image": "arasicaklar/ahtapot-tereyaginda.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1271,7 +1271,7 @@
       "price": "1100",
       "shortDesc": "Şefin önerisi.",
       "description": "Ahtapot ızgara özenle pişirilmiş, şefin özel tarifi.",
-      "image": "assets/arasicaklar/ahtapot-izgara.jpg",
+      "image": "arasicaklar/ahtapot-izgara.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1296,7 +1296,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi ile hazırlanmış nefis pilav, özenle pişirilmiş.",
-      "image": "assets/arasicaklar/hamsili-pilav.jpg",
+      "image": "arasicaklar/hamsili-pilav.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1321,7 +1321,7 @@
       "price": "750",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kılıç balığının nefis şiş lezzeti, özenle hazırlanmış.",
-      "image": "assets/sisler/kilic-sis.jpg",
+      "image": "sisler/kilic-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1346,7 +1346,7 @@
       "price": "700",
       "shortDesc": "Şefin önerisi.",
       "description": "Akya balığının nefis şiş lezzeti, şefin özel tarifi.",
-      "image": "assets/sisler/akya-sis.jpg",
+      "image": "sisler/akya-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1371,7 +1371,7 @@
       "price": "1200",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Lagos balığının nefis şiş lezzeti, özenle pişirilmiş.",
-      "image": "assets/sisler/lagos-sis.jpg",
+      "image": "sisler/lagos-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1396,7 +1396,7 @@
       "price": "700",
       "shortDesc": "Şefin önerisi.",
       "description": "Mavruşgil balığının nefis şiş lezzeti, şefin özel hazırlığı.",
-      "image": "assets/sisler/mavrusgil-sis.jpg",
+      "image": "sisler/mavrusgil-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1421,7 +1421,7 @@
       "price": "900",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kaya levrek balığının nefis şiş lezzeti, özenle hazırlanmış.",
-      "image": "assets/sisler/kaya-levrek-sis.jpg",
+      "image": "sisler/kaya-levrek-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1446,7 +1446,7 @@
       "price": "850",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz levrek balığının nefis şiş lezzeti, şefin özel tarifi.",
-      "image": "assets/sisler/deniz-levrek-sis.jpg",
+      "image": "sisler/deniz-levrek-sis.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1471,7 +1471,7 @@
       "price": "200",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi ile hazırlanmış nefis balık ekmeği, özenle pişirilmiş.",
-      "image": "assets/balik-ekmekler/hamsi-ekmek.jpg",
+      "image": "balik-ekmekler/hamsi-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1496,7 +1496,7 @@
       "price": "200",
       "shortDesc": "Şefin önerisi.",
       "description": "Alabalık ile hazırlanmış nefis balık ekmeği, şefin özel tarifi.",
-      "image": "assets/balik-ekmekler/alabalik-ekmek.jpg",
+      "image": "balik-ekmekler/alabalik-ekmek.jpg",
       "companions": [
         "Fıstık",
         "Kavun",
@@ -1518,7 +1518,7 @@
       "price": "250",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Çupra ile hazırlanmış nefis balık ekmeği, özenle hazırlanmış.",
-      "image": "assets/balik-ekmekler/cupra-ekmek.jpg",
+      "image": "balik-ekmekler/cupra-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1542,7 +1542,7 @@
       "price": "250",
       "shortDesc": "Şefin önerisi.",
       "description": "Levrek ile hazırlanmış nefis balık ekmeği, şefin özel hazırlığı.",
-      "image": "assets/balik-ekmekler/levrek-ekmek.jpg",
+      "image": "balik-ekmekler/levrek-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1567,7 +1567,7 @@
       "price": "300",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Palamut ile hazırlanmış nefis balık ekmeği, özenle pişirilmiş.",
-      "image": "assets/balik-ekmekler/palamut-ekmek.jpg",
+      "image": "balik-ekmekler/palamut-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1592,7 +1592,7 @@
       "price": "350",
       "shortDesc": "Şefin önerisi.",
       "description": "Uskumru ile hazırlanmış nefis balık ekmeği, şefin özel tarifi.",
-      "image": "assets/balik-ekmekler/uskumru-ekmek.jpg",
+      "image": "balik-ekmekler/uskumru-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1617,7 +1617,7 @@
       "price": "350",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Bako mezgit ile hazırlanmış nefis balık ekmeği, özenle hazırlanmış.",
-      "image": "assets/balik-ekmekler/bako-mezgit-ekmek.jpg",
+      "image": "balik-ekmekler/bako-mezgit-ekmek.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1642,7 +1642,7 @@
       "price": "200",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze balık ile hazırlanmış nefis çorba, özenle pişirilmiş.",
-      "image": "assets/corbalar/balik-corbasi.jpg",
+      "image": "corbalar/balik-corbasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1667,7 +1667,7 @@
       "price": "75",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Mevsim sebzelerinden hazırlanmış taze ve nefis salata, özenle hazırlanmış.",
-      "image": "assets/salatalar/mevsim-salatasi.jpg",
+      "image": "salatalar/mevsim-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1692,7 +1692,7 @@
       "price": "150",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze roka ile hazırlanmış nefis salata, şefin özel tarifi.",
-      "image": "assets/salatalar/roka-salatasi.jpg",
+      "image": "salatalar/roka-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1717,7 +1717,7 @@
       "price": "600",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Levrek ile hazırlanmış nefis pide, özenle pişirilmiş.",
-      "image": "assets/pideler/levrekli-pide.jpg",
+      "image": "pideler/levrekli-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1742,7 +1742,7 @@
       "price": "600",
       "shortDesc": "Şefin önerisi.",
       "description": "Karides ile hazırlanmış nefis pide, şefin özel tarifi.",
-      "image": "assets/pideler/karidesli-pide.jpg",
+      "image": "pideler/karidesli-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1767,7 +1767,7 @@
       "price": "400",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze hamsi ile hazırlanmış nefis pide, özenle hazırlanmış.",
-      "image": "assets/pideler/hamsili-pide.jpg",
+      "image": "pideler/hamsili-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1792,7 +1792,7 @@
       "price": "350",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze kıyma ile hazırlanmış nefis pide, şefin özel hazırlığı.",
-      "image": "assets/pideler/kiymali-pide.jpg",
+      "image": "pideler/kiymali-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1817,7 +1817,7 @@
       "price": "400",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kuşbaşı et ile hazırlanmış nefis pide, özenle pişirilmiş.",
-      "image": "assets/pideler/kusbasili-pide.jpg",
+      "image": "pideler/kusbasili-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1842,7 +1842,7 @@
       "price": "300",
       "shortDesc": "Şefin önerisi.",
       "description": "Kaşar peyniri ile hazırlanmış nefis pide, şefin özel tarifi.",
-      "image": "assets/pideler/kasarli-pide.jpg",
+      "image": "pideler/kasarli-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1867,7 +1867,7 @@
       "price": "450",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kuşbaşı et ve kaşar peyniri ile hazırlanmış nefis pide, özenle hazırlanmış.",
-      "image": "assets/pideler/kusbasili-kasarli-pide.jpg",
+      "image": "pideler/kusbasili-kasarli-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1892,7 +1892,7 @@
       "price": "400",
       "shortDesc": "Şefin önerisi.",
       "description": "Kıyma ve kaşar peyniri ile hazırlanmış nefis pide, şefin özel tarifi.",
-      "image": "assets/pideler/kiymali-kasarli-pide.jpg",
+      "image": "pideler/kiymali-kasarli-pide.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1917,7 +1917,7 @@
       "price": "250",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze kabak ile hazırlanmış nefis tatlı, özenle pişirilmiş.",
-      "image": "assets/tatlilar/kabak-tatlisi.jpg",
+      "image": "tatlilar/kabak-tatlisi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1942,7 +1942,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Geleneksel Laz böreği, şefin özel tarifi ile hazırlanmış.",
-      "image": "assets/tatlilar/laz-boregi.jpg",
+      "image": "tatlilar/laz-boregi.jpg",
       "companions": [
         "Turşu",
         "Fıstık",
@@ -1961,7 +1961,7 @@
       "price": "100",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Sıcak helva, özenle hazırlanmış nefis tatlı.",
-      "image": "assets/tatlilar/sicak-helva.jpg",
+      "image": "tatlilar/sicak-helva.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -1986,7 +1986,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Geleneksel haydari meze, özenle hazırlanmış.",
-      "image": "assets/mezeler/haydari.jpg",
+      "image": "mezeler/haydari.jpg",
       "companions": [
         "Kavun",
         "Beyaz Peynir",
@@ -2013,7 +2013,7 @@
       "price": "215",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze cacık, serinletici lezzet.",
-      "image": "assets/mezeler/cacik.jpg",
+      "image": "mezeler/cacik.jpg",
       "companions": [
         "Kavun",
         "Kraker",
@@ -2041,7 +2041,7 @@
       "price": "215",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Geleneksel şakşuka, özenle hazırlanmış.",
-      "image": "assets/mezeler/saksuka.jpg",
+      "image": "mezeler/saksuka.jpg",
       "companions": [
         "Kavun",
         "Limon",
@@ -2067,7 +2067,7 @@
       "price": "210",
       "shortDesc": "Şefin önerisi.",
       "description": "Közlenmiş patlıcan ile hazırlanmış nefis salata.",
-      "image": "assets/mezeler/kozlenmis-patlican-salatasi.jpg",
+      "image": "mezeler/kozlenmis-patlican-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kavun",
@@ -2097,7 +2097,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Muhammara meze, özenle hazırlanmış.",
-      "image": "assets/mezeler/muhammara.jpg",
+      "image": "mezeler/muhammara.jpg",
       "companions": [
         "Fıstık",
         "Peynir",
@@ -2122,7 +2122,7 @@
       "price": "210",
       "shortDesc": "Şefin önerisi.",
       "description": "Bakla ezmesi, geleneksel lezzet.",
-      "image": "assets/mezeler/fava.jpg",
+      "image": "mezeler/fava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Kavun",
@@ -2153,7 +2153,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Zeytinyağlı yaprak sarma, özenle hazırlanmış.",
-      "image": "assets/mezeler/zeytinyagli-yaprak-sarma.jpg",
+      "image": "mezeler/zeytinyagli-yaprak-sarma.jpg",
       "companions": [
         "Roka",
         "Limon",
@@ -2180,7 +2180,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytinyağlı barbunya, geleneksel lezzet.",
-      "image": "assets/mezeler/zeytinyagli-barbunya.jpg",
+      "image": "mezeler/zeytinyagli-barbunya.jpg",
       "companions": [
         "Pide",
         "Roka",
@@ -2208,7 +2208,7 @@
       "price": "315",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Patlıcan ezme, özenle hazırlanmış.",
-      "image": "assets/mezeler/patlican-ezme.jpg",
+      "image": "mezeler/patlican-ezme.jpg",
       "companions": [
         "Fıstık",
         "Kavun",
@@ -2237,7 +2237,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Acılı ezme, şefin özel tarifi.",
-      "image": "assets/mezeler/acili-ezme.jpg",
+      "image": "mezeler/acili-ezme.jpg",
       "companions": [
         "Fıstık",
         "Roka",
@@ -2264,7 +2264,7 @@
       "price": "210",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Yoğurtlu semizotu, özenle hazırlanmış.",
-      "image": "assets/mezeler/yogurtlu-semizotu.jpg",
+      "image": "mezeler/yogurtlu-semizotu.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2297,7 +2297,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Yoğurtlu kabak, geleneksel lezzet.",
-      "image": "assets/mezeler/yogurtlu-kabak.jpg",
+      "image": "mezeler/yogurtlu-kabak.jpg",
       "companions": [
         "Fıstık",
         "Soğan",
@@ -2324,7 +2324,7 @@
       "price": "250",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Zeytinyağlı enginar, özenle hazırlanmış.",
-      "image": "assets/mezeler/zeytinyagli-enginar.jpg",
+      "image": "mezeler/zeytinyagli-enginar.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2357,7 +2357,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Havuç tarator, şefin özel tarifi.",
-      "image": "assets/mezeler/havuc-tarator.jpg",
+      "image": "mezeler/havuc-tarator.jpg",
       "companions": [
         "Kavun",
         "Fıstık",
@@ -2384,7 +2384,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Zeytinyağlı taze fasulye, özenle hazırlanmış.",
-      "image": "assets/mezeler/zeytinyagli-taze-fasulye.jpg",
+      "image": "mezeler/zeytinyagli-taze-fasulye.jpg",
       "companions": [
         "Roka",
         "Sos",
@@ -2411,7 +2411,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytinyağlı kereviz, geleneksel lezzet.",
-      "image": "assets/mezeler/zeytinyagli-kereviz.jpg",
+      "image": "mezeler/zeytinyagli-kereviz.jpg",
       "companions": [
         "Turşu",
         "Limon",
@@ -2438,7 +2438,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Közlenmiş kırmızı biber dolması, özenle hazırlanmış.",
-      "image": "assets/mezeler/kozlenmis-kirmizi-biber-dolmasi.jpg",
+      "image": "mezeler/kozlenmis-kirmizi-biber-dolmasi.jpg",
       "companions": [
         "Kraker",
         "Peynir",
@@ -2463,7 +2463,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytin ezmesi, şefin özel tarifi.",
-      "image": "assets/mezeler/zeytin-ezmesi.jpg",
+      "image": "mezeler/zeytin-ezmesi.jpg",
       "companions": [
         "Fıstık",
         "Soğan",
@@ -2489,7 +2489,7 @@
       "price": "210",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Börülce salatası, özenle hazırlanmış.",
-      "image": "assets/mezeler/borulce-salatasi.jpg",
+      "image": "mezeler/borulce-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2522,7 +2522,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytinyağlı bakla, geleneksel lezzet.",
-      "image": "assets/mezeler/zeytinyagli-bakla.jpg",
+      "image": "mezeler/zeytinyagli-bakla.jpg",
       "companions": [
         "Turşu",
         "Sos",
@@ -2549,7 +2549,7 @@
       "price": "210",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Atom meze, yoğurt ve acı biber ile hazırlanmış.",
-      "image": "assets/mezeler/atom.jpg",
+      "image": "mezeler/atom.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2581,7 +2581,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Babagannuş, özenle hazırlanmış.",
-      "image": "assets/mezeler/babagannus.jpg",
+      "image": "mezeler/babagannus.jpg",
       "companions": [
         "Limon",
         "Kavun",
@@ -2608,7 +2608,7 @@
       "price": "240",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Girit ezmesi, geleneksel lezzet.",
-      "image": "assets/mezeler/girit-ezmesi.jpg",
+      "image": "mezeler/girit-ezmesi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2641,7 +2641,7 @@
       "price": "210",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz börülcesi, özenle hazırlanmış.",
-      "image": "assets/mezeler/deniz-borulcesi.jpg",
+      "image": "mezeler/deniz-borulcesi.jpg",
       "companions": [
         "Fıstık",
         "Kavun",
@@ -2670,7 +2670,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Yoğurtlu pancar, şefin özel tarifi.",
-      "image": "assets/mezeler/yogurtlu-pancar.jpg",
+      "image": "mezeler/yogurtlu-pancar.jpg",
       "companions": [
         "Limon",
         "Soğan",
@@ -2698,7 +2698,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Yoğurtlu patates salatası, özenle hazırlanmış.",
-      "image": "assets/mezeler/yogurtlu-patates-salatasi.jpg",
+      "image": "mezeler/yogurtlu-patates-salatasi.jpg",
       "companions": [
         "Pide",
         "Sos",
@@ -2725,7 +2725,7 @@
       "price": "210",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kabak borani, geleneksel lezzet.",
-      "image": "assets/mezeler/kabak-borani.jpg",
+      "image": "mezeler/kabak-borani.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2758,7 +2758,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Yoğurtlu havuç, özenle hazırlanmış.",
-      "image": "assets/mezeler/yogurtlu-havuc.jpg",
+      "image": "mezeler/yogurtlu-havuc.jpg",
       "companions": [
         "Fıstık",
         "Peynir",
@@ -2783,7 +2783,7 @@
       "price": "215",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Tahinli patlıcan, şefin özel tarifi.",
-      "image": "assets/mezeler/tahinli-patlican.jpg",
+      "image": "mezeler/tahinli-patlican.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2816,7 +2816,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Sarımsaklı yoğurtlu mantar, özenle hazırlanmış.",
-      "image": "assets/mezeler/sarimsakli-yogurtlu-mantar.jpg",
+      "image": "mezeler/sarimsakli-yogurtlu-mantar.jpg",
       "companions": [
         "Peynir",
         "Kavun",
@@ -2842,7 +2842,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kısır, geleneksel lezzet.",
-      "image": "assets/mezeler/kisir.jpg",
+      "image": "mezeler/kisir.jpg",
       "companions": [
         "Soğan",
         "Limon",
@@ -2869,7 +2869,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Patates salatası, özenle hazırlanmış.",
-      "image": "assets/mezeler/patates-salatasi.jpg",
+      "image": "mezeler/patates-salatasi.jpg",
       "companions": [
         "Roka",
         "Fıstık",
@@ -2895,7 +2895,7 @@
       "price": "130",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Gavurdağı salatası, şefin özel tarifi.",
-      "image": "assets/mezeler/gavurdagi-salatasi.jpg",
+      "image": "mezeler/gavurdagi-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -2928,7 +2928,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Arnavut ciğeri, soğuk servis edilir.",
-      "image": "assets/mezeler/arnavut-cigeri.jpg",
+      "image": "mezeler/arnavut-cigeri.jpg",
       "companions": [
         "Pide",
         "Fıstık",
@@ -2956,7 +2956,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Mercimek köftesi, özenle hazırlanmış.",
-      "image": "assets/mezeler/mercimek-koftesi.jpg",
+      "image": "mezeler/mercimek-koftesi.jpg",
       "companions": [
         "Kavun",
         "Pide",
@@ -2984,7 +2984,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytinyağlı pırasa, geleneksel lezzet.",
-      "image": "assets/mezeler/zeytinyagli-pirasa.jpg",
+      "image": "mezeler/zeytinyagli-pirasa.jpg",
       "companions": [
         "Sos",
         "Peynir",
@@ -3012,7 +3012,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Zeytinyağlı patlıcan, özenle hazırlanmış.",
-      "image": "assets/mezeler/zeytinyagli-patlican.jpg",
+      "image": "mezeler/zeytinyagli-patlican.jpg",
       "companions": [
         "Kavun",
         "Peynir",
@@ -3039,7 +3039,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Zeytinyağlı kabak, şefin özel tarifi.",
-      "image": "assets/mezeler/zeytinyagli-kabak.jpg",
+      "image": "mezeler/zeytinyagli-kabak.jpg",
       "companions": [
         "Fıstık",
         "Sos",
@@ -3064,7 +3064,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Börülce piyazı, özenle hazırlanmış.",
-      "image": "assets/mezeler/borulce-piyazi.jpg",
+      "image": "mezeler/borulce-piyazi.jpg",
       "companions": [
         "Kraker",
         "Turşu",
@@ -3089,7 +3089,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Yeşil mercimek salatası, geleneksel lezzet.",
-      "image": "assets/mezeler/yesil-mercimek-salatasi.jpg",
+      "image": "mezeler/yesil-mercimek-salatasi.jpg",
       "companions": [
         "Peynir",
         "Pide",
@@ -3116,7 +3116,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Karides güveç, özenle hazırlanmış.",
-      "image": "assets/mezeler/karides-guvec.jpg",
+      "image": "mezeler/karides-guvec.jpg",
       "companions": [
         "Soğan",
         "Sos",
@@ -3142,7 +3142,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Ahtapot salatası, şefin özel tarifi.",
-      "image": "assets/mezeler/ahtapot-salatasi.jpg",
+      "image": "mezeler/ahtapot-salatasi.jpg",
       "companions": [
         "Beyaz Peynir",
         "Turşu",
@@ -3168,7 +3168,7 @@
       "price": "600",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Kalamar tava, özenle pişirilmiş.",
-      "image": "assets/mezeler/kalamar-tava.jpg",
+      "image": "mezeler/kalamar-tava.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3201,7 +3201,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Midye dolma, geleneksel lezzet.",
-      "image": "assets/mezeler/midye-dolma.jpg",
+      "image": "mezeler/midye-dolma.jpg",
       "companions": [
         "Kraker",
         "Sos",
@@ -3228,7 +3228,7 @@
       "price": "165",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Lakerda, özenle hazırlanmış.",
-      "image": "assets/mezeler/lakerda.jpg",
+      "image": "mezeler/lakerda.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3259,7 +3259,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Hamsi marine, şefin özel tarifi.",
-      "image": "assets/mezeler/hamsi-marine.jpg",
+      "image": "mezeler/hamsi-marine.jpg",
       "companions": [
         "Turşu",
         "Peynir",
@@ -3284,7 +3284,7 @@
       "price": "265",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Levrek marin, özenle hazırlanmış.",
-      "image": "assets/mezeler/levrek-marin.jpg",
+      "image": "mezeler/levrek-marin.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3316,7 +3316,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Tarama, balık yumurtası ezmesi, geleneksel lezzet.",
-      "image": "assets/mezeler/tarama.jpg",
+      "image": "mezeler/tarama.jpg",
       "companions": [
         "Peynir",
         "Kraker",
@@ -3341,7 +3341,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Balık köftesi, özenle hazırlanmış.",
-      "image": "assets/mezeler/balik-koftesi.jpg",
+      "image": "mezeler/balik-koftesi.jpg",
       "companions": [
         "Soğan",
         "Roka",
@@ -3367,7 +3367,7 @@
       "price": "400",
       "shortDesc": "Şefin önerisi.",
       "description": "Deniz mahsullü meze, şefin özel tarifi.",
-      "image": "assets/mezeler/deniz-mahsullu.jpg",
+      "image": "mezeler/deniz-mahsullu.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3400,7 +3400,7 @@
       "price": "40",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze şalgam suyu, acılı ve acısız seçeneklerle sunulur.",
-      "image": "assets/alkolsuz-icecekler/salgam-acili-acisiz.jpg",
+      "image": "alkolsuz-icecekler/salgam-acili-acisiz.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3425,7 +3425,7 @@
       "price": "25",
       "shortDesc": "Şefin önerisi.",
       "description": "Doğal kaynak suyu, taze ve sağlıklı.",
-      "image": "assets/alkolsuz-icecekler/su.jpg",
+      "image": "alkolsuz-icecekler/su.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3450,7 +3450,7 @@
       "price": "60",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Klasik kola lezzeti, soğuk servis.",
-      "image": "assets/alkolsuz-icecekler/kola.jpg",
+      "image": "alkolsuz-icecekler/kola.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3475,7 +3475,7 @@
       "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Meyve aroması ile nefis Fanta, soğuk servis.",
-      "image": "assets/alkolsuz-icecekler/fanta.jpg",
+      "image": "alkolsuz-icecekler/fanta.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3500,7 +3500,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Şekersiz kola lezzeti, soğuk servis.",
-      "image": "assets/alkolsuz-icecekler/kola-zero.jpg",
+      "image": "alkolsuz-icecekler/kola-zero.jpg",
       "companions": [
         "Fıstık",
         "Peynir",
@@ -3519,7 +3519,7 @@
       "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Serinletici Sprite, soğuk servis.",
-      "image": "assets/alkolsuz-icecekler/sprite.jpg",
+      "image": "alkolsuz-icecekler/sprite.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3544,7 +3544,7 @@
       "price": "30",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Doğal maden suyu, serinletici lezzet.",
-      "image": "assets/alkolsuz-icecekler/soda.jpg",
+      "image": "alkolsuz-icecekler/soda.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3569,7 +3569,7 @@
       "price": "60",
       "shortDesc": "Şefin önerisi.",
       "description": "Taze meyve suyu çeşitleri, doğal lezzet.",
-      "image": "assets/alkolsuz-icecekler/cappy-meyve-suyu.jpg",
+      "image": "alkolsuz-icecekler/cappy-meyve-suyu.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3594,7 +3594,7 @@
       "price": "60",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Çeşitli ice tea lezzetleri, soğuk servis.",
-      "image": "assets/alkolsuz-icecekler/ice-tea-cesitleri.jpg",
+      "image": "alkolsuz-icecekler/ice-tea-cesitleri.jpg",
       "companions": [
         "Beyaz Peynir",
         "Fıstık",
@@ -3619,7 +3619,7 @@
       "price": "340",
       "shortDesc": "Mezeyle birlikte tavsiye edilir.",
       "description": "Tek rakı, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/tek-raki.jpg",
+      "image": "alkollu-icecekler/tek-raki.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3632,7 +3632,7 @@
       "price": "340",
       "shortDesc": "Mezeyle birlikte tavsiye edilir.",
       "description": "Duble rakı, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/duble-raki.jpg",
+      "image": "alkollu-icecekler/duble-raki.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3645,7 +3645,7 @@
       "price": "400",
       "shortDesc": "Yeni Rakı, 20cl şişe.",
       "description": "Yeni Rakı, 20cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/yeni-raki-20cl.jpg",
+      "image": "alkollu-icecekler/yeni-raki-20cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3658,7 +3658,7 @@
       "price": "340",
       "shortDesc": "Yeni Rakı, 35cl şişe.",
       "description": "Yeni Rakı, 35cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/yeni-raki-35cl.jpg",
+      "image": "alkollu-icecekler/yeni-raki-35cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3671,7 +3671,7 @@
       "price": "340",
       "shortDesc": "Yeni Rakı, 50cl şişe.",
       "description": "Yeni Rakı, 50cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/yeni-raki-50cl.jpg",
+      "image": "alkollu-icecekler/yeni-raki-50cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3684,7 +3684,7 @@
       "price": "340",
       "shortDesc": "Tekirdağ Rakı, 20cl şişe.",
       "description": "Tekirdağ Rakı, 20cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/tekirdag-raki-20cl.jpg",
+      "image": "alkollu-icecekler/tekirdag-raki-20cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3697,7 +3697,7 @@
       "price": "340",
       "shortDesc": "Tekirdağ Rakı, 35cl şişe.",
       "description": "Tekirdağ Rakı, 35cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/tekirdag-raki-35cl.jpg",
+      "image": "alkollu-icecekler/tekirdag-raki-35cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3710,7 +3710,7 @@
       "price": "340",
       "shortDesc": "Tekirdağ Rakı, 50cl şişe.",
       "description": "Tekirdağ Rakı, 50cl şişe, meze ile birlikte tavsiye edilir.",
-      "image": "assets/alkollu-icecekler/tekirdag-raki-50cl.jpg",
+      "image": "alkollu-icecekler/tekirdag-raki-50cl.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Rakılar",
@@ -3723,7 +3723,7 @@
       "price": "340",
       "shortDesc": "Taze, lezzetli, günlük.",
       "description": "Taze bira, soğuk servis.",
-      "image": "assets/alkollu-icecekler/bira.jpg",
+      "image": "alkollu-icecekler/bira.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
@@ -3736,7 +3736,7 @@
       "price": "340",
       "shortDesc": "Şefin önerisi.",
       "description": "Kaliteli şarap, şefin önerisi.",
-      "image": "assets/alkollu-icecekler/sarap.jpg",
+      "image": "alkollu-icecekler/sarap.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
@@ -3749,7 +3749,7 @@
       "price": "340",
       "shortDesc": "Kaliteli viski seçenekleri.",
       "description": "Kaliteli viski seçenekleri, şefin önerisi.",
-      "image": "assets/alkollu-icecekler/viski.jpg",
+      "image": "alkollu-icecekler/viski.jpg",
       "companions": [],
       "hidden": false,
       "subcategory": "Diğer Alkoller",
