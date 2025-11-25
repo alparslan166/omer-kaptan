@@ -1385,7 +1385,23 @@ function generateImagePath(category, productName) {
       .replace(/^-+|-+$/g, '');
   }
   
-  const categorySlug = normalizeForFile(category);
+  // Kategori klasör adı için özel durumlar (assets klasör yapısına göre)
+  function getCategoryFolderName(categoryName) {
+    const specialCases = {
+      'Ara Sıcaklar': 'arasicaklar', // Tire olmadan
+      'Alkolsüz İçecekler': 'alkolsuz-icecekler',
+      'Alkollü İçecekler': 'alkollu-icecekler',
+      'Balık Ekmekler': 'balik-ekmekler'
+    };
+    
+    if (specialCases[categoryName]) {
+      return specialCases[categoryName];
+    }
+    
+    return normalizeForFile(categoryName);
+  }
+  
+  const categorySlug = getCategoryFolderName(category);
   let productSlug = normalizeForFile(productName);
   
   // Mezeler kategorisi için özel işlem: Parantez içindeki kısımları kaldır
@@ -1400,7 +1416,8 @@ function generateImagePath(category, productName) {
     productSlug = 'deniz-' + normalizeForFile(nameWithoutD);
   }
   
-  return `${categorySlug}/${productSlug}.jpg`;
+  // assets/ ile başlayan tam yol döndür
+  return `assets/${categorySlug}/${productSlug}.jpg`;
 }
 
 function normalizeAssetPathForDeletion(imagePath) {
@@ -2154,16 +2171,29 @@ function setupForms() {
             uploadButton.textContent = '⏳ Resim yükleniyor...';
           }
           
-          // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
-          const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
+          // generateImagePath zaten assets/ ile başlayan yol döndürüyor, bu yüzden direkt kullanabiliriz
+          // Ancak dosya uzantısı farklı olabilir, onu güncelle
+          let fullImagePath = imagePath;
+          if (!fullImagePath.startsWith('assets/')) {
+            fullImagePath = `assets/${fullImagePath}`;
+          }
+          
+          // Dosya uzantısını güncelle (eğer farklıysa)
+          const fileExt = imageFile.name.split('.').pop().toLowerCase();
+          fullImagePath = fullImagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
+          
           console.log('📤 Resim GitHub\'a yükleniyor:', {
             fullPath: fullImagePath,
             fileSize: `${(imageFile.size / 1024).toFixed(2)} KB`,
-            fileType: imageFile.type
+            fileType: imageFile.type,
+            originalPath: imagePath
           });
           
           const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
           console.log('✅ Resim başarıyla yüklendi:', uploadResult);
+          
+          // Resim yolu products.json'a kaydedilirken de güncellenmiş uzantı ile kaydedilmeli
+          imagePath = fullImagePath;
           
           if (uploadResult && uploadResult.url) {
             console.log('🌐 Resim URL:', uploadResult.url);
@@ -2414,8 +2444,16 @@ function setupForms() {
               updateButton.textContent = '⏳ Resim yükleniyor...';
             }
             
-            // GitHub'a yüklemek için tam yol (assets/ ile başlamalı)
-            const fullImagePath = imagePath.startsWith('assets/') ? imagePath : `assets/${imagePath}`;
+            // generateImagePath zaten assets/ ile başlayan yol döndürüyor
+            // Dosya uzantısını güncelle (eğer farklıysa)
+            let fullImagePath = imagePath;
+            if (!fullImagePath.startsWith('assets/')) {
+              fullImagePath = `assets/${fullImagePath}`;
+            }
+            
+            // Dosya uzantısını güncelle
+            const fileExt = imageFile.name.split('.').pop().toLowerCase();
+            fullImagePath = fullImagePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, `.${fileExt}`);
             
             // Eski resim yolu ile yeni resim yolu farklıysa, eski resmi sil
             const oldFullImagePath = product.image && product.image.trim() !== '' 
@@ -2452,6 +2490,9 @@ function setupForms() {
             
             const uploadResult = await window.GitHubAPI.uploadImage(imageFile, fullImagePath);
             console.log('✅ Resim başarıyla yüklendi:', uploadResult);
+            
+            // Resim yolu products.json'a kaydedilirken de güncellenmiş uzantı ile kaydedilmeli
+            imagePath = fullImagePath;
             
             if (uploadResult && uploadResult.url) {
               console.log('🌐 Resim URL:', uploadResult.url);
