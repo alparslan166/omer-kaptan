@@ -510,14 +510,21 @@ function updateDownloadButton(data) {
           });
           console.log('Güncellenecek JSON içeriği (ilk 200 karakter):', jsonStr.substring(0, 200));
           
+          // ÖNEMLİ: products.json'a yazma işlemi (change-log.json'dan önce)
+          console.log('📝 ÖNCE products.json güncelleniyor...');
           const result = await window.GitHubAPI.updateFile(jsonStr);
-          console.log('✅ GitHub API güncelleme sonucu:', result);
+          console.log('📋 GitHub API güncelleme sonucu:', result);
           
           if (result && result.success) {
             // ÖNEMLİ: products.json başarıyla güncellendi!
-            console.log('✅ products.json başarıyla GitHub\'a gönderildi!');
-            console.log('   - Commit:', result.commit?.sha || 'bilinmiyor');
+            console.log('✅✅✅ products.json başarıyla GitHub\'a gönderildi! ✅✅✅');
+            console.log('   - Commit SHA:', result.commit?.sha || 'bilinmiyor');
+            console.log('   - Commit URL:', result.commit?.html_url || 'bilinmiyor');
             console.log('   - Dosya yolu:', config.filePath);
+            console.log('   - Ürün sayısı:', currentData.products.length);
+            
+            // Başarı mesajını hemen göster
+            showNotification('✅ products.json başarıyla GitHub\'a gönderildi! Şimdi change-log.json güncelleniyor...', 'success');
             
             // Change-log'u güncelle (bu products.json'a değil, sadece log'a yazıyor)
             try {
