@@ -1,6 +1,11 @@
 {
   "entries": [
     {
+      "timestamp": 1764112383407,
+      "productName": "test",
+      "description": "Ürün güncellendi. Görsel güncellendi."
+    },
+    {
       "timestamp": 1764110982149,
       "productName": "test",
       "description": "Yeni ürün eklendi. Fiyat: ₺123"
@@ -494,11 +499,6 @@
       "timestamp": 1763301371759,
       "productName": "Mavruşgil Izgara",
       "description": "Ürün güncellendi. Fiyat: ₺340 → ₺650 | Eşlikçiler: Beyaz Peynir, Peynir, Pide, Turşu, Limon, Roka → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
-    },
-    {
-      "timestamp": 1763301359055,
-      "productName": "Lagos Izgara",
-      "description": "Ürün güncellendi. Fiyat: ₺340 → ₺1100 | Eşlikçiler: Kavun, Beyaz Peynir, Roka, Kraker → Beyaz Peynir, Fıstık, Kavun, Kraker, Limon, Peynir, Pide, Roka, Sos, Soğan, Turşu"
     }
   ]
 }
