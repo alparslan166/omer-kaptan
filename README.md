@@ -20,6 +20,14 @@
 
 ---
 
+## 🌐 Live Website
+
+**Visit the live site:**
+- 🍽️ **Main Menu:** [omerkaptanrestaurant.com](https://omerkaptanrestaurant.com)
+- ⚙️ **Admin Panel:** [omerkaptanrestaurant.com/admin.html](https://omerkaptanrestaurant.com/admin.html)
+
+---
+
 ## 🎯 Features
 
 ### Customer-Facing Features
